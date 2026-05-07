@@ -1,0 +1,149 @@
+FITS_AcrylGauge|아크릴 체크 지그 생성, 아크릴 원판 외곽 및 테이블 생성 및 마키노 장비용 툴패스(*.i) 생성, 핫 나이프(Hot Knife) 게이지에 대하여 마키노 장비용 툴패스(*.i) 생성, 생성된 툴패스에 대한 Toolpath Viewer(Simulation) 제공를 수행하거나 지원하는 기능입니다.
+FITS_RibTools|Air Vent Gauge 를 이용하여 Normal, 방향 및 축 방향 U자형 AirVentLine 서피스 생성기능를 수행하거나 지원하는 기능입니다.
+FITS_PatternTools|Procost SVG 생성을 위한 Avoid Curve 자동 생성, Single Set 타입 입력 데이터에 대한 Avoid Curve 생성, Array Set 타입 입력 데이터에 대한 Avoid Curve 생성를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|공구 검증 - 툴패스 미러 - 포스트 - 작업지시서 생성 - 시뮬레이션 통합, 프로그램., Post 옵션 설정 가능, NC Worksheet 옵션 설정 가능를 수행하거나 지원하는 기능입니다.
+FITS_RibTools|Rib Gauge 및 Base 면을 이용하여 Normal 방향 및 Z축 방향 Rib 서피스 생성를 수행하거나 지원하는 기능입니다.
+FITS_AxialSurfaceExtension|닫힌 커브에서 선택한 구간을 기준으로 축방향(X축, Y축) 서피스를 생성하고, 방사형 서피스를 축방향 서피스 사이에 생성 한다를 수행하거나 지원하는 기능입니다.
+FITS_BowermanDrawing|Phylon, Preform 압축비 분석 및 비교 도면 자동 생성를 수행하거나 지원하는 기능입니다.
+FITS_BridgeCurve|단일 커브 위 임의의 두 점을 연결하는 Bridge Curve 생성., 선택한 두 개의 커브를 연결하는 Bridge Curve 생성., 선택한 두 개의 커브와 선택한 포인트를 연결하는 Bridge Curve 생성를 수행하거나 지원하는 기능입니다.
+FITS_JigTools|Buffing Jig 자동 설계를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|선택한 공구와 선택한 작업좌표계를 이용하여 모따기 툴패스 생성를 수행하거나 지원하는 기능입니다.
+FITS_Change_OSBase|Start Base와 End Base 면을 사용하여 모델링의 두께 변환시 사용를 수행하거나 지원하는 기능입니다.
+FITS_CheckSlot_Marking|설명 요약 불가
+FITS_CheckSlot_Marking|파팅면에 주물 홈과 텍스트 마킹 생성를 수행하거나 지원하는 기능입니다.
+FITS_JigTools|Chiller Last 자동 생성를 수행하거나 지원하는 기능입니다.
+FITS_CMP_MoldDesign|CMP Modeling 데이터를 이용하여 3D CMP Mold Design를 수행하거나 지원하는 기능입니다.
+FITS_CMP_MoldDesign|CMP Modeling 데이터를 이용하여 3D CMP Mold Design 및 2D Drawing 생성, D CMP Mold Design : 3D Assembly, 3D Top plate, 3D Bottom plate 각각 생성 및 저장, D Drawing : 2D Assembly, 2D Top plate, 2D Bottom plate 각각 생성를 수행하거나 지원하는 기능입니다.
+FITS_ColorGrdation|설명 요약 불가
+FITS_ConvertSTL|모델링 파일을 STL 파일로 변환, D Print 가 가능한 Repaired STL 생성, 모델링 데이터의 체적 확인를 수행하거나 지원하는 기능입니다.
+FITS_TextureDoc|Texture DB 를 이용하여 Texture Information Document 자동 생성, Texture 별 Color 를 적용한 Rhino Layer 생성, Model Part 별 Texture Document 자동 생성를 수행하거나 지원하는 기능입니다.
+FITS_MarkingGauge|(우발 바텀뷰 기준) Top Curve와 Bot Curve를 이용하여 Top/Bot L/R 마킹 게이지를 생성한다를 수행하거나 지원하는 기능입니다.
+FITS_CreateNipple|Nipple 자동 모델링를 수행하거나 지원하는 기능입니다.
+FITS_DrawintTools|Excel Table 를 복사해서 Rhino 에서 Table 를 만든다를 수행하거나 지원하는 기능입니다.
+FITS_CrossSection|모델링 데이터의 X축, Y축, Z축 Multi - Cross Section 생성, 유형별(Interval, Value, Line) 모델링 Cross Section 생성를 수행하거나 지원하는 기능입니다.
+FITS_CuringJig|Curing Jig(숙성 지그) 자동 설계 프로그램를 수행하거나 지원하는 기능입니다.
+FITS_CurvatureSurface|개의 열린 커브 혹은 2개의 닫힌 커브를 이용하여 곡률 서피스를 생성를 수행하거나 지원하는 기능입니다.
+FITS_CurveExtension|선택한 커브의 정보(길이, R값, 방향) 확인, 선택한 커브 길이 연장 / 축소, 커브 길이를 입력한 값으로 만들기, 여러개의 커브에 대해 일괄 적용 가능를 수행하거나 지원하는 기능입니다.
+FITS_CurvesOffset|선택한 커브들을 일괄 옵셋, 열린 커브, 닫힌 커브 모두 옵셋 가능, 양방향 옵셋 가능, 다중 옵셋 가능를 수행하거나 지원하는 기능입니다.
+FITS_JigTools|컷팅 고주파 몰드 자동 생성를 수행하거나 지원하는 기능입니다.
+FITS_RibTools|● Curve와 Base 면을 사용하여 Base 면 위로 Rib 모델링을, 생성하는 프로그램를 수행하거나 지원하는 기능입니다.
+FITS_DetailTransform|입력 받은 값으로 선택된 객체들을 이동/회전하는 기능를 수행하거나 지원하는 기능입니다.
+FITS_DetailView|선택한 Curve(s)에 대해 Plane 를 자동 생성하여 Plane 기준 2D View를 보여준다. (작업후 DetailView 레이어로 이동)를 수행하거나 지원하는 기능입니다.
+FITS_DigitalTextureTools|● Digital, Texture를 생성하고 생성한 Digital Texture를 3D, Base에 Wrapping 하는 프로그램를 수행하거나 지원하는 기능입니다.
+FITS_DynamicSectionView|실시간 위치별 단면 확인 및 섹션 생성 기능를 수행하거나 지원하는 기능입니다.
+FITS_JigTools|EGMP Jig 자동 설계 프로그램를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|정 발포율 적용 : 1:1 모델링 데이터 에 구간별 발포비를 적용한 축소(발포) 모델링 데이터 자동 생성, 역 발포율 적용 : 축소(발포) 모델링 데이터 에 구간별 발포비를 적용하여 1:1 모델링 데이터 자동 생성, % 정 발포율, 역 발포율 모두 동일한 발포비 테이블을 사용한다를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|기준 사이즈 발포율(xlsx)과 Grading 파일(CDL)을 이용하여 전체 사이즈 발포율 데이터 생성를 수행하거나 지원하는 기능입니다.
+FITS_AI_ExpansionRatio|AI Machine Learning 를 활용하여 Midsole 구간별 단면 형상을 분석하여 발포비율을, 예측하는 프로그램를 수행하거나 지원하는 기능입니다.
+FITS_ExportLayer|Rhino 의 Layer 별로 Object(객체)들을 3dm 또는 igs 파일 형식으로 저장를 수행하거나 지원하는 기능입니다.
+FITS_ExportPLT|본사(T2) 컷팅 머신 (Zund Cutting Machine)에서 사용할 수 있는 파일 형식 (PLT)으로 변환하여 저장를 수행하거나 지원하는 기능입니다.
+FITS_ConvertTools|PFC Procost 프로그램에서 사용가능한 SVG 파일 생성를 수행하거나 지원하는 기능입니다.
+FITS_ExtendMultiSurface|선택한 서피스 엣지를 각 방향별로 입력값 만큼 연장를 수행하거나 지원하는 기능입니다.
+FITS_ExtractEdge|Surface의 Edge Curve 를 생성, Surface 들의 외곽를 자동 인식하여 Curve 생성, 사용자가 선택한 지점으로 연결하며 Curve 생성를 수행하거나 지원하는 기능입니다.
+FITS_FitWidth|모델링을 선택한 Target Curve나 Surface 기준으로 변환 및 이동를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|Footbed Jig, Last, Lasted Upper 를 이용하여 2D 도면 자동 생성를 수행하거나 지원하는 기능입니다.
+FITS_FootbedJig|Footbed Jig 자동 모델링 (완료된 모델링은 Powermill ISDS를 사용하여 자동 툴패스 생성가능)를 수행하거나 지원하는 기능입니다.
+FITS_FootbedSurface|Lasted Upper를 이용한 Footbed Surface 자동생성를 수행하거나 지원하는 기능입니다.
+FITS_TEMS|TEMS 시스템에 필요한 자료 제작를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|접착 파트 정보 및 Y Length 비율 생성를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|생산분 모델링 자동 점검 프로그램를 수행하거나 지원하는 기능입니다.
+FITS_GradingInformationDoc|● Last Spec Chart 를 이용하여 Grading Information Document, 자동 생성, Basic Size X, Y, Z 생성, Grading X, Y, Z 반문대 편차생성, Basic Size 및 Grading 편차 계산식 생성, Your browser, does not support the video tag를 수행하거나 지원하는 기능입니다.
+FITS_GradingInformationDoc|● Last Spec Chart 를 이용하여 Grading Information Document, 자동 생성, Basic Size X, Y, Z 생성, Grading X, Y, Z 반문대 편차생성, Basic Size 및 Grading 편차 계산식 생성, Your browser, does not support the video tag를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|Create grading table, create Z, sentence group, create cdl file and note file를 수행하거나 지원하는 기능입니다.
+FITS_GradingTableMaker|Grading Infomation Doc과 연동하여 Grading Table을, 생성하고 Z문대 그룹생성 및 Grading 검증 cdl 파일과 엑셀파일 생성를 수행하거나 지원하는 기능입니다.
+FITS_GradingTableMaker|GradingInfomationDoc과 연동하여 Grading Table을, 생성하고 Z문대 그룹생성 및 Grading 검증 cdl 파일과 엑셀파일 생성를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|Grading Table을 생성하고 Z문대 그룹생성 cdl 파일과 note파일, 생성를 수행하거나 지원하는 기능입니다.
+FITS_GrooveSurface|Top Surface에 Groove Surface를 생성를 수행하거나 지원하는 기능입니다.
+FITS_GroupGradingTools|● 미드솔, 아웃솔 모델링의 Fix, Morph, Full 구간을, 지정하여, 문대별 Scale Group을 설정하고, 설정된 Scale Group에 맞게 모델링을 변형, 합니다., ● 미드솔, 아웃솔 모 델링의 특정 부분을 Fix하여 다른 부분은 Scale 의 영향을 받지만 Fix, 부분은 Scale 의 영향을 받지 않고 유지 가능합니다., ●, 미드솔, 아웃솔 모 델링의 특정 부분의 두께...를 수행하거나 지원하는 기능입니다.
+FITS_HotKnifeGauge|D Hot Knife 모델링으로 Hot Knife 제작에 필요한 Gauge 생성, 펼쳐진 2D 게이지 생성 (접히는 구간 표시, Knife 종류에 따른 보정값 및 갭 적용), Knife 가장자리 연장, Knife 교차 구간 커브 정리, Acrylic Gauge 생성 (acryl 툴패스 자동 생성을 위한 Layer 정리 작업), Wire Cutting Gauge 생성, D Hot Knife 게...를 수행하거나 지원하는 기능입니다.
+FITS_ImageCapture|선택한 모델링 데이터를 캡쳐하여 파일로 저장, 1:1 이미지를 Rhino 상에 생성, Top, Bot, Lateral, Medial, Toe, Heel 방향별 이미지, 캡쳐를 수행하거나 지원하는 기능입니다.
+FITS_ImportPLT|PLT 파일 Import 기능 (생성된 PLT 파일의 확인 및 수정)를 수행하거나 지원하는 기능입니다.
+FITS_OpenTemplate|파일공유 서버 경로에 있는 탬플릿 파일을 가져와서 Open 합니다., 법인별 템플릿 파일 공유 위치, T2 : U:\전사, 폴더\태광실업\그룹회장\TKG태광\본사\엔지니어링부센터장\금형담당\금형팀(Server)\1., Mold_T2\1.자료공유\F.업무 표준화\a.표준 자료\5-5.Rhino Template Files\2., Rhino 8.0, MV :, TTM :, % 파일 공유 위치에 약...를 수행하거나 지원하는 기능입니다.
+FITS_InjectionAirVent|사출 금형의 Core Cavity Air-Vent Parting 설계 자동화를 수행하거나 지원하는 기능입니다.
+FITS_Injection|사출 금형의 Gate 자동 생성를 수행하거나 지원하는 기능입니다.
+FITS_InjectionGuideBlock|사출 금형의 가이드 블럭 자동 생성를 수행하거나 지원하는 기능입니다.
+FITS_InjectionRunner|사출 금형의 Core Cavity Runner, Parting 설계 자동화를 수행하거나 지원하는 기능입니다.
+FITS_InsoleDieCut|Last Bottom Gauge 를 이용하여 3선 그리기, Insole Diecut Gauge 그리기를 수행하거나 지원하는 기능입니다.
+FITS_ModelingForIPMold|IP Mold Modeling 에서 수정 하고 싶은 영역의 모델링을 사용자가 입력한 구간별 값을 사용하여 Change Base와 Top Edit를 하는 프로그램를 수행하거나 지원하는 기능입니다.
+FITS_IP_TM_MoldParting|● 몰드 상면 서피스와 Top curve를 이용한 IP Target Machining Mold 자동, 설계 기능 ., 입력된 치수가 적용된 상/하 Parting면 생성., 평면 습합부, 에어 밴트 습합부 생성., 실링 / 에어 밴트 / 런너 게이지 생성., 가이드 핀 및 역류 방지 지그 생성., Your browser, does not support the video tag를 수행하거나 지원하는 기능입니다.
+FITS_IP_TM_MoldParting|설명 요약 불가
+FITS_IP_TM_MoldParting|설명 요약 불가
+FITS_IP_TM_PreParting|IP Target Machining 주조 금형 제작을 위한 Wood parting(목형) 자동 설계 및 Cavity 간격(몰드 배열) 확인을 위한 Preparting 금형 생성 기능, 몰드 타입(1족분/2족분) 및 몰드 크기에 따른 목형 및 금형 파팅면 생성를 수행하거나 지원하는 기능입니다.
+FITS_Dimension|Linear Dimension (Horizontal/Vertical, Aligned) 생성 기능, Radial Dimension, Angular Dimension, Ordinate Dimension 생성 기능, Dimension Text 위치 지정 기능, Dimension Font 지정, Dimension Text Size 지정, Dimension Text Color 와 Dimension L...를 수행하거나 지원하는 기능입니다.
+FITS_Make2D|D Modeling 데이터로 2D Gauge 생성 (가장자리와 윤곽선을 평면적인 커브로 생성)를 수행하거나 지원하는 기능입니다.
+FITS_ModelView|:1 이미지 캡처를 통한 MVZ 도면(Block, Label, Section) 생성, PDF/DXF 생성 기능, Toe, Heel, Lateral, Medial Clip view 추가 기능, 입력된 위치, 선택한 커브 기준 X/Y 섹션 생성 기능, 입력된 Z trim length에 기반한 이미지/섹션 생성 기능, Last/Upper 이미지를 Toe, Heel view 에만 적용하는 기능, T...를 수행하거나 지원하는 기능입니다.
+FITS_LastAlignment|신규 라스트 모델링 데이터를 입력한 Heel Offset(HBO) 값에 따라 정렬하고, 게이지를 정리하는 기능, 정렬된 모델링 데이터 재정렬 가능를 수행하거나 지원하는 기능입니다.
+FITS_LastDraft|설명 요약 불가
+FITS_LugModeling|아웃솔 Base와 Gauge를 이용한 Lug 생성를 수행하거나 지원하는 기능입니다.
+FITS_JigTools|Offset Lug 자동 생성를 수행하거나 지원하는 기능입니다.
+FITS_MachiningSurface|툴링 멀티패드용 가공 보조면 생성, PowerMill ISDS - OCP Automation 기능과 연계를 위한 레이어 자동 생성, 가공 블럭, 보조면, 마킹 레이어 일괄 생성, 입력된 경로에 모델링을 포함한 3dm 파일 Export를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|가공재료별 공구 생성, 선택된 Factory Type(T2/MV/TTM)에 따른 Tool Database에 저장된 공구를 가져옵니다., 생성된 공구는 Holder, Tool Number, Spindle, Cutting Feed 등의 가공 파라메터 정보를 포함하고 있습니다를 수행하거나 지원하는 기능입니다.
+FITS_AirholePosition|서피스/메쉬 상에서 에어홀 마킹을 위한 구(Sphere) 생성 기능, 에어홀 마킹 문서 생성 기능를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|소재 체크용 패턴 툴패스 생성, 툴패스는 첫 번째 황삭 툴패스의 블럭을 기준으로 생성됩니다., AL/Steel/EDM 공구 자동 인식 및 생성 진행(A12F/S12F/E12F)를 수행하거나 지원하는 기능입니다.
+FITS_MetalRPAirhole|Metal RP용 에어홀 자동 생성, Metal PR용 에어홀 타입별(오각형, 원형) 생성, 생성된 형상 및 사용자 선택 에어벤트 미드솔 포인트에 정렬를 수행하거나 지원하는 기능입니다.
+FITS_MGG|미드솔 모델링의 Fix, Morph, Full 구간을 지정하여, 문대별, Scale Group을 설정하고, 설정된 Scale Group에 맞게 모델링을 변형 합니다., 미드솔 모델링의 특정 부분을 Fix하여 다른 부분은 Scale 의 영향을 받지만 Fix 부분은 Scale 의 영향을, 받지 않고 유지 가능합니다., 미드솔 모델링의 특정 부분의 두께를 묶고, 설정된 Scale Group에 맞게...를 수행하거나 지원하는 기능입니다.
+FITS_MGG|미드솔 모델링의 Fix, Morph, Full 구간을 지정하여, 문대별 Scale Group을 설정하고, 설정된 Scale Group에 맞게 모델링을 변형 합니다., 미드솔 모델링 Group Grading 시 Z 높이는 고정이 됩니다를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|선택한 툴패스 무효화, 검증 전 상태로 공구 롤백, 선택한 모델링 Z 반전 및 작업좌표계 설정, 선택한 모델링을 90˚/-90˚ Rotate, 선택한 객체 및 작업좌표계를 이용하여 블록 재설정(명명된 좌표계로 변경)를 수행하거나 지원하는 기능입니다.
+FITS_ModelCheckGauge|Sole Part 점검용 PVC Cutting 게이지 자동 생성를 수행하거나 지원하는 기능입니다.
+FITS_ModelMoldShrinkage|모델링에 선택한 부품 Scale을 적용하여 생성하고, 적용된 Scale 값을 레이어와 Rhino 화면에 표시를 수행하거나 지원하는 기능입니다.
+FITS_MoldAlign|Target Machining 작업 공정의 Mold Align 공정, 축이 뒤섞인 Scan Mold 을 CAD Data 로 정렬 공정를 수행하거나 지원하는 기능입니다.
+FITS_MoldModeling_Drawing|대1 모델링과 보정 모델링 비교 도면 생성를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|D2 CNC 장비용 NC 데이터로 M2 CNC 장비용 NC 데이터 생성, D2 CNC 장비용 NC 데이터로 G2 CNC 장비용 NC 데이터 생성를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|선택한 NC Data 의 주요 가공 파라메터 변경, Tool Number, H Number, Spindle, Cutting Feed, Plunge Feed 등 변경 가능, NC Data의 공작물 좌표계 코드 일괄 변경, 여러 개의 NC Data 를 하나의 NC 파일로 병합를 수행하거나 지원하는 기능입니다.
+FITS_NCTextConverter|선택한 레이어에 존재하는 모든 텍스트를 가공을 위한 커브(Single Stroke Curve)로 변환를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|가공을 위한 NC 작업 공정표 문서 생성, NC File 이름 출력, 가공 좌표계 출력, 공구 정보 출력 (공구 넘버, 직경, 타입), Overhang 출력, 가공 정보 출력 (Spindle, Cutting Feed, Plunge Feed), 툴패스 정보 출력 (공차, 가공여유, 툴패스 피치, 툴패스 타입), 가공물 및 작업자 정보 출력 ( 가공모델명, Mold Type, Part Name,...를 수행하거나 지원하는 기능입니다.
+FITS_Nesting|D Gauge를 선택한 사각 Sheet에 최적의 면적을 자동으로 계산하여 배열하는 프로그램를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|설명 요약 불가
+FITS_NormalGrading2D|CDL 값을 이용하여 선택된 객체(2D curve)에 Size 별 Scale 적용., 전체 문대 / 선택된 문대에 대하여 스케일 타입별(XY, ZY, XZ) Scale 적용 기능, 전체 문대 / 선택된 문대에 대하여 스케일 타입별(XY, ZY, XZ) Size 변경 기능(기준 문대가 아닌 Size에 대한 Scale 적용), Scale 적용된 문대별, Layer 생성, 문대별 하위 레이어 일괄...를 수행하거나 지원하는 기능입니다.
+FITS_NormalGrading3D|CDL 값을 이용하여 선택된 객체(3D Modeling Data)에 Size 별 Scale 적용, 전체 문대 일괄 scale 적용 가능, 선택된 문대에 대한 Scale 적용 기능, CDL 값을 이용하여 사이즈 변경 기능 ( 기준 문대가 아닌 Size 에 대한 Scale 적용), Scale 이 적용된 데이터는 문대 별 Layer 생성를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|선택한 Point 와 Curve(Line) 의 시작, 중간, 끝 지점에 Circle, Sphere 또는 사용자가 선택한 객체를 생성, 선택한 Surface의 법선 방향으로 사용자가 선택한 객체를 생성를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|선택한 객체들의 정보를 보여주는 기능를 수행하거나 지원하는 기능입니다.
+FITS_ObjectMinMax|<Boundary box>, 선택한 객체들에 대한 1:1 Boundary Box 생성, 선택한 객체 기준 X, Y, Z 축의 방향으로 입력한 값 만큼 확장한 Boundary Box 생성, 포인트 기준 정치수로 Boundary Box 생성 가능, 포인트 기준 5mm 단위 정치수 Boundary Box 생성 가능, 입력한 축방향 Boundary Box 생성 가능, <Point min/max>,...를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|Rhino ISDS로부터 생성된 모델링 데이터를 기반으로 가공물별, Toolpath Template를 이용하여, 툴패스 생성부터 검증, 포스트, 워크시트(작업공정표) 생성, 시뮬레이션을 일괄 수행를 수행하거나 지원하는 기능입니다.
+FITS_OGG|아웃솔 모델링의 Fix, Morph, Full 구간을 지정하여, 문대별 Scale Group을 설정하고, 설정된 Scale Group에 맞게 모델링을 변형 합니다., Grading 시 선택한 베이스면 기준으로 두께는 고정이 됩니다를 수행하거나 지원하는 기능입니다.
+FITS_OutsoleWasteCheckDoc|설명 요약 불가
+Command명 확인불가|DMP 금형 Taper Parting 면에 Engineered Fresh 자동 설계를 수행하거나 지원하는 기능입니다.
+FITS_PL_MoldDesign|파이론 Mold 자동 설계 프로그램를 수행하거나 지원하는 기능입니다.
+FITS_CompressRatioDoc|● Phylon 과 Preform 의 STL 데이터를 이용하여 구간별 압축비 문서를 생성한다를 수행하거나 지원하는 기능입니다.
+FITS_CompressRatioDoc|Phylon 과 Preform 의 STL 데이터를 이용하여 구간별 압축비 문서를 생성한다를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|선택한 툴패스 타입(핀/홀 타입)과 선택한 작업좌표계를 이용하여 핀/홀 툴패스 생성를 수행하거나 지원하는 기능입니다.
+FITS_PL_TM_MoldParting|Phylon Target Machining Mold의 Taper 구간에서 상/하 Parting 면을 생성를 수행하거나 지원하는 기능입니다.
+FITS_PL_TM_PreParting|Phylon Target Machining 주조금형 제작을 위한 '목형 파팅' 및 몰드 배열 점검을 위한 참고용 Bottom Plate Mold 생성를 수행하거나 지원하는 기능입니다.
+FITS_PointOnObject|선택한 Curve/Surface/Mesh 위 Point 생성, 선택한 Curve의 무게중심 지점에 Point 생성, 선택한 Curve의 Boundary 중심지점에 Point 생성를 수행하거나 지원하는 기능입니다.
+FITS_PolylineToCurve|Polyline을 Curve 로 변환 및 Edge 를 제거하고 그 공간에 부드러운 연결성을 가지는 Curve를 생성하는 프로그램를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|선택한 툴패스에 대해 가공 기계별 Post Process를 진행 합니다., 각 툴패스의 가공 기본 정보를 확인할 수 있습니다를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|설명 요약 불가
+Command명 확인불가|Phylon과 Preform을 이용하여 2D 비교 도면 자동 생성를 수행하거나 지원하는 기능입니다.
+FITS_PressLast|압착 라스트 모델링를 수행하거나 지원하는 기능입니다.
+FITS_ProfileEdit|개의 Curve를(Profile Curve, Target Profile Curve)이용하여 Base Curve에서 Target Curve로 변화되는 프로파일, 변화량을 Top Surface에 적용하는 모프(Morph) 기능를 수행하거나 지원하는 기능입니다.
+FITS_IP_RP_Design|IP / Phylon 1st Parting 자동 설계, 파팅 생성, 주물 체크홈 생성, 모델 정보 마킹를 수행하거나 지원하는 기능입니다.
+FITS_ScaleMark|Dimension 좌표를 생성하여 Object에 적용된 Scale 값 확인를 수행하거나 지원하는 기능입니다.
+FITS_ScanMoldCheck|모델링과 스캔 데이터의 단면 오차 자동 비교, D Auto : 탑라인을 따라 측정 범위내 최대 오차 지점을 자동으로 찾아 측정하고, 허용 오차를 초과한 구간을 검출, Top Line : 모델링 탑커브와 스캔 탑커브의 오차 거리 치수 생성, 아웃솔은 수직 구간이 낮아서 정확한 오차 측정에 어려움이 있어 사용자가 스캔탑 커브 삽입를 수행하거나 지원하는 기능입니다.
+FITS_SectionAlign|Top, Bottom Curve와 X, Y Section을 활용하여 Side Surface 생성를 수행하거나 지원하는 기능입니다.
+FITS_SectionAutoDrawing|D 모델링 데이터을 이용하여 모델링 점검용 Cross-section 도면 자동 생성, 등간격 또는 사용자가 입력 값, 위치에 섹션을 생성, 정렬 하여 모델링 점검용 도면을 생성한다를 수행하거나 지원하는 기능입니다.
+FITS_SmartAlign|두 그룹의 개체(Surface/Solid/Mesh) 들을 Align(일치/정렬) 한다., Point Pairs Align : Align 객체와 Target 객체 각각 대응하는 Position을 지정하여 두 객체를 Align 한다., Accuracy Align : Align 객체와 Target 객체의 Point Cloud를 비교하여 자동으로 두 객체를 Align 한다를 수행하거나 지원하는 기능입니다.
+FITS_SmartSelect|필터에 의한 빠른 선택 기능, Select Filter 창에 지정한 Object type 또는 Object color 선택, 객체 타입/ 칼라 / 레이어 별 선택, 선택된 객체 칼라 변경를 수행하거나 지원하는 기능입니다.
+FITS_SolePartCheckList|Midsole 과 Outsole의 사용자가 지정한 지점의 두께를 측정하여 엑셀 파일로 생성 해주는 프로그램를 수행하거나 지원하는 기능입니다.
+FITS_JigTools|Strobel Press Pad 자동 설계를 수행하거나 지원하는 기능입니다.
+FITS_SurfaceEditFromSection|D 모델링과 몰드를 AA, X Section으로 나눈 뒤 Section Curve(2D)에 Cage를 적용하여 변경 후 3D 모델링에 Cage의 변경값 적용합니다를 수행하거나 지원하는 기능입니다.
+FITS_SurfaceCurveBlend|선택된 Surface와 Curve 사이의 Blend Surface 생성를 수행하거나 지원하는 기능입니다.
+FITS_TapLocation|사출 금형 도면의 Tap 정렬 넘버링 및 Tap 중심 좌표 테이블 자동 생성를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|가공물별 Toolpath Template을 이용하여 툴패스를 자동 생성 합니다., Rhino ISDS Auto-Modeling ( EGMP, Footbed, IP Cooling JIG...) 과 자동 연계 툴패스 생성, 사용자 저장 Template 사용 기능, 툴패스 Template 파일의 Parameter 수정 및 변경 적용 가능를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|스캔된 몰드 데이터와 몰드 모델링 결과의 편차를 그라데이션으로 시각화하는 기능, STL로 변환한 데이터를 원본 모델링과 비교해 변환 과정에서 발생한 데이터 손실(누락/훼손) 구간을 확인하는, 용도로도 활용를 수행하거나 지원하는 기능입니다.
+FITS_ThreeCurveBlend|개의 커브 사이에 인접한 Arc 생성를 수행하거나 지원하는 기능입니다.
+FITS_ThreeSurfaceFillet|개의 서피스 사이에 Fillet 서피스 생성를 수행하거나 지원하는 기능입니다.
+FITS_ModelingAlign|Modeling 데이터를 STL(Scan Mold Data)에 설정한 Point를 기준으로 정렬 (Point Pair Align)를 수행하거나 지원하는 기능입니다.
+FITS_MoldTopCurve|Mold 스캔 데이터에서 Top Curve 를 추출를 수행하거나 지원하는 기능입니다.
+FITS_TopCurveAlign|스캔된 Mold에서 추출한 Top Curve와 Modeling 데이터의 Top Curve를 활용하여 Align를 수행하거나 지원하는 기능입니다.
+FITS_ToeHeelMeteric|Sole Part 의 Toe / Heel 높이 측정을 위한 Zund Cutting 아크릴 게이지를 생성 합니다를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|미러 툴패스 생성, 축 가공, 5축 가공 툴패스에 대한 미러 툴패스 생성를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|툴패스 편집기능, 툴패스 이름에 접두어 일괄 붙이기 (사이즈런 추가)를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|툴패스 무효화 및 공구 롤백 기능, 선택된 Factory Type(T2/MV/TTM)에 따라 Tool Database에 저장된 공구로 교체합니다., 교체된 공구로 툴패스의 스핀들 및 피드 값이 변경됩니다., ▶ T2 롤백 조건, ▶ MV 롤백 조건, ▶ TTM 롤백 조건를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|툴패스 모의 가공를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|툴패스 검증 및 자동 Overhang 계산, 공구의 생크(Shaft) 및 홀더(Holders) 가공 간섭 여부를 분석하여 최소 Overhang 길이를 자동 계산합니다., 간섭이 발생할 경우 자동으로 롱(Long) 공구로 교체하고 Overhang을 다시 계산합니다., 자동 공구 교체 및 재검증, 검증 결과에 따라 적절한 길이의 공구로 자동 대체함으로써 효율적이고 안전한 가공을 지원합니다를 수행하거나 지원하는 기능입니다.
+FITS_TopEdit|개의 Curve를(Base Curve, Target Curve)이용하여 Base Curve에서 Target Curve로 변화되는, 변화량을 미드솔의 Top Surface(빵면)나 Side Surface(측면)에 변화를 적용하는 모프(Morph) 기능를 수행하거나 지원하는 기능입니다.
+FITS_TwoPosDistance|두 지점에 사이의 거리를 확인하는 기능를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|진공 밸브 툴패스 생성, 선택된 포인트 기준으로 툴패스 생성됩니다., 툴패스 타입(1차/2차) 선택, 작업좌표계 선택를 수행하거나 지원하는 기능입니다.
+FITS_VariableOffset|커브의 선택 지점별 옵셋 치수가 적용된 가변 옵셋 커브 생성를 수행하거나 지원하는 기능입니다.
+FITS_DrawingTools|● 섹션 별 사용자가 입력한 비율 값 또는 Top Height 값에 맞게, ZOOMX Preform Section을 생성하고 도면으로 나타내는 프로그램를 수행하거나 지원하는 기능입니다.
+Command명 확인불가|설명 요약 불가

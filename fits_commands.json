@@ -1,0 +1,498 @@
+{
+  "categories": [
+    {
+      "name": "Curve & Surface",
+      "commands": [
+        {
+          "name": "FITS_BridgeCurve",
+          "description": "단일 또는 두 커브 사이 Bridge Curve 생성"
+        },
+        {
+          "name": "FITS_CurvatureSurface",
+          "description": "커브를 이용한 곡률 서피스 생성"
+        },
+        {
+          "name": "FITS_SurfaceCurveBlend",
+          "description": "서피스와 커브 사이 Blend Surface 생성"
+        },
+        {
+          "name": "FITS_ThreeCurveBlend",
+          "description": "3개 커브 사이 Arc 생성"
+        },
+        {
+          "name": "FITS_ThreeSurfaceFillet",
+          "description": "3개 서피스 사이 Fillet 서피스 생성"
+        },
+        {
+          "name": "FITS_AxialSurfaceExtension",
+          "description": "닫힌 커브 기준 축방향 서피스 생성"
+        },
+        {
+          "name": "FITS_CurveExtension",
+          "description": "커브 길이 확인 및 연장/축소"
+        },
+        {
+          "name": "FITS_CurvesOffset",
+          "description": "커브 일괄 옵셋 (양방향, 다중 옵셋)"
+        },
+        {
+          "name": "FITS_VariableOffset",
+          "description": "지점별 옵셋 치수가 적용된 가변 옵셋 커브 생성"
+        },
+        {
+          "name": "FITS_PolylineToCurve",
+          "description": "Polyline을 부드러운 Curve로 변환"
+        },
+        {
+          "name": "FITS_ExtractEdge",
+          "description": "서피스 Edge Curve 생성 및 외곽 자동 인식"
+        },
+        {
+          "name": "FITS_ExtendMultiSurface",
+          "description": "서피스 엣지 방향별 연장"
+        },
+        {
+          "name": "FITS_GrooveSurface",
+          "description": "Top Surface에 Groove Surface 생성"
+        },
+        {
+          "name": "FITS_ProfileEdit",
+          "description": "Profile Curve 기반 Top Surface Morph 적용"
+        },
+        {
+          "name": "FITS_TopEdit",
+          "description": "Base/Target Curve 기반 Top/Side Surface Morph 적용"
+        },
+        {
+          "name": "FITS_SectionAlign",
+          "description": "Top/Bottom Curve와 Section으로 Side Surface 생성"
+        }
+      ]
+    },
+    {
+      "name": "Mold Design",
+      "commands": [
+        {
+          "name": "FITS_CMP_MoldDesign",
+          "description": "CMP 데이터 기반 3D Mold 자동 생성"
+        },
+        {
+          "name": "FITS_PL_MoldDesign",
+          "description": "Phylon Mold 자동 생성"
+        },
+        {
+          "name": "FITS_IP_RP_Design",
+          "description": "IP/Phylon 1st Parting 자동 설계"
+        },
+        {
+          "name": "FITS_IP_TM_MoldParting",
+          "description": "IP Target Machining Mold 자동 생성"
+        },
+        {
+          "name": "FITS_IP_TM_PreParting",
+          "description": "IP Target Machining 목형 자동 설계"
+        },
+        {
+          "name": "FITS_PL_TM_MoldParting",
+          "description": "Phylon Target Machining Mold Parting 생성"
+        },
+        {
+          "name": "FITS_PL_TM_PreParting",
+          "description": "Phylon Target Machining 목형 파팅 생성"
+        },
+        {
+          "name": "FITS_InjectionAirVent",
+          "description": "사출 금형 Air-Vent Parting 자동 설계"
+        },
+        {
+          "name": "FITS_Injection",
+          "description": "사출 금형 Gate 자동 생성"
+        },
+        {
+          "name": "FITS_InjectionGuideBlock",
+          "description": "사출 금형 가이드 블럭 자동 생성"
+        },
+        {
+          "name": "FITS_InjectionRunner",
+          "description": "사출 금형 Runner/Parting 자동 설계"
+        },
+        {
+          "name": "FITS_OverFlow",
+          "description": "DMP 금형 Taper Parting 면 Engineered Fresh 생성"
+        },
+        {
+          "name": "FITS_CheckSlot_Marking",
+          "description": "파팅면 주물 홈과 텍스트 마킹 생성"
+        },
+        {
+          "name": "FITS_MoldAlign",
+          "description": "Scan Mold를 CAD 데이터로 정렬"
+        },
+        {
+          "name": "FITS_ModelingAlign",
+          "description": "모델링을 STL 기준 Point로 정렬"
+        },
+        {
+          "name": "FITS_MoldTopCurve",
+          "description": "Mold 스캔 데이터에서 Top Curve 추출"
+        },
+        {
+          "name": "FITS_TopCurveAlign",
+          "description": "스캔 Mold Top Curve와 모델링 Top Curve 정렬"
+        },
+        {
+          "name": "FITS_ScanMoldCheck",
+          "description": "모델링과 스캔 데이터 단면 오차 자동 비교"
+        }
+      ]
+    },
+    {
+      "name": "Grading & Scale",
+      "commands": [
+        {
+          "name": "FITS_NormalGrading2D",
+          "description": "CDL 값 기반 2D 객체 Size별 Scale 적용"
+        },
+        {
+          "name": "FITS_NormalGrading3D",
+          "description": "CDL 값 기반 3D 모델링 Size별 Scale 적용"
+        },
+        {
+          "name": "FITS_ER_Grading",
+          "description": "발포율 적용 모델링 자동 생성 (정/역 발포율)"
+        },
+        {
+          "name": "FITS_ERTableMaker",
+          "description": "전체 사이즈 발포율 데이터 생성"
+        },
+        {
+          "name": "FITS_GradingTableMaker",
+          "description": "Grading Table 생성 및 검증"
+        },
+        {
+          "name": "FITS_GroupGradingTools",
+          "description": "미드솔/아웃솔 구간별 Scale Group 설정 및 변형"
+        },
+        {
+          "name": "FITS_MGG",
+          "description": "미드솔 모델링 구간별 Scale Group 설정 및 변형"
+        },
+        {
+          "name": "FITS_OGG",
+          "description": "아웃솔 모델링 구간별 Scale Group 설정 및 변형"
+        },
+        {
+          "name": "FITS_AI_ExpansionRatio",
+          "description": "AI 기반 미드솔 발포 비율 예측"
+        },
+        {
+          "name": "FITS_ModelMoldShrinkage",
+          "description": "부품 Scale 적용 및 값 표시"
+        },
+        {
+          "name": "FITS_ScaleMark",
+          "description": "객체에 적용된 Scale 값 확인"
+        }
+      ]
+    },
+    {
+      "name": "Jig & Gauge",
+      "commands": [
+        {
+          "name": "FITS_JigTools",
+          "description": "Buffing Jig, Chiller Last, EGMP Jig, Offset Lug, Strobel Press Pad 자동 설계"
+        },
+        {
+          "name": "FITS_AcrylGauge",
+          "description": "아크릴 체크 지그 및 마키노 툴패스 생성"
+        },
+        {
+          "name": "FITS_HotKnifeGauge",
+          "description": "Hot Knife 제작용 Gauge 생성"
+        },
+        {
+          "name": "FITS_MarkingGauge",
+          "description": "Top/Bot L/R 마킹 게이지 생성"
+        },
+        {
+          "name": "FITS_ModelCheckGauge",
+          "description": "Sole Part 점검용 PVC Cutting 게이지 생성"
+        },
+        {
+          "name": "FITS_ToeHeelMeteric",
+          "description": "Toe/Heel 높이 측정용 아크릴 게이지 생성"
+        },
+        {
+          "name": "FITS_InsoleDieCut",
+          "description": "Insole Diecut Gauge 생성"
+        },
+        {
+          "name": "FITS_CuringJig",
+          "description": "Curing Jig 자동 설계"
+        },
+        {
+          "name": "FITS_FootbedJig",
+          "description": "Footbed Jig 모델링 자동 생성"
+        },
+        {
+          "name": "FITS_RibTools",
+          "description": "Air Vent/Rib Gauge 및 서피스 생성"
+        }
+      ]
+    },
+    {
+      "name": "Drawing & Document",
+      "commands": [
+        {
+          "name": "FITS_TextureDoc",
+          "description": "Texture DB 기반 Information Document 자동 생성"
+        },
+        {
+          "name": "FITS_SectionAutoDrawing",
+          "description": "3D 모델링 기반 Cross-section 도면 자동 생성"
+        },
+        {
+          "name": "FITS_GradingInformationDoc",
+          "description": "Last Spec Chart 기반 Grading Information Document 생성"
+        },
+        {
+          "name": "FITS_BowermanDrawing",
+          "description": "Phylon/Preform 압축비 분석 비교 도면 생성"
+        },
+        {
+          "name": "FITS_FoodbedDrawing",
+          "description": "Footbed Jig/Last/Lasted Upper 기반 2D 도면 생성"
+        },
+        {
+          "name": "FITS_PreformDrawing",
+          "description": "Phylon/Preform 2D 비교 도면 자동 생성"
+        },
+        {
+          "name": "FITS_MoldModeling_Drawing",
+          "description": "대1 모델링과 보정 모델링 비교 도면 생성"
+        },
+        {
+          "name": "FITS_ModelView",
+          "description": "1:1 이미지 캡처 기반 MVZ 도면 생성"
+        },
+        {
+          "name": "FITS_Make2D",
+          "description": "3D 모델링 데이터로 2D Gauge 생성"
+        },
+        {
+          "name": "FITS_DynamicSectionView",
+          "description": "실시간 위치별 단면 확인 및 섹션 생성"
+        },
+        {
+          "name": "FITS_CrossSection",
+          "description": "X/Y/Z축 다중 섹션 생성"
+        },
+        {
+          "name": "FITS_DetailView",
+          "description": "선택 커브 기준 구성평면 생성 및 2D View 표시"
+        },
+        {
+          "name": "FITS_DrawingTools",
+          "description": "Excel Table을 Rhino Table로 생성"
+        },
+        {
+          "name": "FITS_DrawintTools",
+          "description": "Excel Table을 Rhino Table로 생성"
+        },
+        {
+          "name": "FITS_Dimension",
+          "description": "타입별 치수 생성 (Linear, Radial, Ordinate, Angular)"
+        }
+      ]
+    },
+    {
+      "name": "Data Convert & Export",
+      "commands": [
+        {
+          "name": "FITS_ConvertSTL",
+          "description": "모델링을 STL 파일로 변환 및 체적 확인"
+        },
+        {
+          "name": "FITS_ExportLayer",
+          "description": "Layer별 객체를 3dm/igs 파일로 저장"
+        },
+        {
+          "name": "FITS_ExportPLT",
+          "description": "Zund Cutting Machine용 PLT 파일로 변환 저장"
+        },
+        {
+          "name": "FITS_ImportPLT",
+          "description": "PLT 파일 Import 및 확인/수정"
+        },
+        {
+          "name": "FITS_ConvertTools",
+          "description": "PFC Procost용 SVG 파일 생성"
+        },
+        {
+          "name": "FITS_OpenTemplate",
+          "description": "파일 서버의 템플릿 파일을 Rhino로 Import"
+        }
+      ]
+    },
+    {
+      "name": "Analysis & Check",
+      "commands": [
+        {
+          "name": "FITS_ThicknessAnalysis",
+          "description": "스캔 몰드와 모델링 편차 그라데이션 시각화"
+        },
+        {
+          "name": "FITS_SolePartCheckList",
+          "description": "Midsole/Outsole 두께 측정 엑셀 생성"
+        },
+        {
+          "name": "FITS_FullSizeModelChck",
+          "description": "생산분 모델링 자동 점검"
+        },
+        {
+          "name": "FITS_OutsoleWasteCheckDoc",
+          "description": "아웃솔 Waste 점검 문서 생성"
+        },
+        {
+          "name": "FITS_TwoPosDistance",
+          "description": "두 지점 사이 거리 확인"
+        },
+        {
+          "name": "FITS_ObjectInformation",
+          "description": "선택 객체 정보 표시"
+        },
+        {
+          "name": "FITS_ObjectMinMax",
+          "description": "객체 Boundary Box 생성"
+        },
+        {
+          "name": "FITS_CompressRatioDoc",
+          "description": "Phylon/Preform STL 기반 압축비 문서 생성"
+        }
+      ]
+    },
+    {
+      "name": "Object & Modeling",
+      "commands": [
+        {
+          "name": "FITS_DetailTransform",
+          "description": "입력값으로 객체 이동/회전"
+        },
+        {
+          "name": "FITS_SmartAlign",
+          "description": "두 그룹 객체 Align/정렬"
+        },
+        {
+          "name": "FITS_SmartSelect",
+          "description": "필터 기반 빠른 선택 (타입/색상/레이어)"
+        },
+        {
+          "name": "FITS_ObjectGeneration",
+          "description": "Point/Curve 지점에 Circle/Sphere/객체 생성"
+        },
+        {
+          "name": "FITS_PointOnObject",
+          "description": "Curve/Surface/Mesh 위 Point 생성"
+        },
+        {
+          "name": "FITS_FitWidth",
+          "description": "모델링을 Target Curve/Surface 기준으로 변환/이동"
+        },
+        {
+          "name": "FITS_Change_OSBase",
+          "description": "Start/End Base 면 기반 모델링 두께 변환"
+        },
+        {
+          "name": "FITS_SurfaceEditFromSection",
+          "description": "Section Curve에 Cage 적용 후 3D 모델링에 변경값 적용"
+        },
+        {
+          "name": "FITS_ModelingForIPMold",
+          "description": "IP Mold 수정 영역에 Change Base/Top Edit 적용"
+        },
+        {
+          "name": "FITS_LugModeling",
+          "description": "아웃솔 Base/Gauge 기반 Lug 생성"
+        },
+        {
+          "name": "FITS_FootbedSurface",
+          "description": "Lasted Upper 기반 Footbed Surface 자동 생성"
+        },
+        {
+          "name": "FITS_PressLast",
+          "description": "압착 라스트 모델링 생성"
+        },
+        {
+          "name": "FITS_CreateNipple",
+          "description": "Nipple 자동 생성"
+        },
+        {
+          "name": "FITS_Nesting",
+          "description": "2D Gauge를 Sheet에 최적 면적으로 자동 배열"
+        }
+      ]
+    },
+    {
+      "name": "Alignment & Grading Tools",
+      "commands": [
+        {
+          "name": "FITS_LastAlignment",
+          "description": "신규 라스트 모델링 HBO 값 기준 정렬"
+        },
+        {
+          "name": "FITS_LastDraft",
+          "description": "Vamp Gauge/Contour Position/Last Half 게이지 생성"
+        },
+        {
+          "name": "FITS_GradingInformationDoc",
+          "description": "Last Spec Chart 기반 Grading Information Document 생성"
+        },
+        {
+          "name": "FITS_TEMS",
+          "description": "TEMS 시스템 자료 제작 및 접착 파트 정보 생성"
+        },
+        {
+          "name": "FITS_FitWidth",
+          "description": "모델링을 Target Curve/Surface 기준 변환/이동"
+        }
+      ]
+    },
+    {
+      "name": "Image & Pattern",
+      "commands": [
+        {
+          "name": "FITS_ImageCapture",
+          "description": "모델링 방향별 이미지 캡처 및 저장"
+        },
+        {
+          "name": "FITS_PatternTools",
+          "description": "Procost SVG 생성용 Avoid Curve 자동 생성"
+        },
+        {
+          "name": "FITS_DigitalTextureTools",
+          "description": "Digital Texture 생성 및 3D 면에 Wrapping"
+        },
+        {
+          "name": "FITS_ColorGradation",
+          "description": "색상 그라데이션 적용"
+        },
+        {
+          "name": "FITS_AirholePosition",
+          "description": "서피스/메쉬 상 에어홀 마킹 Sphere 생성"
+        },
+        {
+          "name": "FITS_MetalRPAirhole",
+          "description": "Metal RP용 에어홀 자동 생성"
+        },
+        {
+          "name": "FITS_MachiningSurface",
+          "description": "툴링 멀티패드용 가공 보조면 생성"
+        },
+        {
+          "name": "FITS_TapLocation",
+          "description": "사출 금형 도면 Tap 정렬 넘버링 및 좌표 테이블 생성"
+        }
+      ]
+    }
+  ]
+}
