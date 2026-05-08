@@ -1,4 +1,13 @@
 function getSiteUrl() {
+  const bodyShareUrl = document.body && document.body.dataset ? document.body.dataset.shareUrl : "";
+  if (bodyShareUrl) {
+    return bodyShareUrl;
+  }
+
+  if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+    return window.location.href;
+  }
+
   return (window.SITE_CONFIG && window.SITE_CONFIG.siteUrl && window.SITE_CONFIG.siteUrl !== "YOUR_SITE_URL")
     ? window.SITE_CONFIG.siteUrl
     : window.location.href;
@@ -57,24 +66,27 @@ function shareBySms() {
   window.location.href = `sms:?&body=${encodeURIComponent(url)}`;
 }
 
+document.addEventListener("click", (event) => {
+  const target = event.target instanceof HTMLElement ? event.target.closest("button") : null;
+  if (!target || !target.id) {
+    return;
+  }
+
+  if (target.id === "btnCopyLink") {
+    copyLink().catch(() => alert("복사에 실패했어요."));
+    return;
+  }
+
+  if (target.id === "btnKakaoShare") {
+    shareWithKakao();
+    return;
+  }
+
+  if (target.id === "btnSmsShare") {
+    shareBySms();
+  }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
-  const btnCopy = document.getElementById("btnCopyLink");
-  const btnKakao = document.getElementById("btnKakaoShare");
-  const btnSms = document.getElementById("btnSmsShare");
-
-  if (btnCopy) {
-    btnCopy.addEventListener("click", () => {
-      copyLink().catch(() => alert("복사에 실패했어요."));
-    });
-  }
-
-  if (btnKakao) {
-    btnKakao.addEventListener("click", shareWithKakao);
-  }
-
-  if (btnSms) {
-    btnSms.addEventListener("click", shareBySms);
-  }
-
   window.shareBySms = shareBySms;
 });

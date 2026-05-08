@@ -17,9 +17,19 @@ function renderCards() {
   }
 
   grid.innerHTML = cards.map((card) => `
-    <a class="tool-card" href="${card.href}">
-      <div class="tool-thumb" style="--thumb: ${card.thumb}">
-        <span>${card.badge}</span>
+    <a class="tool-card poster-card" href="${card.href}">
+      <div class="poster-topbar">
+        <span class="poster-icon">${card.icon || "◉"}</span>
+        <strong>${card.title}</strong>
+      </div>
+      <div class="tool-thumb poster-stage" style="--thumb: ${card.thumb}">
+        <div class="poster-stickers">
+          ${(card.stickers || []).map((sticker) => `<i>${sticker}</i>`).join("")}
+        </div>
+        <div class="poster-copy">
+          <span>${card.posterTitle || card.category || "테스트"}</span>
+          <strong>${card.posterSubtitle || card.title}</strong>
+        </div>
       </div>
       <div class="tool-body">
         <div class="tool-meta">
