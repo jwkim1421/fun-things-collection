@@ -135,7 +135,7 @@ function renderLoadingScreen(page) {
           <div class="test-progress-train" style="left:calc(100% - 36px)">🚂</div>
         </div>
         <div class="loading-orb">🚉</div>
-        <p class="loading-copyright">쿠쿠열차 테스트 로딩 중</p>
+        <p class="loading-copyright">쿠쿠 테스트 로딩 중</p>
         <h1>${escapeHtml(page.loadingTitle || "결과를 불러오는 중")}</h1>
         <p>${escapeHtml(page.loadingMessage || "")}</p>
         <p class="loading-hint">${escapeHtml(page.loadingHint || "")}</p>

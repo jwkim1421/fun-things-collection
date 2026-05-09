@@ -1,5 +1,5 @@
 window.SITE_CONFIG = {
-  siteName: "쿠쿠열차",
+  siteName: "쿠쿠",
   siteUrl: "https://coocooing.kro.kr/",
   kakaoJavaScriptKey: "f45989bb71514aece0519d2a250e0e7b",
   adsenseClient: "ca-pub-7367164333546101",

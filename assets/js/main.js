@@ -2,36 +2,6 @@ const config = window.SITE_CONFIG || {};
 const content = window.SITE_CONTENT || {};
 const cards = Array.isArray(content.cards) ? content.cards : [];
 
-function renderFeaturedStrip() {
-  const strip = document.getElementById("featuredStrip");
-  if (!strip || !cards.length) return;
-
-  const featuredCards = cards.slice(0, 3);
-
-  strip.innerHTML = featuredCards.map((card, index) => `
-    <a class="featured-card" href="${card.href}">
-      <div class="featured-badge-row">
-        <span class="featured-rank">TOP ${index + 1}</span>
-        <span class="featured-badge">${card.badge || "추천"}</span>
-      </div>
-      <div class="featured-copy">
-        <small>${card.category || "테스트"} · ${card.duration || "1분"}</small>
-        <h4>${card.title}</h4>
-        <p>${card.description}</p>
-      </div>
-      <div class="featured-thumb" style="--thumb: ${card.thumb}">
-        <div class="featured-thumb-top">
-          <span>${card.icon || "◉"}</span>
-          <strong>${card.posterTitle || card.title}</strong>
-        </div>
-        <div class="featured-thumb-center">
-          <em>${card.posterSubtitle || card.description}</em>
-        </div>
-      </div>
-    </a>
-  `).join("");
-}
-
 function renderCards() {
   const grid = document.getElementById("cardGrid");
   if (!grid) return;
@@ -76,15 +46,20 @@ function renderCards() {
 function populateHeader() {
   const siteTitle = document.getElementById("siteTitle");
   const siteTagline = document.getElementById("siteTagline");
+  const footerSiteName = document.getElementById("footerSiteName");
   const year = document.getElementById("year");
 
   if (siteTitle && config.siteName) {
     siteTitle.textContent = config.siteName;
-    document.title = `${config.siteName} | 오늘 기분에 맞는 테스트`;
+    document.title = `${config.siteName} | 마음에 드는 테스트를 골라보세요`;
   }
 
   if (siteTagline && config.siteName && config.siteName !== "YOUR_SITE_NAME") {
     siteTagline.textContent = `${config.siteName}의 테스트와 콘텐츠를 한곳에서 둘러보세요.`;
+  }
+
+  if (footerSiteName && config.siteName) {
+    footerSiteName.textContent = config.siteName;
   }
 
   if (year) {
@@ -92,6 +67,5 @@ function populateHeader() {
   }
 }
 
-renderFeaturedStrip();
 renderCards();
 populateHeader();
