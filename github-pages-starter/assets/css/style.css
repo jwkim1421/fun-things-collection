@@ -78,6 +78,13 @@ button {
   font-size: 22px;
 }
 
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
 .brand h1 {
   margin: 0;
   font-size: 18px;
@@ -171,12 +178,70 @@ button {
   line-height: 1.7;
 }
 
+.hero-badge-row,
+.hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.hero-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: rgba(181, 74, 143, 0.08);
+  border: 1px solid rgba(181, 74, 143, 0.14);
+  color: var(--accent-dark);
+  font-size: 13px;
+  font-weight: 700;
+}
+
 .hero-panel {
   border-radius: 26px;
   padding: 20px;
   display: grid;
   gap: 12px;
   align-content: start;
+}
+
+.mascot-panel {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 16px;
+  padding: 14px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 241, 247, 0.82));
+  border: 1px solid rgba(181, 74, 143, 0.12);
+}
+
+.mascot-panel img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #fff5c6 0%, #ffe7ef 100%);
+  border: 1px solid rgba(62, 43, 58, 0.12);
+}
+
+.mascot-panel strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 18px;
+}
+
+.mascot-panel p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.stat-grid {
+  display: grid;
+  gap: 12px;
 }
 
 .stat {
@@ -243,6 +308,126 @@ button {
 .section-head p {
   margin: 0;
   color: var(--muted);
+}
+
+.featured-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.featured-card {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.featured-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 34px rgba(60, 32, 51, 0.14);
+}
+
+.featured-badge-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.featured-rank,
+.featured-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.featured-rank {
+  background: rgba(181, 74, 143, 0.1);
+  color: var(--accent-dark);
+}
+
+.featured-badge {
+  background: rgba(255, 241, 140, 0.74);
+  color: #6f5210;
+}
+
+.featured-copy small {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.featured-copy h4 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  line-height: 1.35;
+}
+
+.featured-copy p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.featured-thumb {
+  min-height: 168px;
+  padding: 16px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.42), transparent 44%),
+    var(--thumb, linear-gradient(135deg, #f4c6d9, #e5c0ff));
+  border: 1px solid rgba(62, 43, 58, 0.12);
+  display: grid;
+  align-content: space-between;
+}
+
+.featured-thumb-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.featured-thumb-top span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  font-size: 21px;
+}
+
+.featured-thumb-center {
+  display: grid;
+  place-items: center;
+  min-height: 84px;
+  text-align: center;
+}
+
+.featured-thumb-center em {
+  max-width: 220px;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 1.35;
 }
 
 .card-grid {
@@ -1260,6 +1445,7 @@ button {
 
 @media (max-width: 960px) {
   .hero,
+  .featured-strip,
   .card-grid,
   .note-grid,
   .test-hero,
@@ -1285,6 +1471,10 @@ button {
 
   .hero-feature {
     padding: 24px;
+  }
+
+  .mascot-panel {
+    grid-template-columns: 88px 1fr;
   }
 
   .poster-stage {
@@ -1329,8 +1519,25 @@ button {
     padding: 20px;
   }
 
+  .hero-cta-row .solid-link,
+  .hero-cta-row .ghost-link {
+    width: 100%;
+  }
+
   .card-grid {
     gap: 18px;
+  }
+
+  .featured-card {
+    padding: 16px;
+  }
+
+  .featured-copy h4 {
+    font-size: 20px;
+  }
+
+  .featured-thumb-center em {
+    font-size: 20px;
   }
 
   .poster-topbar {

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">쿠쿠열차 공유 이미지</title>
+  <desc id="desc">팬더 마스코트와 함께 오늘 기분에 맞는 테스트를 소개하는 쿠쿠열차 OG 카드</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff7c6" />
+      <stop offset="55%" stop-color="#ffe9f4" />
+      <stop offset="100%" stop-color="#ffd8ea" />
+    </linearGradient>
+    <linearGradient id="rail" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffcc5c" />
+      <stop offset="100%" stop-color="#ff7fb6" />
+    </linearGradient>
+    <radialGradient id="fur" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#fffef9" />
+      <stop offset="100%" stop-color="#f8efdd" />
+    </radialGradient>
+    <radialGradient id="eye" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#7b4b26" />
+      <stop offset="100%" stop-color="#27160f" />
+    </radialGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#9f5a82" flood-opacity=".18" />
+    </filter>
+  </defs>
+  <rect width="1200" height="630" rx="36" fill="url(#bg)" />
+  <g opacity=".4">
+    <path d="M70 490h1060" stroke="url(#rail)" stroke-linecap="round" stroke-width="22" />
+    <path d="M120 452v78M220 452v78M320 452v78M420 452v78M520 452v78M620 452v78M720 452v78M820 452v78M920 452v78M1020 452v78" stroke="#d7875f" stroke-linecap="round" stroke-width="10" />
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="72" y="78" width="1056" height="474" rx="38" fill="rgba(255,255,255,.72)" />
+  </g>
+  <g transform="translate(116 126)">
+    <rect width="300" height="378" rx="36" fill="#fff7d3" stroke="#463238" stroke-opacity=".18" />
+    <circle cx="72" cy="88" r="38" fill="#1d1b1f" />
+    <circle cx="226" cy="88" r="38" fill="#1d1b1f" />
+    <path d="M120 44c23-20 52-26 79-16 18 7 32 23 38 43-21-11-44-18-66-18-19 0-35 3-51 11Z" fill="#1d1b1f" />
+    <ellipse cx="150" cy="190" rx="112" ry="112" fill="url(#fur)" />
+    <path d="M84 186c0-30 19-54 48-64-5 18-5 38 3 60 8 22 7 43-5 66-29-5-46-28-46-62Z" fill="#1d1b1f" />
+    <path d="M216 186c0-30-19-54-48-64 5 18 5 38-3 60-8 22-7 43 5 66 29-5 46-28 46-62Z" fill="#1d1b1f" />
+    <ellipse cx="123" cy="181" rx="21" ry="28" fill="url(#eye)" />
+    <ellipse cx="177" cy="181" rx="21" ry="28" fill="url(#eye)" />
+    <circle cx="129" cy="173" r="6" fill="#fff" />
+    <circle cx="183" cy="173" r="6" fill="#fff" />
+    <path d="M101 145c12-14 26-20 40-20 8 0 13 2 18 6-23 3-38 11-58 28Z" fill="#1d1b1f" />
+    <path d="M199 145c-12-14-26-20-40-20-8 0-13 2-18 6 23 3 38 11 58 28Z" fill="#1d1b1f" />
+    <path d="M126 226c0-15 10-24 24-24s24 9 24 24c0 14-10 25-24 25s-24-11-24-25Z" fill="#1d1b1f" />
+    <path d="M120 255c11 11 21 15 30 15s19-4 30-15" fill="none" stroke="#351d19" stroke-linecap="round" stroke-width="8" />
+    <path d="M137 260c4 7 8 10 13 10s9-3 13-10c-1 13-8 18-26 18s-25-5-26-18Z" fill="#ff9aa8" opacity=".9" />
+    <path d="M90 247c12 10 24 15 38 16" fill="none" stroke="#1d1b1f" stroke-linecap="round" stroke-width="8" />
+    <path d="M210 247c-12 10-24 15-38 16" fill="none" stroke="#1d1b1f" stroke-linecap="round" stroke-width="8" />
+    <circle cx="90" cy="245" r="7" fill="#1d1b1f" />
+    <circle cx="210" cy="245" r="7" fill="#1d1b1f" />
+    <rect x="60" y="310" width="180" height="28" rx="14" fill="#ff7f96" />
+    <text x="150" y="329" fill="#fff" font-family="'Noto Sans KR', 'Segoe UI', sans-serif" font-size="16" font-weight="800" text-anchor="middle">쿠쿠 팬더</text>
+  </g>
+  <g transform="translate(472 132)" fill="#2e2430" font-family="'Noto Sans KR', 'Segoe UI', sans-serif">
+    <text x="0" y="34" fill="#b54a8f" font-size="22" font-weight="800">TODAY&apos;S TEST PICK</text>
+    <text x="0" y="118" font-size="68" font-weight="900">쿠쿠열차</text>
+    <text x="0" y="194" font-size="34" font-weight="800">오늘 기분에 맞는 테스트를 고르고</text>
+    <text x="0" y="246" font-size="34" font-weight="800">한 화면씩 가볍게 답해보세요</text>
+    <text x="0" y="316" fill="#6e6170" font-size="24" font-weight="600">연애 · 관계 · 라이프 · 취향 테스트를 팬더 마스코트와 함께 즐기는 카드형 홈</text>
+    <g transform="translate(0 362)">
+      <rect width="180" height="58" rx="29" fill="#fff5c2" stroke="#d9b55e" />
+      <text x="90" y="38" fill="#6f5210" font-size="22" font-weight="800" text-anchor="middle">원핸드 진행형</text>
+      <rect x="198" width="170" height="58" rx="29" fill="#fff" stroke="#d8cad8" />
+      <text x="283" y="38" fill="#4c3d4b" font-size="22" font-weight="800" text-anchor="middle">공유 바로 가능</text>
+      <rect x="386" width="170" height="58" rx="29" fill="#fff" stroke="#d8cad8" />
+      <text x="471" y="38" fill="#4c3d4b" font-size="22" font-weight="800" text-anchor="middle">추천 카드 모아보기</text>
+    </g>
+  </g>
+</svg>
