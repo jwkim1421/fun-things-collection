@@ -91,10 +91,10 @@
         title: "내 연애 열차 운행 타입은?",
         summary: "소개 화면에서 시작해 질문을 한 장씩 넘기며, 연애에서 내가 어떤 리듬으로 관계를 이끄는지 알아보는 테스트입니다.",
         intro: "원핸드로도 편하게 진행되도록 한 화면에 한 질문만 보여주는 구성입니다. 답변은 저장하지 않고 브라우저 안에서만 계산됩니다.",
-        pills: ["연애 테스트", "10문항", "원핸드 진행"],
+        pills: ["연애 테스트", "12문항", "원핸드 진행"],
         eyebrow: "Love Train Type Test",
         heroCardTitle: "내 연애 열차 운행 타입은?",
-        heroCardSubtitle: "질문 10개로 보는 관계 리듬",
+        heroCardSubtitle: "질문 12개로 보는 관계 리듬",
         heroArt: {
           centerEmoji: "🚂",
           stickers: ["💌", "🎟️", "🌼", "☁️", "💗", "🫧", "⭐", "🌙"]
@@ -231,6 +231,32 @@
               {
                 label: "편안하고 믿음직해서 오래 생각나는 사람",
                 scores: { station: 2, guide: 1 }
+              }
+            ]
+          },
+          {
+            prompt: "연인과 연락 스타일은 어느 쪽이 더 편한가요?",
+            options: [
+              {
+                label: "생각날 때마다 자주 주고받는 편이 더 좋다.",
+                scores: { engine: 2, guide: 1 }
+              },
+              {
+                label: "서로 일상을 해치지 않는 선에서 여유 있게 주고받는 게 좋다.",
+                scores: { station: 2, signal: 1 }
+              }
+            ]
+          },
+          {
+            prompt: "연애 초반, 마음이 커지고 있다는 걸 느끼면 나는?",
+            options: [
+              {
+                label: "조금 더 적극적으로 다가가면서 관계를 빠르게 진전시키고 싶다.",
+                scores: { engine: 2, guide: 1 }
+              },
+              {
+                label: "좋아하는 마음은 있지만 천천히 흐름을 보며 확신을 쌓아간다.",
+                scores: { signal: 2, station: 1 }
               }
             ]
           }

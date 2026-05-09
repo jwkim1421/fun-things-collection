@@ -85,7 +85,8 @@ function renderQuestionScreen(page, questionIndex) {
   const question = page.questions[questionIndex];
   const total = page.questions.length;
   const current = questionIndex + 1;
-  const progressPercent = Math.round((current / total) * 100);
+  const answeredCount = questionIndex;
+  const progressPercent = Math.round((answeredCount / total) * 100);
 
   return `
     <section class="test-card-shell question-shell">
@@ -121,9 +122,18 @@ function renderQuestionScreen(page, questionIndex) {
 }
 
 function renderLoadingScreen(page) {
+  const total = page.questions.length;
   return `
     <section class="loading-shell">
       <article class="loading-card">
+        <div class="test-progress-head loading-progress-head">
+          <strong>QUESTION ${total} / ${total}</strong>
+          <span>100%</span>
+        </div>
+        <div class="test-progress-track loading-progress-track" aria-hidden="true">
+          <div class="test-progress-fill" style="width:100%"></div>
+          <div class="test-progress-train" style="left:calc(100% - 36px)">🚂</div>
+        </div>
         <div class="loading-orb">🚉</div>
         <p class="loading-copyright">쿠쿠열차 테스트 로딩 중</p>
         <h1>${escapeHtml(page.loadingTitle || "결과를 불러오는 중")}</h1>
