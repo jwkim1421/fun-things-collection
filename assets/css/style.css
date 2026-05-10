@@ -209,12 +209,12 @@ button {
   height: 100%;
   max-width: none;
   object-fit: cover;
-  object-position: center 42%;
+  object-position: center 20%;
   border-radius: 26px;
 }
 
 .ad-slot-wrap {
-  margin: 18px 0;
+  margin: 12px 0 10px;
 }
 
 .ad-card {
@@ -224,7 +224,8 @@ button {
 }
 
 .ad-card-wide {
-  min-height: 120px;
+  min-height: 56px;
+  padding: 10px 14px;
 }
 
 .ad-label {
@@ -237,7 +238,7 @@ button {
 }
 
 .ad-placeholder {
-  min-height: 140px;
+  min-height: 72px;
   display: grid;
   place-items: center;
   border-radius: 16px;
@@ -247,8 +248,16 @@ button {
   border: 1px dashed rgba(110, 97, 112, 0.25);
 }
 
+.ad-card-wide .ad-label {
+  margin-bottom: 6px;
+}
+
+.ad-card-wide .adsbygoogle {
+  min-height: 32px;
+}
+
 .section-head {
-  margin: 26px 0 14px;
+  margin: 18px 0 14px;
 }
 
 .section-head h3 {
@@ -284,22 +293,6 @@ button {
   box-shadow: 0 18px 34px rgba(60, 32, 51, 0.14);
 }
 
-.poster-topbar {
-  min-height: 40px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0 14px;
-  background: #fff;
-  border-bottom: 2px solid rgba(62, 43, 58, 0.4);
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.poster-icon {
-  font-size: 16px;
-}
-
 .tool-thumb {
   aspect-ratio: 1.28 / 1;
   background:
@@ -310,7 +303,7 @@ button {
 }
 
 .poster-stage {
-  min-height: 250px;
+  min-height: 214px;
 }
 
 .poster-stickers {
@@ -354,7 +347,7 @@ button {
 
 .poster-copy strong {
   display: block;
-  font-size: 28px;
+  font-size: 24px;
   line-height: 1.28;
 }
 
@@ -368,7 +361,7 @@ button {
 }
 
 .tool-body {
-  padding: 14px 16px 18px;
+  padding: 12px 14px 16px;
 }
 
 .tool-meta {
@@ -395,8 +388,12 @@ button {
 .tool-body p {
   margin: 0;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.5;
   font-size: 14px;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .note-grid {
@@ -1366,10 +1363,6 @@ button {
   .hero-mascot {
     max-width: 240px;
     justify-self: center;
-  }
-
-  .poster-topbar {
-    font-size: 16px;
   }
 
   .poster-stage {

@@ -18,10 +18,6 @@ function renderCards() {
 
   grid.innerHTML = cards.map((card) => `
     <a class="tool-card poster-card" href="${card.href}">
-      <div class="poster-topbar">
-        <span class="poster-icon">${card.icon || "◉"}</span>
-        <strong>${card.title}</strong>
-      </div>
       <div class="tool-thumb poster-stage" style="--thumb: ${card.thumb}">
         <div class="poster-stickers">
           ${(card.stickers || []).map((sticker) => `<i>${sticker}</i>`).join("")}
