@@ -221,13 +221,15 @@ button {
 }
 
 .ad-card-wide {
-  min-height: 140px;
-  max-height: 180px;
+  min-height: 118px;
+  height: 118px;
+  max-height: 118px;
 }
 
 .ad-card-wide .adsbygoogle {
-  min-height: 110px !important;
-  max-height: 130px;
+  min-height: 72px !important;
+  height: 72px !important;
+  max-height: 72px !important;
   overflow: hidden;
 }
 
@@ -267,12 +269,14 @@ button {
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 22px;
+  align-items: stretch;
 }
 
 .tool-card {
-  display: block;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
   text-decoration: none;
   color: inherit;
   background: #fffdf6;
@@ -311,10 +315,11 @@ button {
     var(--thumb, linear-gradient(135deg, #f4c6d9, #e5c0ff));
   position: relative;
   display: block;
+  overflow: hidden;
 }
 
 .poster-stage {
-  min-height: 250px;
+  min-height: clamp(210px, 26vw, 250px);
 }
 
 .poster-stickers {
@@ -358,7 +363,7 @@ button {
 
 .poster-copy strong {
   display: block;
-  font-size: 28px;
+  font-size: clamp(22px, 2.7vw, 28px);
   line-height: 1.28;
 }
 
@@ -394,6 +399,7 @@ button {
 .tool-body h4 {
   margin: 0 0 8px;
   font-size: 17px;
+  line-height: 1.35;
 }
 
 .tool-body p {
@@ -401,6 +407,7 @@ button {
   color: var(--muted);
   line-height: 1.6;
   font-size: 14px;
+  word-break: keep-all;
 }
 
 .note-grid {
@@ -1364,6 +1371,7 @@ button {
   }
 
   .card-grid {
+    grid-template-columns: 1fr;
     gap: 18px;
   }
 
@@ -1381,7 +1389,7 @@ button {
   }
 
   .poster-copy {
-    width: 84%;
+    width: 82%;
   }
 
   .poster-copy strong {

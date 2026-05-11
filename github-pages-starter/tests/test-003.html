@@ -3,14 +3,45 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sample Test 003</title>
+  <meta name="description" content="계획파인지 즉흥파인지, 여행에서 가장 편한 리듬을 알아보는 여행 성향 테스트입니다." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="나만의 여행 성향 찾기 | 쿠쿠" />
+  <meta property="og:description" content="10문항으로 가볍게 보는 여행 취향 테스트. 나는 계획형인지 즉흥형인지 확인해보세요." />
+  <meta property="og:url" content="https://coocooing.kro.kr/tests/test-003.html" />
+  <meta property="og:image" content="https://coocooing.kro.kr/assets/images/kuku-og-card.png" />
+  <meta property="og:image:alt" content="쿠쿠 강아지 캐릭터와 여행 성향 테스트 소개 이미지" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="나만의 여행 성향 찾기 | 쿠쿠" />
+  <meta name="twitter:description" content="내가 가장 편안하게 움직이는 여행 리듬을 찾는 취향 테스트." />
+  <meta name="twitter:image" content="https://coocooing.kro.kr/assets/images/kuku-og-card.png" />
+  <title>나만의 여행 성향 찾기 | 쿠쿠</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="../assets/images/coocoo.png" />
+  <link rel="apple-touch-icon" href="../assets/images/coocoo.png" />
   <link rel="stylesheet" href="../assets/css/style.css" />
+  <script defer src="../assets/js/site-config.js"></script>
+  <script defer src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+  <script defer src="../assets/js/content-data.js"></script>
+  <script defer src="../assets/js/test-page.js"></script>
+  <script defer src="../assets/js/share.js"></script>
 </head>
-<body>
-  <main class="wrap" style="padding: 40px 20px;">
-    <p><a href="../index.html">Back to home</a></p>
-    <h1>Sample Test 003</h1>
-    <p>This is a placeholder test page. Replace it with your real content.</p>
-  </main>
+<body class="test-play-body" data-test-id="test-003">
+  <div class="test-play-shell">
+    <header class="test-play-topbar">
+      <a class="test-brand-pill" href="../index.html">쿠쿠</a>
+      <div class="test-nav-pills" aria-label="테스트 분류">
+        <span>여행</span>
+        <span>취향</span>
+        <span>라이프</span>
+        <span>공유</span>
+      </div>
+    </header>
+
+    <main class="test-play-main">
+      <section class="test-play-frame" id="testApp" aria-live="polite"></section>
+    </main>
+  </div>
 </body>
 </html>
