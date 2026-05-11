@@ -115,7 +115,6 @@ function renderQuestionScreen(page, questionIndex) {
             `).join("")}
           </div>
         </section>
-        <p class="test-card-footnote">한 손으로 답하기 편하도록 한 문항씩만 보여드리고 있어요.</p>
       </article>
     </section>
   `;

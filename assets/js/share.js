@@ -13,52 +13,87 @@ function getSiteUrl() {
     : window.location.href;
 }
 
+function getShareDescription() {
+  const meta = document.querySelector('meta[name="description"]');
+  return meta && meta.content
+    ? meta.content
+    : "쿠쿠에서 테스트를 확인해보세요.";
+}
+
 function initKakao() {
   const key = window.SITE_CONFIG && window.SITE_CONFIG.kakaoJavaScriptKey;
   if (!key || key === "YOUR_KAKAO_JAVASCRIPT_KEY" || typeof Kakao === "undefined") {
     return false;
   }
 
-  if (!Kakao.isInitialized()) {
-    Kakao.init(key);
+  try {
+    if (!Kakao.isInitialized()) {
+      Kakao.init(key);
+    }
+  } catch (error) {
+    console.warn("Kakao SDK initialization failed.", error);
+    return false;
   }
 
   return true;
 }
 
-async function copyLink() {
+async function copyLink(options = {}) {
+  const { silent = false } = options;
   const url = getSiteUrl();
   await navigator.clipboard.writeText(url);
-  alert("링크를 복사했어요.");
+  if (!silent) {
+    alert("링크를 복사했어요.");
+  }
 }
 
-function shareWithKakao() {
+async function shareWithKakao() {
   const url = getSiteUrl();
+  const description = getShareDescription();
+
   if (!initKakao()) {
-    window.open(url, "_blank", "noopener,noreferrer");
+    await copyLink({ silent: true }).catch(() => null);
+    alert("카카오 공유를 열지 못해 링크를 복사했어요. 카카오 개발자 설정에 현재 도메인이 등록되어 있는지도 확인해 주세요.");
     return;
   }
 
-  Kakao.Share.sendDefault({
-    objectType: "feed",
-    content: {
-      title: document.title,
-      description: "A static site starter for GitHub Pages.",
-      link: {
-        webUrl: url,
-        mobileWebUrl: url
-      }
-    },
-    buttons: [
-      {
-        title: "Open",
+  try {
+    const shareApi =
+      Kakao.Share && typeof Kakao.Share.sendDefault === "function"
+        ? Kakao.Share
+        : Kakao.Link && typeof Kakao.Link.sendDefault === "function"
+          ? Kakao.Link
+          : null;
+
+    if (!shareApi) {
+      throw new Error("No Kakao share API is available.");
+    }
+
+    shareApi.sendDefault({
+      objectType: "feed",
+      content: {
+        title: document.title,
+        description,
         link: {
           webUrl: url,
           mobileWebUrl: url
         }
-      }
-    ]
-  });
+      },
+      buttons: [
+        {
+          title: "테스트 열기",
+          link: {
+            webUrl: url,
+            mobileWebUrl: url
+          }
+        }
+      ]
+    });
+  } catch (error) {
+    console.warn("Kakao sharing failed.", error);
+    await copyLink({ silent: true }).catch(() => null);
+    alert("카카오 공유를 열지 못해 링크를 복사했어요. 카카오 개발자 설정에 https://coocooing.kro.kr 도메인이 등록되어 있는지 확인해 주세요.");
+  }
 }
 
 function shareBySms() {
@@ -78,7 +113,7 @@ document.addEventListener("click", (event) => {
   }
 
   if (target.id === "btnKakaoShare") {
-    shareWithKakao();
+    shareWithKakao().catch(() => alert("카카오 공유를 열지 못했어요."));
     return;
   }
 
