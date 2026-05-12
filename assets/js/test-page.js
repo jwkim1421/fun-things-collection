@@ -76,7 +76,7 @@ function applyShareState(page, resultKey) {
 function decorateNavPills() {
   document.querySelectorAll(".test-nav-pills span").forEach((pill) => {
     const text = pill.textContent ? pill.textContent.trim().replace(/^#/, "") : "";
-    const nextText = text === "공유" ? "결과" : text;
+    const nextText = text === "공유" ? "테스트" : text;
     pill.textContent = `#${nextText}`;
   });
 }
