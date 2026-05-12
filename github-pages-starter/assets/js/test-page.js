@@ -31,6 +31,56 @@ function getRelatedCards(page, cards) {
     .filter(Boolean);
 }
 
+function getSharedResultKey(page) {
+  try {
+    const currentUrl = new URL(window.location.href);
+    const resultKey = currentUrl.searchParams.get("result");
+    return resultKey && page.results && page.results[resultKey] ? resultKey : "";
+  } catch (error) {
+    return "";
+  }
+}
+
+function buildShareUrl(resultKey) {
+  const currentUrl = new URL(window.location.href);
+  if (resultKey) {
+    currentUrl.searchParams.set("result", resultKey);
+  } else {
+    currentUrl.searchParams.delete("result");
+  }
+
+  return currentUrl.toString();
+}
+
+function applyShareState(page, resultKey) {
+  if (!document.body || !document.body.dataset) {
+    return;
+  }
+
+  if (!resultKey || !page.results || !page.results[resultKey]) {
+    document.body.dataset.shareUrl = buildShareUrl("");
+    document.body.dataset.shareTitle = `${page.title} | ${((window.SITE_CONFIG && window.SITE_CONFIG.siteName) || "쿠쿠")}`;
+    document.body.dataset.shareDescription = page.summary || "";
+    document.body.dataset.shareButtonTitle = "테스트 열기";
+    return;
+  }
+
+  const result = page.results[resultKey];
+  const siteName = ((window.SITE_CONFIG && window.SITE_CONFIG.siteName) || "쿠쿠");
+  document.body.dataset.shareUrl = buildShareUrl(resultKey);
+  document.body.dataset.shareTitle = `${page.title} - ${result.title} | ${siteName}`;
+  document.body.dataset.shareDescription = result.summary || page.summary || "";
+  document.body.dataset.shareButtonTitle = "결과 확인하기";
+}
+
+function decorateNavPills() {
+  document.querySelectorAll(".test-nav-pills span").forEach((pill) => {
+    const text = pill.textContent ? pill.textContent.trim().replace(/^#/, "") : "";
+    const nextText = text === "공유" ? "테스트" : text;
+    pill.textContent = `#${nextText}`;
+  });
+}
+
 function scoreAnswers(page, answers) {
   const totals = {};
 
@@ -244,11 +294,13 @@ function createTestApp(data) {
     return null;
   }
 
+  const initialSharedResultKey = getSharedResultKey(data.page);
+
   const state = {
-    screen: "intro",
+    screen: initialSharedResultKey ? "result" : "intro",
     currentQuestion: 0,
     answers: [],
-    resultKey: ""
+    resultKey: initialSharedResultKey
   };
 
   let loadingTimer = null;
@@ -262,21 +314,25 @@ function createTestApp(data) {
 
   function render() {
     if (state.screen === "intro") {
+      applyShareState(data.page, "");
       root.innerHTML = renderIntroScreen(data.page);
       return;
     }
 
     if (state.screen === "question") {
+      applyShareState(data.page, "");
       root.innerHTML = renderQuestionScreen(data.page, state.currentQuestion);
       return;
     }
 
     if (state.screen === "loading") {
+      applyShareState(data.page, "");
       root.innerHTML = renderLoadingScreen(data.page);
       return;
     }
 
     if (state.screen === "result") {
+      applyShareState(data.page, state.resultKey);
       root.innerHTML = renderResultScreen(data.page, state.resultKey, data.cards);
     }
   }
@@ -360,5 +416,6 @@ document.addEventListener("DOMContentLoaded", () => {
     metaDescription.setAttribute("content", description);
   }
 
+  decorateNavPills();
   createTestApp(data);
 });

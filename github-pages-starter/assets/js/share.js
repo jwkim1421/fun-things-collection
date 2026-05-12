@@ -14,10 +14,24 @@ function getSiteUrl() {
 }
 
 function getShareDescription() {
+  const bodyShareDescription = document.body && document.body.dataset ? document.body.dataset.shareDescription : "";
+  if (bodyShareDescription) {
+    return bodyShareDescription;
+  }
+
   const meta = document.querySelector('meta[name="description"]');
   return meta && meta.content
     ? meta.content
     : "쿠쿠에서 테스트를 확인해보세요.";
+}
+
+function getShareTitle() {
+  const bodyShareTitle = document.body && document.body.dataset ? document.body.dataset.shareTitle : "";
+  if (bodyShareTitle) {
+    return bodyShareTitle;
+  }
+
+  return document.title;
 }
 
 function initKakao() {
@@ -50,6 +64,10 @@ async function copyLink(options = {}) {
 async function shareWithKakao() {
   const url = getSiteUrl();
   const description = getShareDescription();
+  const title = getShareTitle();
+  const buttonTitle = document.body && document.body.dataset && document.body.dataset.shareButtonTitle
+    ? document.body.dataset.shareButtonTitle
+    : "테스트 열기";
 
   if (!initKakao()) {
     await copyLink({ silent: true }).catch(() => null);
@@ -72,7 +90,7 @@ async function shareWithKakao() {
     shareApi.sendDefault({
       objectType: "feed",
       content: {
-        title: document.title,
+        title,
         description,
         link: {
           webUrl: url,
@@ -81,7 +99,7 @@ async function shareWithKakao() {
       },
       buttons: [
         {
-          title: "테스트 열기",
+          title: buttonTitle,
           link: {
             webUrl: url,
             mobileWebUrl: url
