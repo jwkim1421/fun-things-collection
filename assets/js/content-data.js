@@ -20,7 +20,7 @@
         ],
         startButtonLabel: "테스트 시작하기",
         resetButtonLabel: "다시 해보기",
-        otherTestLabel: "다른 테스트 해보기"
+        otherTestLabel: "다른 테스트 보기"
       },
       definition
     );

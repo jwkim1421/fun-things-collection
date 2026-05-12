@@ -92,6 +92,35 @@ function renderInlineAd(label = "728 x 90") {
   `;
 }
 
+function renderShareIcon(type) {
+  if (type === "copy") {
+    return `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="9" y="8" width="10" height="11" rx="2"></rect>
+        <rect x="5" y="4" width="10" height="11" rx="2"></rect>
+      </svg>
+    `;
+  }
+
+  if (type === "sms") {
+    return `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 6h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H9l-4 3v-3H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"></path>
+        <path d="M7 10h10"></path>
+        <path d="M7 13h7"></path>
+      </svg>
+    `;
+  }
+
+  return `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 4c5.2 0 9 3.3 9 7.4S17.2 19 12.8 19l-4.5 2.4.9-3.4C6.2 17 3 14.4 3 11.4 3 7.3 6.8 4 12 4Z"></path>
+      <path d="M9.2 10.3h5.6"></path>
+      <path d="M9.2 13.2h3.7"></path>
+    </svg>
+  `;
+}
+
 function ensureStickyBottomAd() {
   if (document.querySelector(".sticky-bottom-ad")) {
     return;
@@ -302,9 +331,15 @@ function renderResultScreen(page, resultKey, cards) {
         </section>
 
         <div class="result-share-row">
-          <button class="ghost-btn" id="btnCopyLink" type="button">링크 복사</button>
-          <button class="ghost-btn" id="btnSmsShare" type="button">문자 공유</button>
-          <button class="solid-btn" id="btnKakaoShare" type="button">카카오 공유</button>
+          <button class="share-icon-btn" id="btnCopyLink" type="button" aria-label="링크 복사" title="링크 복사">
+            ${renderShareIcon("copy")}
+          </button>
+          <button class="share-icon-btn" id="btnSmsShare" type="button" aria-label="문자 공유" title="문자 공유">
+            ${renderShareIcon("sms")}
+          </button>
+          <button class="share-icon-btn share-icon-btn-kakao" id="btnKakaoShare" type="button" aria-label="카카오 공유" title="카카오 공유">
+            ${renderShareIcon("kakao")}
+          </button>
         </div>
 
         <div class="result-action-row">

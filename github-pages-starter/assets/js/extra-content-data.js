@@ -19,7 +19,7 @@
         relatedIntro: "비슷한 무드의 테스트도 이어서 눌러보세요.",
         startButtonLabel: "테스트 시작하기",
         resetButtonLabel: "다시 해보기",
-        otherTestLabel: "다른 테스트 해보기"
+        otherTestLabel: "다른 테스트 보기"
       },
       definition
     );

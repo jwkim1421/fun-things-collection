@@ -1359,11 +1359,46 @@ button {
 .result-share-row {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-bottom: 10px;
+  justify-items: center;
 }
 
 .result-action-row .test-main-button,
 .result-action-row .test-sub-button {
   margin-top: 0;
+}
+
+.share-icon-btn {
+  width: 72px;
+  height: 72px;
+  border: 2px solid rgba(62, 43, 58, 0.18);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.96);
+  display: grid;
+  place-items: center;
+  color: var(--text);
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(60, 32, 51, 0.1);
+}
+
+.share-icon-btn svg {
+  width: 30px;
+  height: 30px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.share-icon-btn-kakao {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  border-color: transparent;
+}
+
+.result-action-row .test-main-button,
+.result-action-row .test-sub-button {
+  font-size: 30px;
 }
 
 @keyframes wobble {
@@ -1434,8 +1469,7 @@ button {
   }
 
   .result-header-body,
-  .result-related-grid,
-  .result-share-row {
+  .result-related-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1541,6 +1575,21 @@ button {
   .test-sub-button {
     min-height: 58px;
     font-size: 20px;
+  }
+
+  .result-action-row .test-main-button,
+  .result-action-row .test-sub-button {
+    font-size: 18px;
+  }
+
+  .share-icon-btn {
+    width: 64px;
+    height: 64px;
+  }
+
+  .share-icon-btn svg {
+    width: 26px;
+    height: 26px;
   }
 
   .question-panel h1 {
