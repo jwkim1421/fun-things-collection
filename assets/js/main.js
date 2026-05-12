@@ -1,6 +1,17 @@
 const config = window.SITE_CONFIG || {};
 const content = window.SITE_CONTENT || {};
 const cards = Array.isArray(content.cards) ? content.cards : [];
+const ITEMS_PER_PAGE = 12;
+let currentPage = 1;
+
+function getTotalPages() {
+  return Math.max(1, Math.ceil(cards.length / ITEMS_PER_PAGE));
+}
+
+function getCardsForPage(page) {
+  const start = (page - 1) * ITEMS_PER_PAGE;
+  return cards.slice(start, start + ITEMS_PER_PAGE);
+}
 
 function renderCards() {
   const grid = document.getElementById("cardGrid");
@@ -16,8 +27,14 @@ function renderCards() {
     return;
   }
 
-  grid.innerHTML = cards.map((card) => `
+  const pageCards = getCardsForPage(currentPage);
+
+  grid.innerHTML = pageCards.map((card) => `
     <a class="tool-card poster-card" href="${card.href}">
+      <div class="poster-topbar">
+        <span class="poster-icon">${card.icon || "◉"}</span>
+        <strong>${card.title}</strong>
+      </div>
       <div class="tool-thumb poster-stage" style="--thumb: ${card.thumb}">
         <div class="poster-stickers">
           ${(card.stickers || []).map((sticker) => `<i>${sticker}</i>`).join("")}
@@ -37,6 +54,43 @@ function renderCards() {
       </div>
     </a>
   `).join("");
+}
+
+function renderPagination() {
+  const pager = document.getElementById("cardPager");
+  if (!pager) return;
+
+  const totalPages = getTotalPages();
+  if (totalPages <= 1) {
+    pager.innerHTML = "";
+    pager.hidden = true;
+    return;
+  }
+
+  pager.hidden = false;
+  pager.innerHTML = `
+    <button class="pager-btn" type="button" data-action="prev-page" ${currentPage === 1 ? "disabled" : ""}>&lt;&lt; Prev</button>
+    <span class="pager-status">${currentPage} / ${totalPages}</span>
+    <button class="pager-btn" type="button" data-action="next-page" ${currentPage === totalPages ? "disabled" : ""}>Next &gt;&gt;</button>
+  `;
+
+  pager.querySelector('[data-action="prev-page"]')?.addEventListener("click", () => changePage(currentPage - 1));
+  pager.querySelector('[data-action="next-page"]')?.addEventListener("click", () => changePage(currentPage + 1));
+}
+
+function changePage(nextPage) {
+  const totalPages = getTotalPages();
+  const safePage = Math.max(1, Math.min(totalPages, nextPage));
+  if (safePage === currentPage) return;
+
+  currentPage = safePage;
+  renderCards();
+  renderPagination();
+
+  const allTests = document.getElementById("allTests");
+  if (allTests) {
+    allTests.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 }
 
 function populateHeader() {
@@ -64,4 +118,5 @@ function populateHeader() {
 }
 
 renderCards();
+renderPagination();
 populateHeader();

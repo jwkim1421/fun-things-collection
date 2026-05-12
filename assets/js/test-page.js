@@ -149,13 +149,17 @@ function renderResultScreen(page, resultKey, cards) {
   const preview = (page.resultPreview || [])
     .map((label) => `<span class="result-pill">${escapeHtml(label)}</span>`)
     .join("");
+  const resultHeaderTitle = page.resultHeaderTitle || "나의 결과는?";
+  const resultTraitTitle = page.resultTraitTitle || "이런 타입이에요";
+  const relatedSectionTitle = page.relatedSectionTitle || "다음 테스트도 이어서 보기";
+  const shareSectionTitle = page.shareSectionTitle || "공유용 요약";
 
   return `
     <section class="test-card-shell result-shell">
       <div class="test-card-tab">${escapeHtml(page.title)}</div>
       <article class="test-card result-card">
         <section class="result-header-board">
-          <div class="result-header-title">나의 연애 열차 타입은?</div>
+          <div class="result-header-title">${escapeHtml(resultHeaderTitle)}</div>
           <div class="result-header-body">
             <div class="result-avatar-box">
               <div class="result-avatar">${escapeHtml(result.heroEmoji || "💗")}</div>
@@ -172,7 +176,7 @@ function renderResultScreen(page, resultKey, cards) {
         </section>
 
         <section class="result-section">
-          <div class="result-section-title">나는 이런 연애 타입!</div>
+          <div class="result-section-title">${escapeHtml(resultTraitTitle)}</div>
           <div class="result-section-body result-traits">
             ${result.strengths.map((item) => `<p>${escapeHtml(item)}</p>`).join("")}
             <p class="result-tip-line">${escapeHtml(result.tip)}</p>
@@ -195,7 +199,7 @@ function renderResultScreen(page, resultKey, cards) {
         </section>
 
         <section class="result-section">
-          <div class="result-section-title">다음 테스트도 이어서 보기</div>
+          <div class="result-section-title">${escapeHtml(relatedSectionTitle)}</div>
           <div class="result-section-body result-related-grid">
             ${relatedCards.map((card) => `
               <a class="result-related-card" href="${card.href}">
@@ -208,7 +212,7 @@ function renderResultScreen(page, resultKey, cards) {
         </section>
 
         <section class="result-section">
-          <div class="result-section-title">공유용 요약</div>
+          <div class="result-section-title">${escapeHtml(shareSectionTitle)}</div>
           <div class="result-section-body result-preview-board">
             <p>${escapeHtml(page.callout || "")}</p>
             <div class="result-preview-pills">${preview}</div>
@@ -345,6 +349,16 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  document.title = data.page.title || data.card?.title || document.title;
+  const siteName = (window.SITE_CONFIG && window.SITE_CONFIG.siteName) || "쿠쿠";
+  const pageTitle = data.page.title || data.card?.title || document.title;
+  const description = data.page.summary || data.card?.description || "";
+
+  document.title = `${pageTitle} | ${siteName}`;
+
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (metaDescription && description) {
+    metaDescription.setAttribute("content", description);
+  }
+
   createTestApp(data);
 });
