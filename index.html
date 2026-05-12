@@ -28,7 +28,7 @@
   <script defer src="./assets/js/main.js"></script>
   <script defer src="./assets/js/share.js"></script>
 </head>
-<body>
+<body class="home-body">
   <header class="site-header">
     <div class="wrap">
       <div class="brand">
@@ -84,6 +84,13 @@
       <section class="card-grid" id="cardGrid" aria-label="Featured content"></section>
       <nav class="card-pager" id="cardPager" aria-label="테스트 페이지 이동"></nav>
 
+      <section class="inline-banner-ad" aria-label="Advertisement">
+        <div class="ad-card ad-card-horizontal">
+          <div class="ad-label">Ad</div>
+          <div class="ad-placeholder ad-placeholder-horizontal">728 x 90</div>
+        </div>
+      </section>
+
       <footer class="site-footer">
         <p>© <span id="year"></span> <span id="footerSiteName">쿠쿠</span>. 가볍게 즐기는 카드형 테스트 아카이브.</p>
       </footer>
@@ -96,5 +103,12 @@
       </div>
     </aside>
   </main>
+
+  <aside class="sticky-bottom-ad" aria-label="Advertisement">
+    <div class="sticky-bottom-ad-inner">
+      <span class="ad-label">Ad</span>
+      <div class="ad-placeholder ad-placeholder-sticky">320 x 50 / 728 x 90</div>
+    </div>
+  </aside>
 </body>
 </html>

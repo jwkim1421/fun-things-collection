@@ -131,6 +131,11 @@ button {
   padding: 22px 20px 40px;
 }
 
+.home-body,
+.test-play-body {
+  padding-bottom: 116px;
+}
+
 .content {
   min-width: 0;
 }
@@ -251,6 +256,45 @@ button {
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 230, 240, 0.9));
   border: 1px dashed rgba(110, 97, 112, 0.25);
+}
+
+.inline-banner-ad {
+  margin-top: 22px;
+}
+
+.ad-card-horizontal {
+  min-height: 124px;
+}
+
+.ad-placeholder-horizontal {
+  min-height: 90px;
+}
+
+.sticky-bottom-ad {
+  position: fixed;
+  left: 50%;
+  bottom: 12px;
+  z-index: 35;
+  transform: translateX(-50%);
+  width: min(960px, calc(100vw - 24px));
+  pointer-events: none;
+}
+
+.sticky-bottom-ad-inner {
+  padding: 10px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 32px rgba(60, 32, 51, 0.16);
+  pointer-events: auto;
+}
+
+.sticky-bottom-ad-inner .ad-label {
+  margin-bottom: 8px;
+}
+
+.ad-placeholder-sticky {
+  min-height: 50px;
 }
 
 .section-head {
@@ -859,6 +903,20 @@ button {
   padding: 24px 20px 48px;
 }
 
+.test-flow-stack {
+  width: min(100%, 860px);
+  display: grid;
+  gap: 16px;
+}
+
+.test-inline-ad {
+  width: 100%;
+}
+
+.test-inline-ad .ad-card {
+  background: rgba(255, 255, 255, 0.8);
+}
+
 .test-play-frame {
   width: min(100%, 720px);
 }
@@ -1393,6 +1451,11 @@ button {
     padding-right: 16px;
   }
 
+  .home-body,
+  .test-play-body {
+    padding-bottom: 102px;
+  }
+
   .hero-copy,
   .panel-card {
     padding: 20px;
@@ -1406,6 +1469,20 @@ button {
   .card-grid {
     grid-template-columns: 1fr;
     gap: 18px;
+  }
+
+  .sticky-bottom-ad {
+    bottom: 8px;
+    width: calc(100vw - 16px);
+  }
+
+  .sticky-bottom-ad-inner {
+    padding: 8px;
+    border-radius: 16px;
+  }
+
+  .ad-placeholder-sticky {
+    min-height: 54px;
   }
 
   .hero-mascot {

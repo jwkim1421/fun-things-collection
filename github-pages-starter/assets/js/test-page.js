@@ -81,6 +81,34 @@ function decorateNavPills() {
   });
 }
 
+function renderInlineAd(label = "728 x 90") {
+  return `
+    <section class="test-inline-ad" aria-label="Advertisement">
+      <div class="ad-card ad-card-horizontal">
+        <div class="ad-label">Ad</div>
+        <div class="ad-placeholder ad-placeholder-horizontal">${escapeHtml(label)}</div>
+      </div>
+    </section>
+  `;
+}
+
+function ensureStickyBottomAd() {
+  if (document.querySelector(".sticky-bottom-ad")) {
+    return;
+  }
+
+  const stickyAd = document.createElement("aside");
+  stickyAd.className = "sticky-bottom-ad";
+  stickyAd.setAttribute("aria-label", "Advertisement");
+  stickyAd.innerHTML = `
+    <div class="sticky-bottom-ad-inner">
+      <span class="ad-label">Ad</span>
+      <div class="ad-placeholder ad-placeholder-sticky">320 x 50 / 728 x 90</div>
+    </div>
+  `;
+  document.body.appendChild(stickyAd);
+}
+
 function scoreAnswers(page, answers) {
   const totals = {};
 
@@ -139,34 +167,37 @@ function renderQuestionScreen(page, questionIndex) {
   const progressPercent = Math.round((answeredCount / total) * 100);
 
   return `
-    <section class="test-card-shell question-shell">
-      <div class="test-card-tab">${escapeHtml(page.title)}</div>
-      <article class="test-card question-card">
-        <div class="test-progress-head">
-          <strong>QUESTION ${current} / ${total}</strong>
-          <span>${progressPercent}%</span>
-        </div>
-        <div class="test-progress-track" aria-hidden="true">
-          <div class="test-progress-fill" style="width:${progressPercent}%"></div>
-          <div class="test-progress-train" style="left:calc(${progressPercent}% - 18px)">🚂</div>
-        </div>
-        <section class="question-panel">
-          <h1>${escapeHtml(question.prompt)}</h1>
-          <div class="question-choice-list">
-            ${question.options.map((option, optionIndex) => `
-              <button
-                class="question-choice"
-                type="button"
-                data-action="choose-answer"
-                data-question-index="${questionIndex}"
-                data-option-index="${optionIndex}">
-                ${escapeHtml(option.label)}
-              </button>
-            `).join("")}
+    <div class="test-flow-stack">
+      <section class="test-card-shell question-shell">
+        <div class="test-card-tab">${escapeHtml(page.title)}</div>
+        <article class="test-card question-card">
+          <div class="test-progress-head">
+            <strong>QUESTION ${current} / ${total}</strong>
+            <span>${progressPercent}%</span>
           </div>
-        </section>
-      </article>
-    </section>
+          <div class="test-progress-track" aria-hidden="true">
+            <div class="test-progress-fill" style="width:${progressPercent}%"></div>
+            <div class="test-progress-train" style="left:calc(${progressPercent}% - 18px)">🚂</div>
+          </div>
+          <section class="question-panel">
+            <h1>${escapeHtml(question.prompt)}</h1>
+            <div class="question-choice-list">
+              ${question.options.map((option, optionIndex) => `
+                <button
+                  class="question-choice"
+                  type="button"
+                  data-action="choose-answer"
+                  data-question-index="${questionIndex}"
+                  data-option-index="${optionIndex}">
+                  ${escapeHtml(option.label)}
+                </button>
+              `).join("")}
+            </div>
+          </section>
+        </article>
+      </section>
+      ${renderInlineAd("728 x 90")}
+    </div>
   `;
 }
 
@@ -205,9 +236,10 @@ function renderResultScreen(page, resultKey, cards) {
   const shareSectionTitle = page.shareSectionTitle || "공유용 요약";
 
   return `
-    <section class="test-card-shell result-shell">
-      <div class="test-card-tab">${escapeHtml(page.title)}</div>
-      <article class="test-card result-card">
+    <div class="test-flow-stack">
+      <section class="test-card-shell result-shell">
+        <div class="test-card-tab">${escapeHtml(page.title)}</div>
+        <article class="test-card result-card">
         <section class="result-header-board">
           <div class="result-header-title">${escapeHtml(resultHeaderTitle)}</div>
           <div class="result-header-body">
@@ -283,8 +315,10 @@ function renderResultScreen(page, resultKey, cards) {
             ${escapeHtml(page.otherTestLabel || "다른 테스트 해보기")}
           </a>
         </div>
-      </article>
-    </section>
+        </article>
+      </section>
+      ${renderInlineAd("728 x 90")}
+    </div>
   `;
 }
 
@@ -417,5 +451,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   decorateNavPills();
+  ensureStickyBottomAd();
   createTestApp(data);
 });
