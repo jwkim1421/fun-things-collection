@@ -1,6 +1,12 @@
 const config = window.SITE_CONFIG || {};
 const content = window.SITE_CONTENT || {};
-const cards = Array.isArray(content.cards) ? content.cards : [];
+const cards = Array.isArray(content.cards)
+  ? [...content.cards].sort((left, right) => {
+      const leftNumber = Number(String(left.id || "").replace(/[^\d]/g, "")) || 0;
+      const rightNumber = Number(String(right.id || "").replace(/[^\d]/g, "")) || 0;
+      return rightNumber - leftNumber;
+    })
+  : [];
 const ITEMS_PER_PAGE = 12;
 let currentPage = 1;
 

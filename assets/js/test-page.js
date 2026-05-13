@@ -121,23 +121,6 @@ function renderShareIcon(type) {
   `;
 }
 
-function ensureStickyBottomAd() {
-  if (document.querySelector(".sticky-bottom-ad")) {
-    return;
-  }
-
-  const stickyAd = document.createElement("aside");
-  stickyAd.className = "sticky-bottom-ad";
-  stickyAd.setAttribute("aria-label", "Advertisement");
-  stickyAd.innerHTML = `
-    <div class="sticky-bottom-ad-inner">
-      <span class="ad-label">Ad</span>
-      <div class="ad-placeholder ad-placeholder-sticky">320 x 50 / 728 x 90</div>
-    </div>
-  `;
-  document.body.appendChild(stickyAd);
-}
-
 function scoreAnswers(page, answers) {
   const totals = {};
 
@@ -167,24 +150,27 @@ function renderIntroScreen(page) {
   const centerEmoji = (page.heroArt && page.heroArt.centerEmoji) || "🚂";
 
   return `
-    <section class="test-card-shell intro-shell">
-      <div class="test-card-tab">${escapeHtml(page.title)}</div>
-      <article class="test-card intro-card">
-        <div class="intro-art">
-          <div class="intro-stickers">
-            ${stickers.map((sticker) => `<span>${escapeHtml(sticker)}</span>`).join("")}
+    <div class="test-flow-stack">
+      <section class="test-card-shell intro-shell">
+        <div class="test-card-tab">${escapeHtml(page.title)}</div>
+        <article class="test-card intro-card">
+          <div class="intro-art">
+            <div class="intro-stickers">
+              ${stickers.map((sticker) => `<span>${escapeHtml(sticker)}</span>`).join("")}
+            </div>
+            <div class="intro-center-mark">${escapeHtml(centerEmoji)}</div>
+            <div class="intro-copy">
+              <strong>${escapeHtml(page.heroCardTitle || page.title)}</strong>
+              <span>${escapeHtml(page.heroCardSubtitle || page.summary)}</span>
+            </div>
           </div>
-          <div class="intro-center-mark">${escapeHtml(centerEmoji)}</div>
-          <div class="intro-copy">
-            <strong>${escapeHtml(page.heroCardTitle || page.title)}</strong>
-            <span>${escapeHtml(page.heroCardSubtitle || page.summary)}</span>
-          </div>
-        </div>
-        <button class="test-main-button" type="button" data-action="start-test">
-          ${escapeHtml(page.startLabel || "테스트 시작하기")}
-        </button>
-      </article>
-    </section>
+          <button class="test-main-button" type="button" data-action="start-test">
+            ${escapeHtml(page.startLabel || "테스트 시작하기")}
+          </button>
+        </article>
+      </section>
+      ${renderInlineAd("728 x 90")}
+    </div>
   `;
 }
 
@@ -233,23 +219,26 @@ function renderQuestionScreen(page, questionIndex) {
 function renderLoadingScreen(page) {
   const total = page.questions.length;
   return `
-    <section class="loading-shell">
-      <article class="loading-card">
-        <div class="test-progress-head loading-progress-head">
-          <strong>QUESTION ${total} / ${total}</strong>
-          <span>100%</span>
-        </div>
-        <div class="test-progress-track loading-progress-track" aria-hidden="true">
-          <div class="test-progress-fill" style="width:100%"></div>
-          <div class="test-progress-train" style="left:calc(100% - 36px)">🚂</div>
-        </div>
-        <div class="loading-orb">🚉</div>
-        <p class="loading-copyright">쿠쿠 테스트 로딩 중</p>
-        <h1>${escapeHtml(page.loadingTitle || "결과를 불러오는 중")}</h1>
-        <p>${escapeHtml(page.loadingMessage || "")}</p>
-        <p class="loading-hint">${escapeHtml(page.loadingHint || "")}</p>
-      </article>
-    </section>
+    <div class="test-flow-stack">
+      <section class="loading-shell">
+        <article class="loading-card">
+          <div class="test-progress-head loading-progress-head">
+            <strong>QUESTION ${total} / ${total}</strong>
+            <span>100%</span>
+          </div>
+          <div class="test-progress-track loading-progress-track" aria-hidden="true">
+            <div class="test-progress-fill" style="width:100%"></div>
+            <div class="test-progress-train" style="left:calc(100% - 36px)">🚂</div>
+          </div>
+          <div class="loading-orb">🚉</div>
+          <p class="loading-copyright">쿠쿠 테스트 로딩 중</p>
+          <h1>${escapeHtml(page.loadingTitle || "결과를 불러오는 중")}</h1>
+          <p>${escapeHtml(page.loadingMessage || "")}</p>
+          <p class="loading-hint">${escapeHtml(page.loadingHint || "")}</p>
+        </article>
+      </section>
+      ${renderInlineAd("728 x 90")}
+    </div>
   `;
 }
 
@@ -486,6 +475,5 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   decorateNavPills();
-  ensureStickyBottomAd();
   createTestApp(data);
 });
