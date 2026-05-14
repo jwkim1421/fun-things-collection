@@ -328,6 +328,7 @@ function renderResultScreen(page, resultKey, cards) {
           </button>
           <button class="share-icon-btn share-icon-btn-kakao" id="btnKakaoShare" type="button" aria-label="카카오 공유" title="카카오 공유">
             ${renderShareIcon("kakao")}
+            <span class="share-icon-btn-label">Kakao</span>
           </button>
         </div>
 
