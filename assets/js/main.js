@@ -42,12 +42,17 @@ function renderCards() {
         <strong>${card.title}</strong>
       </div>
       <div class="tool-thumb poster-stage" style="--thumb: ${card.thumb}">
+        <div class="poster-chip-row">
+          <span class="poster-chip poster-chip-soft">${card.posterTitle || card.category || "테스트"}</span>
+          <span class="poster-chip poster-chip-highlight">${card.badge || "쿠쿠 추천"}</span>
+        </div>
         <div class="poster-stickers">
           ${(card.stickers || []).map((sticker) => `<i>${sticker}</i>`).join("")}
         </div>
         <div class="poster-copy">
           <span>${card.posterTitle || card.category || "테스트"}</span>
           <strong>${card.posterSubtitle || card.title}</strong>
+          <p>${card.description}</p>
         </div>
       </div>
       <div class="tool-body">
