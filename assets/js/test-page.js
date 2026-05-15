@@ -166,7 +166,6 @@ function hydrateCoupangSlots(root) {
 
 function renderInlineAd(testId, placement = "journey") {
   const slot = getAdSlotData(testId, placement);
-  const products = slot && Array.isArray(slot.products) ? slot.products : [];
   const label = slot && slot.sizeLabel ? slot.sizeLabel : "728 x 90";
   const dynamic = slot && slot.coupangDynamic ? slot.coupangDynamic : null;
 
@@ -174,15 +173,6 @@ function renderInlineAd(testId, placement = "journey") {
     <section class="test-inline-ad" aria-label="Advertisement">
       <div class="ad-card ad-card-horizontal affiliate-slot-card">
         <div class="ad-label">Ad</div>
-        ${slot ? `
-          <div class="affiliate-slot-copy affiliate-slot-copy-inline">
-            <strong class="affiliate-slot-title">${escapeHtml(slot.heading)}</strong>
-            <p class="affiliate-slot-description">${escapeHtml(slot.description)}</p>
-            <div class="affiliate-slot-tags">
-              ${products.map((product) => `<span class="affiliate-slot-tag">${escapeHtml(product)}</span>`).join("")}
-            </div>
-          </div>
-        ` : ""}
         ${dynamic ? `
           <div
             class="affiliate-banner-embed affiliate-banner-embed-dynamic"
