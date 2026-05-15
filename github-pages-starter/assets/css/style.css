@@ -509,7 +509,7 @@ button {
 
 .poster-stickers {
   position: absolute;
-  inset: 70px 26px auto 26px;
+  inset: 56px 26px auto 26px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -996,12 +996,14 @@ button {
 }
 
 .test-play-body {
+  --test-theme: linear-gradient(135deg, #fff1bf, #e7e7ff);
   min-height: 100vh;
   background:
-    linear-gradient(rgba(251, 243, 201, 0.88), rgba(251, 243, 201, 0.88)),
+    linear-gradient(rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.56)),
+    var(--test-theme),
     linear-gradient(90deg, rgba(240, 214, 120, 0.22) 1px, transparent 1px),
     linear-gradient(rgba(240, 214, 120, 0.22) 1px, transparent 1px);
-  background-size: auto, 24px 24px, 24px 24px;
+  background-size: auto, auto, 24px 24px, 24px 24px;
 }
 
 .test-play-shell {
@@ -1098,14 +1100,18 @@ button {
   z-index: 1;
   padding: 10px 18px;
   border-radius: 20px 20px 0 0;
-  background: #f7e58b;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.08)),
+    var(--test-theme);
   border: 3px solid rgba(62, 43, 58, 0.72);
   border-bottom: 0;
   font-weight: 800;
 }
 
 .test-card {
-  background: rgba(255, 251, 231, 0.96);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.58)),
+    var(--test-theme);
   border: 3px solid rgba(62, 43, 58, 0.72);
   border-radius: 28px;
   box-shadow: 0 8px 0 rgba(62, 43, 58, 0.12);
@@ -1117,7 +1123,9 @@ button {
   min-height: 560px;
   padding: 28px;
   border-radius: 24px;
-  background: linear-gradient(180deg, #ffef97 0%, #ffe98a 100%);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.1)),
+    var(--test-theme);
   overflow: hidden;
 }
 
@@ -1186,7 +1194,9 @@ button {
   margin-top: 18px;
   border-radius: 22px;
   border: 3px solid rgba(62, 43, 58, 0.72);
-  background: linear-gradient(180deg, #fff3aa 0%, #ffe587 100%);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.08)),
+    var(--test-theme);
   color: #1f1a10;
   text-decoration: none;
   display: inline-flex;
@@ -1270,7 +1280,9 @@ button {
   padding: 14px 18px;
   border-radius: 22px;
   border: 3px solid rgba(62, 43, 58, 0.72);
-  background: linear-gradient(90deg, rgba(255, 248, 210, 0.98), rgba(255, 250, 227, 0.98));
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.84)),
+    var(--test-theme);
   color: #3d3423;
   font-size: clamp(20px, 2.7vw, 28px);
   text-align: left;
@@ -1297,7 +1309,9 @@ button {
   padding: 34px 24px;
   border-radius: 28px;
   border: 3px solid rgba(62, 43, 58, 0.72);
-  background: rgba(255, 255, 255, 0.94);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.72)),
+    var(--test-theme);
   text-align: center;
   box-shadow: 0 8px 0 rgba(62, 43, 58, 0.12);
 }
@@ -1317,7 +1331,9 @@ button {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: rgba(255, 232, 136, 0.94);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.08)),
+    var(--test-theme);
   font-size: 42px;
   animation: wobble 1.2s ease-in-out infinite;
 }
@@ -1357,7 +1373,9 @@ button {
 .result-header-title,
 .result-section-title {
   padding: 14px 16px;
-  background: #ffef97;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.08)),
+    var(--test-theme);
   border-bottom: 2px solid rgba(62, 43, 58, 0.4);
   text-align: center;
   font-size: 24px;
@@ -1749,7 +1767,7 @@ button {
   }
 
   .poster-stickers {
-    inset: 62px 18px auto 18px;
+    inset: 52px 18px auto 18px;
   }
 
   .intro-art {

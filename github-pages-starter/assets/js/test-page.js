@@ -16,6 +16,15 @@ function getTestPageData() {
   };
 }
 
+function applyTestTheme(card) {
+  if (!document.body) {
+    return;
+  }
+
+  const thumb = card && card.thumb ? card.thumb : "linear-gradient(135deg, #fff1bf, #e7e7ff)";
+  document.body.style.setProperty("--test-theme", thumb);
+}
+
 function escapeHtml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -586,6 +595,7 @@ document.addEventListener("DOMContentLoaded", () => {
     metaDescription.setAttribute("content", description);
   }
 
+  applyTestTheme(data.card);
   decorateNavPills();
   createTestApp(data);
 });
