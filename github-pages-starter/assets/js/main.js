@@ -19,21 +19,101 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
+let coupangScriptPromise = null;
+
+function ensureCoupangScript() {
+  if (window.PartnersCoupang && window.PartnersCoupang.G) {
+    return Promise.resolve();
+  }
+
+  if (coupangScriptPromise) {
+    return coupangScriptPromise;
+  }
+
+  coupangScriptPromise = new Promise((resolve, reject) => {
+    const existingScript = document.querySelector('script[data-coupang-partners="true"]');
+    if (existingScript) {
+      existingScript.addEventListener("load", () => resolve(), { once: true });
+      existingScript.addEventListener("error", () => reject(new Error("쿠팡 파트너스 스크립트를 불러오지 못했습니다.")), { once: true });
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://ads-partners.coupang.com/g.js";
+    script.async = true;
+    script.dataset.coupangPartners = "true";
+    script.addEventListener("load", () => resolve(), { once: true });
+    script.addEventListener("error", () => reject(new Error("쿠팡 파트너스 스크립트를 불러오지 못했습니다.")), { once: true });
+    document.head.appendChild(script);
+  });
+
+  return coupangScriptPromise;
+}
+
+function hydrateCoupangSlots(root = document) {
+  const slots = Array.from(root.querySelectorAll("[data-coupang-dynamic]"));
+  if (!slots.length) return;
+
+  ensureCoupangScript()
+    .then(() => {
+      if (!(window.PartnersCoupang && window.PartnersCoupang.G)) {
+        return;
+      }
+
+      slots.forEach((slot) => {
+        slot.innerHTML = "";
+        const script = document.createElement("script");
+        script.textContent = `
+          new PartnersCoupang.G({
+            id: ${Number(slot.dataset.coupangId)},
+            template: "${slot.dataset.coupangTemplate}",
+            trackingCode: "${slot.dataset.coupangTracking}",
+            width: "${slot.dataset.coupangWidth}",
+            height: "${slot.dataset.coupangHeight}",
+            tsource: ""
+          });
+        `;
+        slot.appendChild(script);
+      });
+    })
+    .catch(() => {
+      slots.forEach((slot) => {
+        if (!slot.textContent.trim()) {
+          slot.textContent = `${slot.dataset.coupangWidth || "160"} x ${slot.dataset.coupangHeight || "600"}`;
+        }
+      });
+    });
+}
+
 function renderAffiliateSlot(slot, layout = "horizontal") {
   const isRail = layout === "rail";
   const tags = Array.isArray(slot.products) ? slot.products : [];
   const embedHtml = slot.embedHtml || "";
+  const dynamic = slot.coupangDynamic || null;
+  const showCopy = slot.showCopy !== false;
 
   return `
     <div class="ad-label">Ad</div>
-    <div class="affiliate-slot-copy ${isRail ? "affiliate-slot-copy-rail" : ""}">
-      <strong class="affiliate-slot-title">${escapeHtml(slot.heading || "쿠팡 추천 상품")}</strong>
-      <p class="affiliate-slot-description">${escapeHtml(slot.description || "")}</p>
-      <div class="affiliate-slot-tags">
-        ${tags.map((product) => `<span class="affiliate-slot-tag">${escapeHtml(product)}</span>`).join("")}
+    ${showCopy ? `
+      <div class="affiliate-slot-copy ${isRail ? "affiliate-slot-copy-rail" : ""}">
+        <strong class="affiliate-slot-title">${escapeHtml(slot.heading || "쿠팡 추천 상품")}</strong>
+        <p class="affiliate-slot-description">${escapeHtml(slot.description || "")}</p>
+        <div class="affiliate-slot-tags">
+          ${tags.map((product) => `<span class="affiliate-slot-tag">${escapeHtml(product)}</span>`).join("")}
+        </div>
       </div>
-    </div>
-    ${embedHtml
+    ` : ""}
+    ${dynamic
+      ? `<div
+          class="affiliate-banner-embed affiliate-banner-embed-dynamic ${isRail ? "affiliate-banner-embed-rail" : "affiliate-banner-embed-horizontal"}"
+          data-coupang-slot="${escapeHtml(slot.slotId || "")}"
+          data-coupang-dynamic="${escapeHtml(slot.slotId || "")}"
+          data-coupang-id="${escapeHtml(String(dynamic.id))}"
+          data-coupang-template="${escapeHtml(dynamic.template)}"
+          data-coupang-tracking="${escapeHtml(dynamic.trackingCode)}"
+          data-coupang-width="${escapeHtml(dynamic.width)}"
+          data-coupang-height="${escapeHtml(dynamic.height)}">${escapeHtml(slot.sizeLabel || (isRail ? "160 x 600" : "728 x 90"))}</div>`
+      : embedHtml
       ? `<div class="affiliate-banner-embed ${isRail ? "affiliate-banner-embed-rail" : "affiliate-banner-embed-horizontal"}" data-coupang-slot="${escapeHtml(slot.slotId || "")}">${embedHtml}</div>`
       : `<div class="ad-placeholder ${isRail ? "" : "ad-placeholder-horizontal"}" data-coupang-slot="${escapeHtml(slot.slotId || "")}">
           ${escapeHtml(slot.sizeLabel || (isRail ? "160 x 600" : "728 x 90"))}
@@ -61,6 +141,8 @@ function populateHomeAffiliateSlots() {
   if (bottom && homeSlots.bottomBanner) {
     bottom.innerHTML = renderAffiliateSlot(homeSlots.bottomBanner, "horizontal");
   }
+
+  hydrateCoupangSlots(document);
 }
 
 function getTotalPages() {
