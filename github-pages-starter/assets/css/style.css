@@ -310,6 +310,41 @@ button {
   text-align: left;
 }
 
+.affiliate-banner-embed {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+}
+
+.affiliate-banner-embed a {
+  display: block;
+}
+
+.affiliate-banner-embed img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+.affiliate-banner-embed-rail img {
+  max-width: 160px;
+  margin: 0 auto;
+}
+
+.affiliate-banner-embed-dynamic {
+  min-height: 110px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.affiliate-banner-embed-dynamic iframe,
+.affiliate-banner-embed-dynamic img,
+.affiliate-banner-embed-dynamic div {
+  max-width: 100%;
+}
+
 .inline-banner-ad {
   margin-top: 22px;
 }

@@ -22,6 +22,7 @@ function escapeHtml(value) {
 function renderAffiliateSlot(slot, layout = "horizontal") {
   const isRail = layout === "rail";
   const tags = Array.isArray(slot.products) ? slot.products : [];
+  const embedHtml = slot.embedHtml || "";
 
   return `
     <div class="ad-label">Ad</div>
@@ -32,9 +33,12 @@ function renderAffiliateSlot(slot, layout = "horizontal") {
         ${tags.map((product) => `<span class="affiliate-slot-tag">${escapeHtml(product)}</span>`).join("")}
       </div>
     </div>
-    <div class="ad-placeholder ${isRail ? "" : "ad-placeholder-horizontal"}" data-coupang-slot="${escapeHtml(slot.slotId || "")}">
-      ${escapeHtml(slot.sizeLabel || (isRail ? "160 x 600" : "728 x 90"))}
-    </div>
+    ${embedHtml
+      ? `<div class="affiliate-banner-embed ${isRail ? "affiliate-banner-embed-rail" : "affiliate-banner-embed-horizontal"}" data-coupang-slot="${escapeHtml(slot.slotId || "")}">${embedHtml}</div>`
+      : `<div class="ad-placeholder ${isRail ? "" : "ad-placeholder-horizontal"}" data-coupang-slot="${escapeHtml(slot.slotId || "")}">
+          ${escapeHtml(slot.sizeLabel || (isRail ? "160 x 600" : "728 x 90"))}
+        </div>`
+    }
   `;
 }
 

@@ -89,10 +89,77 @@ function decorateNavPills() {
   });
 }
 
+let coupangScriptPromise = null;
+
+function ensureCoupangScript() {
+  if (window.PartnersCoupang && window.PartnersCoupang.G) {
+    return Promise.resolve();
+  }
+
+  if (coupangScriptPromise) {
+    return coupangScriptPromise;
+  }
+
+  coupangScriptPromise = new Promise((resolve, reject) => {
+    const existingScript = document.querySelector('script[data-coupang-partners="true"]');
+    if (existingScript) {
+      existingScript.addEventListener("load", () => resolve(), { once: true });
+      existingScript.addEventListener("error", () => reject(new Error("쿠팡 파트너스 스크립트를 불러오지 못했습니다.")), { once: true });
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://ads-partners.coupang.com/g.js";
+    script.async = true;
+    script.dataset.coupangPartners = "true";
+    script.addEventListener("load", () => resolve(), { once: true });
+    script.addEventListener("error", () => reject(new Error("쿠팡 파트너스 스크립트를 불러오지 못했습니다.")), { once: true });
+    document.head.appendChild(script);
+  });
+
+  return coupangScriptPromise;
+}
+
+function hydrateCoupangSlots(root) {
+  const slots = Array.from(root.querySelectorAll("[data-coupang-dynamic]"));
+  if (!slots.length) return;
+
+  ensureCoupangScript()
+    .then(() => {
+      if (!(window.PartnersCoupang && window.PartnersCoupang.G)) {
+        return;
+      }
+
+      slots.forEach((slot) => {
+        slot.innerHTML = "";
+        const script = document.createElement("script");
+        script.textContent = `
+          new PartnersCoupang.G({
+            id: ${Number(slot.dataset.coupangId)},
+            template: "${slot.dataset.coupangTemplate}",
+            trackingCode: "${slot.dataset.coupangTracking}",
+            width: "${slot.dataset.coupangWidth}",
+            height: "${slot.dataset.coupangHeight}",
+            tsource: ""
+          });
+        `;
+        slot.appendChild(script);
+      });
+    })
+    .catch(() => {
+      slots.forEach((slot) => {
+        if (!slot.textContent.trim()) {
+          slot.textContent = `${slot.dataset.coupangWidth || "680"} x ${slot.dataset.coupangHeight || "110"}`;
+        }
+      });
+    });
+}
+
 function renderInlineAd(testId, placement = "journey") {
   const slot = getAdSlotData(testId, placement);
   const products = slot && Array.isArray(slot.products) ? slot.products : [];
   const label = slot && slot.sizeLabel ? slot.sizeLabel : "728 x 90";
+  const dynamic = slot && slot.coupangDynamic ? slot.coupangDynamic : null;
 
   return `
     <section class="test-inline-ad" aria-label="Advertisement">
@@ -107,9 +174,21 @@ function renderInlineAd(testId, placement = "journey") {
             </div>
           </div>
         ` : ""}
-        <div
-          class="ad-placeholder ad-placeholder-horizontal"
-          data-coupang-slot="${escapeHtml(slot && slot.slotId ? slot.slotId : `${testId}-${placement}`)}">${escapeHtml(label)}</div>
+        ${dynamic ? `
+          <div
+            class="affiliate-banner-embed affiliate-banner-embed-dynamic"
+            data-coupang-slot="${escapeHtml(slot && slot.slotId ? slot.slotId : `${testId}-${placement}`)}"
+            data-coupang-dynamic="${escapeHtml(slot && slot.slotId ? slot.slotId : `${testId}-${placement}`)}"
+            data-coupang-id="${escapeHtml(String(dynamic.id))}"
+            data-coupang-template="${escapeHtml(dynamic.template)}"
+            data-coupang-tracking="${escapeHtml(dynamic.trackingCode)}"
+            data-coupang-width="${escapeHtml(dynamic.width)}"
+            data-coupang-height="${escapeHtml(dynamic.height)}">${escapeHtml(label)}</div>
+        ` : `
+          <div
+            class="ad-placeholder ad-placeholder-horizontal"
+            data-coupang-slot="${escapeHtml(slot && slot.slotId ? slot.slotId : `${testId}-${placement}`)}">${escapeHtml(label)}</div>
+        `}
       </div>
       <p class="affiliate-disclosure">이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받을 수 있습니다.</p>
     </section>
@@ -403,24 +482,28 @@ function createTestApp(data) {
     if (state.screen === "intro") {
       applyShareState(data.page, "");
       root.innerHTML = renderIntroScreen(data.page);
+      hydrateCoupangSlots(root);
       return;
     }
 
     if (state.screen === "question") {
       applyShareState(data.page, "");
       root.innerHTML = renderQuestionScreen(data.page, state.currentQuestion);
+      hydrateCoupangSlots(root);
       return;
     }
 
     if (state.screen === "loading") {
       applyShareState(data.page, "");
       root.innerHTML = renderLoadingScreen(data.page);
+      hydrateCoupangSlots(root);
       return;
     }
 
     if (state.screen === "result") {
       applyShareState(data.page, state.resultKey);
       root.innerHTML = renderResultScreen(data.page, state.resultKey, data.cards);
+      hydrateCoupangSlots(root);
     }
   }
 

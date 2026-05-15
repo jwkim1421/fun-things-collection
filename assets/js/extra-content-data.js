@@ -615,6 +615,145 @@
     })
   };
 
+  const productGroups = {
+    beauty: {
+      label: "뷰티 소품",
+      summary: "설렘, 첫인상, 자기표현 무드와 자연스럽게 이어지는 가벼운 추천군",
+      products: ["틴트", "립밤", "미니 향수"]
+    },
+    rest: {
+      label: "회복·휴식",
+      summary: "피로 회복과 감정 정리에 잘 붙는 편안한 셀프케어 추천군",
+      products: ["수면안대", "온열팩", "허브차"]
+    },
+    travel: {
+      label: "여행·외출",
+      summary: "가볍게 챙기기 좋고 테스트 무드와도 잘 맞는 외출 추천군",
+      products: ["파우치", "텀블러", "여행 보틀"]
+    },
+    focus: {
+      label: "집중·루틴",
+      summary: "루틴을 만들거나 몰입을 돕는 데 어울리는 실용 추천군",
+      products: ["스터디 타이머", "플래너", "데스크 소품"]
+    },
+    relation: {
+      label: "관계·선물",
+      summary: "친구와 공유하거나 가볍게 선물하기 좋은 감정 연결 추천군",
+      products: ["키링", "포토앨범", "미니 선물템"]
+    },
+    mood: {
+      label: "무드·공간",
+      summary: "공간 감성과 정서 무드를 살려주는 홈 라이프 추천군",
+      products: ["디퓨저", "무드등", "캔들"]
+    },
+    digital: {
+      label: "디지털 소품",
+      summary: "바로 쓰기 좋고 클릭 부담이 낮은 데일리 디지털 추천군",
+      products: ["보조배터리", "이어폰", "거치대"]
+    }
+  };
+
+  const homeAdSlots = {
+    leftRail: {
+      slotId: "home-left-rail",
+      heading: "쿠쿠 추천 · 뷰티 소품",
+      description: "연애, 성향 테스트와 잘 어울리는 가벼운 뷰티 아이템을 먼저 배치합니다.",
+      products: productGroups.beauty.products,
+      sizeLabel: "160 x 600",
+      embedHtml: `<a href="https://link.coupang.com/a/dLgFhmtJRc" target="_blank" referrerpolicy="unsafe-url" rel="nofollow sponsored noopener"><img src="https://ads-partners.coupang.com/banners/989140?subId=&traceId=V0-301-5a8c79a76485eb21-I989140&w=160&h=600" alt="쿠팡 파트너스 뷰티 카테고리 배너"></a>`
+    },
+    rightRail: {
+      slotId: "home-right-rail",
+      heading: "쿠쿠 추천 · 디지털 소품",
+      description: "모바일 사용자에게 잘 맞는 보조배터리, 이어폰, 거치대 계열을 추천합니다.",
+      products: productGroups.digital.products,
+      sizeLabel: "160 x 600",
+      embedHtml: `<a href="https://link.coupang.com/a/dLgLrOsARE" target="_blank" referrerpolicy="unsafe-url" rel="nofollow sponsored noopener"><img src="https://ads-partners.coupang.com/banners/989143?subId=&traceId=V0-301-5f9bd61900e673c0-I989143&w=160&h=600" alt="쿠팡 파트너스 디지털 카테고리 배너"></a>`
+    },
+    bottomBanner: {
+      slotId: "home-bottom-banner",
+      heading: "쿠쿠 추천 · 회복 루틴 아이템",
+      description: "홈 최하단은 계절성과 상관없이 무난하게 클릭되는 휴식·회복 상품군으로 시작합니다.",
+      products: productGroups.rest.products,
+      sizeLabel: "728 x 90",
+      embedHtml: `<a href="https://link.coupang.com/a/dLgRwPr7eu" target="_blank" referrerpolicy="unsafe-url" rel="nofollow sponsored noopener"><img src="https://ads-partners.coupang.com/banners/989144?subId=&traceId=V0-301-2f679fc6bd8f2e58-I989144&w=728&h=90" alt="쿠팡 파트너스 홈 하단 배너"></a>`
+    }
+  };
+
+  const testGroupMap = {
+    "test-001": { start: "beauty", journey: "beauty", result: "beauty" },
+    "test-002": { start: "rest", journey: "rest", result: "rest" },
+    "test-003": { start: "travel", journey: "travel", result: "travel" },
+    "test-004": { start: "focus", journey: "focus", result: "focus" },
+    "test-005": { start: "relation", journey: "relation", result: "relation" },
+    "test-006": { start: "mood", journey: "rest", result: "mood" },
+    "test-007": { start: "beauty", journey: "beauty", result: "beauty" },
+    "test-008": { start: "beauty", journey: "beauty", result: "beauty" },
+    "test-009": { start: "focus", journey: "focus", result: "digital" },
+    "test-010": { start: "digital", journey: "digital", result: "relation" },
+    "test-011": { start: "focus", journey: "digital", result: "focus" },
+    "test-012": { start: "rest", journey: "rest", result: "mood" },
+    "test-013": { start: "beauty", journey: "beauty", result: "beauty" },
+    "test-014": { start: "mood", journey: "digital", result: "mood" },
+    "test-015": { start: "mood", journey: "mood", result: "mood" },
+    "test-016": { start: "digital", journey: "focus", result: "digital" },
+    "test-017": { start: "beauty", journey: "relation", result: "beauty" },
+    "test-018": { start: "mood", journey: "mood", result: "mood" },
+    "test-019": { start: "rest", journey: "rest", result: "digital" },
+    "test-020": { start: "relation", journey: "rest", result: "digital" }
+  };
+
+  const placementMeta = {
+    start: {
+      title: "시작 화면 추천",
+      prefix: "테스트 시작 전 가볍게 보기 좋은"
+    },
+    journey: {
+      title: "진행 중 추천",
+      prefix: "질문 흐름을 크게 해치지 않게 붙일"
+    },
+    result: {
+      title: "결과 화면 추천",
+      prefix: "결과 확인 후 자연스럽게 이어보기 좋은"
+    }
+  };
+
+  function buildTestSlot(testId, placement, groupKey) {
+    const group = productGroups[groupKey];
+    const placementInfo = placementMeta[placement];
+
+    return {
+      slotId: `${testId}-${placement}`,
+      heading: `${placementInfo.title} · ${group.label}`,
+      description: `${placementInfo.prefix} ${group.label} 상품군입니다.`,
+      products: group.products,
+      sizeLabel: "728 x 90"
+    };
+  }
+
+  const testAdSlots = Object.fromEntries(
+    Object.entries(testGroupMap).map(([testId, placements]) => [
+      testId,
+      {
+        start: buildTestSlot(testId, "start", placements.start),
+        journey: buildTestSlot(testId, "journey", placements.journey),
+        result: buildTestSlot(testId, "result", placements.result)
+      }
+    ])
+  );
+
+  Object.values(testAdSlots).forEach((slots) => {
+    ["start", "journey", "result"].forEach((placement) => {
+      slots[placement].coupangDynamic = {
+        id: 989147,
+        template: "carousel",
+        trackingCode: "AF1716783",
+        width: "680",
+        height: "110"
+      };
+    });
+  });
+
   const existingIds = new Set(cards.map((card) => card.id));
   extraCards.forEach((card) => {
     if (!existingIds.has(card.id)) {
@@ -626,5 +765,10 @@
     if (!pages[id]) {
       pages[id] = extraPages[id];
     }
+  });
+
+  siteContent.adSlots = Object.assign({}, siteContent.adSlots, {
+    home: homeAdSlots,
+    tests: testAdSlots
   });
 })();

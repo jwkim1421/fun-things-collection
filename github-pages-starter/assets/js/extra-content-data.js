@@ -659,21 +659,24 @@
       heading: "쿠쿠 추천 · 뷰티 소품",
       description: "연애, 성향 테스트와 잘 어울리는 가벼운 뷰티 아이템을 먼저 배치합니다.",
       products: productGroups.beauty.products,
-      sizeLabel: "160 x 600"
+      sizeLabel: "160 x 600",
+      embedHtml: `<a href="https://link.coupang.com/a/dLgFhmtJRc" target="_blank" referrerpolicy="unsafe-url" rel="nofollow sponsored noopener"><img src="https://ads-partners.coupang.com/banners/989140?subId=&traceId=V0-301-5a8c79a76485eb21-I989140&w=160&h=600" alt="쿠팡 파트너스 뷰티 카테고리 배너"></a>`
     },
     rightRail: {
       slotId: "home-right-rail",
       heading: "쿠쿠 추천 · 디지털 소품",
       description: "모바일 사용자에게 잘 맞는 보조배터리, 이어폰, 거치대 계열을 추천합니다.",
       products: productGroups.digital.products,
-      sizeLabel: "160 x 600"
+      sizeLabel: "160 x 600",
+      embedHtml: `<a href="https://link.coupang.com/a/dLgLrOsARE" target="_blank" referrerpolicy="unsafe-url" rel="nofollow sponsored noopener"><img src="https://ads-partners.coupang.com/banners/989143?subId=&traceId=V0-301-5f9bd61900e673c0-I989143&w=160&h=600" alt="쿠팡 파트너스 디지털 카테고리 배너"></a>`
     },
     bottomBanner: {
       slotId: "home-bottom-banner",
       heading: "쿠쿠 추천 · 회복 루틴 아이템",
       description: "홈 최하단은 계절성과 상관없이 무난하게 클릭되는 휴식·회복 상품군으로 시작합니다.",
       products: productGroups.rest.products,
-      sizeLabel: "728 x 90"
+      sizeLabel: "728 x 90",
+      embedHtml: `<a href="https://link.coupang.com/a/dLgRwPr7eu" target="_blank" referrerpolicy="unsafe-url" rel="nofollow sponsored noopener"><img src="https://ads-partners.coupang.com/banners/989144?subId=&traceId=V0-301-2f679fc6bd8f2e58-I989144&w=728&h=90" alt="쿠팡 파트너스 홈 하단 배너"></a>`
     }
   };
 
@@ -738,6 +741,18 @@
       }
     ])
   );
+
+  Object.values(testAdSlots).forEach((slots) => {
+    ["start", "journey", "result"].forEach((placement) => {
+      slots[placement].coupangDynamic = {
+        id: 989147,
+        template: "carousel",
+        trackingCode: "AF1716783",
+        width: "680",
+        height: "110"
+      };
+    });
+  });
 
   const existingIds = new Set(cards.map((card) => card.id));
   extraCards.forEach((card) => {

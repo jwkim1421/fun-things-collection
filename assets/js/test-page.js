@@ -41,6 +41,14 @@ function getSharedResultKey(page) {
   }
 }
 
+function getAdSlotData(testId, placement) {
+  const content = window.SITE_CONTENT || {};
+  const adSlots = content.adSlots || {};
+  const tests = adSlots.tests || {};
+  const testSlots = tests[testId] || {};
+  return testSlots[placement] || null;
+}
+
 function buildShareUrl(resultKey) {
   const currentUrl = new URL(window.location.href);
   if (resultKey) {
@@ -81,12 +89,106 @@ function decorateNavPills() {
   });
 }
 
-function renderInlineAd(label = "728 x 90") {
+let coupangScriptPromise = null;
+
+function ensureCoupangScript() {
+  if (window.PartnersCoupang && window.PartnersCoupang.G) {
+    return Promise.resolve();
+  }
+
+  if (coupangScriptPromise) {
+    return coupangScriptPromise;
+  }
+
+  coupangScriptPromise = new Promise((resolve, reject) => {
+    const existingScript = document.querySelector('script[data-coupang-partners="true"]');
+    if (existingScript) {
+      existingScript.addEventListener("load", () => resolve(), { once: true });
+      existingScript.addEventListener("error", () => reject(new Error("쿠팡 파트너스 스크립트를 불러오지 못했습니다.")), { once: true });
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://ads-partners.coupang.com/g.js";
+    script.async = true;
+    script.dataset.coupangPartners = "true";
+    script.addEventListener("load", () => resolve(), { once: true });
+    script.addEventListener("error", () => reject(new Error("쿠팡 파트너스 스크립트를 불러오지 못했습니다.")), { once: true });
+    document.head.appendChild(script);
+  });
+
+  return coupangScriptPromise;
+}
+
+function hydrateCoupangSlots(root) {
+  const slots = Array.from(root.querySelectorAll("[data-coupang-dynamic]"));
+  if (!slots.length) return;
+
+  ensureCoupangScript()
+    .then(() => {
+      if (!(window.PartnersCoupang && window.PartnersCoupang.G)) {
+        return;
+      }
+
+      slots.forEach((slot) => {
+        slot.innerHTML = "";
+        const script = document.createElement("script");
+        script.textContent = `
+          new PartnersCoupang.G({
+            id: ${Number(slot.dataset.coupangId)},
+            template: "${slot.dataset.coupangTemplate}",
+            trackingCode: "${slot.dataset.coupangTracking}",
+            width: "${slot.dataset.coupangWidth}",
+            height: "${slot.dataset.coupangHeight}",
+            tsource: ""
+          });
+        `;
+        slot.appendChild(script);
+      });
+    })
+    .catch(() => {
+      slots.forEach((slot) => {
+        if (!slot.textContent.trim()) {
+          slot.textContent = `${slot.dataset.coupangWidth || "680"} x ${slot.dataset.coupangHeight || "110"}`;
+        }
+      });
+    });
+}
+
+function renderInlineAd(testId, placement = "journey") {
+  const slot = getAdSlotData(testId, placement);
+  const products = slot && Array.isArray(slot.products) ? slot.products : [];
+  const label = slot && slot.sizeLabel ? slot.sizeLabel : "728 x 90";
+  const dynamic = slot && slot.coupangDynamic ? slot.coupangDynamic : null;
+
   return `
     <section class="test-inline-ad" aria-label="Advertisement">
-      <div class="ad-card ad-card-horizontal">
+      <div class="ad-card ad-card-horizontal affiliate-slot-card">
         <div class="ad-label">Ad</div>
-        <div class="ad-placeholder ad-placeholder-horizontal">${escapeHtml(label)}</div>
+        ${slot ? `
+          <div class="affiliate-slot-copy affiliate-slot-copy-inline">
+            <strong class="affiliate-slot-title">${escapeHtml(slot.heading)}</strong>
+            <p class="affiliate-slot-description">${escapeHtml(slot.description)}</p>
+            <div class="affiliate-slot-tags">
+              ${products.map((product) => `<span class="affiliate-slot-tag">${escapeHtml(product)}</span>`).join("")}
+            </div>
+          </div>
+        ` : ""}
+        ${dynamic ? `
+          <div
+            class="affiliate-banner-embed affiliate-banner-embed-dynamic"
+            data-coupang-slot="${escapeHtml(slot && slot.slotId ? slot.slotId : `${testId}-${placement}`)}"
+            data-coupang-dynamic="${escapeHtml(slot && slot.slotId ? slot.slotId : `${testId}-${placement}`)}"
+            data-coupang-id="${escapeHtml(String(dynamic.id))}"
+            data-coupang-template="${escapeHtml(dynamic.template)}"
+            data-coupang-tracking="${escapeHtml(dynamic.trackingCode)}"
+            data-coupang-width="${escapeHtml(dynamic.width)}"
+            data-coupang-height="${escapeHtml(dynamic.height)}">${escapeHtml(label)}</div>
+        ` : `
+          <div
+            class="ad-placeholder ad-placeholder-horizontal"
+            data-coupang-slot="${escapeHtml(slot && slot.slotId ? slot.slotId : `${testId}-${placement}`)}">${escapeHtml(label)}</div>
+        `}
       </div>
       <p class="affiliate-disclosure">이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받을 수 있습니다.</p>
     </section>
@@ -147,6 +249,7 @@ function scoreAnswers(page, answers) {
 }
 
 function renderIntroScreen(page) {
+  const testId = document.body && document.body.dataset ? document.body.dataset.testId : "";
   const stickers = (page.heroArt && page.heroArt.stickers) || [];
   const centerEmoji = (page.heroArt && page.heroArt.centerEmoji) || "🚂";
 
@@ -170,12 +273,13 @@ function renderIntroScreen(page) {
           </button>
         </article>
       </section>
-      ${renderInlineAd("728 x 90")}
+      ${renderInlineAd(testId, "start")}
     </div>
   `;
 }
 
 function renderQuestionScreen(page, questionIndex) {
+  const testId = document.body && document.body.dataset ? document.body.dataset.testId : "";
   const question = page.questions[questionIndex];
   const total = page.questions.length;
   const current = questionIndex + 1;
@@ -212,12 +316,13 @@ function renderQuestionScreen(page, questionIndex) {
           </section>
         </article>
       </section>
-      ${renderInlineAd("728 x 90")}
+      ${renderInlineAd(testId, "journey")}
     </div>
   `;
 }
 
 function renderLoadingScreen(page) {
+  const testId = document.body && document.body.dataset ? document.body.dataset.testId : "";
   const total = page.questions.length;
   return `
     <div class="test-flow-stack">
@@ -238,12 +343,13 @@ function renderLoadingScreen(page) {
           <p class="loading-hint">${escapeHtml(page.loadingHint || "")}</p>
         </article>
       </section>
-      ${renderInlineAd("728 x 90")}
+      ${renderInlineAd(testId, "journey")}
     </div>
   `;
 }
 
 function renderResultScreen(page, resultKey, cards) {
+  const testId = document.body && document.body.dataset ? document.body.dataset.testId : "";
   const result = page.results[resultKey];
   const relatedCards = getRelatedCards(page, cards);
   const preview = (page.resultPreview || [])
@@ -343,7 +449,7 @@ function renderResultScreen(page, resultKey, cards) {
         </div>
         </article>
       </section>
-      ${renderInlineAd("728 x 90")}
+      ${renderInlineAd(testId, "result")}
     </div>
   `;
 }
@@ -376,24 +482,28 @@ function createTestApp(data) {
     if (state.screen === "intro") {
       applyShareState(data.page, "");
       root.innerHTML = renderIntroScreen(data.page);
+      hydrateCoupangSlots(root);
       return;
     }
 
     if (state.screen === "question") {
       applyShareState(data.page, "");
       root.innerHTML = renderQuestionScreen(data.page, state.currentQuestion);
+      hydrateCoupangSlots(root);
       return;
     }
 
     if (state.screen === "loading") {
       applyShareState(data.page, "");
       root.innerHTML = renderLoadingScreen(data.page);
+      hydrateCoupangSlots(root);
       return;
     }
 
     if (state.screen === "result") {
       applyShareState(data.page, state.resultKey);
       root.innerHTML = renderResultScreen(data.page, state.resultKey, data.cards);
+      hydrateCoupangSlots(root);
     }
   }
 
