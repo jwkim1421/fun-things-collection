@@ -10,6 +10,55 @@ const cards = Array.isArray(content.cards)
 const ITEMS_PER_PAGE = 12;
 let currentPage = 1;
 
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function renderAffiliateSlot(slot, layout = "horizontal") {
+  const isRail = layout === "rail";
+  const tags = Array.isArray(slot.products) ? slot.products : [];
+
+  return `
+    <div class="ad-label">Ad</div>
+    <div class="affiliate-slot-copy ${isRail ? "affiliate-slot-copy-rail" : ""}">
+      <strong class="affiliate-slot-title">${escapeHtml(slot.heading || "쿠팡 추천 상품")}</strong>
+      <p class="affiliate-slot-description">${escapeHtml(slot.description || "")}</p>
+      <div class="affiliate-slot-tags">
+        ${tags.map((product) => `<span class="affiliate-slot-tag">${escapeHtml(product)}</span>`).join("")}
+      </div>
+    </div>
+    <div class="ad-placeholder ${isRail ? "" : "ad-placeholder-horizontal"}" data-coupang-slot="${escapeHtml(slot.slotId || "")}">
+      ${escapeHtml(slot.sizeLabel || (isRail ? "160 x 600" : "728 x 90"))}
+    </div>
+  `;
+}
+
+function populateHomeAffiliateSlots() {
+  const homeSlots = content.adSlots && content.adSlots.home ? content.adSlots.home : null;
+  if (!homeSlots) return;
+
+  const left = document.getElementById("homeLeftRailAd");
+  const right = document.getElementById("homeRightRailAd");
+  const bottom = document.getElementById("homeBottomBannerAd");
+
+  if (left && homeSlots.leftRail) {
+    left.innerHTML = renderAffiliateSlot(homeSlots.leftRail, "rail");
+  }
+
+  if (right && homeSlots.rightRail) {
+    right.innerHTML = renderAffiliateSlot(homeSlots.rightRail, "rail");
+  }
+
+  if (bottom && homeSlots.bottomBanner) {
+    bottom.innerHTML = renderAffiliateSlot(homeSlots.bottomBanner, "horizontal");
+  }
+}
+
 function getTotalPages() {
   return Math.max(1, Math.ceil(cards.length / ITEMS_PER_PAGE));
 }
@@ -131,3 +180,4 @@ function populateHeader() {
 renderCards();
 renderPagination();
 populateHeader();
+populateHomeAffiliateSlots();

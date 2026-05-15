@@ -262,6 +262,14 @@ button {
   margin-top: 22px;
 }
 
+.affiliate-disclosure {
+  margin: 10px 4px 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+}
+
 .ad-card-horizontal {
   min-height: 124px;
 }

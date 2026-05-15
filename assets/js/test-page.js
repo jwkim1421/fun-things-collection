@@ -88,6 +88,7 @@ function renderInlineAd(label = "728 x 90") {
         <div class="ad-label">Ad</div>
         <div class="ad-placeholder ad-placeholder-horizontal">${escapeHtml(label)}</div>
       </div>
+      <p class="affiliate-disclosure">이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받을 수 있습니다.</p>
     </section>
   `;
 }
