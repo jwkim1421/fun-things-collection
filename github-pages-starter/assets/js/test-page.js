@@ -41,6 +41,14 @@ function getSharedResultKey(page) {
   }
 }
 
+function getAdSlotData(testId, placement) {
+  const content = window.SITE_CONTENT || {};
+  const adSlots = content.adSlots || {};
+  const tests = adSlots.tests || {};
+  const testSlots = tests[testId] || {};
+  return testSlots[placement] || null;
+}
+
 function buildShareUrl(resultKey) {
   const currentUrl = new URL(window.location.href);
   if (resultKey) {
@@ -81,12 +89,27 @@ function decorateNavPills() {
   });
 }
 
-function renderInlineAd(label = "728 x 90") {
+function renderInlineAd(testId, placement = "journey") {
+  const slot = getAdSlotData(testId, placement);
+  const products = slot && Array.isArray(slot.products) ? slot.products : [];
+  const label = slot && slot.sizeLabel ? slot.sizeLabel : "728 x 90";
+
   return `
     <section class="test-inline-ad" aria-label="Advertisement">
-      <div class="ad-card ad-card-horizontal">
+      <div class="ad-card ad-card-horizontal affiliate-slot-card">
         <div class="ad-label">Ad</div>
-        <div class="ad-placeholder ad-placeholder-horizontal">${escapeHtml(label)}</div>
+        ${slot ? `
+          <div class="affiliate-slot-copy affiliate-slot-copy-inline">
+            <strong class="affiliate-slot-title">${escapeHtml(slot.heading)}</strong>
+            <p class="affiliate-slot-description">${escapeHtml(slot.description)}</p>
+            <div class="affiliate-slot-tags">
+              ${products.map((product) => `<span class="affiliate-slot-tag">${escapeHtml(product)}</span>`).join("")}
+            </div>
+          </div>
+        ` : ""}
+        <div
+          class="ad-placeholder ad-placeholder-horizontal"
+          data-coupang-slot="${escapeHtml(slot && slot.slotId ? slot.slotId : `${testId}-${placement}`)}">${escapeHtml(label)}</div>
       </div>
       <p class="affiliate-disclosure">이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받을 수 있습니다.</p>
     </section>
@@ -147,6 +170,7 @@ function scoreAnswers(page, answers) {
 }
 
 function renderIntroScreen(page) {
+  const testId = document.body && document.body.dataset ? document.body.dataset.testId : "";
   const stickers = (page.heroArt && page.heroArt.stickers) || [];
   const centerEmoji = (page.heroArt && page.heroArt.centerEmoji) || "🚂";
 
@@ -170,12 +194,13 @@ function renderIntroScreen(page) {
           </button>
         </article>
       </section>
-      ${renderInlineAd("728 x 90")}
+      ${renderInlineAd(testId, "start")}
     </div>
   `;
 }
 
 function renderQuestionScreen(page, questionIndex) {
+  const testId = document.body && document.body.dataset ? document.body.dataset.testId : "";
   const question = page.questions[questionIndex];
   const total = page.questions.length;
   const current = questionIndex + 1;
@@ -212,12 +237,13 @@ function renderQuestionScreen(page, questionIndex) {
           </section>
         </article>
       </section>
-      ${renderInlineAd("728 x 90")}
+      ${renderInlineAd(testId, "journey")}
     </div>
   `;
 }
 
 function renderLoadingScreen(page) {
+  const testId = document.body && document.body.dataset ? document.body.dataset.testId : "";
   const total = page.questions.length;
   return `
     <div class="test-flow-stack">
@@ -238,12 +264,13 @@ function renderLoadingScreen(page) {
           <p class="loading-hint">${escapeHtml(page.loadingHint || "")}</p>
         </article>
       </section>
-      ${renderInlineAd("728 x 90")}
+      ${renderInlineAd(testId, "journey")}
     </div>
   `;
 }
 
 function renderResultScreen(page, resultKey, cards) {
+  const testId = document.body && document.body.dataset ? document.body.dataset.testId : "";
   const result = page.results[resultKey];
   const relatedCards = getRelatedCards(page, cards);
   const preview = (page.resultPreview || [])
@@ -343,7 +370,7 @@ function renderResultScreen(page, resultKey, cards) {
         </div>
         </article>
       </section>
-      ${renderInlineAd("728 x 90")}
+      ${renderInlineAd(testId, "result")}
     </div>
   `;
 }
