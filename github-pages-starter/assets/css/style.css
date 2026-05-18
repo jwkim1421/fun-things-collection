@@ -654,7 +654,7 @@ button {
 
 .poster-stickers {
   position: absolute;
-  inset: 56px 26px auto 26px;
+  inset: 42px 26px auto 26px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -1144,10 +1144,10 @@ button {
   --test-theme: linear-gradient(135deg, #fff1bf, #e7e7ff);
   min-height: 100vh;
   background:
-    linear-gradient(rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.56)),
+    linear-gradient(rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.34)),
     var(--test-theme),
-    linear-gradient(90deg, rgba(240, 214, 120, 0.22) 1px, transparent 1px),
-    linear-gradient(rgba(240, 214, 120, 0.22) 1px, transparent 1px);
+    linear-gradient(90deg, rgba(240, 214, 120, 0.16) 1px, transparent 1px),
+    linear-gradient(rgba(240, 214, 120, 0.16) 1px, transparent 1px);
   background-size: auto, auto, 24px 24px, 24px 24px;
 }
 
@@ -1373,10 +1373,10 @@ button {
 
 .test-progress-track {
   position: relative;
-  height: 24px;
+  height: 16px;
   border-radius: 999px;
   background: #fff;
-  border: 3px solid rgba(62, 43, 58, 0.72);
+  border: 2px solid rgba(62, 43, 58, 0.72);
   overflow: hidden;
 }
 
@@ -1395,9 +1395,12 @@ button {
 
 .test-progress-train {
   position: absolute;
-  top: -10px;
-  font-size: 34px;
+  top: -16px;
+  font-size: 30px;
   line-height: 1;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 2px 3px rgba(62, 43, 58, 0.24));
+  pointer-events: none;
 }
 
 .question-panel {
@@ -1410,7 +1413,7 @@ button {
 
 .question-panel h1 {
   margin: 0 0 20px;
-  font-size: clamp(27px, 3.6vw, 38px);
+  font-size: clamp(25px, 3.3vw, 36px);
   line-height: 1.4;
   font-weight: 800;
 }
@@ -1429,7 +1432,7 @@ button {
     linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.84)),
     var(--test-theme);
   color: #3d3423;
-  font-size: clamp(20px, 2.7vw, 28px);
+  font-size: clamp(18px, 2.5vw, 26px);
   text-align: left;
   font-weight: 700;
   cursor: pointer;
@@ -1511,7 +1514,9 @@ button {
 .result-header-board,
 .result-section {
   border: 2px solid rgba(62, 43, 58, 0.5);
-  background: rgba(255, 255, 255, 0.94);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8)),
+    var(--test-theme);
   margin-bottom: 14px;
 }
 
@@ -1605,6 +1610,13 @@ button {
   display: grid;
   gap: 10px;
   text-align: center;
+}
+
+.result-traits-lead,
+.result-match-extended {
+  margin-top: 8px !important;
+  color: #5f4b2f;
+  font-weight: 700;
 }
 
 .result-tip-line {
@@ -1946,7 +1958,7 @@ button {
   }
 
   .poster-stickers {
-    inset: 52px 18px auto 18px;
+    inset: 38px 18px auto 18px;
   }
 
   .intro-art {
@@ -2006,12 +2018,12 @@ button {
   }
 
   .question-panel h1 {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .question-choice {
     min-height: 80px;
-    font-size: 17px;
+    font-size: 15px;
   }
 
   .loading-card h1,
@@ -2025,5 +2037,25 @@ button {
   .result-summary-copy p,
   .result-section-body p {
     font-size: 16px;
+  }
+}
+
+@media (max-width: 1560px) {
+  .page-shell {
+    grid-template-columns: 180px minmax(0, 1fr);
+  }
+
+  .ad-rail-right {
+    display: none;
+  }
+}
+
+@media (max-width: 1360px) {
+  .page-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .ad-rail {
+    display: none;
   }
 }

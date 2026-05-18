@@ -237,6 +237,70 @@ function buildResultExtendedCopy(result) {
   return [emphasis, tip].filter(Boolean).join(" ");
 }
 
+function toKeywordCandidate(text) {
+  const cleaned = String(text || "")
+    .replace(/[.,!?]/g, "")
+    .trim();
+
+  if (!cleaned) {
+    return "";
+  }
+
+  const parts = cleaned.split(/\s+/).filter(Boolean);
+  if (parts.length >= 2) {
+    return parts.slice(0, 2).join(" ");
+  }
+
+  return cleaned.slice(0, 8);
+}
+
+function buildResultTraitLead(result) {
+  const strengths = Array.isArray(result.strengths) ? result.strengths.filter(Boolean) : [];
+  const summary = result.summary || result.title || "";
+  const first = strengths[0] || "";
+  const second = strengths[1] || "";
+  const lines = [];
+
+  if (summary && first) {
+    lines.push(`${summary}인 만큼, 일상에서는 ${first} 쪽으로 성향이 드러나는 편입니다.`);
+  } else if (summary) {
+    lines.push(`${summary} 성향은 일상에서 비교적 꾸준하게 반복되는 패턴으로 나타납니다.`);
+  }
+
+  if (second) {
+    lines.push(`${second} 감각도 함께 가지고 있어서, 상황에 따라 반응 방식이 더 선명하게 읽힐 수 있어요.`);
+  } else if (first) {
+    lines.push(`${first}이 눈에 띄는 포인트라서 주변 사람도 비교적 빠르게 이 무드를 알아차릴 가능성이 큽니다.`);
+  }
+
+  return lines.join(" ");
+}
+
+function buildResultKeywords(result) {
+  const moodItems = Array.isArray(result.moodItems) ? result.moodItems : [];
+  const strengths = Array.isArray(result.strengths) ? result.strengths : [];
+  const extras = strengths.map(toKeywordCandidate).filter(Boolean);
+  const candidates = [...moodItems, ...extras, toKeywordCandidate(result.matchLabel), toKeywordCandidate(result.summary)]
+    .filter(Boolean);
+  const unique = [];
+
+  candidates.forEach((item) => {
+    if (!unique.includes(item)) {
+      unique.push(item);
+    }
+  });
+
+  return unique.slice(0, 5);
+}
+
+function buildResultMatchExtended(result) {
+  const strengths = Array.isArray(result.strengths) ? result.strengths : [];
+  const anchor = strengths[0] || result.summary || "이 결과";
+  const matchLabel = result.matchLabel || "상대";
+
+  return `${matchLabel} 타입은 ${anchor} 쪽 성향을 자연스럽게 받아주거나 보완해주는 편이라, 함께 있을 때 리듬이 더 편안하게 맞춰질 가능성이 큽니다.`;
+}
+
 function scoreAnswers(page, answers) {
   const totals = {};
 
@@ -310,7 +374,7 @@ function renderQuestionScreen(page, questionIndex) {
           </div>
           <div class="test-progress-track" aria-hidden="true">
             <div class="test-progress-fill" style="width:${progressPercent}%"></div>
-            <div class="test-progress-train" style="left:calc(${progressPercent}% - 18px)">🚂</div>
+            <div class="test-progress-train" style="left:${progressPercent}%">🚂</div>
           </div>
           <section class="question-panel">
             <h1>${escapeHtml(question.prompt)}</h1>
@@ -347,7 +411,7 @@ function renderLoadingScreen(page) {
           </div>
           <div class="test-progress-track loading-progress-track" aria-hidden="true">
             <div class="test-progress-fill" style="width:100%"></div>
-            <div class="test-progress-train" style="left:calc(100% - 36px)">🚂</div>
+            <div class="test-progress-train" style="left:100%">🚂</div>
           </div>
           <div class="loading-orb">🚉</div>
           <p class="loading-copyright">쿠쿠 테스트 로딩 중</p>
@@ -374,6 +438,9 @@ function renderResultScreen(page, resultKey, cards) {
   const shareSectionTitle = page.shareSectionTitle || "공유용 요약";
   const sharePrompt = page.sharePrompt || "친구에게 보내고 서로 결과를 비교해보세요.";
   const resultExtendedCopy = buildResultExtendedCopy(result);
+  const resultTraitLead = buildResultTraitLead(result);
+  const resultKeywords = buildResultKeywords(result);
+  const resultMatchExtended = buildResultMatchExtended(result);
 
   return `
     <div class="test-flow-stack">
@@ -401,6 +468,7 @@ function renderResultScreen(page, resultKey, cards) {
         <section class="result-section">
           <div class="result-section-title">${escapeHtml(resultTraitTitle)}</div>
           <div class="result-section-body result-traits">
+            ${resultTraitLead ? `<p class="result-traits-lead">${escapeHtml(resultTraitLead)}</p>` : ""}
             ${result.strengths.map((item) => `<p>${escapeHtml(item)}</p>`).join("")}
             <p class="result-tip-line">${escapeHtml(result.tip)}</p>
           </div>
@@ -409,7 +477,7 @@ function renderResultScreen(page, resultKey, cards) {
         <section class="result-section">
           <div class="result-section-title">${escapeHtml(result.moodTitle || "추천 무드")}</div>
           <div class="result-section-body result-chip-board">
-            ${result.moodItems.map((item) => `<span class="result-pill">${escapeHtml(item)}</span>`).join("")}
+            ${resultKeywords.map((item) => `<span class="result-pill">${escapeHtml(item)}</span>`).join("")}
           </div>
         </section>
 
@@ -418,6 +486,7 @@ function renderResultScreen(page, resultKey, cards) {
           <div class="result-section-body result-match-board">
             <strong>${escapeHtml(result.matchLabel || "")}</strong>
             <p>${escapeHtml(result.matchDescription || "")}</p>
+            <p class="result-match-extended">${escapeHtml(resultMatchExtended)}</p>
           </div>
         </section>
 
