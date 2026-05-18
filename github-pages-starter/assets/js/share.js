@@ -44,6 +44,36 @@ function getShareImage() {
   return meta && meta.content ? meta.content : "";
 }
 
+const kakaoImageCache = new Map();
+
+async function resolveKakaoImageUrl(imageUrl) {
+  if (!imageUrl) {
+    return "";
+  }
+
+  if (kakaoImageCache.has(imageUrl)) {
+    return kakaoImageCache.get(imageUrl);
+  }
+
+  if (!(window.Kakao && Kakao.Share && typeof Kakao.Share.scrapImage === "function")) {
+    return imageUrl;
+  }
+
+  try {
+    const response = await Kakao.Share.scrapImage({ imageUrl });
+    const resolvedUrl =
+      response?.infos?.original?.url ||
+      response?.infos?.thumbnail?.url ||
+      imageUrl;
+
+    kakaoImageCache.set(imageUrl, resolvedUrl);
+    return resolvedUrl;
+  } catch (error) {
+    console.warn("Kakao share image scrap failed.", error);
+    return imageUrl;
+  }
+}
+
 function initKakao() {
   const key = window.SITE_CONFIG && window.SITE_CONFIG.kakaoJavaScriptKey;
   if (!key || key === "YOUR_KAKAO_JAVASCRIPT_KEY" || typeof Kakao === "undefined") {
@@ -98,19 +128,25 @@ async function shareWithKakao() {
       throw new Error("No Kakao share API is available.");
     }
 
+    const resolvedImageUrl = await resolveKakaoImageUrl(imageUrl);
+    const content = {
+      title,
+      description,
+      link: {
+        webUrl: url,
+        mobileWebUrl: url
+      }
+    };
+
+    if (resolvedImageUrl) {
+      content.imageUrl = resolvedImageUrl;
+      content.imageWidth = 1200;
+      content.imageHeight = 630;
+    }
+
     shareApi.sendDefault({
       objectType: "feed",
-      content: {
-        title,
-        description,
-        imageUrl,
-        imageWidth: 1200,
-        imageHeight: 630,
-        link: {
-          webUrl: url,
-          mobileWebUrl: url
-        }
-      },
+      content,
       buttons: [
         {
           title: buttonTitle,

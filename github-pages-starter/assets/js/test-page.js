@@ -227,6 +227,16 @@ function renderShareIcon(type) {
   `;
 }
 
+function buildResultExtendedCopy(result) {
+  const strengths = Array.isArray(result.strengths) ? result.strengths.slice(0, 2) : [];
+  const emphasis = strengths.length
+    ? `특히 ${strengths.join(", ")} 쪽에서 강점이 또렷하게 드러납니다.`
+    : "";
+  const tip = result.tip ? result.tip : "";
+
+  return [emphasis, tip].filter(Boolean).join(" ");
+}
+
 function scoreAnswers(page, answers) {
   const totals = {};
 
@@ -363,6 +373,7 @@ function renderResultScreen(page, resultKey, cards) {
   const relatedSectionTitle = page.relatedSectionTitle || "다음 테스트도 이어서 보기";
   const shareSectionTitle = page.shareSectionTitle || "공유용 요약";
   const sharePrompt = page.sharePrompt || "친구에게 보내고 서로 결과를 비교해보세요.";
+  const resultExtendedCopy = buildResultExtendedCopy(result);
 
   return `
     <div class="test-flow-stack">
@@ -381,6 +392,7 @@ function renderResultScreen(page, resultKey, cards) {
               <div class="result-summary-copy">
                 <strong>${escapeHtml(result.summary)}</strong>
                 <p>${escapeHtml(result.description)}</p>
+                ${resultExtendedCopy ? `<p class="result-summary-extended">${escapeHtml(resultExtendedCopy)}</p>` : ""}
               </div>
             </div>
           </div>

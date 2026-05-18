@@ -1591,6 +1591,12 @@ button {
   font-size: 18px;
 }
 
+.result-summary-extended {
+  margin-top: 14px !important;
+  color: #463754;
+  font-weight: 700;
+}
+
 .result-section-body {
   padding: 16px;
 }
