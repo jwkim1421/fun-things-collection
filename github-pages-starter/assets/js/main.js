@@ -8,6 +8,7 @@ const cards = Array.isArray(content.cards)
     })
   : [];
 const ITEMS_PER_PAGE = 12;
+const FEATURED_TEST_IDS = ["test-020", "test-001", "test-005"];
 let currentPage = 1;
 
 function escapeHtml(value) {
@@ -154,6 +155,56 @@ function getCardsForPage(page) {
   return cards.slice(start, start + ITEMS_PER_PAGE);
 }
 
+function getFeaturedCards() {
+  return FEATURED_TEST_IDS
+    .map((id) => cards.find((card) => card.id === id))
+    .filter(Boolean);
+}
+
+function renderFeaturedShowcase() {
+  const section = document.getElementById("featuredShowcase");
+  if (!section) return;
+
+  const featuredCards = getFeaturedCards();
+  if (!featuredCards.length) {
+    section.innerHTML = "";
+    section.hidden = true;
+    return;
+  }
+
+  section.hidden = false;
+  section.innerHTML = `
+    <div class="section-head">
+      <h3>처음이라면 이 3개부터 추천해요</h3>
+      <p>공유가 잘 붙고 쿠쿠의 분위기를 가장 잘 보여주는 대표 테스트만 먼저 골랐어요.</p>
+    </div>
+    <div class="featured-grid">
+      ${featuredCards.map((card) => `
+        <a class="featured-card" href="${card.href}">
+          <div class="featured-card-stage" style="--thumb: ${card.thumb}">
+            <div class="featured-card-tags">
+              <span>${card.featuredLabel || "대표 테스트"}</span>
+              <span>${card.badge || "추천"}</span>
+            </div>
+            <div class="featured-card-stickers">
+              ${(card.stickers || []).slice(0, 4).map((sticker) => `<i>${sticker}</i>`).join("")}
+            </div>
+            <div class="featured-card-copy">
+              <small>${card.posterTitle || card.category || "테스트"}</small>
+              <strong>${card.posterSubtitle || card.title}</strong>
+              <p>${card.featuredHook || card.description}</p>
+            </div>
+          </div>
+          <div class="featured-card-body">
+            <h4>${card.title}</h4>
+            <p>${card.featuredReason || card.description}</p>
+          </div>
+        </a>
+      `).join("")}
+    </div>
+  `;
+}
+
 function renderCards() {
   const grid = document.getElementById("cardGrid");
   if (!grid) return;
@@ -266,4 +317,5 @@ function populateHeader() {
 renderCards();
 renderPagination();
 populateHeader();
+renderFeaturedShowcase();
 populateHomeAffiliateSlots();

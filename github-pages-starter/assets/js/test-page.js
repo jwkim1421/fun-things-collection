@@ -74,10 +74,13 @@ function applyShareState(page, resultKey) {
     return;
   }
 
+  const defaultImage = document.querySelector('meta[property="og:image"]')?.getAttribute("content") || "";
+
   if (!resultKey || !page.results || !page.results[resultKey]) {
     document.body.dataset.shareUrl = buildShareUrl("");
-    document.body.dataset.shareTitle = `${page.title} | ${((window.SITE_CONFIG && window.SITE_CONFIG.siteName) || "쿠쿠")}`;
-    document.body.dataset.shareDescription = page.summary || "";
+    document.body.dataset.shareTitle = page.shareTitle || `${page.title} | ${((window.SITE_CONFIG && window.SITE_CONFIG.siteName) || "쿠쿠")}`;
+    document.body.dataset.shareDescription = page.shareDescription || page.summary || "";
+    document.body.dataset.shareImage = page.shareImage || defaultImage;
     document.body.dataset.shareButtonTitle = "테스트 열기";
     return;
   }
@@ -85,8 +88,9 @@ function applyShareState(page, resultKey) {
   const result = page.results[resultKey];
   const siteName = ((window.SITE_CONFIG && window.SITE_CONFIG.siteName) || "쿠쿠");
   document.body.dataset.shareUrl = buildShareUrl(resultKey);
-  document.body.dataset.shareTitle = `${page.title} - ${result.title} | ${siteName}`;
-  document.body.dataset.shareDescription = result.summary || page.summary || "";
+  document.body.dataset.shareTitle = result.shareTitle || `${page.title} - ${result.title} | ${siteName}`;
+  document.body.dataset.shareDescription = result.shareDescription || result.summary || page.shareDescription || page.summary || "";
+  document.body.dataset.shareImage = result.shareImage || page.shareImage || defaultImage;
   document.body.dataset.shareButtonTitle = "결과 확인하기";
 }
 
@@ -358,6 +362,7 @@ function renderResultScreen(page, resultKey, cards) {
   const resultTraitTitle = page.resultTraitTitle || "이런 타입이에요";
   const relatedSectionTitle = page.relatedSectionTitle || "다음 테스트도 이어서 보기";
   const shareSectionTitle = page.shareSectionTitle || "공유용 요약";
+  const sharePrompt = page.sharePrompt || "친구에게 보내고 서로 결과를 비교해보세요.";
 
   return `
     <div class="test-flow-stack">
@@ -425,6 +430,7 @@ function renderResultScreen(page, resultKey, cards) {
           </div>
         </section>
 
+        <p class="result-share-nudge">${escapeHtml(sharePrompt)}</p>
         <div class="result-share-row">
           <button class="share-icon-btn" id="btnCopyLink" type="button" aria-label="링크 복사" title="링크 복사">
             ${renderShareIcon("copy")}

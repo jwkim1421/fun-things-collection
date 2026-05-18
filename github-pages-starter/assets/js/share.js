@@ -34,6 +34,16 @@ function getShareTitle() {
   return document.title;
 }
 
+function getShareImage() {
+  const bodyShareImage = document.body && document.body.dataset ? document.body.dataset.shareImage : "";
+  if (bodyShareImage) {
+    return bodyShareImage;
+  }
+
+  const meta = document.querySelector('meta[property="og:image"]');
+  return meta && meta.content ? meta.content : "";
+}
+
 function initKakao() {
   const key = window.SITE_CONFIG && window.SITE_CONFIG.kakaoJavaScriptKey;
   if (!key || key === "YOUR_KAKAO_JAVASCRIPT_KEY" || typeof Kakao === "undefined") {
@@ -65,6 +75,7 @@ async function shareWithKakao() {
   const url = getSiteUrl();
   const description = getShareDescription();
   const title = getShareTitle();
+  const imageUrl = getShareImage();
   const buttonTitle = document.body && document.body.dataset && document.body.dataset.shareButtonTitle
     ? document.body.dataset.shareButtonTitle
     : "테스트 열기";
@@ -92,6 +103,9 @@ async function shareWithKakao() {
       content: {
         title,
         description,
+        imageUrl,
+        imageWidth: 1200,
+        imageHeight: 630,
         link: {
           webUrl: url,
           mobileWebUrl: url
