@@ -1373,11 +1373,11 @@ button {
 
 .test-progress-track {
   position: relative;
-  height: 16px;
+  height: 12px;
   border-radius: 999px;
   background: #fff;
   border: 2px solid rgba(62, 43, 58, 0.72);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .test-progress-fill {
@@ -1395,12 +1395,13 @@ button {
 
 .test-progress-train {
   position: absolute;
-  top: -16px;
-  font-size: 30px;
+  top: 50%;
+  font-size: 24px;
   line-height: 1;
-  transform: translateX(-50%);
+  transform: translate(-50%, -54%);
   filter: drop-shadow(0 2px 3px rgba(62, 43, 58, 0.24));
   pointer-events: none;
+  z-index: 2;
 }
 
 .question-panel {
@@ -1413,7 +1414,7 @@ button {
 
 .question-panel h1 {
   margin: 0 0 20px;
-  font-size: clamp(25px, 3.3vw, 36px);
+  font-size: clamp(23px, 3vw, 34px);
   line-height: 1.4;
   font-weight: 800;
 }
@@ -1421,6 +1422,11 @@ button {
 .question-choice-list {
   display: grid;
   gap: 12px;
+}
+
+.question-choice-list.is-image-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .question-choice {
@@ -1432,10 +1438,42 @@ button {
     linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.84)),
     var(--test-theme);
   color: #3d3423;
-  font-size: clamp(18px, 2.5vw, 26px);
+  font-size: clamp(16px, 2.3vw, 24px);
   text-align: left;
   font-weight: 700;
   cursor: pointer;
+  display: grid;
+  gap: 8px;
+  align-content: center;
+}
+
+.question-choice-compact {
+  min-height: 76px;
+  padding: 12px 18px;
+}
+
+.question-choice-image {
+  min-height: 176px;
+  padding: 18px 14px;
+  text-align: center;
+  justify-items: center;
+}
+
+.question-choice-emoji {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.question-choice-label {
+  display: block;
+}
+
+.question-choice-help {
+  display: block;
+  color: #7a582c;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
 }
 
 .test-card-footnote {
@@ -1594,6 +1632,11 @@ button {
   color: #2e2430;
   line-height: 1.8;
   font-size: 18px;
+}
+
+.result-traits-extended,
+.result-match-followup {
+  color: #7a582c;
 }
 
 .result-summary-extended {
@@ -2046,6 +2089,16 @@ button {
   }
 
   .ad-rail-right {
+    display: none;
+  }
+}
+
+@media (max-width: 1720px) {
+  .page-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .ad-rail {
     display: none;
   }
 }

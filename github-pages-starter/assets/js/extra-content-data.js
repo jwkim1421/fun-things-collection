@@ -234,6 +234,48 @@
       featuredLabel: "요즘 반응 좋은 대표 테스트",
       featuredHook: "사람 속에서 살아나는지, 깊은 대화에서 충전되는지 바로 비교해보세요.",
       featuredReason: "관계형 테스트 중 가장 넓게 공감이 붙는 카드"
+    },
+    {
+      id: "test-021",
+      title: "지금 내 에너지 레벨은?",
+      description: "요즘 남은 집중력과 여유를 5단계 선택으로 체크하는 에너지 상태 테스트입니다.",
+      href: "./tests/test-021.html",
+      badge: "레벨",
+      category: "심리 체크",
+      duration: "2분",
+      icon: "🪫",
+      posterTitle: "에너지 레벨",
+      posterSubtitle: "나는 얼마나 남았을까?",
+      stickers: ["🌤️", "☕", "💤", "🎧"],
+      thumb: "linear-gradient(135deg, #fff0d7, #e8f6ff)"
+    },
+    {
+      id: "test-022",
+      title: "지금 끌리는 장면 고르기",
+      description: "그림처럼 끌리는 장면을 고르며 오늘의 감정 무드를 읽는 이미지 선택 테스트입니다.",
+      href: "./tests/test-022.html",
+      badge: "이미지",
+      category: "감성 테스트",
+      duration: "2분",
+      icon: "🖼️",
+      posterTitle: "끌리는 장면",
+      posterSubtitle: "내 무드는 어디로?",
+      stickers: ["🌊", "🌿", "☕", "🎡"],
+      thumb: "linear-gradient(135deg, #ffe8f4, #edf4ff)"
+    },
+    {
+      id: "test-023",
+      title: "스트레스 회복 점수표",
+      description: "질문마다 점수를 쌓아 지금 회복력이 몇 점인지 보는 누적 점수형 테스트입니다.",
+      href: "./tests/test-023.html",
+      badge: "점수",
+      category: "자기관리",
+      duration: "2분",
+      icon: "📊",
+      posterTitle: "회복 점수표",
+      posterSubtitle: "나는 몇 점일까?",
+      stickers: ["🫖", "🛁", "🌙", "🧘"],
+      thumb: "linear-gradient(135deg, #eef7d9, #ffe9dd)"
     }
   ];
 
