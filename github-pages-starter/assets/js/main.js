@@ -176,7 +176,7 @@ function renderFeaturedShowcase() {
   section.innerHTML = `
     <div class="section-head">
       <h3>처음이라면 이 3개부터 추천해요</h3>
-      <p>공유가 잘 붙고 쿠쿠의 분위기를 가장 잘 보여주는 대표 테스트만 먼저 골랐어요.</p>
+      <p>쿠쿠의 분위기를 가장 잘 보여주는 대표 테스트 3가지!</p>
     </div>
     <div class="featured-grid">
       ${featuredCards.map((card) => `
