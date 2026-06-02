@@ -75,6 +75,8 @@ function applyShareState(page, resultKey) {
   }
 
   const defaultImage = document.querySelector('meta[property="og:image"]')?.getAttribute("content") || "";
+  const defaultTheme = page.thumb || "linear-gradient(135deg, #fff1bf, #e7e7ff)";
+  const mascotUrl = `${window.location.origin}/assets/images/coocoo.png`;
 
   if (!resultKey || !page.results || !page.results[resultKey]) {
     document.body.dataset.shareUrl = buildShareUrl("");
@@ -82,16 +84,35 @@ function applyShareState(page, resultKey) {
     document.body.dataset.shareDescription = page.shareDescription || page.summary || "";
     document.body.dataset.shareImage = page.shareImage || defaultImage;
     document.body.dataset.shareButtonTitle = "테스트 열기";
+    document.body.dataset.shareContext = "page";
+    document.body.dataset.shareTestTitle = page.title || "";
+    document.body.dataset.shareResultTitle = "";
+    document.body.dataset.shareResultSummary = page.summary || "";
+    document.body.dataset.shareResultDescription = page.shareDescription || page.summary || "";
+    document.body.dataset.shareResultIcon = page.heroEmoji || page.icon || "✨";
+    document.body.dataset.shareTheme = defaultTheme;
+    document.body.dataset.shareMascot = mascotUrl;
     return;
   }
 
   const result = page.results[resultKey];
   const siteName = ((window.SITE_CONFIG && window.SITE_CONFIG.siteName) || "쿠쿠");
+  const shareDescription = result.shareDescription || result.summary || page.shareDescription || page.summary || "";
+  const extendedCopy = buildResultExtendedCopy(result);
+  const combinedDescription = [result.description || "", extendedCopy].filter(Boolean).join(" ");
   document.body.dataset.shareUrl = buildShareUrl(resultKey);
   document.body.dataset.shareTitle = result.shareTitle || `${page.title} - ${result.title} | ${siteName}`;
-  document.body.dataset.shareDescription = result.shareDescription || result.summary || page.shareDescription || page.summary || "";
+  document.body.dataset.shareDescription = shareDescription;
   document.body.dataset.shareImage = result.shareImage || page.shareImage || defaultImage;
   document.body.dataset.shareButtonTitle = "결과 확인하기";
+  document.body.dataset.shareContext = "result";
+  document.body.dataset.shareTestTitle = page.title || "";
+  document.body.dataset.shareResultTitle = result.title || "";
+  document.body.dataset.shareResultSummary = result.summary || "";
+  document.body.dataset.shareResultDescription = combinedDescription || shareDescription;
+  document.body.dataset.shareResultIcon = result.heroEmoji || page.heroEmoji || page.icon || "✨";
+  document.body.dataset.shareTheme = defaultTheme;
+  document.body.dataset.shareMascot = mascotUrl;
 }
 
 function decorateNavPills() {
@@ -441,7 +462,7 @@ function renderQuestionScreen(page, questionIndex) {
           </div>
           <div class="test-progress-track" aria-hidden="true">
             <div class="test-progress-fill" style="width:${progressPercent}%"></div>
-            <div class="test-progress-train" style="left:clamp(12px, ${progressPercent}%, calc(100% - 12px))">🚂</div>
+            <div class="test-progress-train" style="left:clamp(18px, ${progressPercent}%, calc(100% - 18px))">🚂</div>
           </div>
           <section class="question-panel">
             <h1>${escapeHtml(question.prompt)}</h1>
@@ -488,7 +509,7 @@ function renderLoadingScreen(page) {
           </div>
           <div class="test-progress-track loading-progress-track" aria-hidden="true">
             <div class="test-progress-fill" style="width:100%"></div>
-            <div class="test-progress-train" style="left:calc(100% - 12px)">🚂</div>
+            <div class="test-progress-train" style="left:calc(100% - 18px)">🚂</div>
           </div>
           <div class="loading-orb">🚉</div>
           <p class="loading-copyright">쿠쿠 테스트 로딩 중</p>
