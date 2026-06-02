@@ -241,8 +241,8 @@ async function buildDynamicShareCanvas() {
   try {
     const mascot = await loadShareImageAsset(payload.mascotUrl);
     ctx.save();
-    ctx.globalAlpha = 0.96;
-    ctx.drawImage(mascot, 900, 384, 160, 160);
+    ctx.globalAlpha = 0.94;
+    ctx.drawImage(mascot, 904, 88, 132, 132);
     ctx.restore();
   } catch (error) {
     console.warn("Failed to load mascot image for share card.", error);
