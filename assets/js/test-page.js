@@ -75,6 +75,8 @@ function applyShareState(page, resultKey) {
   }
 
   const defaultImage = document.querySelector('meta[property="og:image"]')?.getAttribute("content") || "";
+  const defaultTheme = page.thumb || "linear-gradient(135deg, #fff1bf, #e7e7ff)";
+  const mascotUrl = `${window.location.origin}/assets/images/coocoo.png`;
 
   if (!resultKey || !page.results || !page.results[resultKey]) {
     document.body.dataset.shareUrl = buildShareUrl("");
@@ -82,16 +84,35 @@ function applyShareState(page, resultKey) {
     document.body.dataset.shareDescription = page.shareDescription || page.summary || "";
     document.body.dataset.shareImage = page.shareImage || defaultImage;
     document.body.dataset.shareButtonTitle = "테스트 열기";
+    document.body.dataset.shareContext = "page";
+    document.body.dataset.shareTestTitle = page.title || "";
+    document.body.dataset.shareResultTitle = "";
+    document.body.dataset.shareResultSummary = page.summary || "";
+    document.body.dataset.shareResultDescription = page.shareDescription || page.summary || "";
+    document.body.dataset.shareResultIcon = page.heroEmoji || page.icon || "✨";
+    document.body.dataset.shareTheme = defaultTheme;
+    document.body.dataset.shareMascot = mascotUrl;
     return;
   }
 
   const result = page.results[resultKey];
   const siteName = ((window.SITE_CONFIG && window.SITE_CONFIG.siteName) || "쿠쿠");
+  const shareDescription = result.shareDescription || result.summary || page.shareDescription || page.summary || "";
+  const extendedCopy = buildResultExtendedCopy(result);
+  const combinedDescription = [result.description || "", extendedCopy].filter(Boolean).join(" ");
   document.body.dataset.shareUrl = buildShareUrl(resultKey);
   document.body.dataset.shareTitle = result.shareTitle || `${page.title} - ${result.title} | ${siteName}`;
-  document.body.dataset.shareDescription = result.shareDescription || result.summary || page.shareDescription || page.summary || "";
+  document.body.dataset.shareDescription = shareDescription;
   document.body.dataset.shareImage = result.shareImage || page.shareImage || defaultImage;
   document.body.dataset.shareButtonTitle = "결과 확인하기";
+  document.body.dataset.shareContext = "result";
+  document.body.dataset.shareTestTitle = page.title || "";
+  document.body.dataset.shareResultTitle = result.title || "";
+  document.body.dataset.shareResultSummary = result.summary || "";
+  document.body.dataset.shareResultDescription = combinedDescription || shareDescription;
+  document.body.dataset.shareResultIcon = result.heroEmoji || page.heroEmoji || page.icon || "✨";
+  document.body.dataset.shareTheme = defaultTheme;
+  document.body.dataset.shareMascot = mascotUrl;
 }
 
 function decorateNavPills() {
@@ -237,6 +258,15 @@ function buildResultExtendedCopy(result) {
   return [emphasis, tip].filter(Boolean).join(" ");
 }
 
+function buildResultTraitExtended(result) {
+  const strengths = Array.isArray(result.strengths) ? result.strengths.filter(Boolean) : [];
+  const first = strengths[0] || result.summary || "이 타입";
+  const second = strengths[1] || result.matchLabel || "주변 사람";
+  const third = strengths[2] || result.moodItems?.[0] || "일상 패턴";
+
+  return `${first}이 기본 결이라면, ${second}처럼 이어지는 관계나 상황에서 반응이 더 선명해집니다. 특히 ${third} 쪽으로 움직일 때 당신답다는 느낌이 또렷해질 가능성이 큽니다.`;
+}
+
 function toKeywordCandidate(text) {
   const cleaned = String(text || "")
     .replace(/[.,!?]/g, "")
@@ -280,12 +310,30 @@ function buildResultKeywords(result) {
   const moodItems = Array.isArray(result.moodItems) ? result.moodItems : [];
   const strengths = Array.isArray(result.strengths) ? result.strengths : [];
   const extras = strengths.map(toKeywordCandidate).filter(Boolean);
-  const candidates = [...moodItems, ...extras, toKeywordCandidate(result.matchLabel), toKeywordCandidate(result.summary)]
+  const fallbackSeed = [
+    toKeywordCandidate(result.title),
+    toKeywordCandidate(result.summary),
+    toKeywordCandidate(result.tip),
+    "쿠쿠 무드",
+    "관계 리듬",
+    "감정 패턴",
+    "상황 해석",
+    "일상 리듬",
+    "반응 포인트"
+  ];
+  const candidates = [...moodItems, ...extras, toKeywordCandidate(result.matchLabel), ...fallbackSeed]
     .filter(Boolean);
   const unique = [];
 
   candidates.forEach((item) => {
     if (!unique.includes(item)) {
+      unique.push(item);
+    }
+  });
+
+  const fallbackKeywords = ["쿠쿠 타입", "관계 감각", "리듬 포인트", "무드 결", "생활 패턴"];
+  fallbackKeywords.forEach((item) => {
+    if (unique.length < 5 && !unique.includes(item)) {
       unique.push(item);
     }
   });
@@ -301,7 +349,46 @@ function buildResultMatchExtended(result) {
   return `${matchLabel} 타입은 ${anchor} 쪽 성향을 자연스럽게 받아주거나 보완해주는 편이라, 함께 있을 때 리듬이 더 편안하게 맞춰질 가능성이 큽니다.`;
 }
 
+function buildResultMatchFollowup(result) {
+  const moodItems = Array.isArray(result.moodItems) ? result.moodItems.filter(Boolean) : [];
+  const firstMood = moodItems[0] || "지금의 무드";
+  const secondMood = moodItems[1] || "관계 흐름";
+
+  return `${firstMood}을 더 자연스럽게 꺼내게 해주고, ${secondMood}이 필요한 순간에는 서로의 템포를 조절해주기 쉬운 조합입니다. 그래서 오래 갈수록 편안함과 재미를 같이 느끼기 좋은 편이에요. 가까워질수록 서로를 억지로 바꾸기보다, 각자의 강점을 편하게 살려주는 식의 궁합으로 이어질 가능성이 큽니다.`;
+}
+
+function buildResultTraitFollowup(result) {
+  const firstStrength = Array.isArray(result.strengths) && result.strengths[0] ? result.strengths[0] : "지금의 리듬";
+  const secondStrength = Array.isArray(result.strengths) && result.strengths[1] ? result.strengths[1] : "관계 감각";
+  const tip = result.tip || "지금의 호흡을 믿고 가볍게 조절해보세요.";
+
+  return `${firstStrength}이 핵심 축이라면, ${secondStrength}은 일상에서 그 성향을 더 자연스럽게 드러내는 장치에 가깝습니다. 그래서 지금의 결과는 단순 취향보다, 요즘 내가 어떤 방식으로 반응하고 회복하는지를 비교적 선명하게 보여주는 편이에요. ${tip}`;
+}
+
+function buildResultMatchDetail(result) {
+  const label = result.matchLabel || "상대";
+  const summary = result.summary || "지금의 성향";
+
+  return `${label} 타입과 함께 있을 때는 ${summary}이 조금 더 편안하고 안정적으로 드러나는 경우가 많습니다. 서로의 속도와 거리감이 어긋나기보다 맞물릴 가능성이 높아서, 일상적인 대화나 약속에서도 피로감보다 자연스러운 합이 먼저 느껴질 수 있어요.`;
+}
+
 function scoreAnswers(page, answers) {
+  if (page.scoringMode === "range-total") {
+    const totalScore = answers.reduce((sum, answerIndex, questionIndex) => {
+      const question = page.questions[questionIndex];
+      const option = question && question.options ? question.options[answerIndex] : null;
+      return sum + Number(option && option.points ? option.points : 0);
+    }, 0);
+
+    const matchedRange = (page.resultRanges || []).find((range) => (
+      totalScore >= Number(range.min) && totalScore <= Number(range.max)
+    ));
+
+    if (matchedRange && matchedRange.key && page.results && page.results[matchedRange.key]) {
+      return matchedRange.key;
+    }
+  }
+
   const totals = {};
 
   Object.keys(page.results || {}).forEach((key) => {
@@ -362,6 +449,7 @@ function renderQuestionScreen(page, questionIndex) {
   const current = questionIndex + 1;
   const answeredCount = questionIndex;
   const progressPercent = Math.round((answeredCount / total) * 100);
+  const layout = question.layout || page.questionLayout || (question.options.length >= 5 ? "five-choice" : "buttons");
 
   return `
     <div class="test-flow-stack">
@@ -374,19 +462,29 @@ function renderQuestionScreen(page, questionIndex) {
           </div>
           <div class="test-progress-track" aria-hidden="true">
             <div class="test-progress-fill" style="width:${progressPercent}%"></div>
-            <div class="test-progress-train" style="left:${progressPercent}%">🚂</div>
+            <div class="test-progress-train" style="left:clamp(18px, ${progressPercent}%, calc(100% - 18px))">🚂</div>
           </div>
           <section class="question-panel">
             <h1>${escapeHtml(question.prompt)}</h1>
-            <div class="question-choice-list">
+            <div class="question-choice-list ${layout === "image-grid" ? "is-image-grid" : ""} ${layout === "five-choice" ? "is-five-choice" : ""}">
               ${question.options.map((option, optionIndex) => `
                 <button
-                  class="question-choice"
+                  class="question-choice ${layout === "image-grid" ? "question-choice-image" : ""} ${layout === "five-choice" ? "question-choice-compact" : ""}"
                   type="button"
                   data-action="choose-answer"
                   data-question-index="${questionIndex}"
                   data-option-index="${optionIndex}">
-                  ${escapeHtml(option.label)}
+                  ${layout === "image-grid"
+                    ? `
+                      <span class="question-choice-emoji">${escapeHtml(option.emoji || "🪄")}</span>
+                      <span class="question-choice-label">${escapeHtml(option.label)}</span>
+                      ${option.description ? `<small class="question-choice-help">${escapeHtml(option.description)}</small>` : ""}
+                    `
+                    : `
+                      <span class="question-choice-label">${escapeHtml(option.label)}</span>
+                      ${option.description ? `<small class="question-choice-help">${escapeHtml(option.description)}</small>` : ""}
+                    `
+                  }
                 </button>
               `).join("")}
             </div>
@@ -411,7 +509,7 @@ function renderLoadingScreen(page) {
           </div>
           <div class="test-progress-track loading-progress-track" aria-hidden="true">
             <div class="test-progress-fill" style="width:100%"></div>
-            <div class="test-progress-train" style="left:100%">🚂</div>
+            <div class="test-progress-train" style="left:calc(100% - 18px)">🚂</div>
           </div>
           <div class="loading-orb">🚉</div>
           <p class="loading-copyright">쿠쿠 테스트 로딩 중</p>
@@ -441,6 +539,8 @@ function renderResultScreen(page, resultKey, cards) {
   const resultTraitLead = buildResultTraitLead(result);
   const resultKeywords = buildResultKeywords(result);
   const resultMatchExtended = buildResultMatchExtended(result);
+  const resultTraitFollowup = buildResultTraitFollowup(result);
+  const resultMatchDetail = buildResultMatchDetail(result);
 
   return `
     <div class="test-flow-stack">
@@ -471,6 +571,8 @@ function renderResultScreen(page, resultKey, cards) {
             ${resultTraitLead ? `<p class="result-traits-lead">${escapeHtml(resultTraitLead)}</p>` : ""}
             ${result.strengths.map((item) => `<p>${escapeHtml(item)}</p>`).join("")}
             <p class="result-tip-line">${escapeHtml(result.tip)}</p>
+            <p class="result-traits-extended">${escapeHtml(buildResultTraitExtended(result))}</p>
+            <p class="result-traits-followup">${escapeHtml(resultTraitFollowup)}</p>
           </div>
         </section>
 
@@ -487,6 +589,8 @@ function renderResultScreen(page, resultKey, cards) {
             <strong>${escapeHtml(result.matchLabel || "")}</strong>
             <p>${escapeHtml(result.matchDescription || "")}</p>
             <p class="result-match-extended">${escapeHtml(resultMatchExtended)}</p>
+            <p class="result-match-detail">${escapeHtml(resultMatchDetail)}</p>
+            <p class="result-match-followup">${escapeHtml(buildResultMatchFollowup(result))}</p>
           </div>
         </section>
 
