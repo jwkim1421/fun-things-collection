@@ -44,6 +44,20 @@ function getShareImage() {
   return meta && meta.content ? meta.content : "";
 }
 
+function trackShareClick(method) {
+  if (!(window.COOCOO_ANALYTICS && typeof window.COOCOO_ANALYTICS.track === "function")) {
+    return;
+  }
+
+  const bodyData = document.body && document.body.dataset ? document.body.dataset : {};
+  window.COOCOO_ANALYTICS.track("share_click", {
+    content_id: bodyData.testId || bodyData.playId || "home",
+    content_title: bodyData.shareTestTitle || document.title,
+    result_key: new URLSearchParams(window.location.search).get("result") || "",
+    share_method: method
+  });
+}
+
 const kakaoImageCache = new Map();
 
 function parseThemeStops(theme) {
@@ -426,16 +440,19 @@ document.addEventListener("click", (event) => {
   }
 
   if (target.id === "btnCopyLink") {
+    trackShareClick("copy_link");
     copyLink().catch(() => alert("복사에 실패했어요."));
     return;
   }
 
   if (target.id === "btnKakaoShare") {
+    trackShareClick("kakao");
     shareWithKakao().catch(() => alert("카카오 공유를 열지 못했어요."));
     return;
   }
 
   if (target.id === "btnSmsShare") {
+    trackShareClick("sms");
     shareBySms();
   }
 });

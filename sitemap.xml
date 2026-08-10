@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://coocooing.kro.kr/</loc><lastmod>2026-05-12</lastmod></url>
+  <url><loc>https://coocooing.kro.kr/</loc><lastmod>2026-08-10</lastmod></url>
   <url><loc>https://coocooing.kro.kr/privacy.html</loc><lastmod>2026-05-12</lastmod></url>
   <url><loc>https://coocooing.kro.kr/contact.html</loc><lastmod>2026-05-12</lastmod></url>
   <url><loc>https://coocooing.kro.kr/tests/test-001.html</loc><lastmod>2026-05-12</lastmod></url>
@@ -23,4 +23,8 @@
   <url><loc>https://coocooing.kro.kr/tests/test-018.html</loc><lastmod>2026-05-12</lastmod></url>
   <url><loc>https://coocooing.kro.kr/tests/test-019.html</loc><lastmod>2026-05-12</lastmod></url>
   <url><loc>https://coocooing.kro.kr/tests/test-020.html</loc><lastmod>2026-05-12</lastmod></url>
+  <url><loc>https://coocooing.kro.kr/play/chat-temperature.html</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://coocooing.kro.kr/play/procrastination-bingo.html</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://coocooing.kro.kr/play/battery-stop.html</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://coocooing.kro.kr/play/today-box.html</loc><lastmod>2026-08-10</lastmod></url>
 </urlset>

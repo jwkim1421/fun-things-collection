@@ -8,8 +8,55 @@ const cards = Array.isArray(content.cards)
     })
   : [];
 const ITEMS_PER_PAGE = 12;
-const FEATURED_TEST_IDS = ["test-020", "test-001", "test-005"];
 let currentPage = 1;
+let activeMood = "all";
+
+const PLAY_CARDS = [
+  {
+    href: "./play/chat-temperature.html",
+    eyebrow: "대화형 테스트",
+    title: "썸 탈 때 내 답장 온도는?",
+    description: "쿠쿠와 카톡하듯 답장을 고르면 내 대화 온도가 보여요.",
+    time: "2분",
+    icon: "💬",
+    tone: "coral"
+  },
+  {
+    href: "./play/procrastination-bingo.html",
+    eyebrow: "체크형 놀이",
+    title: "대학생 미루기 습관 빙고",
+    description: "찔리는 칸을 눌러 오늘의 미루기 레벨을 완성해보세요.",
+    time: "1분",
+    icon: "▦",
+    tone: "blue"
+  },
+  {
+    href: "./play/battery-stop.html",
+    eyebrow: "30초 게임",
+    title: "쿠쿠 배터리 100%에 멈추기",
+    description: "빠르게 차오르는 배터리를 100에 가장 가깝게 멈춰요.",
+    time: "30초",
+    icon: "⚡",
+    tone: "yellow"
+  },
+  {
+    href: "./play/today-box.html",
+    eyebrow: "하루 한 번",
+    title: "쿠쿠의 오늘 상자",
+    description: "상자 하나를 고르면 오늘의 작은 미션이 나와요.",
+    time: "20초",
+    icon: "□",
+    tone: "green"
+  }
+];
+
+const MOOD_FILTERS = [
+  { id: "all", label: "전부 보기", match: () => true },
+  { id: "quick", label: "1분 안에 끝내기", match: (card) => /1분|90초/.test(card.duration || "") },
+  { id: "friend", label: "친구에게 보내기", match: (card) => /관계|친구|케미|소셜/.test(`${card.category} ${card.title}`) },
+  { id: "escape", label: "시험기간 현실 도피", match: (card) => /라이프|취향|무드|스트레스|주말|여행/.test(`${card.category} ${card.title}`) },
+  { id: "love", label: "연애가 복잡할 때", match: (card) => /연애|썸|매력/.test(`${card.category} ${card.title}`) }
+];
 
 function escapeHtml(value) {
   return String(value)
@@ -147,73 +194,65 @@ function populateHomeAffiliateSlots() {
 }
 
 function getTotalPages() {
-  return Math.max(1, Math.ceil(cards.length / ITEMS_PER_PAGE));
+  return Math.max(1, Math.ceil(getFilteredCards().length / ITEMS_PER_PAGE));
 }
 
 function getCardsForPage(page) {
   const start = (page - 1) * ITEMS_PER_PAGE;
-  return cards.slice(start, start + ITEMS_PER_PAGE);
+  return getFilteredCards().slice(start, start + ITEMS_PER_PAGE);
 }
 
-function getFeaturedCards() {
-  return FEATURED_TEST_IDS
-    .map((id) => cards.find((card) => card.id === id))
-    .filter(Boolean);
+function getFilteredCards() {
+  const filter = MOOD_FILTERS.find((item) => item.id === activeMood) || MOOD_FILTERS[0];
+  return cards.filter(filter.match);
 }
 
-function renderFeaturedShowcase() {
-  const section = document.getElementById("featuredShowcase");
-  if (!section) return;
+function getCardTone(card) {
+  const text = `${card.category || ""} ${card.title || ""}`;
+  if (/연애|썸|매력/.test(text)) return "coral";
+  if (/관계|친구|소셜/.test(text)) return "blue";
+  if (/자기관리|심리|집중|스트레스/.test(text)) return "green";
+  if (/취향|라이프|여행|무드/.test(text)) return "yellow";
+  return "paper";
+}
 
-  const featuredCards = getFeaturedCards();
-  if (!featuredCards.length) {
-    section.innerHTML = "";
-    section.hidden = true;
-    return;
-  }
+function renderPlayCards() {
+  const grid = document.getElementById("playCardGrid");
+  if (!grid) return;
 
-  section.hidden = false;
-  section.innerHTML = `
-    <div class="section-head">
-      <h3>처음이라면 이 3개부터 추천해요</h3>
-      <p>공유가 잘 붙고 쿠쿠의 분위기를 가장 잘 보여주는 대표 테스트만 먼저 골랐어요.</p>
-    </div>
-    <div class="featured-grid">
-      ${featuredCards.map((card) => `
-        <a class="featured-card" href="${card.href}">
-          <div class="featured-card-stage" style="--thumb: ${card.thumb}">
-            <div class="featured-card-tags">
-              <span>${card.featuredLabel || "대표 테스트"}</span>
-              <span>${card.badge || "추천"}</span>
-            </div>
-            <div class="featured-card-stickers">
-              ${(card.stickers || []).slice(0, 4).map((sticker) => `<i>${sticker}</i>`).join("")}
-            </div>
-            <div class="featured-card-copy">
-              <small>${card.posterTitle || card.category || "테스트"}</small>
-              <strong>${card.posterSubtitle || card.title}</strong>
-              <p>${card.featuredHook || card.description}</p>
-            </div>
-          </div>
-          <div class="featured-card-body">
-            <h4>${card.title}</h4>
-            <p>${card.featuredReason || card.description}</p>
-          </div>
-        </a>
-      `).join("")}
-    </div>
-  `;
+  grid.innerHTML = PLAY_CARDS.map((card, index) => `
+    <a class="play-card tone-${card.tone}" href="${card.href}">
+      <span class="play-card-number">0${index + 1}</span>
+      <span class="play-card-icon" aria-hidden="true">${card.icon}</span>
+      <small>${card.eyebrow} · ${card.time}</small>
+      <strong>${card.title}</strong>
+      <p>${card.description}</p>
+      <span class="play-card-arrow" aria-hidden="true">↗</span>
+    </a>
+  `).join("");
+}
+
+function renderMoodFilters() {
+  const row = document.getElementById("moodFilters");
+  if (!row) return;
+
+  row.innerHTML = MOOD_FILTERS.map((filter) => `
+    <button class="mood-filter ${filter.id === activeMood ? "is-active" : ""}" type="button" data-mood="${filter.id}" aria-pressed="${filter.id === activeMood}">
+      ${filter.label}
+    </button>
+  `).join("");
 }
 
 function renderCards() {
   const grid = document.getElementById("cardGrid");
   if (!grid) return;
 
-  if (!cards.length) {
+  const filteredCards = getFilteredCards();
+  if (!filteredCards.length) {
     grid.innerHTML = `
       <article class="empty-card">
-        <h4>카드 데이터가 비어 있습니다</h4>
-        <p><code>assets/js/content-data.js</code>에 홈 카드 목록을 추가해 주세요.</p>
+        <h4>이 기분에 맞는 카드가 아직 없어요</h4>
+        <p>다른 기분을 골라보거나 전체 카드를 둘러보세요.</p>
       </article>
     `;
     return;
@@ -222,32 +261,19 @@ function renderCards() {
   const pageCards = getCardsForPage(currentPage);
 
   grid.innerHTML = pageCards.map((card) => `
-    <a class="tool-card poster-card" href="${card.href}">
-      <div class="poster-topbar">
-        <span class="poster-icon">${card.icon || "◉"}</span>
-        <strong>${card.title}</strong>
+    <a class="tool-card editorial-card tone-${getCardTone(card)}" href="${card.href}" data-content-id="${card.id}">
+      <div class="editorial-card-head">
+        <span>${card.category || "테스트"}</span>
+        <small>${card.duration || "1분"}</small>
       </div>
-      <div class="tool-thumb poster-stage" style="--thumb: ${card.thumb}">
-        <div class="poster-chip-row">
-          <span class="poster-chip poster-chip-soft">${card.posterTitle || card.category || "테스트"}</span>
-          <span class="poster-chip poster-chip-highlight">${card.badge || "쿠쿠 추천"}</span>
-        </div>
-        <div class="poster-stickers">
-          ${(card.stickers || []).map((sticker) => `<i>${sticker}</i>`).join("")}
-        </div>
-        <div class="poster-copy">
-          <span>${card.posterTitle || card.category || "테스트"}</span>
-          <strong>${card.posterSubtitle || card.title}</strong>
-          <p>${card.description}</p>
-        </div>
+      <div class="editorial-card-art">
+        <span class="editorial-card-icon" aria-hidden="true">${card.icon || "◉"}</span>
+        <p>${card.posterSubtitle || card.description}</p>
       </div>
       <div class="tool-body">
-        <div class="tool-meta">
-          <small>${card.category || "콘텐츠"}</small>
-          <small>${card.duration || "1분"}</small>
-        </div>
         <h4>${card.title}</h4>
         <p>${card.description}</p>
+        <span class="card-open-label">열어보기 <i aria-hidden="true">→</i></span>
       </div>
     </a>
   `).join("");
@@ -284,11 +310,21 @@ function changePage(nextPage) {
   renderCards();
   renderPagination();
 
-  const allTests = document.getElementById("allTests");
+  const allTests = document.getElementById("tests");
   if (allTests) {
     allTests.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
+
+document.getElementById("moodFilters")?.addEventListener("click", (event) => {
+  const button = event.target instanceof HTMLElement ? event.target.closest("[data-mood]") : null;
+  if (!button) return;
+  activeMood = button.dataset.mood || "all";
+  currentPage = 1;
+  renderMoodFilters();
+  renderCards();
+  renderPagination();
+});
 
 function populateHeader() {
   const siteTitle = document.getElementById("siteTitle");
@@ -298,11 +334,11 @@ function populateHeader() {
 
   if (siteTitle && config.siteName) {
     siteTitle.textContent = config.siteName;
-    document.title = `${config.siteName} | 마음에 드는 테스트를 골라보세요`;
+    document.title = `${config.siteName} | 잠깐 놀다 가는 디지털 놀이터`;
   }
 
   if (siteTagline && config.siteName && config.siteName !== "YOUR_SITE_NAME") {
-    siteTagline.textContent = `${config.siteName}의 테스트와 콘텐츠를 한곳에서 둘러보세요.`;
+    siteTagline.textContent = "1~3분이면 기분이 바뀌는 짧은 테스트와 놀이";
   }
 
   if (footerSiteName && config.siteName) {
@@ -317,5 +353,6 @@ function populateHeader() {
 renderCards();
 renderPagination();
 populateHeader();
-renderFeaturedShowcase();
+renderPlayCards();
+renderMoodFilters();
 populateHomeAffiliateSlots();

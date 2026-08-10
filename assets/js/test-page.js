@@ -16,6 +16,28 @@ function getTestPageData() {
   };
 }
 
+function getContentAnalyticsParams(page) {
+  const testId = document.body && document.body.dataset ? document.body.dataset.testId : "";
+  const questions = Array.isArray(page.questions) ? page.questions : [];
+  const formats = new Set(questions.map((question) => question.layout || page.questionLayout || "buttons"));
+
+  return {
+    content_id: testId,
+    content_title: page.title || "",
+    content_category: page.category || "테스트",
+    content_format: page.contentFormat || Array.from(formats).join(",") || "buttons",
+    question_count: questions.length
+  };
+}
+
+function trackContentEvent(eventName, page, parameters = {}) {
+  if (!(window.COOCOO_ANALYTICS && typeof window.COOCOO_ANALYTICS.track === "function")) {
+    return;
+  }
+
+  window.COOCOO_ANALYTICS.track(eventName, Object.assign(getContentAnalyticsParams(page), parameters));
+}
+
 function applyTestTheme(card) {
   if (!document.body) {
     return;
@@ -534,7 +556,7 @@ function renderResultScreen(page, resultKey, cards) {
   const resultTraitTitle = page.resultTraitTitle || "이런 타입이에요";
   const relatedSectionTitle = page.relatedSectionTitle || "다음 테스트도 이어서 보기";
   const shareSectionTitle = page.shareSectionTitle || "공유용 요약";
-  const sharePrompt = page.sharePrompt || "친구에게 보내고 서로 결과를 비교해보세요.";
+  const sharePrompt = page.sharePrompt || `이 결과를 친구에게 보내고 “너도 나를 이렇게 봤어?”라고 물어보세요.`;
   const resultExtendedCopy = buildResultExtendedCopy(result);
   const resultTraitLead = buildResultTraitLead(result);
   const resultKeywords = buildResultKeywords(result);
@@ -575,6 +597,14 @@ function renderResultScreen(page, resultKey, cards) {
             <p class="result-traits-followup">${escapeHtml(resultTraitFollowup)}</p>
           </div>
         </section>
+
+        <aside class="result-kuku-comment">
+          <img src="../assets/images/coocoo.png" alt="" />
+          <div>
+            <span>쿠쿠의 한마디</span>
+            <p>${escapeHtml(result.tip || "결과는 정답이 아니라 지금의 리듬을 보는 힌트예요.")}</p>
+          </div>
+        </aside>
 
         <section class="result-section">
           <div class="result-section-title">${escapeHtml(result.moodTitle || "추천 무드")}</div>
@@ -656,7 +686,8 @@ function createTestApp(data) {
     screen: initialSharedResultKey ? "result" : "intro",
     currentQuestion: 0,
     answers: [],
-    resultKey: initialSharedResultKey
+    resultKey: initialSharedResultKey,
+    startedAt: 0
   };
 
   let loadingTimer = null;
@@ -703,6 +734,23 @@ function createTestApp(data) {
     clearLoadingTimer();
     loadingTimer = window.setTimeout(() => {
       state.resultKey = scoreAnswers(data.page, state.answers);
+      const durationSeconds = state.startedAt
+        ? Math.max(1, Math.round((Date.now() - state.startedAt) / 1000))
+        : 0;
+      trackContentEvent("content_complete", data.page, {
+        result_key: state.resultKey,
+        duration_seconds: durationSeconds
+      });
+      try {
+        const completedIds = JSON.parse(window.sessionStorage.getItem("coocoo_completed_content_ids") || "[]");
+        const currentId = getContentAnalyticsParams(data.page).content_id;
+        if (currentId && !completedIds.includes(currentId)) {
+          completedIds.push(currentId);
+          window.sessionStorage.setItem("coocoo_completed_content_ids", JSON.stringify(completedIds));
+        }
+      } catch (error) {
+        console.warn("Unable to persist completed content analytics state.", error);
+      }
       state.screen = "result";
       render();
     }, 1400);
@@ -717,10 +765,26 @@ function createTestApp(data) {
     const action = target.getAttribute("data-action");
 
     if (action === "start-test") {
+      const analyticsParams = getContentAnalyticsParams(data.page);
+      let completedIds = [];
+      try {
+        completedIds = JSON.parse(window.sessionStorage.getItem("coocoo_completed_content_ids") || "[]");
+      } catch (error) {
+        console.warn("Unable to read completed content analytics state.", error);
+      }
+      trackContentEvent("content_start", data.page);
+      const secondStartKey = `coocoo_second_start_${analyticsParams.content_id}`;
+      if (completedIds.some((id) => id !== analyticsParams.content_id) && !window.sessionStorage.getItem(secondStartKey)) {
+        trackContentEvent("second_content_start", data.page, {
+          previous_content_count: completedIds.length
+        });
+        window.sessionStorage.setItem(secondStartKey, "1");
+      }
       state.screen = "question";
       state.currentQuestion = 0;
       state.answers = [];
       state.resultKey = "";
+      state.startedAt = Date.now();
       render();
       return;
     }
@@ -747,6 +811,7 @@ function createTestApp(data) {
       state.currentQuestion = 0;
       state.answers = [];
       state.resultKey = "";
+      state.startedAt = 0;
       render();
     }
   });
@@ -760,6 +825,16 @@ function createTestApp(data) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector(".test-play-main");
+  if (main) {
+    main.id = main.id || "mainContent";
+    const skipLink = document.createElement("a");
+    skipLink.className = "skip-link";
+    skipLink.href = "#mainContent";
+    skipLink.textContent = "본문 바로가기";
+    document.body.prepend(skipLink);
+  }
+
   const data = getTestPageData();
   if (!data) {
     return;
