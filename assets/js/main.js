@@ -47,6 +47,33 @@ const PLAY_CARDS = [
     time: "20초",
     icon: "□",
     tone: "green"
+  },
+  {
+    href: "./play/relationship-ranking.html",
+    eyebrow: "카드 순위형 · 2분",
+    title: "관계에서 포기 못 하는 것 순위",
+    description: "다섯 장을 옮겨 지금 가장 중요한 관계 기준을 골라요.",
+    time: "2분",
+    icon: "↕",
+    tone: "paper"
+  },
+  {
+    href: "./play/weekly-energy-budget.html",
+    eyebrow: "포인트 배분형 · 1분",
+    title: "이번 주 에너지 100을 어디에 쓸까?",
+    description: "에너지 100을 나누면 지금 마음이 향한 곳이 보여요.",
+    time: "1분",
+    icon: "100",
+    tone: "yellow"
+  },
+  {
+    href: "./play/campus-festival-story.html",
+    eyebrow: "분기형 스토리 · 1분",
+    title: "축제 날, 쿠쿠를 어디서 만날까?",
+    description: "고른 길에 따라 쿠쿠를 만나는 장소와 결말이 달라져요.",
+    time: "1분",
+    icon: "?",
+    tone: "coral"
   }
 ];
 

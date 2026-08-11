@@ -691,6 +691,58 @@ function createTestApp(data) {
   };
 
   let loadingTimer = null;
+  let restoringHistory = false;
+
+  function snapshotState() {
+    return {
+      currentQuestion: state.currentQuestion,
+      answers: [...state.answers],
+      resultKey: state.resultKey,
+      startedAt: state.startedAt
+    };
+  }
+
+  function restoreSnapshot(snapshot = {}) {
+    state.currentQuestion = Number(snapshot.currentQuestion) || 0;
+    state.answers = Array.isArray(snapshot.answers) ? [...snapshot.answers] : [];
+    state.resultKey = snapshot.resultKey || "";
+    state.startedAt = Number(snapshot.startedAt) || 0;
+  }
+
+  function writeHistory(screen, options = {}) {
+    if (restoringHistory) {
+      return;
+    }
+
+    const url = new URL(window.location.href);
+    if (screen === "result" && state.resultKey) {
+      url.searchParams.set("result", state.resultKey);
+    } else {
+      url.searchParams.delete("result");
+    }
+
+    const historyState = {
+      coocooTest: true,
+      testId: data.testId,
+      screen,
+      snapshot: snapshotState()
+    };
+    const method = options.replace ? "replaceState" : "pushState";
+    window.history[method](historyState, "", url);
+  }
+
+  function replaceQuestionHistory() {
+    if (state.screen === "question") {
+      writeHistory("question", { replace: true });
+    }
+  }
+
+  function scrollTestToTop() {
+    window.requestAnimationFrame(() => {
+      const top = Math.max(0, root.getBoundingClientRect().top + window.scrollY - 12);
+      window.scrollTo({ top, left: 0, behavior: "auto" });
+    });
+  }
 
   function clearLoadingTimer() {
     if (loadingTimer) {
@@ -699,61 +751,60 @@ function createTestApp(data) {
     }
   }
 
-  function render() {
+  function render(options = {}) {
     if (state.screen === "intro") {
       applyShareState(data.page, "");
       root.innerHTML = renderIntroScreen(data.page);
       hydrateCoupangSlots(root);
-      return;
-    }
-
-    if (state.screen === "question") {
+    } else if (state.screen === "question") {
       applyShareState(data.page, "");
       root.innerHTML = renderQuestionScreen(data.page, state.currentQuestion);
       hydrateCoupangSlots(root);
-      return;
-    }
-
-    if (state.screen === "loading") {
+    } else if (state.screen === "loading") {
       applyShareState(data.page, "");
       root.innerHTML = renderLoadingScreen(data.page);
       hydrateCoupangSlots(root);
-      return;
-    }
-
-    if (state.screen === "result") {
+    } else if (state.screen === "result") {
       applyShareState(data.page, state.resultKey);
       root.innerHTML = renderResultScreen(data.page, state.resultKey, data.cards);
       hydrateCoupangSlots(root);
     }
+
+    if (options.scroll !== false) {
+      scrollTestToTop();
+    }
   }
 
-  function startLoadingAndResolve() {
+  function resolveResult() {
+    state.resultKey = scoreAnswers(data.page, state.answers);
+    const durationSeconds = state.startedAt
+      ? Math.max(1, Math.round((Date.now() - state.startedAt) / 1000))
+      : 0;
+    trackContentEvent("content_complete", data.page, {
+      result_key: state.resultKey,
+      duration_seconds: durationSeconds
+    });
+    try {
+      const completedIds = JSON.parse(window.sessionStorage.getItem("coocoo_completed_content_ids") || "[]");
+      const currentId = getContentAnalyticsParams(data.page).content_id;
+      if (currentId && !completedIds.includes(currentId)) {
+        completedIds.push(currentId);
+        window.sessionStorage.setItem("coocoo_completed_content_ids", JSON.stringify(completedIds));
+      }
+    } catch (error) {
+      console.warn("Unable to persist completed content analytics state.", error);
+    }
+    state.screen = "result";
+    writeHistory("result", { replace: true });
+    render();
+  }
+
+  function startLoadingAndResolve(options = {}) {
     state.screen = "loading";
+    writeHistory("loading", { replace: Boolean(options.replaceHistory) });
     render();
     clearLoadingTimer();
-    loadingTimer = window.setTimeout(() => {
-      state.resultKey = scoreAnswers(data.page, state.answers);
-      const durationSeconds = state.startedAt
-        ? Math.max(1, Math.round((Date.now() - state.startedAt) / 1000))
-        : 0;
-      trackContentEvent("content_complete", data.page, {
-        result_key: state.resultKey,
-        duration_seconds: durationSeconds
-      });
-      try {
-        const completedIds = JSON.parse(window.sessionStorage.getItem("coocoo_completed_content_ids") || "[]");
-        const currentId = getContentAnalyticsParams(data.page).content_id;
-        if (currentId && !completedIds.includes(currentId)) {
-          completedIds.push(currentId);
-          window.sessionStorage.setItem("coocoo_completed_content_ids", JSON.stringify(completedIds));
-        }
-      } catch (error) {
-        console.warn("Unable to persist completed content analytics state.", error);
-      }
-      state.screen = "result";
-      render();
-    }, 1400);
+    loadingTimer = window.setTimeout(resolveResult, 1400);
   }
 
   root.addEventListener("click", (event) => {
@@ -785,6 +836,7 @@ function createTestApp(data) {
       state.answers = [];
       state.resultKey = "";
       state.startedAt = Date.now();
+      writeHistory("question");
       render();
       return;
     }
@@ -801,6 +853,7 @@ function createTestApp(data) {
       }
 
       state.currentQuestion = questionIndex + 1;
+      replaceQuestionHistory();
       render();
       return;
     }
@@ -812,14 +865,38 @@ function createTestApp(data) {
       state.answers = [];
       state.resultKey = "";
       state.startedAt = 0;
+      writeHistory("intro");
       render();
     }
   });
 
+  function restoreHistoryScreen(historyState) {
+    clearLoadingTimer();
+    restoringHistory = true;
+    restoreSnapshot(historyState.snapshot);
+    state.screen = historyState.screen;
+    render();
+    restoringHistory = false;
+
+    if (state.screen === "loading") {
+      startLoadingAndResolve({ replaceHistory: true });
+    }
+  }
+
+  function handlePopState(event) {
+    if (event.state?.coocooTest && event.state.testId === data.testId) {
+      restoreHistoryScreen(event.state);
+    }
+  }
+
+  window.addEventListener("popstate", handlePopState);
+
   render();
+  writeHistory(state.screen, { replace: true });
   return {
     destroy() {
       clearLoadingTimer();
+      window.removeEventListener("popstate", handlePopState);
     }
   };
 }
