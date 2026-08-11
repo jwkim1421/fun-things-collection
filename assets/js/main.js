@@ -67,6 +67,18 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
+function friendlyHomeCopy(value) {
+  return String(value || "")
+    .replaceAll("테스트입니다", "테스트예요")
+    .replaceAll("콘텐츠입니다", "콘텐츠예요")
+    .replaceAll("카드입니다", "카드예요")
+    .replaceAll("편입니다", "편이에요")
+    .replaceAll("있습니다", "있어요")
+    .replaceAll("없습니다", "없어요")
+    .replaceAll("됩니다", "돼요")
+    .replaceAll("합니다", "해요");
+}
+
 let coupangScriptPromise = null;
 
 function ensureCoupangScript() {
@@ -223,10 +235,12 @@ function renderPlayCards() {
   grid.innerHTML = PLAY_CARDS.map((card, index) => `
     <a class="play-card tone-${card.tone}" href="${card.href}">
       <span class="play-card-number">0${index + 1}</span>
-      <span class="play-card-icon" aria-hidden="true">${card.icon}</span>
-      <small>${card.eyebrow} · ${card.time}</small>
-      <strong>${card.title}</strong>
+      <div class="play-card-heading">
+        <span class="play-card-icon" aria-hidden="true">${card.icon}</span>
+        <strong>${card.title}</strong>
+      </div>
       <p>${card.description}</p>
+      <small><span>${card.eyebrow}</span><span>${card.time}</span></small>
       <span class="play-card-arrow" aria-hidden="true">↗</span>
     </a>
   `).join("");
@@ -264,16 +278,17 @@ function renderCards() {
     <a class="tool-card editorial-card tone-${getCardTone(card)}" href="${card.href}" data-content-id="${card.id}">
       <div class="editorial-card-head">
         <span>${card.category || "테스트"}</span>
-        <small>${card.duration || "1분"}</small>
       </div>
       <div class="editorial-card-art">
-        <span class="editorial-card-icon" aria-hidden="true">${card.icon || "◉"}</span>
-        <p>${card.posterSubtitle || card.description}</p>
+        <div class="editorial-card-title-row">
+          <span class="editorial-card-icon" aria-hidden="true">${card.icon || "◉"}</span>
+          <p>${friendlyHomeCopy(card.posterSubtitle || card.description)}</p>
+        </div>
       </div>
       <div class="tool-body">
         <h4>${card.title}</h4>
-        <p>${card.description}</p>
-        <span class="card-open-label">열어보기 <i aria-hidden="true">→</i></span>
+        <p>${friendlyHomeCopy(card.description)}</p>
+        <span class="card-open-label"><span>열어보기 <i aria-hidden="true">→</i></span><small>${card.duration || "1분"}</small></span>
       </div>
     </a>
   `).join("");

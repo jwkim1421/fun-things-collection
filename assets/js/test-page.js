@@ -602,7 +602,7 @@ function renderResultScreen(page, resultKey, cards) {
           <img src="../assets/images/coocoo.png" alt="" />
           <div>
             <span>쿠쿠의 한마디</span>
-            <p>${escapeHtml(result.tip || "결과는 정답이 아니라 지금의 리듬을 보는 힌트예요.")}</p>
+            <p>${escapeHtml(result.kukuComment || result.tip || "이 결과, 친구 거랑 나란히 놓으면 더 웃길지도 몰라.")}</p>
           </div>
         </aside>
 

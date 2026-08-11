@@ -3,7 +3,7 @@ const PLAY_CONTENT = {
     type: "chat",
     title: "썸 탈 때 내 답장 온도는?",
     category: "대화형 테스트",
-    intro: "쿠쿠가 보내는 메시지에 평소처럼 답해보세요. 말의 길이와 표현 온도로 내 대화 리듬을 읽어드려요.",
+    intro: "쿠쿠가 보내는 메시지에 평소처럼 답해보세요. 말의 길이와 표현 온도로 내 대화 리듬을 살펴봐요.",
     icon: "💬",
     questions: [
       { message: "오늘 수업 끝났어? 뭐 하고 있어?", replies: [
@@ -33,16 +33,16 @@ const PLAY_CONTENT = {
       ] }
     ],
     results: {
-      warm: { title: "포근한 38도 답장형", line: "마음을 숨기기보다 상대가 안심할 만큼 따뜻하게 돌려주는 타입", detail: "당신의 답장은 질문과 반응이 함께 있어 대화를 자연스럽게 이어갑니다. 상대의 말에서 작은 포인트를 잡아 다시 건네는 힘이 있어요. 다만 매번 분위기를 책임지려 하지 않아도 괜찮습니다.", icon: "☕" },
-      calm: { title: "은근한 24도 답장형", line: "과하지 않은 말투로 편안함을 오래 남기는 타입", detail: "당신은 빠르게 달아오르기보다 안정적인 리듬을 선호합니다. 짧아도 필요한 답은 놓치지 않아 부담 없는 신뢰를 만들어요. 가끔은 한 문장만 더 보태면 관심이 훨씬 선명하게 전달됩니다.", icon: "🌿" },
-      direct: { title: "직진 42도 답장형", line: "타이밍이 왔다 싶으면 관계의 온도를 직접 올리는 타입", detail: "당신은 애매한 신호보다 구체적인 제안과 솔직한 표현에 강합니다. 상대가 고민할 시간을 줄여주는 시원함이 매력이에요. 다만 상대의 속도를 한 번 확인하면 직진의 장점이 더 빛납니다.", icon: "🔥" }
+      warm: { title: "포근한 38도 답장형", line: "마음을 숨기기보다 상대가 안심할 만큼 따뜻하게 돌려주는 타입", detail: "질문과 반응이 함께 있어서 대화가 자연스럽게 이어져요. 상대의 말에서 작은 포인트를 잡아 다시 건네는 힘도 있어요. 매번 분위기를 책임질 필요는 없으니 편한 날엔 짧게 답해도 괜찮아요.", icon: "☕" },
+      calm: { title: "은근한 24도 답장형", line: "과하지 않은 말투로 편안함을 오래 남기는 타입", detail: "빠르게 달아오르기보다 안정적인 리듬을 좋아해요. 짧아도 필요한 답은 놓치지 않아 부담 없는 신뢰를 만들어요. 한 문장이 더 붙는 날에는 관심이 더 선명하게 보일지도 몰라요.", icon: "🌿" },
+      direct: { title: "직진 42도 답장형", line: "타이밍이 왔다 싶으면 관계의 온도를 직접 올리는 타입", detail: "애매한 신호보다 구체적인 제안과 솔직한 표현에 강해요. 상대가 고민할 시간을 줄여주는 시원함이 매력이에요. 속도가 비슷한 사람을 만나면 대화가 아주 빠르게 뜨거워져요.", icon: "🔥" }
     }
   },
   "procrastination-bingo": {
     type: "bingo",
     title: "대학생 미루기 습관 빙고",
     category: "체크형 놀이",
-    intro: "최근 일주일을 떠올리며 찔리는 칸을 눌러보세요. 빙고가 없어도 선택한 칸 수로 결과가 나옵니다.",
+    intro: "최근 일주일을 떠올리며 찔리는 칸을 눌러보세요. 빙고가 없어도 선택한 칸 수로 결과가 나와요.",
     icon: "▦",
     cells: [
       "강의 자료만 열어봄", "할 일 목록 꾸미기", "일단 간식부터", "마감 시간 재확인",
@@ -62,7 +62,7 @@ const PLAY_CONTENT = {
     type: "daily",
     title: "쿠쿠의 오늘 상자",
     category: "하루 한 번",
-    intro: "생각을 오래 하지 말고 지금 눈에 먼저 들어오는 상자를 골라보세요. 오늘 하루에 붙일 작은 미션을 드려요.",
+    intro: "오래 고민하지 말고 지금 눈에 먼저 들어오는 상자를 골라보세요. 오늘 하루에 붙일 작은 미션이 나와요.",
     icon: "□",
     boxes: [
       { label: "빨간 상자", icon: "●", title: "먼저 말 걸기", detail: "오늘 떠오른 사람 한 명에게 짧게 안부를 보내보세요. 길게 쓰지 않아도 충분해요.", tone: "coral" },
@@ -134,6 +134,22 @@ function resultActions() {
     </div>
     <a class="play-home-link" href="../index.html#play">다른 놀이 고르기 →</a>
   `;
+}
+
+function getKukuComment(contentType, resultKey) {
+  const comments = {
+    battery: {
+      perfect: "이 정도면 손끝에 충전기 센서 달린 거 아니야?",
+      close: "아깝다! 숫자는 살짝 비켜갔는데 감은 꽤 좋았어.",
+      wild: "100은 지나갔지만 과감함만큼은 만점이네."
+    },
+    bingo: "미루기의 종류도 이렇게 다양할 줄은 몰랐지?",
+    chat: "답장 온도는 숫자보다 상대에 따라 더 자주 바뀌더라.",
+    daily: "오늘 상자는 골랐고, 이제 어떻게 쓸지는 네 마음이야."
+  };
+
+  if (contentType === "battery") return comments.battery[resultKey] || comments.battery.close;
+  return comments[contentType] || "이 결과, 친구 거랑 나란히 놓으면 더 웃길지도 몰라.";
 }
 
 function getLocalDateKey() {
@@ -226,7 +242,7 @@ function createPlaygroundApp() {
     const result = content.results[resultKey];
     applyPlayShare(content, result.title, result.line, resultKey);
     if (shouldTrack) trackPlayEvent("content_complete", content, { result_key: resultKey, duration_seconds: Math.max(1, Math.round((Date.now() - state.startedAt) / 1000)) });
-    root.innerHTML = renderPlayResult(content, result.icon, result.title, result.line, result.detail);
+    root.innerHTML = renderPlayResult(content, result.icon, result.title, result.line, result.detail, { comment: getKukuComment("chat") });
     hydratePlayResultAd();
   }
 
@@ -264,7 +280,7 @@ function createPlaygroundApp() {
     const resultKey = `bingo-${selectedCount}-${bingos}`;
     applyPlayShare(content, result.title, result.line, resultKey);
     if (shouldTrack) trackPlayEvent("content_complete", content, { result_key: resultKey, bingo_count: bingos, duration_seconds: Math.max(1, Math.round((Date.now() - state.startedAt) / 1000)) });
-    root.innerHTML = renderPlayResult(content, result.icon, result.title, `${result.line} · 완성 빙고 ${bingos}개`, result.detail);
+    root.innerHTML = renderPlayResult(content, result.icon, result.title, `${result.line} · 완성 빙고 ${bingos}개`, result.detail, { comment: getKukuComment("bingo") });
     hydratePlayResultAd();
   }
 
@@ -301,14 +317,18 @@ function createPlaygroundApp() {
     const batteryValue = forcedBattery === null ? state.battery : forcedBattery;
     const score = Math.max(0, 100 - Math.round(Math.abs(100 - batteryValue)));
     const result = score >= 98
-      ? { icon: "★", title: "쿠쿠 충전 장인", line: `${Math.round(batteryValue)}%에서 정지. 손끝 감각이 거의 완벽해요!` }
+      ? { key: "perfect", icon: "🏆", title: "쿠쿠 충전 장인", line: `${Math.round(batteryValue)}%에서 정지. 거의 정답 같은 손끝 감각!`, detail: "멈춰야 할 순간을 정확하게 잡았어요. 숫자가 차오르는 속도와 손끝 타이밍이 제대로 맞아떨어졌네요." }
       : score >= 90
-        ? { icon: "+", title: "감 좋은 충전러", line: `${Math.round(batteryValue)}%에서 정지. 한 번만 더 하면 100이 보여요.` }
-        : { icon: "↻", title: "과감한 타이밍 탐험가", line: `${Math.round(batteryValue)}%에서 정지. 감을 알았으니 재도전하면 달라져요.` };
+        ? { key: "close", icon: "🔋", title: "감 좋은 충전러", line: `${Math.round(batteryValue)}%에서 정지. 100 근처를 제대로 읽었어요.`, detail: "완벽한 숫자는 살짝 비켜갔지만 타이밍 감각은 충분히 가까웠어요. 이번 기록은 꽤 자랑해도 돼요." }
+        : { key: "wild", icon: "⚡", title: "과감한 타이밍 탐험가", line: `${Math.round(batteryValue)}%에서 정지. 망설임보다 손이 먼저 움직였어요.`, detail: "정확함보다 과감함이 먼저 나온 기록이에요. 숫자보다 순간의 속도감을 즐긴 쪽에 가까워요." };
     const resultKey = `battery-${Math.round(batteryValue)}`;
     applyPlayShare(content, result.title, result.line, resultKey);
     if (shouldTrack) trackPlayEvent("content_complete", content, { result_key: resultKey, game_score: score, duration_seconds: Math.max(1, Math.round((Date.now() - state.startedAt) / 1000)) });
-    root.innerHTML = renderPlayResult(content, result.icon, result.title, result.line, "결과는 운보다 리듬에 가까워요. 너무 오래 재지 말고 첫 감각을 믿을 때 점수가 더 잘 나올 수 있습니다.", true);
+    root.innerHTML = renderPlayResult(content, result.icon, result.title, result.line, result.detail, {
+      resultLabel: "충전 결과",
+      restart: true,
+      comment: getKukuComment("battery", result.key)
+    });
     hydratePlayResultAd();
   }
 
@@ -337,20 +357,21 @@ function createPlaygroundApp() {
     window.localStorage.setItem(`coocoo_today_box_${todayKey}`, String(index));
     applyPlayShare(content, box.title, box.detail, `box-${index}`);
     if (shouldTrack) trackPlayEvent("content_complete", content, { result_key: `box-${index}`, duration_seconds: Math.max(1, Math.round((Date.now() - state.startedAt) / 1000)) });
-    root.innerHTML = renderPlayResult(content, box.icon, box.title, "오늘 쿠쿠가 꺼내준 작은 미션", box.detail);
+    root.innerHTML = renderPlayResult(content, box.icon, box.title, "오늘 쿠쿠가 꺼내준 작은 미션", box.detail, { comment: getKukuComment("daily") });
     hydratePlayResultAd();
   }
 
-  function renderPlayResult(source, icon, title, line, detail, replay = false) {
+  function renderPlayResult(source, icon, title, line, detail, options = {}) {
+    const resultLabel = options.resultLabel || `${source.category} 결과`;
     return `
       <section class="play-result">
-        <span class="play-content-type">${escapePlayHtml(source.category)} 결과</span>
+        <span class="play-content-type">${escapePlayHtml(resultLabel)}</span>
         <div class="play-result-icon" aria-hidden="true">${icon}</div>
         <h1>${escapePlayHtml(title)}</h1>
         <strong>${escapePlayHtml(line)}</strong>
         <p>${escapePlayHtml(detail)}</p>
-        <div class="kuku-comment"><img src="../assets/images/coocoo.png" alt="" /><span>쿠쿠의 한마디</span><p>${replay ? "한 번 더 하면 손끝 감각이 더 선명해질지도 몰라!" : "결과가 마음에 들었다면 친구에게 보내 서로 비교해봐!"}</p></div>
-        ${replay ? `<button class="play-primary-button" type="button" data-action="restart">다시 도전하기</button>` : ""}
+        <div class="kuku-comment"><img src="../assets/images/coocoo.png" alt="" /><span>쿠쿠의 한마디</span><p>${escapePlayHtml(options.comment || "친구 결과랑 나란히 놓으면 더 웃길지도 몰라.")}</p></div>
+        ${options.restart ? `<button class="play-primary-button" type="button" data-action="restart">다시 도전하기</button>` : ""}
         ${resultActions()}
         <div class="play-result-ad-wrap">
           <span>AD</span>

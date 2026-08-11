@@ -2742,3 +2742,307 @@ a:focus-visible {
   .daily-box { min-height: 130px; flex-direction: row; }
   .battery-device { width: 150px; height: 270px; }
 }
+
+/* 2026-08 mobile hierarchy and friendly playground polish. */
+.hero-copy h2,
+.section-head h3,
+.play-card strong,
+.editorial-card-art p,
+.editorial-card .tool-body h4,
+.play-intro h1,
+.play-result h1,
+.question-panel h1 {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+.hero-shell,
+.hero-mascot,
+.hero-mascot img,
+.hero-mascot p,
+.play-card,
+.mood-browser,
+.tool-card.editorial-card,
+.editorial-card-icon,
+.play-intro,
+.chat-game,
+.bingo-game,
+.battery-game,
+.daily-game,
+.play-result,
+.play-intro-icon,
+.play-result-icon,
+.kuku-comment,
+.kuku-comment img,
+.daily-box,
+.chat-phone,
+.chat-bubble,
+.chat-replies button {
+  border-radius: 12px;
+}
+
+.hero-mascot {
+  aspect-ratio: auto;
+  padding: 12px;
+  gap: 10px;
+  background: var(--tone-yellow);
+}
+
+.hero-mascot img {
+  height: 150px;
+  object-position: center 25%;
+}
+
+.hero-mascot p {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--line);
+  background: #fffdf8;
+}
+
+.play-card {
+  min-height: 160px;
+  padding: 14px 16px;
+}
+
+.play-card-number {
+  top: 12px;
+  right: 14px;
+}
+
+.play-card-heading {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding-right: 26px;
+}
+
+.play-card-icon {
+  width: 42px;
+  height: 42px;
+  margin: 0;
+  border-radius: 8px;
+  font-size: 22px;
+}
+
+.play-card strong {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+.play-card p {
+  margin: 10px 28px 10px 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.play-card small {
+  margin-top: auto;
+  padding-top: 9px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  border-top: 1px solid rgba(40, 35, 31, 0.28);
+  font-size: 11px;
+}
+
+.play-card-arrow {
+  right: 15px;
+  bottom: 34px;
+  font-size: 18px;
+}
+
+.editorial-card-art {
+  min-height: 116px;
+  padding: 15px;
+  justify-content: center;
+}
+
+.editorial-card-title-row {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 50px minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+}
+
+.editorial-card-icon {
+  width: 50px;
+  height: 50px;
+  font-size: 26px;
+}
+
+.editorial-card-art p {
+  max-width: none;
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.editorial-card .tool-body {
+  padding: 14px 15px;
+}
+
+.editorial-card .tool-body h4 {
+  font-size: 16px;
+}
+
+.editorial-card .tool-body p {
+  margin: 7px 0 12px;
+}
+
+.card-open-label small {
+  color: var(--muted);
+  font: inherit;
+}
+
+.play-result-icon {
+  border-radius: 10px;
+}
+
+.test-progress-head {
+  margin-bottom: 22px;
+}
+
+.test-progress-track {
+  margin-top: 4px;
+}
+
+.test-progress-train {
+  top: -17px;
+  font-size: 23px;
+}
+
+.test-play-body[data-test-id="test-020"] {
+  --test-theme: #dce6df;
+  background: #f4f0e8;
+}
+
+.test-play-body[data-test-id="test-020"] .intro-art,
+.test-play-body[data-test-id="test-020"] .question-panel,
+.test-play-body[data-test-id="test-020"] .result-card,
+.test-play-body[data-test-id="test-020"] .result-header-title,
+.test-play-body[data-test-id="test-020"] .result-section-title {
+  background-image: none;
+}
+
+.test-play-body[data-test-id="test-020"] .intro-art {
+  background: #dce6df;
+}
+
+.test-play-body[data-test-id="test-020"] .question-panel,
+.test-play-body[data-test-id="test-020"] .result-card {
+  background: #fffdf8;
+}
+
+.test-play-body[data-test-id="test-020"] .result-header-title,
+.test-play-body[data-test-id="test-020"] .result-section-title {
+  background: #dce6df;
+}
+
+.test-play-body[data-test-id="test-020"] .result-summary-box,
+.test-play-body[data-test-id="test-020"] .result-avatar-box,
+.test-play-body[data-test-id="test-020"] .result-related-card {
+  background: #f5e39c;
+}
+
+@media (max-width: 640px) {
+  .hero-shell {
+    padding: 18px;
+  }
+
+  .hero-copy h2 {
+    font-size: clamp(25px, 8vw, 31px);
+    line-height: 1.22;
+  }
+
+  .hero-mascot {
+    grid-template-columns: 82px minmax(0, 1fr);
+    padding: 10px;
+  }
+
+  .hero-mascot img {
+    height: 82px;
+  }
+
+  .hero-mascot p {
+    min-height: 82px;
+    padding: 10px 12px;
+    border: 2px solid var(--line);
+  }
+
+  .section-head h3 {
+    font-size: 24px;
+    line-height: 1.25;
+  }
+
+  .section-head p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .play-card {
+    min-height: 150px;
+  }
+
+  .editorial-card-art {
+    min-height: 102px;
+  }
+
+  .editorial-card-title-row {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .editorial-card-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 23px;
+  }
+
+  .editorial-card-art p {
+    font-size: 17px;
+  }
+
+  .play-intro h1,
+  .bingo-game h1,
+  .battery-game h1,
+  .daily-game h1,
+  .play-result h1 {
+    font-size: clamp(25px, 8vw, 34px);
+    line-height: 1.2;
+  }
+
+  .play-intro,
+  .play-result {
+    padding: 24px 20px;
+  }
+
+  .play-result > strong {
+    font-size: 17px;
+  }
+
+  .kuku-comment {
+    grid-template-columns: 58px minmax(0, 1fr);
+    padding: 12px;
+    gap: 4px 12px;
+  }
+
+  .kuku-comment img {
+    width: 58px;
+    height: 58px;
+  }
+
+  .test-progress-head {
+    margin-bottom: 24px;
+  }
+
+  .test-progress-train {
+    top: -15px;
+    font-size: 20px;
+  }
+}
