@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">메시지를 보내는 쿠쿠</title>
+  <rect x="5" y="5" width="118" height="118" rx="24" fill="#fffdf8" stroke="#28231f" stroke-width="6"/>
+  <path d="M28 78V45a14 14 0 0 1 14-14h54a14 14 0 0 1 14 14v25a14 14 0 0 1-14 14H55L36 98l4-20Z" fill="#b9d2df" stroke="#28231f" stroke-width="5" stroke-linejoin="round"/>
+  <path d="m48 52 9-15 9 15m20 0 9-15 8 17" fill="#f3c85e" stroke="#28231f" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M50 54c2-12 10-18 23-18s22 7 24 20v16H49Z" fill="#f3c85e" stroke="#28231f" stroke-width="4"/>
+  <ellipse cx="73" cy="65" rx="20" ry="14" fill="#fff5dc"/>
+  <circle cx="64" cy="59" r="3.5" fill="#28231f"/><circle cx="82" cy="59" r="3.5" fill="#28231f"/>
+  <path d="M69 66h8l-4 5Z" fill="#28231f"/><path d="M66 72q7 7 14 0" fill="none" stroke="#28231f" stroke-width="3" stroke-linecap="round"/>
+</svg>

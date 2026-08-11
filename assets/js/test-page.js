@@ -533,7 +533,7 @@ function renderLoadingScreen(page) {
             <div class="test-progress-fill" style="width:100%"></div>
             <div class="test-progress-train" style="left:calc(100% - 18px)">🚂</div>
           </div>
-          <div class="loading-orb">🚉</div>
+          <div class="loading-orb"><img src="../assets/images/kuku-loading.svg" alt="" /></div>
           <p class="loading-copyright">쿠쿠 테스트 로딩 중</p>
           <h1>${escapeHtml(page.loadingTitle || "결과를 불러오는 중")}</h1>
           <p>${escapeHtml(page.loadingMessage || "")}</p>

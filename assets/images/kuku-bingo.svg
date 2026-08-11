@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">빙고판을 든 쿠쿠</title>
+  <rect x="5" y="5" width="118" height="118" rx="24" fill="#fffdf8" stroke="#28231f" stroke-width="6"/>
+  <path d="m35 48 10-18 11 18m24 0 11-18 10 19" fill="#f3c85e" stroke="#28231f" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M36 53c3-16 14-24 32-24s30 10 32 27v27H35Z" fill="#f3c85e" stroke="#28231f" stroke-width="4"/>
+  <ellipse cx="68" cy="68" rx="23" ry="17" fill="#fff5dc"/>
+  <circle cx="58" cy="59" r="4" fill="#28231f"/><circle cx="79" cy="59" r="4" fill="#28231f"/>
+  <path d="M64 68h9l-4.5 5Z" fill="#28231f"/>
+  <rect x="27" y="77" width="74" height="35" rx="6" fill="#b9d2df" stroke="#28231f" stroke-width="4"/>
+  <g fill="#fffdf8" stroke="#28231f" stroke-width="2"><rect x="35" y="85" width="11" height="8"/><rect x="49" y="85" width="11" height="8"/><rect x="63" y="85" width="11" height="8"/><rect x="77" y="85" width="11" height="8"/><rect x="35" y="97" width="11" height="8"/><rect x="49" y="97" width="11" height="8"/><rect x="63" y="97" width="11" height="8"/><rect x="77" y="97" width="11" height="8"/></g>
+  <path d="m51 100 4 4 8-10" fill="none" stroke="#df5b4f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -19,6 +19,7 @@ const PLAY_CARDS = [
     description: "쿠쿠와 카톡하듯 답장을 고르면 내 대화 온도가 보여요.",
     time: "2분",
     icon: "💬",
+    iconAsset: "kuku-chat.svg",
     tone: "coral"
   },
   {
@@ -28,6 +29,7 @@ const PLAY_CARDS = [
     description: "찔리는 칸을 눌러 오늘의 미루기 레벨을 완성해보세요.",
     time: "1분",
     icon: "▦",
+    iconAsset: "kuku-bingo.svg",
     tone: "blue"
   },
   {
@@ -37,6 +39,7 @@ const PLAY_CARDS = [
     description: "빠르게 차오르는 배터리를 100에 가장 가깝게 멈춰요.",
     time: "30초",
     icon: "⚡",
+    iconAsset: "kuku-battery.svg",
     tone: "yellow"
   },
   {
@@ -263,7 +266,9 @@ function renderPlayCards() {
     <a class="play-card tone-${card.tone}" href="${card.href}">
       <span class="play-card-number">0${index + 1}</span>
       <div class="play-card-heading">
-        <span class="play-card-icon" aria-hidden="true">${card.icon}</span>
+        <span class="play-card-icon" aria-hidden="true">${card.iconAsset
+          ? `<img src="./assets/images/${card.iconAsset}" alt="" />`
+          : card.icon}</span>
         <strong>${card.title}</strong>
       </div>
       <p>${card.description}</p>

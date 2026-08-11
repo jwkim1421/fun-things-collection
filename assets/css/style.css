@@ -1518,11 +1518,15 @@ button {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.08)),
-    var(--test-theme);
+  background: #fffdf8;
   font-size: 42px;
   animation: wobble 1.2s ease-in-out infinite;
+}
+
+.loading-orb img {
+  display: block;
+  width: 82px;
+  height: 82px;
 }
 
 .loading-copyright {
@@ -2322,6 +2326,12 @@ body,
   background: #fffdf8;
   font-size: 26px;
 }
+
+.play-card-icon img {
+  display: block;
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+}
 .play-card small { margin-top: 24px; font-weight: 800; }
 .play-card strong { margin-top: 8px; font-size: 20px; line-height: 1.35; }
 .play-card p { margin: 9px 0 0; font-size: 13px; line-height: 1.6; }
@@ -2566,6 +2576,69 @@ body,
   border: 2px solid var(--line);
   background: #fffdf8;
   font-size: 46px;
+}
+
+.play-intro-icon img,
+.play-result-icon img {
+  display: block;
+  width: 84px;
+  height: 84px;
+}
+
+.not-found-shell {
+  min-height: 100vh;
+  padding: 48px 20px;
+  display: grid;
+  place-items: center;
+  background: #f4f0e8;
+}
+
+.not-found-card {
+  width: min(100%, 480px);
+  padding: clamp(28px, 7vw, 48px);
+  text-align: center;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  background: #fffdf8;
+  box-shadow: var(--paper-shadow);
+}
+
+.not-found-card img {
+  display: block;
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 18px;
+}
+
+.not-found-card small {
+  color: var(--accent-dark);
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.not-found-card h1 {
+  margin: 12px 0;
+  font-size: clamp(28px, 7vw, 42px);
+  line-height: 1.2;
+  word-break: keep-all;
+}
+
+.not-found-card p {
+  margin: 0 0 24px;
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+.not-found-card a {
+  display: inline-block;
+  padding: 13px 20px;
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  background: var(--tone-yellow);
+  color: var(--ink);
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 3px 3px 0 rgba(40, 35, 31, 0.18);
 }
 
 .play-intro h1,

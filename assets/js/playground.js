@@ -5,6 +5,7 @@ const PLAY_CONTENT = {
     category: "대화형 테스트",
     intro: "쿠쿠가 보내는 메시지에 평소처럼 답해보세요. 말의 길이와 표현 온도로 내 대화 리듬을 살펴봐요.",
     icon: "💬",
+    iconAsset: "kuku-chat.svg",
     questions: [
       { message: "오늘 수업 끝났어? 뭐 하고 있어?", replies: [
         { label: "응! 방금 끝났어 ㅎㅎ 너는?", score: "warm" },
@@ -44,6 +45,7 @@ const PLAY_CONTENT = {
     category: "체크형 놀이",
     intro: "최근 일주일을 떠올리며 찔리는 칸을 눌러보세요. 빙고가 없어도 선택한 칸 수로 결과가 나와요.",
     icon: "▦",
+    iconAsset: "kuku-bingo.svg",
     cells: [
       "강의 자료만 열어봄", "할 일 목록 꾸미기", "일단 간식부터", "마감 시간 재확인",
       "책상 정리 시작", "관련 없는 검색", "친구 진행률 물어봄", "5분만 누워 있기",
@@ -56,7 +58,8 @@ const PLAY_CONTENT = {
     title: "쿠쿠 배터리 100%에 멈추기",
     category: "30초 게임",
     intro: "버튼을 누르면 배터리가 빠르게 차올라요. 100%에 가장 가깝다고 느낀 순간 다시 눌러 멈춰보세요.",
-    icon: "⚡"
+    icon: "⚡",
+    iconAsset: "kuku-battery.svg"
   },
   "today-box": {
     type: "daily",
@@ -164,6 +167,13 @@ function escapePlayHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
+}
+
+function renderPlayIcon(icon, iconAsset) {
+  if (iconAsset) {
+    return `<img src="../assets/images/${escapePlayHtml(iconAsset)}" alt="" />`;
+  }
+  return escapePlayHtml(icon);
 }
 
 function trackPlayEvent(eventName, content, params = {}) {
@@ -381,7 +391,7 @@ function createPlaygroundApp() {
     root.innerHTML = `
       <section class="play-intro tone-${introTone}">
         <span class="play-content-type">${escapePlayHtml(content.category)}</span>
-        <div class="play-intro-icon" aria-hidden="true">${content.icon}</div>
+        <div class="play-intro-icon" aria-hidden="true">${renderPlayIcon(content.icon, content.iconAsset)}</div>
         <h1>${escapePlayHtml(content.title)}</h1>
         <p>${escapePlayHtml(content.intro)}</p>
         <button class="play-primary-button" type="button" data-action="start">시작하기</button>
