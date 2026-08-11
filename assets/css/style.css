@@ -19,6 +19,8 @@
 html, body {
   margin: 0;
   min-height: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -2531,8 +2533,20 @@ body,
 
 .play-page {
   width: min(100% - 28px, 760px);
+  min-width: 0;
+  max-width: 100%;
   margin: 0 auto;
   padding: 20px 0 60px;
+}
+
+.play-body {
+  overflow-x: clip;
+}
+
+#playgroundApp {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .play-intro,
@@ -2541,6 +2555,9 @@ body,
 .battery-game,
 .daily-game,
 .play-result {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   padding: clamp(24px, 6vw, 48px);
   border: 2px solid var(--line);
   border-radius: 10px;
@@ -2651,6 +2668,8 @@ body,
   font-size: clamp(34px, 7vw, 56px);
   line-height: 1.12;
   font-weight: 400;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .play-intro > p,
@@ -2662,6 +2681,7 @@ body,
   margin: 18px 0 0;
   color: var(--muted);
   line-height: 1.8;
+  overflow-wrap: anywhere;
 }
 
 .play-primary-button,
@@ -2773,6 +2793,15 @@ body,
 .play-result .play-content-type,
 .play-result-icon { margin-inline: auto; }
 .play-result > strong { display: block; max-width: 600px; margin: 22px auto 0; font-size: 21px; line-height: 1.55; }
+.play-result > strong,
+.kuku-comment,
+.play-share-actions,
+.play-home-link,
+.play-result-ad-wrap {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
 .play-result > p { margin-inline: auto; }
 .kuku-comment {
   margin-top: 32px;

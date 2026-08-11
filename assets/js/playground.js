@@ -121,6 +121,7 @@ const PLAY_CONTENT = {
     category: "분기형 스토리",
     intro: "학교 축제에서 쿠쿠가 사라졌어요. 장면마다 마음 가는 선택을 골라 나만의 결말을 찾아보세요.",
     icon: "?",
+    totalSteps: 4,
     startNode: "gate",
     nodes: {
       gate: {
@@ -137,17 +138,71 @@ const PLAY_CONTENT = {
         icon: "音",
         scene: "공연이 시작되자 모두 앞을 보고 있어요. 그런데 뒤쪽에서 쿠쿠 꼬리처럼 보이는 노란 손수건이 잠깐 흔들렸어요.",
         choices: [
-          { label: "사람들 사이를 뚫고 손수건을 따라간다", result: "spotlight" },
-          { label: "일단 친구들과 공연 한 곡을 즐긴다", result: "together" }
+          { label: "사람들 사이를 뚫고 손수건을 따라간다", next: "backstage" },
+          { label: "일단 공연 한 곡을 끝까지 즐긴다", next: "snackLane" }
         ]
       },
       booth: {
         label: "오후 5:22 · 동아리 부스 골목",
         icon: "店",
-        scene: "한산한 골목 끝에서 쿠쿠가 혼자 타로 카드를 넘기고 있어요. 아직 당신을 발견하지 못한 눈치예요.",
+        scene: "한산한 골목 끝 타로 부스에 노란 털 몇 가닥과 별 모양 스티커가 남아 있어요. 쿠쿠는 방금 다른 곳으로 간 것 같아요.",
         choices: [
-          { label: "뒤에서 조용히 놀래킨다", result: "mischief" },
-          { label: "맞은편 의자에 앉아 먼저 눈 마주치길 기다린다", result: "observer" }
+          { label: "부스 주인에게 쿠쿠가 간 방향을 묻는다", next: "stampCorner" },
+          { label: "별 스티커가 붙은 길을 직접 따라간다", next: "tarotTable" }
+        ]
+      },
+      backstage: {
+        label: "오후 5:31 · 무대 뒤편",
+        icon: "幕",
+        scene: "손수건은 백스테이지 문고리에 묶여 있고, 안쪽에서는 상자를 끄는 소리와 웃음소리가 번갈아 들려요.",
+        choices: [
+          { label: "문틈으로 보이는 꼬리를 바로 쫓아간다", next: "chase" },
+          { label: "스태프에게 쿠쿠가 있는지 먼저 물어본다", next: "wait" }
+        ]
+      },
+      snackLane: {
+        label: "오후 5:34 · 푸드트럭 거리",
+        icon: "食",
+        scene: "노래가 끝난 뒤 바닥에서 쿠쿠 이름이 적힌 영수증을 발견했어요. 바로 옆 포토 부스에서는 익숙한 웃음소리가 들려요.",
+        choices: [
+          { label: "영수증에 찍힌 가게부터 빠르게 찾아간다", next: "chase" },
+          { label: "웃음소리가 난 포토 부스 앞에서 기다린다", next: "wait" }
+        ]
+      },
+      stampCorner: {
+        label: "오후 5:33 · 스탬프 행사장",
+        icon: "印",
+        scene: "부스 주인은 쿠쿠가 스탬프를 모으러 갔다고 했어요. 행사장에는 막 찍힌 발자국과 아직 마르지 않은 잉크가 남아 있어요.",
+        choices: [
+          { label: "새 발자국을 따라 행사장 안으로 들어간다", next: "chase" },
+          { label: "완성 도장을 받는 곳에서 쿠쿠를 기다린다", next: "wait" }
+        ]
+      },
+      tarotTable: {
+        label: "오후 5:35 · 타로 부스 옆길",
+        icon: "星",
+        scene: "별 스티커는 작은 쉼터에서 끊겼어요. 테이블에는 뒤집힌 카드 한 장과 쿠쿠가 좋아하는 레몬 사탕이 놓여 있어요.",
+        choices: [
+          { label: "카드를 뒤집고 적힌 장소로 바로 향한다", next: "chase" },
+          { label: "사탕 하나를 들고 쉼터에서 잠깐 기다린다", next: "wait" }
+        ]
+      },
+      chase: {
+        label: "오후 5:43 · 마지막 단서",
+        icon: "!",
+        scene: "드디어 커튼 너머로 쿠쿠의 그림자가 보여요. 쿠쿠는 아직 당신이 바로 뒤까지 온 줄 모르는 것 같아요.",
+        choices: [
+          { label: "커튼을 열고 쿠쿠 이름을 크게 부른다", result: "spotlight" },
+          { label: "옆에 있던 소품을 들고 깜짝 등장한다", result: "mischief" }
+        ]
+      },
+      wait: {
+        label: "오후 5:45 · 잠깐의 여백",
+        icon: "○",
+        scene: "조금 기다리자 멀리서 쿠쿠가 두리번거리며 걸어와요. 먼저 발견한 건 당신이지만, 쿠쿠도 곧 이쪽을 볼 것 같아요.",
+        choices: [
+          { label: "손을 흔들어 친구들과 함께 부른다", result: "together" },
+          { label: "그대로 앉아 쿠쿠가 먼저 발견하길 기다린다", result: "observer" }
         ]
       }
     },
@@ -647,7 +702,7 @@ function createPlaygroundApp() {
     const step = state.storyPath.length + 1;
     root.innerHTML = `
       <section class="story-game">
-        <div class="play-progress-label"><span>장면 ${step} / 2</span><span>${escapePlayHtml(node.label)}</span></div>
+        <div class="play-progress-label"><span>장면 ${step} / ${content.totalSteps || 2}</span><span>${escapePlayHtml(node.label)}</span></div>
         <div class="story-scene-icon" aria-hidden="true">${node.icon}</div>
         <h1>${escapePlayHtml(content.title)}</h1>
         <p class="story-scene-copy">${escapePlayHtml(node.scene)}</p>
