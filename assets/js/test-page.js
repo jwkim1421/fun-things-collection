@@ -731,12 +731,6 @@ function createTestApp(data) {
     window.history[method](historyState, "", url);
   }
 
-  function replaceQuestionHistory() {
-    if (state.screen === "question") {
-      writeHistory("question", { replace: true });
-    }
-  }
-
   function scrollTestToTop() {
     window.requestAnimationFrame(() => {
       const top = Math.max(0, root.getBoundingClientRect().top + window.scrollY - 12);
@@ -853,7 +847,7 @@ function createTestApp(data) {
       }
 
       state.currentQuestion = questionIndex + 1;
-      replaceQuestionHistory();
+      writeHistory("question");
       render();
       return;
     }

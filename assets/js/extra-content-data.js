@@ -234,6 +234,48 @@
       featuredLabel: "요즘 반응 좋은 대표 테스트",
       featuredHook: "사람 속에서 살아나는지, 깊은 대화에서 충전되는지 바로 비교해보세요.",
       featuredReason: "관계형 테스트 중 가장 넓게 공감이 붙는 카드"
+    },
+    {
+      id: "test-021",
+      title: "지금 내 에너지 레벨은?",
+      description: "다섯 가지 반응 중 지금의 나와 가장 가까운 것을 골라보는 컨디션 테스트예요.",
+      href: "./tests/test-021.html",
+      badge: "5지선다",
+      category: "컨디션 테스트",
+      duration: "2분",
+      icon: "📶",
+      posterTitle: "에너지 레벨",
+      posterSubtitle: "지금 나는 몇 칸일까?",
+      stickers: ["🔋", "☀️", "☕", "🛋️"],
+      thumb: "#d9e7d2"
+    },
+    {
+      id: "test-022",
+      title: "오늘 끌리는 장면은?",
+      description: "설명보다 먼저 눈에 들어오는 장면으로 오늘의 감정 무드를 골라보는 테스트예요.",
+      href: "./tests/test-022.html",
+      badge: "이미지 선택",
+      category: "무드 테스트",
+      duration: "2분",
+      icon: "🖼️",
+      posterTitle: "오늘의 장면",
+      posterSubtitle: "눈길이 머무는 곳은?",
+      stickers: ["🌊", "🌃", "🌿", "🎡"],
+      thumb: "#c9dbe8"
+    },
+    {
+      id: "test-023",
+      title: "요즘 내 여유 잔량은?",
+      description: "일상 반응에 점수를 쌓아 요즘 마음의 여백이 얼마나 남았는지 보는 테스트예요.",
+      href: "./tests/test-023.html",
+      badge: "점수형",
+      category: "라이프 테스트",
+      duration: "2분",
+      icon: "🫙",
+      posterTitle: "여유 잔량",
+      posterSubtitle: "마음에 빈칸이 남았을까?",
+      stickers: ["🫧", "📅", "🎧", "🌙"],
+      thumb: "#ead8c4"
     }
   ];
 
@@ -618,6 +660,201 @@
       resultPreview: ["활기 충전형", "깊은 대화형", "조용한 관찰형", "휴식 보존형"],
       relatedIds: ["test-012", "test-005", "test-019"],
       callout: "사람을 좋아하는 것과 사람 속에서 충전되는 것은 의외로 다를 수 있어요. 친구와 비교하면 그 차이가 더 재밌게 보여요."
+    }),
+    "test-021": makePage({
+      category: "컨디션 테스트",
+      title: "지금 내 에너지 레벨은?",
+      summary: "다섯 가지 반응 중 요즘의 나와 가까운 것을 고르며 현재 에너지 온도를 확인해요.",
+      heroCardSubtitle: "지금 나는 몇 칸일까?",
+      heroArt: { centerEmoji: "📶", stickers: ["🔋", "☀️", "☕", "🛋️", "🎧", "🌙"] },
+      questionLayout: "five-choice",
+      loadingMessage: "고른 반응을 모아 지금의 에너지 레벨을 맞춰보고 있어요.",
+      questions: [
+        { prompt: "아침 알람이 울렸을 때 가장 가까운 반응은?", options: [
+          { label: "바로 일어나 오늘 할 일을 떠올린다", scores: { full: 2 } },
+          { label: "한 번 미루지만 금방 움직인다", scores: { steady: 2 } },
+          { label: "침대에서 오늘 일정을 계산한다", scores: { saving: 2 } },
+          { label: "일어났지만 정신은 아직 로딩 중", scores: { low: 2 } },
+          { label: "알람과 협상하다 시간이 사라진다", scores: { empty: 2 } }
+        ] },
+        { prompt: "갑자기 저녁 약속이 생기면?", options: [
+          { label: "좋아, 오히려 하루가 재밌어졌다", scores: { full: 2 } },
+          { label: "상대와 장소가 괜찮으면 간다", scores: { steady: 2 } },
+          { label: "내일 일정부터 보고 정한다", scores: { saving: 2 } },
+          { label: "반갑지만 벌써 조금 피곤하다", scores: { low: 2 } },
+          { label: "오늘의 나는 집과 이미 약속했다", scores: { empty: 2 } }
+        ] },
+        { prompt: "해야 할 일이 세 개 겹치면 나는?", options: [
+          { label: "순서를 정하고 바로 하나를 끝낸다", scores: { full: 2 } },
+          { label: "쉬운 것부터 흐름을 만든다", scores: { steady: 2 } },
+          { label: "중요한 것만 남기고 덜어낸다", scores: { saving: 2 } },
+          { label: "목록을 보다가 잠깐 멍해진다", scores: { low: 2 } },
+          { label: "일단 화면을 닫고 현실을 외면한다", scores: { empty: 2 } }
+        ] },
+        { prompt: "친구가 고민을 길게 털어놓으면?", options: [
+          { label: "끝까지 듣고 같이 방법도 찾아본다", scores: { full: 2 } },
+          { label: "공감하며 내가 할 수 있는 만큼 듣는다", scores: { steady: 2 } },
+          { label: "오늘 들을 여유가 있는지 먼저 본다", scores: { saving: 2 } },
+          { label: "마음은 있는데 집중이 자꾸 흐려진다", scores: { low: 2 } },
+          { label: "미안하지만 지금은 내 배터리도 없다", scores: { empty: 2 } }
+        ] },
+        { prompt: "쉬는 시간이 30분 생기면?", options: [
+          { label: "산책이나 작은 볼일을 하나 해낸다", scores: { full: 2 } },
+          { label: "좋아하는 영상이나 음악을 즐긴다", scores: { steady: 2 } },
+          { label: "아무 일정도 넣지 않고 비워둔다", scores: { saving: 2 } },
+          { label: "앉아 있다가 어느새 시간이 끝난다", scores: { low: 2 } },
+          { label: "그대로 누워서 세상과 잠깐 끊긴다", scores: { empty: 2 } }
+        ] },
+        { prompt: "요즘 메시지 답장 속도는?", options: [
+          { label: "읽으면 바로 답하고 대화도 이어간다", scores: { full: 2 } },
+          { label: "조금 늦어도 무난하게 답한다", scores: { steady: 2 } },
+          { label: "중요한 연락부터 골라 답한다", scores: { saving: 2 } },
+          { label: "답장을 생각만 하고 놓칠 때가 있다", scores: { low: 2 } },
+          { label: "알림 숫자가 이제 배경처럼 보인다", scores: { empty: 2 } }
+        ] },
+        { prompt: "이번 주 나를 가장 닮은 문장은?", options: [
+          { label: "할 만하고, 재밌는 일도 더 찾고 싶다", scores: { full: 2 } },
+          { label: "적당히 바쁘지만 내 리듬은 지킨다", scores: { steady: 2 } },
+          { label: "쓸 에너지와 아낄 에너지를 구분한다", scores: { saving: 2 } },
+          { label: "크게 문제는 없지만 계속 졸린 느낌", scores: { low: 2 } },
+          { label: "이번 주는 로딩 화면이 너무 길다", scores: { empty: 2 } }
+        ] },
+        { prompt: "지금 딱 하나를 받을 수 있다면?", options: [
+          { label: "새로운 계획을 시작할 기회", scores: { full: 2 } },
+          { label: "기분 좋은 약속 하나", scores: { steady: 2 } },
+          { label: "아무도 건드리지 않는 자유 시간", scores: { saving: 2 } },
+          { label: "생각 없이 푹 잘 수 있는 밤", scores: { low: 2 } },
+          { label: "이번 주를 건너뛰는 리모컨", scores: { empty: 2 } }
+        ] }
+      ],
+      results: {
+        full: { title: "에너지 만땅형", summary: "움직일수록 다음 재미가 더 잘 보이는 상태", description: "요즘의 당신은 새로운 일과 사람을 받아들일 여유가 꽤 있어요. 일정이 조금 늘어도 피로보다 기대가 먼저 오는 날이 많아요.", strengths: ["시작 속도가 빠름", "새로운 자극을 잘 받음", "사람과 일 사이 전환이 가벼움"], tip: "에너지가 넉넉한 날의 속도와 표정이 지금 꽤 선명해요.", kukuComment: "지금 너 옆에 있으면 나까지 괜히 바빠질 것 같은데?", moodTitle: "에너지 키워드", moodItems: ["시작", "활기", "호기심"], matchTitle: "같이 놀기 좋은 타입", matchLabel: "안정 유지형", matchDescription: "당신의 추진력과 상대의 고른 리듬이 잘 섞여요.", heroEmoji: "🔋" },
+        steady: { title: "안정 유지형", summary: "무리하지 않으면서 일상을 고르게 굴리는 상태", description: "크게 들뜨지도 바닥나지도 않은 채 내 속도를 유지하고 있어요. 필요한 일과 즐거운 일을 적당히 나누는 감각이 살아 있어요.", strengths: ["고른 생활 리듬", "무리 없는 관계 온도", "일상 회복력이 안정적"], tip: "화려하진 않아도 꽤 오래 가는 배터리 모드예요.", kukuComment: "너 은근 오래 가는 타입이네. 배터리 표시가 잘 안 줄어.", moodTitle: "에너지 키워드", moodItems: ["균형", "지속", "평온"], matchTitle: "같이 놀기 좋은 타입", matchLabel: "에너지 만땅형", matchDescription: "상대의 활기가 평온한 리듬에 작은 재미를 더해줘요.", heroEmoji: "🌤️" },
+        saving: { title: "선택 절전형", summary: "중요한 곳에만 에너지를 골라 쓰는 상태", description: "지금은 모든 요청에 같은 힘을 쓰기보다 무엇을 남길지 빠르게 고르는 편이에요. 사람과 일정 사이에서 나만의 절전 기준이 분명해요.", strengths: ["우선순위 감각", "거절과 보류의 구분", "에너지 소비를 잘 알아챔"], tip: "꺼진 게 아니라 필요한 순간을 위해 밝기를 낮춘 모드에 가까워요.", kukuComment: "선택적 절전이라더니 좋아하는 얘기 나오면 바로 켜지잖아.", moodTitle: "에너지 키워드", moodItems: ["선택", "절전", "우선순위"], matchTitle: "같이 놀기 좋은 타입", matchLabel: "안정 유지형", matchDescription: "서로 과하게 끌어당기지 않아 편하게 시간을 보낼 수 있어요.", heroEmoji: "🪫" },
+        low: { title: "느린 충전형", summary: "움직이고는 있지만 로딩이 평소보다 긴 상태", description: "할 일은 해내도 전환마다 작은 멈춤이 필요한 때예요. 반응이 느린 건 의지가 없어서라기보다 쓸 수 있는 여백이 줄어든 쪽에 가까워요.", strengths: ["내 피로 신호를 알아챔", "꼭 필요한 일은 놓치지 않음", "느린 속도에서도 계속 움직임"], tip: "지금은 빠른 모드보다 한 칸씩 채워지는 화면이 더 닮았어요.", kukuComment: "답장 쓰다 잠든 거 아니지? 아직 커서 깜빡이는 중이지?", moodTitle: "에너지 키워드", moodItems: ["로딩", "느린 전환", "작은 회복"], matchTitle: "같이 놀기 좋은 타입", matchLabel: "선택 절전형", matchDescription: "서로의 남은 에너지를 굳이 설명하지 않아도 알아보기 쉬워요.", heroEmoji: "☕" },
+        empty: { title: "완전 방전형", summary: "오늘의 할당량을 이미 꽤 많이 써버린 상태", description: "사소한 선택이나 짧은 답장도 평소보다 무겁게 느껴질 수 있어요. 지금의 당신은 게으른 사람보다 충전 화면을 오래 보고 있는 사람에 가까워요.", strengths: ["바닥 신호가 분명함", "불필요한 자극에서 멀어짐", "혼자 있는 시간의 필요를 잘 앎"], tip: "지금 화면에는 번쩍이는 알림보다 조용한 충전 표시가 더 잘 어울려요.", kukuComment: "오늘은 네가 아니라 충전기 쪽이 주인공인 날이네.", moodTitle: "에너지 키워드", moodItems: ["방전", "무알림", "정지 화면"], matchTitle: "같이 놀기 좋은 타입", matchLabel: "느린 충전형", matchDescription: "말을 많이 하지 않아도 같은 속도로 쉬기 편한 조합이에요.", heroEmoji: "🛌" }
+      },
+      resultPreview: ["에너지 만땅형", "안정 유지형", "선택 절전형", "느린 충전형", "완전 방전형"],
+      relatedIds: ["test-002", "test-019", "test-020"],
+      callout: "같은 하루라도 누구는 시작 화면이고 누구는 충전 화면일 수 있어요."
+    }),
+    "test-022": makePage({
+      category: "무드 테스트",
+      title: "오늘 끌리는 장면은?",
+      summary: "설명보다 먼저 눈길이 가는 장면을 고르며 오늘의 감정 무드를 찾아봐요.",
+      heroCardSubtitle: "눈길이 머무는 곳은?",
+      heroArt: { centerEmoji: "🖼️", stickers: ["🌊", "🌃", "🌿", "🎡", "☕", "🌙"] },
+      questionLayout: "image-grid",
+      loadingMessage: "고른 장면의 색과 공기를 이어 오늘의 무드를 만들고 있어요.",
+      questions: [
+        { prompt: "지금 창문을 열었을 때 보고 싶은 풍경은?", options: [
+          { emoji: "🌊", label: "바람 부는 바다", description: "탁 트인 수평선", scores: { open: 2 } },
+          { emoji: "🌃", label: "불빛 많은 거리", description: "늦은 밤의 활기", scores: { sparkle: 2 } },
+          { emoji: "🌿", label: "조용한 숲길", description: "나뭇잎 사이 그늘", scores: { calm: 2 } },
+          { emoji: "🛋️", label: "정돈된 내 방", description: "익숙한 담요와 음악", scores: { cozy: 2 } }
+        ] },
+        { prompt: "오늘 한 장의 사진을 남긴다면?", options: [
+          { emoji: "☁️", label: "넓은 하늘", description: "아무것도 막지 않는 장면", scores: { open: 2 } },
+          { emoji: "🎡", label: "놀이공원 불빛", description: "색이 가득한 순간", scores: { sparkle: 2 } },
+          { emoji: "🍃", label: "흔들리는 그림자", description: "조용히 움직이는 빛", scores: { calm: 2 } },
+          { emoji: "☕", label: "따뜻한 테이블", description: "컵과 작은 디저트", scores: { cozy: 2 } }
+        ] },
+        { prompt: "마음에 저장하고 싶은 소리는?", options: [
+          { emoji: "🌬️", label: "창문을 지나는 바람", description: "멀리 나가는 느낌", scores: { open: 2 } },
+          { emoji: "🎵", label: "공연 직전의 음악", description: "곧 시작될 것 같은 떨림", scores: { sparkle: 2 } },
+          { emoji: "🌧️", label: "잔잔한 빗소리", description: "생각이 느려지는 리듬", scores: { calm: 2 } },
+          { emoji: "📻", label: "작은 라디오 소리", description: "방 안을 채우는 목소리", scores: { cozy: 2 } }
+        ] },
+        { prompt: "오늘의 색을 하나 고른다면?", options: [
+          { emoji: "🩵", label: "맑은 파랑", description: "공간이 넓어지는 색", scores: { open: 2 } },
+          { emoji: "❤️", label: "선명한 빨강", description: "시선이 먼저 가는 색", scores: { sparkle: 2 } },
+          { emoji: "💚", label: "차분한 초록", description: "숨이 고르게 되는 색", scores: { calm: 2 } },
+          { emoji: "🤎", label: "부드러운 갈색", description: "익숙하고 포근한 색", scores: { cozy: 2 } }
+        ] },
+        { prompt: "잠깐 사라질 수 있다면 어디로?", options: [
+          { emoji: "🚆", label: "처음 가는 도시", description: "목적지는 도착해서 정하기", scores: { open: 2 } },
+          { emoji: "🎪", label: "사람 많은 축제", description: "웃음과 음악 사이", scores: { sparkle: 2 } },
+          { emoji: "🏞️", label: "호수 옆 벤치", description: "말 없이 물결 보기", scores: { calm: 2 } },
+          { emoji: "🏠", label: "불 켜진 작은 집", description: "아무도 재촉하지 않는 곳", scores: { cozy: 2 } }
+        ] },
+        { prompt: "오늘 옆에 두고 싶은 물건은?", options: [
+          { emoji: "🗺️", label: "접힌 지도", description: "아직 안 가본 곳 표시하기", scores: { open: 2 } },
+          { emoji: "📸", label: "작은 카메라", description: "재밌는 순간 바로 남기기", scores: { sparkle: 2 } },
+          { emoji: "📓", label: "빈 노트", description: "떠오르는 생각 천천히 적기", scores: { calm: 2 } },
+          { emoji: "🧸", label: "오래된 인형", description: "익숙한 촉감 곁에 두기", scores: { cozy: 2 } }
+        ] },
+        { prompt: "하루 끝에 걷고 싶은 길은?", options: [
+          { emoji: "🌉", label: "강 위의 긴 다리", description: "밤공기와 넓은 시야", scores: { open: 2 } },
+          { emoji: "🏙️", label: "네온사인 골목", description: "아직 끝나지 않은 하루", scores: { sparkle: 2 } },
+          { emoji: "🌲", label: "가로수 사이 산책로", description: "발소리만 들리는 길", scores: { calm: 2 } },
+          { emoji: "🏡", label: "집 앞 익숙한 골목", description: "곧 도착한다는 안도감", scores: { cozy: 2 } }
+        ] },
+        { prompt: "지금 가장 머물고 싶은 장면은?", options: [
+          { emoji: "🛫", label: "이륙 직전 창가", description: "어디든 갈 수 있는 순간", scores: { open: 2 } },
+          { emoji: "🎆", label: "불꽃이 터지는 밤", description: "짧고 선명한 장면", scores: { sparkle: 2 } },
+          { emoji: "🌙", label: "달빛 든 빈 방", description: "생각이 가라앉는 시간", scores: { calm: 2 } },
+          { emoji: "🕯️", label: "작은 조명 아래", description: "내 것들에 둘러싸인 자리", scores: { cozy: 2 } }
+        ] }
+      ],
+      results: {
+        open: { title: "바람 환기형", summary: "넓은 장면과 새로운 공기가 필요한 오늘", description: "오늘은 익숙한 화면보다 시야가 트이는 장면에 마음이 먼저 가요. 멀리 가고 싶다기보다, 잠깐이라도 다른 공기로 바뀌는 순간이 끌리는 날이에요.", strengths: ["새로운 풍경에 빠르게 반응함", "공간이 바뀌면 기분도 잘 전환됨", "가능성이 열린 장면을 좋아함"], tip: "오늘의 시선은 닫힌 결론보다 열린 창문 쪽에 더 오래 머물러요.", kukuComment: "지도만 펼쳤는데 벌써 마음은 한 정거장 먼저 갔네.", moodTitle: "장면 키워드", moodItems: ["바람", "수평선", "이동"], matchTitle: "함께 보고 싶은 장면", matchLabel: "포근한 귀가형", matchDescription: "멀리 본 뒤 편하게 돌아올 자리가 있는 조합이에요.", heroEmoji: "🌊" },
+        sparkle: { title: "반짝 점화형", summary: "선명한 색과 재밌는 사건이 당기는 오늘", description: "오늘은 조용히 지나가는 장면보다 한 번 더 돌아보게 되는 빛과 소리에 마음이 움직여요. 평범한 하루 안에서도 작은 사건 하나를 기다리는 무드예요.", strengths: ["재밌는 순간을 잘 발견함", "사람과 분위기에서 에너지를 얻음", "선명한 기억을 남기고 싶어함"], tip: "오늘의 시선은 설명보다 먼저 반짝이는 것에 솔직하게 반응해요.", kukuComment: "조용히 고르라니까 제일 반짝이는 걸 바로 집었네.", moodTitle: "장면 키워드", moodItems: ["불빛", "사건", "설렘"], matchTitle: "함께 보고 싶은 장면", matchLabel: "고요한 관찰형", matchDescription: "당신의 반짝임과 상대의 차분함이 장면을 더 오래 남겨줘요.", heroEmoji: "🎡" },
+        calm: { title: "고요 관찰형", summary: "작은 움직임과 잔잔한 공기가 편한 오늘", description: "오늘은 큰 자극보다 빛의 변화나 작은 소리처럼 천천히 알아차리는 장면이 끌려요. 마음이 조용한 쪽으로 기울며 주변을 세밀하게 보고 있어요.", strengths: ["미묘한 분위기를 잘 느낌", "천천히 머무는 시간을 좋아함", "작은 변화에서 의미를 찾음"], tip: "오늘의 장면은 빠르게 넘기기보다 한 프레임 오래 보는 쪽에 가까워요.", kukuComment: "아무 말 없는 장면 골라놓고 속으로는 제일 많이 보고 있지?", moodTitle: "장면 키워드", moodItems: ["그늘", "빗소리", "정적"], matchTitle: "함께 보고 싶은 장면", matchLabel: "반짝 점화형", matchDescription: "상대의 생동감이 고요한 화면에 재미있는 초점을 더해줘요.", heroEmoji: "🌿" },
+        cozy: { title: "포근한 귀가형", summary: "익숙한 온도와 안전한 자리가 끌리는 오늘", description: "오늘은 새로운 곳보다 나를 이미 잘 아는 공간에 마음이 가요. 익숙한 물건과 작은 조명처럼 긴 설명 없이 편안해지는 장면을 찾고 있어요.", strengths: ["나를 편하게 하는 요소를 잘 앎", "익숙한 공간에서 회복이 빠름", "부드러운 온도와 촉감을 좋아함"], tip: "오늘의 시선은 멀리 있는 이벤트보다 가까운 온기를 먼저 찾아요.", kukuComment: "결국 제일 좋은 자리는 네 담요 옆이었구나.", moodTitle: "장면 키워드", moodItems: ["온기", "익숙함", "귀가"], matchTitle: "함께 보고 싶은 장면", matchLabel: "바람 환기형", matchDescription: "상대의 새로운 공기가 익숙한 하루에 가벼운 환기를 만들어줘요.", heroEmoji: "🛋️" }
+      },
+      resultPreview: ["바람 환기형", "반짝 점화형", "고요 관찰형", "포근한 귀가형"],
+      relatedIds: ["test-014", "test-018", "test-015"],
+      callout: "같은 사진을 봐도 먼저 들어오는 색과 소리는 사람마다 꽤 달라요."
+    }),
+    "test-023": makePage({
+      category: "라이프 테스트",
+      title: "요즘 내 여유 잔량은?",
+      summary: "일상 반응에 점수를 쌓아 마음에 남은 여백을 확인하는 점수 누적형 테스트예요.",
+      heroCardSubtitle: "마음에 빈칸이 남았을까?",
+      heroArt: { centerEmoji: "🫙", stickers: ["🫧", "📅", "🎧", "🌙", "☕", "💬"] },
+      scoringMode: "range-total",
+      loadingMessage: "일상에 남은 작은 빈칸을 모아 여유 잔량을 계산하고 있어요.",
+      questions: [
+        { prompt: "예정에 없던 부탁이 들어오면?", options: [
+          { label: "흥미로우면 기꺼이 해본다", points: 3 }, { label: "일정을 보고 가능하면 한다", points: 2 }, { label: "미루거나 범위를 줄여서 한다", points: 1 }, { label: "듣는 순간 마음부터 꽉 막힌다", points: 0 }
+        ] },
+        { prompt: "카페에서 주문을 기다리는 몇 분 동안?", options: [
+          { label: "주변을 구경하며 그냥 기다린다", points: 3 }, { label: "메시지 한두 개를 확인한다", points: 2 }, { label: "할 일을 떠올리며 마음이 급해진다", points: 1 }, { label: "왜 이렇게 오래 걸리지 싶어진다", points: 0 }
+        ] },
+        { prompt: "친구의 긴 메시지를 받으면?", options: [
+          { label: "천천히 읽고 내 생각도 길게 보낸다", points: 3 }, { label: "읽고 여유 있을 때 답한다", points: 2 }, { label: "핵심만 보고 짧게 반응한다", points: 1 }, { label: "알림만 봐도 답장 숙제가 생긴 느낌", points: 0 }
+        ] },
+        { prompt: "하루 계획이 조금 어긋났을 때?", options: [
+          { label: "그럴 수도 있지 하고 새 흐름을 탄다", points: 3 }, { label: "중요한 일정만 다시 맞춘다", points: 2 }, { label: "괜찮은 척하지만 계속 신경 쓰인다", points: 1 }, { label: "하나 틀어지면 하루 전체가 망한 느낌", points: 0 }
+        ] },
+        { prompt: "요즘 식사 시간은 어떤 편?", options: [
+          { label: "천천히 먹으며 맛도 잘 느낀다", points: 3 }, { label: "보통 속도로 무난하게 챙긴다", points: 2 }, { label: "다음 일을 생각하며 빠르게 먹는다", points: 1 }, { label: "끼니를 놓치거나 대충 넘길 때가 많다", points: 0 }
+        ] },
+        { prompt: "재밌어 보이는 영상이나 글을 발견하면?", options: [
+          { label: "지금 멈춰서 끝까지 즐긴다", points: 3 }, { label: "저장해두고 실제로 나중에 본다", points: 2 }, { label: "저장은 하지만 대부분 쌓여간다", points: 1 }, { label: "재밌어 보여도 볼 힘이 없다", points: 0 }
+        ] },
+        { prompt: "주말에 빈 시간이 생기면?", options: [
+          { label: "하고 싶던 일을 떠올리며 신난다", points: 3 }, { label: "푹 쉬거나 가볍게 나간다", points: 2 }, { label: "밀린 일을 처리해야 마음이 놓인다", points: 1 }, { label: "누워만 있다가 끝나도 회복이 안 된다", points: 0 }
+        ] },
+        { prompt: "지금 내 머릿속 화면에 가장 가까운 건?", options: [
+          { label: "창이 몇 개만 열린 깔끔한 화면", points: 3 }, { label: "필요한 창이 적당히 열린 화면", points: 2 }, { label: "탭이 많지만 아직 버틸 만한 화면", points: 1 }, { label: "어디서 소리가 나는지도 모르는 화면", points: 0 }
+        ] }
+      ],
+      resultRanges: [
+        { min: 19, max: 24, key: "wide" },
+        { min: 13, max: 18, key: "room" },
+        { min: 7, max: 12, key: "tight" },
+        { min: 0, max: 6, key: "packed" }
+      ],
+      results: {
+        wide: { title: "여백 넉넉형", summary: "예상 밖의 일도 잠깐 구경할 공간이 남은 상태", description: "요즘의 당신은 일정과 감정 사이에 작은 빈칸이 꽤 남아 있어요. 갑작스러운 변화가 와도 바로 밀려나기보다 한 번 보고 고를 수 있는 여유가 있어요.", strengths: ["기다림을 크게 불편해하지 않음", "예정 밖 재미를 받아들일 수 있음", "일상 속 감각이 비교적 또렷함"], tip: "지금은 빈칸이 낭비보다 재미가 들어올 자리처럼 보여요.", kukuComment: "네 일정표에는 낙서할 칸도 남아 있네. 좀 부럽다.", moodTitle: "여유 키워드", moodItems: ["빈칸", "느린 식사", "예정 밖 재미"], matchTitle: "비슷한 리듬", matchLabel: "숨통 한 칸형", matchDescription: "서로 급하게 결론 내리지 않아 편하게 시간을 보내기 좋아요.", heroEmoji: "🫙" },
+        room: { title: "숨통 한 칸형", summary: "바쁘지만 내가 고를 수 있는 작은 공간은 남은 상태", description: "할 일은 많아도 모든 순간에 쫓기지는 않아요. 중요한 것과 미뤄도 되는 것을 나누며 일상에 한 칸 정도의 숨통을 남겨두는 편이에요.", strengths: ["우선순위를 조절함", "작은 휴식을 실제로 사용함", "변화에 어느 정도 유연함"], tip: "꽉 차기 직전에도 한 칸을 남기는 감각이 요즘의 당신과 닮았어요.", kukuComment: "한 칸 남겨둔 거 내가 간식 놓는 자리로 써도 돼?", moodTitle: "여유 키워드", moodItems: ["한 칸", "조절", "짧은 휴식"], matchTitle: "비슷한 리듬", matchLabel: "여백 넉넉형", matchDescription: "상대의 느긋함이 남은 한 칸을 더 편하게 지켜줘요.", heroEmoji: "🫧" },
+        tight: { title: "빽빽 일정형", summary: "일상은 굴러가지만 작은 변수에도 화면이 복잡해지는 상태", description: "필요한 일은 해내고 있지만 예상 밖의 요청이 끼어들 공간은 넓지 않아요. 쉬는 순간에도 다음 할 일을 떠올리며 머릿속 탭이 계속 열려 있는 편이에요.", strengths: ["바쁜 중에도 기본 일정을 유지함", "중요한 일을 놓치지 않음", "부족한 여유를 빠르게 알아챔"], tip: "요즘 화면은 고장 난 게 아니라 열린 탭이 유난히 많은 쪽에 가까워요.", kukuComment: "탭 하나 닫으면 다른 데서 두 개가 열리는 마술 중이지?", moodTitle: "여유 키워드", moodItems: ["열린 탭", "다음 일정", "짧은 답장"], matchTitle: "비슷한 리듬", matchLabel: "숨통 한 칸형", matchDescription: "상대의 작은 여백이 복잡한 흐름을 잠깐 느슨하게 해줘요.", heroEmoji: "📚" },
+        packed: { title: "여백 실종형", summary: "쉬는 시간까지 다른 일의 꼬리표가 따라오는 상태", description: "지금은 짧은 기다림이나 메시지 하나도 새 할 일처럼 느껴질 수 있어요. 해야 할 일보다 그것들이 동시에 떠 있는 상태 자체가 더 무겁게 다가오는 때예요.", strengths: ["과부하 신호가 분명함", "핵심만 남기려는 감각", "지금의 상태를 숨기기 어려울 만큼 솔직함"], tip: "오늘의 화면에는 새 탭보다 잠깐의 빈 화면이 더 잘 어울려요.", kukuComment: "여유가 실종됐는데 마지막 목격 장소가 네 일정표래.", moodTitle: "여유 키워드", moodItems: ["과부하", "알림 피로", "빈 화면"], matchTitle: "비슷한 리듬", matchLabel: "빽빽 일정형", matchDescription: "서로 긴 설명 없이도 지금 복잡한 상태를 알아보기 쉬워요.", heroEmoji: "🗂️" }
+      },
+      resultPreview: ["여백 넉넉형", "숨통 한 칸형", "빽빽 일정형", "여백 실종형"],
+      relatedIds: ["test-004", "test-016", "test-002"],
+      callout: "여유는 시간이 많고 적은 것보다, 갑작스러운 한 가지가 들어올 자리가 있는지에 더 가까워요."
     })
   };
 
@@ -709,7 +946,10 @@
     "test-017": { start: "beauty", journey: "relation", result: "beauty" },
     "test-018": { start: "mood", journey: "mood", result: "mood" },
     "test-019": { start: "rest", journey: "rest", result: "digital" },
-    "test-020": { start: "relation", journey: "rest", result: "digital" }
+    "test-020": { start: "relation", journey: "rest", result: "digital" },
+    "test-021": { start: "rest", journey: "rest", result: "digital" },
+    "test-022": { start: "mood", journey: "mood", result: "mood" },
+    "test-023": { start: "focus", journey: "rest", result: "rest" }
   };
 
   const placementMeta = {

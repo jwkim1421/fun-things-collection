@@ -159,16 +159,16 @@
       heroArt: { centerEmoji: "🧃", stickers: ["🌿", "☕", "🛋️", "📩", "🫧", "🪴", "🌤️", "💤"] },
       loadingMessage: "답변을 조합해서 당신의 회복 루틴과 현재 에너지 상태를 정리하고 있습니다.",
       questions: [
-        { prompt: "업무가 몰릴 때 나는 먼저 무엇을 하나요?", options: [{ label: "우선순위를 정리하고 할 일을 쪼개서 본다.", scores: { ritual: 2, buffer: 1 } }, { label: "일단 눈앞의 급한 것부터 처리하며 버틴다.", scores: { sprint: 2, alert: 1 } }] },
+        { prompt: "업무가 몰릴 때 나는 먼저 무엇을 하나요?", options: [{ label: "우선순위를 정리하고 할 일을 쪼개서 본다.", scores: { reset: 2, buffer: 1 } }, { label: "일단 눈앞의 급한 것부터 처리하며 버틴다.", scores: { sprint: 2, alert: 1 } }] },
         { prompt: "퇴근 후 가장 자주 드는 생각은?", options: [{ label: "잠깐 쉬고 나면 다시 괜찮아질 것 같다.", scores: { buffer: 2 } }, { label: "아무것도 하기 싫고 기운이 뚝 떨어진다.", scores: { alert: 2, sprint: 1 } }] },
-        { prompt: "휴식 시간이 생기면 더 끌리는 쪽은?", options: [{ label: "혼자 조용히 정리되는 시간을 갖고 싶다.", scores: { reset: 2, ritual: 1 } }, { label: "사람 만나며 기분 전환을 하고 싶다.", scores: { buffer: 2, sprint: 1 } }] },
-        { prompt: "일이 꼬일 때 내 반응은?", options: [{ label: "문제가 뭔지 바로 파악하고 다시 순서를 잡는다.", scores: { ritual: 2 } }, { label: "속으로는 지치지만 표면적으로는 일단 끌고 간다.", scores: { sprint: 2, alert: 1 } }] },
-        { prompt: "휴대폰 알림이 쌓이면 어떤 편인가요?", options: [{ label: "한 번에 정리하며 흐름을 통제하려 한다.", scores: { ritual: 2, reset: 1 } }, { label: "알림만 봐도 더 피곤해져서 미루게 된다.", scores: { alert: 2 } }] },
-        { prompt: "요즘 주말을 보내는 방식은?", options: [{ label: "에너지를 채우는 루틴을 일부러 만든다.", scores: { reset: 2, ritual: 1 } }, { label: "쉬긴 쉬는데 회복된 느낌은 잘 안 든다.", scores: { alert: 2, sprint: 1 } }] },
+        { prompt: "휴식 시간이 생기면 더 끌리는 쪽은?", options: [{ label: "혼자 조용히 정리되는 시간을 갖고 싶다.", scores: { reset: 3 } }, { label: "사람 만나며 기분 전환을 하고 싶다.", scores: { buffer: 2, sprint: 1 } }] },
+        { prompt: "일이 꼬일 때 내 반응은?", options: [{ label: "문제가 뭔지 바로 파악하고 다시 순서를 잡는다.", scores: { reset: 2 } }, { label: "속으로는 지치지만 표면적으로는 일단 끌고 간다.", scores: { sprint: 2, alert: 1 } }] },
+        { prompt: "휴대폰 알림이 쌓이면 어떤 편인가요?", options: [{ label: "한 번에 정리하며 흐름을 통제하려 한다.", scores: { reset: 3 } }, { label: "알림만 봐도 더 피곤해져서 미루게 된다.", scores: { alert: 2 } }] },
+        { prompt: "요즘 주말을 보내는 방식은?", options: [{ label: "에너지를 채우는 루틴을 일부러 만든다.", scores: { reset: 3 } }, { label: "쉬긴 쉬는데 회복된 느낌은 잘 안 든다.", scores: { alert: 2, sprint: 1 } }] },
         { prompt: "동료가 힘들어 보일 때 나는?", options: [{ label: "서로 무너지지 않게 분위기를 살피고 챙긴다.", scores: { buffer: 2 } }, { label: "나도 벅차서 먼저 내 일부터 끝내고 싶다.", scores: { sprint: 2, alert: 1 } }] },
-        { prompt: "에너지 관리에서 더 중요한 것은?", options: [{ label: "무너지기 전에 쉬는 타이밍을 잡는 것", scores: { reset: 2, ritual: 1 } }, { label: "어쨌든 마감 전까지 버티는 추진력", scores: { sprint: 2 } }] },
-        { prompt: "연속으로 바쁜 날이 이어질 때 나는?", options: [{ label: "짧아도 쉬는 루틴을 꼭 넣으려 한다.", scores: { ritual: 2, reset: 1 } }, { label: "쉬는 감각이 무뎌져 그냥 관성으로 움직인다.", scores: { alert: 2 } }] },
-        { prompt: "지금의 나를 가장 잘 설명하는 말은?", options: [{ label: "피곤해도 회복 포인트를 아는 편", scores: { buffer: 2, ritual: 1 } }, { label: "쉬어도 덜 쉬는 느낌이 남아 있다.", scores: { alert: 2, reset: 1 } }] }
+        { prompt: "에너지 관리에서 더 중요한 것은?", options: [{ label: "무너지기 전에 쉬는 타이밍을 잡는 것", scores: { reset: 3 } }, { label: "어쨌든 마감 전까지 버티는 추진력", scores: { sprint: 2 } }] },
+        { prompt: "연속으로 바쁜 날이 이어질 때 나는?", options: [{ label: "짧아도 쉬는 루틴을 꼭 넣으려 한다.", scores: { reset: 3 } }, { label: "쉬는 감각이 무뎌져 그냥 관성으로 움직인다.", scores: { alert: 2 } }] },
+        { prompt: "지금의 나를 가장 잘 설명하는 말은?", options: [{ label: "피곤해도 회복 포인트를 아는 편", scores: { buffer: 2, reset: 1 } }, { label: "쉬어도 덜 쉬는 느낌이 남아 있다.", scores: { alert: 2, reset: 1 } }] }
       ],
       results: {
         sprint: { title: "버티는 스프린터형", summary: "체력과 책임감으로 끝까지 끌고 가는 편", description: "당신은 바쁜 상황에서 일단 해내는 힘이 강합니다. 순간 추진력과 책임감이 좋아 팀에서 믿음직하게 보일 수 있지만, 회복 없이 오래 버티는 방식이 굳어지면 어느 순간 급격히 방전될 수 있습니다.", strengths: ["마감 앞에서 강한 집중력", "어려운 상황에서도 손을 놓지 않는 끈기", "실행력이 빠르고 즉각적임"], tip: "버티는 힘이 큰 만큼, 쉬는 힘을 루틴으로 만들면 훨씬 오래 갑니다.", moodTitle: "지금 추천하는 회복 방식", moodItems: ["할 일 3개만 남기기", "퇴근 후 무알림 1시간", "짧은 낮잠"], matchTitle: "찰떡 조합", matchLabel: "리셋 설계형", matchDescription: "당신의 추진력에 회복 루틴이 얹히면 오래 가는 페이스가 완성됩니다.", heroEmoji: "🏃" },
