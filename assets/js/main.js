@@ -77,6 +77,24 @@ const PLAY_CARDS = [
     time: "1분",
     icon: "?",
     tone: "coral"
+  },
+  {
+    href: "./play/emotion-trash.html",
+    eyebrow: "감정 비우기 · 1분",
+    title: "오늘 마음, 여기 두고 갈래?",
+    description: "걸리는 말을 짧게 적고 구겨서 화면 밖으로 보내요.",
+    time: "1분",
+    icon: "⌁",
+    tone: "blue"
+  },
+  {
+    href: "./play/choice-roulette.html",
+    eyebrow: "선택 룰렛 · 30초",
+    title: "쿠쿠야, 하나만 골라줘",
+    description: "고민되는 선택지만 켜두면 쿠쿠가 하나를 뽑아줘요.",
+    time: "30초",
+    icon: "↻",
+    tone: "green"
   }
 ];
 

@@ -212,6 +212,22 @@ const PLAY_CONTENT = {
       mischief: { icon: "?", title: "장난 선공형 결말", line: "반가운 마음을 진지한 인사보다 장난으로 먼저 보여주는 타입", detail: "쿠쿠는 화들짝 놀라 카드를 떨어뜨렸지만 곧바로 웃었어요. 둘은 서로의 오늘 운세를 마음대로 지어주며 부스 마감 시간까지 눌러앉았어요." },
       observer: { icon: "○", title: "느긋한 관찰형 결말", line: "서두르지 않고 상대가 나를 발견하는 순간을 즐기는 타입", detail: "세 장째 카드를 넘기던 쿠쿠가 드디어 당신을 보고 눈을 동그랗게 떴어요. 말없이 웃은 뒤 둘은 가장 한산한 길로 축제를 한 바퀴 돌았어요." }
     }
+  },
+  "emotion-trash": {
+    type: "trash",
+    title: "오늘 마음, 여기 두고 갈래?",
+    category: "감정 비우기 · 1분",
+    intro: "머릿속에 걸리는 말을 짧게 적고 구겨서 보내요. 적은 문장은 저장하지 않아요.",
+    icon: "⌁",
+    presets: ["과제", "답장", "약속", "눈치", "피곤함"]
+  },
+  "choice-roulette": {
+    type: "roulette",
+    title: "쿠쿠야, 하나만 골라줘",
+    category: "선택 룰렛 · 30초",
+    intro: "오늘 고민되는 선택지만 켜두세요. 쿠쿠가 핑계 없이 하나를 골라줘요.",
+    icon: "↻",
+    items: ["맛있는 거 먹기", "산책하기", "카페 가기", "집에서 쉬기", "친구 만나기", "밀린 일 하나 끝내기"]
   }
 };
 
@@ -298,7 +314,9 @@ function getKukuComment(contentType, resultKey) {
     daily: "오늘 상자는 골랐고, 이제 어떻게 쓸지는 네 마음이야.",
     ranking: "맨 위 카드보다 두 번째 카드에서 더 오래 고민한 거 아니야?",
     allocation: "100을 나누는 데도 지금 마음이 꽤 솔직하게 나오네.",
-    story: "다른 길을 골랐으면 쿠쿠를 완전히 다른 곳에서 만났겠지?"
+    story: "다른 길을 골랐으면 쿠쿠를 완전히 다른 곳에서 만났겠지?",
+    trash: "적어낸 말은 쿠쿠도 기억하지 않을게. 여기 두고 가자.",
+    roulette: "쿠쿠가 골랐으니 결과가 마음에 안 들면 네 마음은 이미 정해진 거야."
   };
 
   if (contentType === "battery") return comments.battery[resultKey] || comments.battery.close;
@@ -371,7 +389,8 @@ function createPlaygroundApp() {
     order: [],
     allocation: {},
     storyNode: "",
-    storyPath: []
+    storyPath: [],
+    rouletteEnabled: []
   };
   let restoringHistory = false;
 
@@ -389,6 +408,7 @@ function createPlaygroundApp() {
       allocation: Object.assign({}, state.allocation),
       storyNode: state.storyNode,
       storyPath: [...state.storyPath],
+      rouletteEnabled: [...state.rouletteEnabled],
       resultKey
     };
   }
@@ -404,6 +424,7 @@ function createPlaygroundApp() {
     state.allocation = Object.assign({}, snapshot.allocation || {});
     state.storyNode = snapshot.storyNode || content.startNode || "";
     state.storyPath = Array.isArray(snapshot.storyPath) ? [...snapshot.storyPath] : [];
+    state.rouletteEnabled = Array.isArray(snapshot.rouletteEnabled) ? [...snapshot.rouletteEnabled] : [];
   }
 
   function writeHistory(screen, options = {}) {
@@ -441,7 +462,9 @@ function createPlaygroundApp() {
       daily: "green",
       ranking: "paper",
       allocation: "yellow",
-      story: "coral"
+      story: "coral",
+      trash: "blue",
+      roulette: "green"
     }[content.type] || "paper";
     root.innerHTML = `
       <section class="play-intro tone-${introTone}">
@@ -748,6 +771,84 @@ function createPlaygroundApp() {
     scrollPlaygroundToTop();
   }
 
+  function renderTrash() {
+    root.innerHTML = `
+      <section class="trash-game">
+        <span class="play-content-type">${escapePlayHtml(content.category)}</span>
+        <h1>${escapePlayHtml(content.title)}</h1>
+        <p>직접 적어도 되고, 지금 마음과 가까운 단어부터 눌러도 돼요.</p>
+        <div class="trash-presets" aria-label="마음 단어 고르기">
+          ${content.presets.map((preset) => `<button type="button" data-action="trash-preset" data-preset="${escapePlayHtml(preset)}">${escapePlayHtml(preset)}</button>`).join("")}
+        </div>
+        <div class="trash-paper">
+          <label for="trashNote">지금 머릿속에 걸리는 말</label>
+          <textarea id="trashNote" data-trash-input maxlength="120" rows="5" placeholder="여기에 잠깐 두고 갈 말을 적어보세요."></textarea>
+          <small><span data-trash-count>0</span> / 120 · 입력한 문장은 저장하지 않아요.</small>
+        </div>
+        <button class="play-primary-button" type="button" data-action="trash-submit" disabled>구겨서 보내기</button>
+      </section>
+    `;
+  }
+
+  function finishTrash(shouldTrack = true) {
+    const resultKey = "trash-done";
+    writeHistory("result", { resultKey, replace: !shouldTrack });
+    applyPlayShare(content, "여기 두고 가기 완료", "걸리던 말을 적고 화면 밖으로 보냈어요.", resultKey);
+    if (shouldTrack) trackPlayEvent("content_complete", content, { result_key: resultKey, duration_seconds: Math.max(1, Math.round((Date.now() - state.startedAt) / 1000)) });
+    root.innerHTML = renderPlayResult(content, "○", "여기 두고 가기 완료", "걸리던 말을 적고 화면 밖으로 보냈어요.", "무슨 말을 적었는지는 어디에도 남지 않아요. 잠깐 적어낸 것만으로 충분하니, 이 화면에서는 가볍게 두고 가요.", { resultLabel: "감정 비우기 완료", comment: getKukuComment("trash") });
+    hydratePlayResultAd();
+    scrollPlaygroundToTop();
+  }
+
+  function renderRoulette() {
+    const enabled = new Set(state.rouletteEnabled);
+    root.innerHTML = `
+      <section class="roulette-game">
+        <span class="play-content-type">${escapePlayHtml(content.category)}</span>
+        <h1>${escapePlayHtml(content.title)}</h1>
+        <p>후보를 눌러 켜거나 끌 수 있어요. 두 개 이상 남겨주세요.</p>
+        <div class="roulette-wheel" aria-hidden="true"><span>↻</span></div>
+        <div class="roulette-options">
+          ${content.items.map((item, index) => `<button type="button" class="${enabled.has(index) ? "is-active" : ""}" data-action="roulette-toggle" data-index="${index}" aria-pressed="${enabled.has(index)}"><span>${String(index + 1).padStart(2, "0")}</span>${escapePlayHtml(item)}</button>`).join("")}
+        </div>
+        <button class="play-primary-button" type="button" data-action="roulette-spin" ${enabled.size >= 2 ? "" : "disabled"}>룰렛 돌리기</button>
+      </section>
+    `;
+  }
+
+  function toggleRoulette(index) {
+    const enabled = new Set(state.rouletteEnabled);
+    enabled.has(index) ? enabled.delete(index) : enabled.add(index);
+    state.rouletteEnabled = [...enabled].sort((left, right) => left - right);
+    replacePlayHistory();
+    renderRoulette();
+  }
+
+  function spinRoulette() {
+    if (state.rouletteEnabled.length < 2) return;
+    const values = new Uint32Array(1);
+    window.crypto.getRandomValues(values);
+    const resultIndex = state.rouletteEnabled[values[0] % state.rouletteEnabled.length];
+    const wheel = root.querySelector(".roulette-wheel");
+    const button = root.querySelector('[data-action="roulette-spin"]');
+    if (wheel) wheel.classList.add("is-spinning");
+    if (button instanceof HTMLButtonElement) button.disabled = true;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.setTimeout(() => finishRoulette(resultIndex), reduceMotion ? 60 : 900);
+  }
+
+  function finishRoulette(resultIndex = 0, shouldTrack = true) {
+    const safeIndex = Math.max(0, Math.min(content.items.length - 1, Number(resultIndex) || 0));
+    const selectedItem = content.items[safeIndex];
+    const resultKey = `roulette-${safeIndex}`;
+    writeHistory("result", { resultKey, replace: !shouldTrack });
+    applyPlayShare(content, selectedItem, `오늘의 선택은 '${selectedItem}'이에요.`, resultKey);
+    if (shouldTrack) trackPlayEvent("content_complete", content, { result_key: resultKey, enabled_count: state.rouletteEnabled.length, duration_seconds: Math.max(1, Math.round((Date.now() - state.startedAt) / 1000)) });
+    root.innerHTML = renderPlayResult(content, "↻", selectedItem, `오늘의 선택은 '${selectedItem}'이에요.`, "룰렛은 골랐고, 따를지 말지는 여전히 네 마음이에요. 결과를 보자마자 다른 후보가 아쉬웠다면 그것도 꽤 정확한 답이에요.", { resultLabel: "선택 룰렛 결과", comment: getKukuComment("roulette"), restart: true });
+    hydratePlayResultAd();
+    scrollPlaygroundToTop();
+  }
+
   function renderPlayResult(source, icon, title, line, detail, options = {}) {
     const resultLabel = options.resultLabel || `${source.category} 결과`;
     return `
@@ -784,6 +885,7 @@ function createPlaygroundApp() {
       : {};
     state.storyNode = content.type === "story" ? content.startNode : "";
     state.storyPath = [];
+    state.rouletteEnabled = content.type === "roulette" ? content.items.map((item, index) => index) : [];
     state.startedAt = Date.now();
     writeHistory("play");
     trackPlayEvent("content_start", content);
@@ -809,6 +911,8 @@ function createPlaygroundApp() {
     if (content.type === "ranking") renderRanking();
     if (content.type === "allocation") renderAllocation();
     if (content.type === "story") renderStory();
+    if (content.type === "trash") renderTrash();
+    if (content.type === "roulette") renderRoulette();
     scrollPlaygroundToTop();
   }
 
@@ -842,9 +946,34 @@ function createPlaygroundApp() {
     if (action === "finish-ranking") finishRanking();
     if (action === "finish-allocation") finishAllocation();
     if (action === "story-choice") chooseStory(Number(button.dataset.choiceIndex));
+    if (action === "trash-preset") {
+      const textarea = root.querySelector("[data-trash-input]");
+      if (textarea instanceof HTMLTextAreaElement) {
+        textarea.value = textarea.value ? `${textarea.value}, ${button.dataset.preset}` : button.dataset.preset || "";
+        textarea.dispatchEvent(new Event("input", { bubbles: true }));
+        textarea.focus();
+      }
+    }
+    if (action === "trash-submit") {
+      const paper = root.querySelector(".trash-paper");
+      if (paper) paper.classList.add("is-discarding");
+      if (button instanceof HTMLButtonElement) button.disabled = true;
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.setTimeout(() => finishTrash(), reduceMotion ? 60 : 520);
+    }
+    if (action === "roulette-toggle") toggleRoulette(Number(button.dataset.index));
+    if (action === "roulette-spin") spinRoulette();
   });
 
   root.addEventListener("input", (event) => {
+    const textarea = event.target instanceof HTMLTextAreaElement ? event.target.closest("[data-trash-input]") : null;
+    if (textarea) {
+      const count = root.querySelector("[data-trash-count]");
+      const submit = root.querySelector('[data-action="trash-submit"]');
+      if (count) count.textContent = String(textarea.value.length);
+      if (submit instanceof HTMLButtonElement) submit.disabled = !textarea.value.trim();
+      return;
+    }
     const input = event.target instanceof HTMLInputElement ? event.target.closest("[data-allocation-id]") : null;
     if (!input) return;
     const bucketId = input.dataset.allocationId;
@@ -902,6 +1031,8 @@ function createPlaygroundApp() {
     if (state.screen === "play" && content.type === "ranking") renderRanking();
     if (state.screen === "play" && content.type === "allocation") renderAllocation();
     if (state.screen === "play" && content.type === "story") renderStory();
+    if (state.screen === "play" && content.type === "trash") renderTrash();
+    if (state.screen === "play" && content.type === "roulette") renderRoulette();
 
     const resultKey = historyState.snapshot?.resultKey || "";
     if (state.screen === "result" && content.type === "chat") finishChat(resultKey, false);
@@ -914,6 +1045,8 @@ function createPlaygroundApp() {
     if (state.screen === "result" && content.type === "ranking") finishRanking(resultKey.replace("rank-", ""), false);
     if (state.screen === "result" && content.type === "allocation") finishAllocation(resultKey.split("-")[1] || "", false);
     if (state.screen === "result" && content.type === "story") finishStory(resultKey.replace("story-", ""), false);
+    if (state.screen === "result" && content.type === "trash") finishTrash(false);
+    if (state.screen === "result" && content.type === "roulette") finishRoulette(Number(resultKey.replace("roulette-", "")), false);
     restoringHistory = false;
     scrollPlaygroundToTop();
   }
@@ -943,6 +1076,10 @@ function createPlaygroundApp() {
   } else if (content.type === "story" && /^story-[a-z]+$/.test(sharedResult)) {
     state.storyNode = content.startNode;
     finishStory(sharedResult.replace("story-", ""), false);
+  } else if (content.type === "trash" && sharedResult === "trash-done") {
+    finishTrash(false);
+  } else if (content.type === "roulette" && /^roulette-\d+$/.test(sharedResult)) {
+    finishRoulette(Number(sharedResult.replace("roulette-", "")), false);
   } else {
     renderIntro();
     writeHistory("intro", { replace: true });

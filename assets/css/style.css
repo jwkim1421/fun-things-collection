@@ -2554,6 +2554,8 @@ body,
 .bingo-game,
 .battery-game,
 .daily-game,
+.trash-game,
+.roulette-game,
 .play-result {
   width: 100%;
   min-width: 0;
@@ -3152,7 +3154,9 @@ a:focus-visible {
 /* Ranking and point-allocation playground formats. */
 .ranking-game,
 .allocation-game,
-.story-game {
+.story-game,
+.trash-game,
+.roulette-game {
   padding: clamp(24px, 6vw, 48px);
   border: 2px solid var(--line);
   border-radius: 12px;
@@ -3162,7 +3166,9 @@ a:focus-visible {
 
 .ranking-game h1,
 .allocation-game h1,
-.story-game h1 {
+.story-game h1,
+.trash-game h1,
+.roulette-game h1 {
   margin: 28px 0 0;
   font-family: "Black Han Sans", "Noto Sans KR", sans-serif;
   font-size: clamp(32px, 6vw, 52px);
@@ -3174,7 +3180,9 @@ a:focus-visible {
 
 .ranking-game > p,
 .allocation-game > p,
-.story-game > p {
+.story-game > p,
+.trash-game > p,
+.roulette-game > p {
   margin: 14px 0 0;
   color: var(--muted);
   line-height: 1.7;
@@ -3278,6 +3286,77 @@ a:focus-visible {
 .story-choice-list button strong { font-size: 16px; line-height: 1.45; word-break: keep-all; }
 .story-choice-list button b { font-size: 22px; }
 
+.trash-presets {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.trash-presets button,
+.roulette-options button {
+  color: var(--text);
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background: #fffdf8;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.trash-presets button { padding: 9px 13px; }
+.trash-presets button:hover,
+.trash-presets button:focus-visible { background: var(--tone-blue); }
+
+.trash-paper {
+  margin-top: 20px;
+  padding: 18px;
+  border: 2px solid var(--line);
+  border-radius: 9px;
+  background: #f7f3ea;
+  transform-origin: center bottom;
+}
+
+.trash-paper label { display: block; margin-bottom: 10px; font-weight: 900; }
+.trash-paper textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 14px;
+  resize: vertical;
+  color: var(--text);
+  border: 2px solid var(--line);
+  border-radius: 7px;
+  background: #fffdf8;
+  font: inherit;
+  line-height: 1.65;
+}
+.trash-paper small { display: block; margin-top: 8px; color: var(--muted); text-align: right; }
+.trash-paper.is-discarding { animation: discard-paper 500ms ease-in forwards; }
+
+@keyframes discard-paper {
+  45% { transform: rotate(-3deg) scale(0.75); opacity: 0.8; }
+  100% { transform: translateY(90px) rotate(12deg) scale(0.15); opacity: 0; }
+}
+
+.roulette-wheel {
+  width: 156px;
+  height: 156px;
+  margin: 28px auto 0;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--line);
+  border-radius: 50%;
+  background: conic-gradient(var(--tone-coral) 0 16.66%, var(--tone-blue) 0 33.33%, var(--tone-yellow) 0 50%, var(--tone-green) 0 66.66%, #ded7ca 0 83.33%, #fffdf8 0);
+  box-shadow: 5px 5px 0 rgba(40, 35, 31, 0.16);
+}
+.roulette-wheel span { width: 58px; height: 58px; display: grid; place-items: center; border: 2px solid var(--line); border-radius: 50%; background: #fffdf8; font-size: 30px; }
+.roulette-wheel.is-spinning { animation: spin-roulette 850ms cubic-bezier(0.2, 0.75, 0.2, 1); }
+@keyframes spin-roulette { to { transform: rotate(1080deg); } }
+
+.roulette-options { margin-top: 28px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.roulette-options button { min-height: 54px; padding: 10px 12px; display: flex; align-items: center; gap: 10px; text-align: left; opacity: 0.5; }
+.roulette-options button span { color: var(--accent-dark); font: 700 12px Georgia, serif; }
+.roulette-options button.is-active { background: var(--tone-green); opacity: 1; box-shadow: 3px 3px 0 rgba(40, 35, 31, 0.14); }
+
 @media (min-width: 761px) {
   .play-card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
@@ -3285,10 +3364,14 @@ a:focus-visible {
 @media (max-width: 560px) {
   .ranking-game,
   .allocation-game,
-  .story-game { padding: 20px 16px; }
+  .story-game,
+  .trash-game,
+  .roulette-game { padding: 20px 16px; }
   .ranking-game h1,
   .allocation-game h1,
-  .story-game h1 { font-size: 28px; }
+  .story-game h1,
+  .trash-game h1,
+  .roulette-game h1 { font-size: 28px; }
   .ranking-item { grid-template-columns: 28px 38px minmax(0, 1fr); gap: 8px; }
   .ranking-icon { width: 38px; height: 38px; font-size: 18px; }
   .ranking-copy strong { font-size: 14px; }
@@ -3300,4 +3383,6 @@ a:focus-visible {
   .story-scene-copy { padding: 15px 16px; font-size: 15px; }
   .story-choice-list button { min-height: 70px; padding: 12px 14px; grid-template-columns: 30px minmax(0, 1fr) 18px; }
   .story-choice-list button strong { font-size: 14px; }
+  .roulette-wheel { width: 132px; height: 132px; }
+  .roulette-options { grid-template-columns: 1fr; }
 }
