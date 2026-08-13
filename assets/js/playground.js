@@ -292,9 +292,28 @@ function applyPlayShare(content, resultTitle, resultLine, resultKey) {
   body.dataset.shareButtonTitle = "결과 확인하기";
 }
 
-function resultActions() {
+let playCommunityClientPromise = null;
+
+function getPlayCommunityClient() {
+  if (window.COOCOO_COMMUNITY) return Promise.resolve(window.COOCOO_COMMUNITY);
+  if (!playCommunityClientPromise) {
+    playCommunityClientPromise = import("./community.js").then(() => window.COOCOO_COMMUNITY || null);
+  }
+  return playCommunityClientPromise;
+}
+
+function hydratePlayCommunity(root) {
+  getPlayCommunityClient().then((client) => client && client.hydrate(root)).catch(() => null);
+}
+
+function resultActions(contentId) {
   return `
+    <div class="community-reactions" data-reaction-panel data-content-id="${escapePlayHtml(contentId)}" aria-label="콘텐츠 반응">
+      <button type="button" data-reaction="fun" aria-pressed="false"><span aria-hidden="true">☺</span><strong>재밌어요</strong><b data-reaction-count="fun">0</b></button>
+      <button type="button" data-reaction="relatable" aria-pressed="false"><span aria-hidden="true">♥</span><strong>공감돼요</strong><b data-reaction-count="relatable">0</b></button>
+    </div>
     <div class="play-share-actions">
+      <button type="button" id="btnSaveResultImage">결과 이미지 저장</button>
       <button type="button" id="btnCopyLink">링크 복사</button>
       <button type="button" id="btnKakaoShare">Kakao 공유</button>
     </div>
@@ -336,6 +355,7 @@ let playgroundAdScriptPromise = null;
 function hydratePlayResultAd() {
   const slot = document.getElementById("playResultAd");
   if (!slot) return;
+  hydratePlayCommunity(document.getElementById("playgroundApp") || document);
 
   if (!playgroundAdScriptPromise) {
     playgroundAdScriptPromise = new Promise((resolve, reject) => {
@@ -473,8 +493,10 @@ function createPlaygroundApp() {
         <h1>${escapePlayHtml(content.title)}</h1>
         <p>${escapePlayHtml(content.intro)}</p>
         <button class="play-primary-button" type="button" data-action="start">시작하기</button>
+        <span class="intro-participation content-stat" data-participation-count="${escapePlayHtml(playId)}" hidden></span>
       </section>
     `;
+    hydratePlayCommunity(root);
   }
 
   function renderChat() {
@@ -860,7 +882,7 @@ function createPlaygroundApp() {
         <p>${escapePlayHtml(detail)}</p>
         <div class="kuku-comment"><img src="../assets/images/coocoo.png" alt="" /><span>쿠쿠의 한마디</span><p>${escapePlayHtml(options.comment || "친구 결과랑 나란히 놓으면 더 웃길지도 몰라.")}</p></div>
         ${options.restart ? `<button class="play-primary-button" type="button" data-action="restart">다시 도전하기</button>` : ""}
-        ${resultActions()}
+        ${resultActions(playId)}
         <div class="play-result-ad-wrap">
           <span>AD</span>
           <div id="playResultAd" class="play-result-ad">680 × 110</div>
@@ -889,6 +911,9 @@ function createPlaygroundApp() {
     state.startedAt = Date.now();
     writeHistory("play");
     trackPlayEvent("content_start", content);
+    getPlayCommunityClient()
+      .then((client) => client && client.recordParticipation(playId))
+      .catch(() => null);
     try {
       const completedIds = JSON.parse(window.sessionStorage.getItem("coocoo_completed_content_ids") || "[]");
       const secondStartKey = `coocoo_second_start_${playId}`;

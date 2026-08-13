@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="쿠쿠 테스트와 짧은 놀이를 제목과 해시태그로 찾아보세요." />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="콘텐츠 검색 | 쿠쿠" />
+  <meta property="og:description" content="연애, 관계, 대학생, 감정 등 지금 끌리는 주제로 쿠쿠 콘텐츠를 찾아보세요." />
+  <meta property="og:url" content="https://coocooing.kro.kr/search.html" />
+  <meta property="og:image" content="https://coocooing.kro.kr/assets/images/kuku-og-card.png" />
+  <title>콘텐츠 검색 | 쿠쿠</title>
+  <link rel="canonical" href="https://coocooing.kro.kr/search.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="./assets/images/coocoo.png" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <script defer src="./assets/js/site-config.js"></script>
+  <script defer src="./assets/js/content-data.js"></script>
+  <script defer src="./assets/js/extra-content-data.js"></script>
+  <script defer src="./assets/js/catalog.js"></script>
+  <script defer src="./assets/js/community.js"></script>
+  <script defer src="./assets/js/search.js"></script>
+</head>
+<body class="home-body search-body">
+  <a class="skip-link" href="#mainContent">본문 바로가기</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand brand-link" href="./index.html">
+        <span class="brand-mark"><img src="./assets/images/coocoo.png" alt="" width="512" height="512" /></span>
+        <div><strong>쿠쿠</strong><p>테스트와 놀이 찾기</p></div>
+      </a>
+      <nav class="home-nav"><a href="./index.html">놀이터 홈</a></nav>
+    </div>
+  </header>
+  <main class="search-main" id="mainContent">
+    <section class="search-hero">
+      <span class="section-index">FIND YOUR CARD</span>
+      <h1>오늘 끌리는 걸 찾아볼까?</h1>
+      <form class="search-form" id="contentSearchForm" role="search">
+        <label class="sr-only" for="contentSearchInput">콘텐츠 검색</label>
+        <input id="contentSearchInput" name="q" type="search" autocomplete="off" placeholder="연애, 대학생, 1분 놀이처럼 검색해보세요" />
+        <button type="submit">검색</button>
+      </form>
+    </section>
+    <section class="search-tags" aria-labelledby="tagHeading">
+      <h2 id="tagHeading">추천 검색어</h2>
+      <div id="recommendedTags"></div>
+    </section>
+    <section class="search-results" aria-labelledby="resultHeading">
+      <div class="section-head section-head-row"><div><h2 id="resultHeading">전체 콘텐츠</h2><p id="searchSummary"></p></div></div>
+      <div class="search-result-grid" id="searchResultGrid"></div>
+    </section>
+  </main>
+</body>
+</html>

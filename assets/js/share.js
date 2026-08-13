@@ -265,6 +265,27 @@ async function buildDynamicShareCanvas() {
   return canvas;
 }
 
+async function downloadResultImage() {
+  const canvas = await buildDynamicShareCanvas();
+  if (!canvas) {
+    alert("결과 화면에서 이미지를 저장할 수 있어요.");
+    return;
+  }
+
+  const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+  if (!blob) throw new Error("Result image could not be created.");
+
+  const objectUrl = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  const title = document.body.dataset.shareResultTitle || "result";
+  link.href = objectUrl;
+  link.download = `coocoo-${title.replace(/[^0-9A-Za-z가-힣_-]+/g, "-")}.png`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+}
+
 async function uploadDynamicShareImage() {
   if (!(window.Kakao && Kakao.Share && typeof Kakao.Share.uploadImage === "function")) {
     return "";
@@ -445,6 +466,12 @@ document.addEventListener("click", (event) => {
     return;
   }
 
+  if (target.id === "btnSaveResultImage") {
+    trackShareClick("save_image");
+    downloadResultImage().catch(() => alert("이미지를 저장하지 못했어요."));
+    return;
+  }
+
   if (target.id === "btnKakaoShare") {
     trackShareClick("kakao");
     shareWithKakao().catch(() => alert("카카오 공유를 열지 못했어요."));
@@ -459,4 +486,5 @@ document.addEventListener("click", (event) => {
 
 document.addEventListener("DOMContentLoaded", () => {
   window.shareBySms = shareBySms;
+  window.downloadResultImage = downloadResultImage;
 });

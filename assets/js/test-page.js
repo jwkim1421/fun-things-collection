@@ -16,6 +16,20 @@ function getTestPageData() {
   };
 }
 
+let communityClientPromise = null;
+
+function getCommunityClient() {
+  if (window.COOCOO_COMMUNITY) return Promise.resolve(window.COOCOO_COMMUNITY);
+  if (!communityClientPromise) {
+    communityClientPromise = import("./community.js").then(() => window.COOCOO_COMMUNITY || null);
+  }
+  return communityClientPromise;
+}
+
+function hydrateCommunity(root) {
+  getCommunityClient().then((client) => client && client.hydrate(root)).catch(() => null);
+}
+
 function getContentAnalyticsParams(page) {
   const testId = document.body && document.body.dataset ? document.body.dataset.testId : "";
   const questions = Array.isArray(page.questions) ? page.questions : [];
@@ -457,6 +471,7 @@ function renderIntroScreen(page) {
           <button class="test-main-button" type="button" data-action="start-test">
             ${escapeHtml(page.startLabel || "테스트 시작하기")}
           </button>
+          <span class="intro-participation content-stat" data-participation-count="${escapeHtml(testId)}" hidden></span>
         </article>
       </section>
       ${renderInlineAd(testId, "start")}
@@ -646,7 +661,15 @@ function renderResultScreen(page, resultKey, cards) {
         </section>
 
         <p class="result-share-nudge">${escapeHtml(sharePrompt)}</p>
-        <div class="result-share-row">
+        <div class="community-reactions" data-reaction-panel data-content-id="${escapeHtml(testId)}" aria-label="콘텐츠 반응">
+          <button type="button" data-reaction="fun" aria-pressed="false"><span aria-hidden="true">☺</span><strong>재밌어요</strong><b data-reaction-count="fun">0</b></button>
+          <button type="button" data-reaction="relatable" aria-pressed="false"><span aria-hidden="true">♥</span><strong>공감돼요</strong><b data-reaction-count="relatable">0</b></button>
+        </div>
+        <div class="result-share-row result-share-row-four">
+          <button class="share-icon-btn" id="btnSaveResultImage" type="button" aria-label="결과 이미지 저장" title="결과 이미지 저장">
+            ${renderShareIcon("copy")}
+            <span class="share-icon-btn-label">저장</span>
+          </button>
           <button class="share-icon-btn" id="btnCopyLink" type="button" aria-label="링크 복사" title="링크 복사">
             ${renderShareIcon("copy")}
           </button>
@@ -764,6 +787,8 @@ function createTestApp(data) {
       hydrateCoupangSlots(root);
     }
 
+    hydrateCommunity(root);
+
     if (options.scroll !== false) {
       scrollTestToTop();
     }
@@ -818,6 +843,9 @@ function createTestApp(data) {
         console.warn("Unable to read completed content analytics state.", error);
       }
       trackContentEvent("content_start", data.page);
+      getCommunityClient()
+        .then((client) => client && client.recordParticipation(data.testId))
+        .catch(() => null);
       const secondStartKey = `coocoo_second_start_${analyticsParams.content_id}`;
       if (completedIds.some((id) => id !== analyticsParams.content_id) && !window.sessionStorage.getItem(secondStartKey)) {
         trackContentEvent("second_content_start", data.page, {

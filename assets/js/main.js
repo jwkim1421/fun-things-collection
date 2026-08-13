@@ -11,92 +11,8 @@ const ITEMS_PER_PAGE = 12;
 let currentPage = 1;
 let activeMood = "all";
 
-const PLAY_CARDS = [
-  {
-    href: "./play/chat-temperature.html",
-    eyebrow: "대화형 테스트",
-    title: "썸 탈 때 내 답장 온도는?",
-    description: "쿠쿠와 카톡하듯 답장을 고르면 내 대화 온도가 보여요.",
-    time: "2분",
-    icon: "💬",
-    iconAsset: "kuku-chat.svg",
-    tone: "coral"
-  },
-  {
-    href: "./play/procrastination-bingo.html",
-    eyebrow: "체크형 놀이",
-    title: "대학생 미루기 습관 빙고",
-    description: "찔리는 칸을 눌러 오늘의 미루기 레벨을 완성해보세요.",
-    time: "1분",
-    icon: "▦",
-    iconAsset: "kuku-bingo.svg",
-    tone: "blue"
-  },
-  {
-    href: "./play/battery-stop.html",
-    eyebrow: "30초 게임",
-    title: "쿠쿠 배터리 100%에 멈추기",
-    description: "빠르게 차오르는 배터리를 100에 가장 가깝게 멈춰요.",
-    time: "30초",
-    icon: "⚡",
-    iconAsset: "kuku-battery.svg",
-    tone: "yellow"
-  },
-  {
-    href: "./play/today-box.html",
-    eyebrow: "하루 한 번",
-    title: "쿠쿠의 오늘 상자",
-    description: "상자 하나를 고르면 오늘의 작은 미션이 나와요.",
-    time: "20초",
-    icon: "□",
-    tone: "green"
-  },
-  {
-    href: "./play/relationship-ranking.html",
-    eyebrow: "카드 순위형 · 2분",
-    title: "관계에서 포기 못 하는 것 순위",
-    description: "다섯 장을 옮겨 지금 가장 중요한 관계 기준을 골라요.",
-    time: "2분",
-    icon: "↕",
-    tone: "paper"
-  },
-  {
-    href: "./play/weekly-energy-budget.html",
-    eyebrow: "포인트 배분형 · 1분",
-    title: "이번 주 에너지 100을 어디에 쓸까?",
-    description: "에너지 100을 나누면 지금 마음이 향한 곳이 보여요.",
-    time: "1분",
-    icon: "100",
-    tone: "yellow"
-  },
-  {
-    href: "./play/campus-festival-story.html",
-    eyebrow: "분기형 스토리 · 1분",
-    title: "축제 날, 쿠쿠를 어디서 만날까?",
-    description: "고른 길에 따라 쿠쿠를 만나는 장소와 결말이 달라져요.",
-    time: "1분",
-    icon: "?",
-    tone: "coral"
-  },
-  {
-    href: "./play/emotion-trash.html",
-    eyebrow: "감정 비우기 · 1분",
-    title: "오늘 마음, 여기 두고 갈래?",
-    description: "걸리는 말을 짧게 적고 구겨서 화면 밖으로 보내요.",
-    time: "1분",
-    icon: "⌁",
-    tone: "blue"
-  },
-  {
-    href: "./play/choice-roulette.html",
-    eyebrow: "선택 룰렛 · 30초",
-    title: "쿠쿠야, 하나만 골라줘",
-    description: "고민되는 선택지만 켜두면 쿠쿠가 하나를 뽑아줘요.",
-    time: "30초",
-    icon: "↻",
-    tone: "green"
-  }
-];
+const catalog = window.COOCOO_CATALOG || { playCards: [], themes: [], itemsForTheme: () => [] };
+const PLAY_CARDS = catalog.playCards;
 
 const MOOD_FILTERS = [
   { id: "all", label: "전부 보기", match: () => true },
@@ -281,7 +197,7 @@ function renderPlayCards() {
   if (!grid) return;
 
   grid.innerHTML = PLAY_CARDS.map((card, index) => `
-    <a class="play-card tone-${card.tone}" href="${card.href}">
+    <a class="play-card tone-${card.tone}" href="${card.href}" data-content-id="${card.id}">
       <span class="play-card-number">0${index + 1}</span>
       <div class="play-card-heading">
         <span class="play-card-icon" aria-hidden="true">${card.iconAsset
@@ -292,8 +208,36 @@ function renderPlayCards() {
       <p>${card.description}</p>
       <small><span>${card.eyebrow}</span><span>${card.time}</span></small>
       <span class="play-card-arrow" aria-hidden="true">↗</span>
+      <span class="content-stat" data-participation-count="${card.id}" hidden></span>
     </a>
   `).join("");
+}
+
+function renderContentShelves() {
+  const root = document.getElementById("contentShelves");
+  if (!root || !catalog.themes.length) return;
+
+  root.innerHTML = catalog.themes.map((theme) => {
+    const items = catalog.itemsForTheme(theme, 6);
+    return `
+      <section class="content-shelf" aria-labelledby="shelf-${theme.id}">
+        <div class="content-shelf-head">
+          <div><span class="section-index">THEME</span><h3 id="shelf-${theme.id}">${escapeHtml(theme.title)}</h3><p>${escapeHtml(theme.description)}</p></div>
+          <a href="./search.html?q=${encodeURIComponent(theme.tags?.[0] || "")}">더 찾아보기 →</a>
+        </div>
+        <div class="content-shelf-track">
+          ${items.map((item) => `
+            <a class="shelf-card tone-${getCardTone(item)}" href="${item.href}" data-content-id="${item.id}">
+              <span class="shelf-card-icon" aria-hidden="true">${item.icon || "◉"}</span>
+              <small>${item.type === "play" ? "짧은 놀이" : item.category || "테스트"}</small>
+              <strong>${escapeHtml(item.title)}</strong>
+              <span class="content-stat" data-participation-count="${item.id}" hidden></span>
+            </a>
+          `).join("")}
+        </div>
+      </section>
+    `;
+  }).join("");
 }
 
 function renderMoodFilters() {
@@ -339,6 +283,7 @@ function renderCards() {
         <h4>${card.title}</h4>
         <p>${friendlyHomeCopy(card.description)}</p>
         <span class="card-open-label"><span>열어보기 <i aria-hidden="true">→</i></span><small>${card.duration || "1분"}</small></span>
+        <span class="content-stat" data-participation-count="${card.id}" hidden></span>
       </div>
     </a>
   `).join("");
@@ -420,4 +365,6 @@ renderPagination();
 populateHeader();
 renderPlayCards();
 renderMoodFilters();
+renderContentShelves();
 populateHomeAffiliateSlots();
+document.dispatchEvent(new CustomEvent("coocoo:content-rendered"));
