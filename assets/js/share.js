@@ -60,20 +60,6 @@ function trackShareClick(method) {
 
 const kakaoImageCache = new Map();
 
-function parseThemeStops(theme) {
-  const fallback = ["#fff1bf", "#e7e7ff"];
-  if (!theme) {
-    return fallback;
-  }
-
-  const matches = String(theme).match(/#(?:[0-9a-fA-F]{3,8})/g);
-  if (!matches || matches.length < 2) {
-    return fallback;
-  }
-
-  return [matches[0], matches[1]];
-}
-
 function wrapCanvasText(ctx, text, maxWidth, maxLines) {
   const words = String(text || "").trim().split(/\s+/).filter(Boolean);
   if (!words.length) {
@@ -93,7 +79,23 @@ function wrapCanvasText(ctx, text, maxWidth, maxLines) {
     if (currentLine) {
       lines.push(currentLine);
     }
-    currentLine = word;
+
+    if (ctx.measureText(word).width <= maxWidth) {
+      currentLine = word;
+      return;
+    }
+
+    let fragment = "";
+    Array.from(word).forEach((character) => {
+      const nextFragment = `${fragment}${character}`;
+      if (fragment && ctx.measureText(nextFragment).width > maxWidth) {
+        lines.push(fragment);
+        fragment = character;
+      } else {
+        fragment = nextFragment;
+      }
+    });
+    currentLine = fragment;
   });
 
   if (currentLine) {
@@ -151,7 +153,6 @@ function getDynamicSharePayload() {
     resultSummary: bodyData.shareResultSummary || "",
     resultDescription: bodyData.shareResultDescription || "",
     resultIcon: bodyData.shareResultIcon || "✨",
-    theme: bodyData.shareTheme || "linear-gradient(135deg, #fff1bf, #e7e7ff)",
     mascotUrl: bodyData.shareMascot || `${window.location.origin}/assets/images/coocoo.png`
   };
 }
@@ -170,33 +171,19 @@ async function buildDynamicShareCanvas() {
     return null;
   }
 
-  const [themeStart, themeEnd] = parseThemeStops(payload.theme);
-  const bgGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-  bgGradient.addColorStop(0, themeStart);
-  bgGradient.addColorStop(1, themeEnd);
-  ctx.fillStyle = bgGradient;
+  ctx.fillStyle = "#f4f0e8";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  const frameGradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
-  frameGradient.addColorStop(0, "rgba(255,255,255,0.88)");
-  frameGradient.addColorStop(1, "rgba(255,255,255,0.72)");
-  ctx.fillStyle = frameGradient;
+  ctx.fillStyle = "#fffdf8";
   drawRoundedRect(ctx, 54, 46, 1092, 538, 34);
   ctx.fill();
 
-  ctx.strokeStyle = "rgba(91, 71, 86, 0.22)";
+  ctx.strokeStyle = "#28231f";
   ctx.lineWidth = 4;
   drawRoundedRect(ctx, 54, 46, 1092, 538, 34);
   ctx.stroke();
 
-  ctx.fillStyle = "rgba(255,255,255,0.78)";
-  drawRoundedRect(ctx, 88, 92, 250, 410, 28);
-  ctx.fill();
-
-  const leftGradient = ctx.createLinearGradient(88, 92, 338, 502);
-  leftGradient.addColorStop(0, "rgba(255, 240, 151, 0.94)");
-  leftGradient.addColorStop(1, "rgba(255, 250, 217, 0.94)");
-  ctx.fillStyle = leftGradient;
+  ctx.fillStyle = "#f2d27f";
   drawRoundedRect(ctx, 88, 92, 250, 410, 28);
   ctx.fill();
 
@@ -204,7 +191,7 @@ async function buildDynamicShareCanvas() {
   ctx.font = "700 30px Arial";
   ctx.fillText(payload.testTitle, 382, 126);
 
-  ctx.fillStyle = "rgba(255,255,255,0.78)";
+  ctx.fillStyle = "#f2d27f";
   drawRoundedRect(ctx, 382, 160, 692, 72, 24);
   ctx.fill();
 
@@ -215,7 +202,7 @@ async function buildDynamicShareCanvas() {
     ctx.fillText(line, 420, 212 + (index * 56));
   });
 
-  ctx.fillStyle = "rgba(255, 250, 205, 0.92)";
+  ctx.fillStyle = "#fff4b9";
   drawRoundedRect(ctx, 382, 260, 692, 208, 26);
   ctx.fill();
 
@@ -232,7 +219,7 @@ async function buildDynamicShareCanvas() {
     ctx.fillText(line, 420, 382 + (index * 34));
   });
 
-  ctx.fillStyle = "rgba(255,255,255,0.82)";
+  ctx.fillStyle = "#b8d3df";
   drawRoundedRect(ctx, 382, 500, 470, 46, 22);
   ctx.fill();
   ctx.fillStyle = "#6f5375";

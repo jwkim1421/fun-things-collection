@@ -1558,10 +1558,8 @@ button {
 
 .result-header-board,
 .result-section {
-  border: 2px solid rgba(62, 43, 58, 0.5);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8)),
-    var(--test-theme);
+  border: 2px solid var(--line);
+  background: #fffdf8;
   margin-bottom: 14px;
   border-radius: 10px;
   overflow: hidden;
@@ -1570,10 +1568,8 @@ button {
 .result-header-title,
 .result-section-title {
   padding: 14px 16px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.08)),
-    var(--test-theme);
-  border-bottom: 2px solid rgba(62, 43, 58, 0.4);
+  background: #f2d27f;
+  border-bottom: 2px solid var(--line);
   text-align: center;
   font-size: 24px;
   font-weight: 800;
@@ -1589,7 +1585,7 @@ button {
 }
 
 .result-avatar-box {
-  background: linear-gradient(180deg, #ffef97 0%, #fff9d9 100%);
+  background: #f8e8a7;
   border: 2px solid rgba(62, 43, 58, 0.26);
   display: grid;
   align-items: center;
@@ -1628,7 +1624,7 @@ button {
   min-height: 166px;
   padding: 18px;
   border-radius: 6px;
-  background: linear-gradient(180deg, rgba(255, 255, 178, 0.95), rgba(255, 248, 199, 0.95));
+  background: #fff4b9;
 }
 
 .result-summary-copy strong {
@@ -1644,6 +1640,14 @@ button {
   color: #2e2430;
   line-height: 1.8;
   font-size: 18px;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+}
+
+.result-summary-copy p + p,
+.result-section-body p + p {
+  margin-top: 12px;
 }
 
 .result-traits-extended,
@@ -1666,6 +1670,11 @@ button {
   display: grid;
   gap: 10px;
   text-align: center;
+}
+
+.result-traits > p,
+.result-match-board > p {
+  text-align: left;
 }
 
 .result-traits-lead,

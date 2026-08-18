@@ -70,6 +70,37 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
+function splitReadableParagraphs(value, targetLength = 92) {
+  const text = String(value || "").replace(/\s+/g, " ").trim();
+  if (!text) return [];
+
+  const sentences = text.match(/[^.!?…]+(?:[.!?…]+|$)/g)
+    ?.map((sentence) => sentence.trim())
+    .filter(Boolean) || [text];
+  const paragraphs = [];
+  let current = "";
+
+  sentences.forEach((sentence) => {
+    const candidate = current ? `${current} ${sentence}` : sentence;
+    if (current && candidate.length > targetLength) {
+      paragraphs.push(current);
+      current = sentence;
+    } else {
+      current = candidate;
+    }
+  });
+
+  if (current) paragraphs.push(current);
+  return paragraphs;
+}
+
+function renderReadableParagraphs(value, className = "") {
+  const classAttribute = className ? ` class="${className}"` : "";
+  return splitReadableParagraphs(value)
+    .map((paragraph) => `<p${classAttribute}>${escapeHtml(paragraph)}</p>`)
+    .join("");
+}
+
 function getRelatedCards(page, cards) {
   return (page.relatedIds || [])
     .map((id) => cards.find((card) => card.id === id))
@@ -595,8 +626,8 @@ function renderResultScreen(page, resultKey, cards) {
               <div class="result-mini-badge">${escapeHtml(result.matchTitle || "결과")}</div>
               <div class="result-summary-copy">
                 <strong>${escapeHtml(result.summary)}</strong>
-                <p>${escapeHtml(result.description)}</p>
-                ${resultExtendedCopy ? `<p class="result-summary-extended">${escapeHtml(resultExtendedCopy)}</p>` : ""}
+                ${renderReadableParagraphs(result.description)}
+                ${renderReadableParagraphs(resultExtendedCopy, "result-summary-extended")}
               </div>
             </div>
           </div>
@@ -605,11 +636,11 @@ function renderResultScreen(page, resultKey, cards) {
         <section class="result-section">
           <div class="result-section-title">${escapeHtml(resultTraitTitle)}</div>
           <div class="result-section-body result-traits">
-            ${resultTraitLead ? `<p class="result-traits-lead">${escapeHtml(resultTraitLead)}</p>` : ""}
+            ${renderReadableParagraphs(resultTraitLead, "result-traits-lead")}
             ${result.strengths.map((item) => `<p>${escapeHtml(item)}</p>`).join("")}
-            <p class="result-tip-line">${escapeHtml(result.tip)}</p>
-            <p class="result-traits-extended">${escapeHtml(buildResultTraitExtended(result))}</p>
-            <p class="result-traits-followup">${escapeHtml(resultTraitFollowup)}</p>
+            ${renderReadableParagraphs(result.tip, "result-tip-line")}
+            ${renderReadableParagraphs(buildResultTraitExtended(result), "result-traits-extended")}
+            ${renderReadableParagraphs(resultTraitFollowup, "result-traits-followup")}
           </div>
         </section>
 
@@ -632,10 +663,10 @@ function renderResultScreen(page, resultKey, cards) {
           <div class="result-section-title">${escapeHtml(result.matchTitle || "찰떡 궁합")}</div>
           <div class="result-section-body result-match-board">
             <strong>${escapeHtml(result.matchLabel || "")}</strong>
-            <p>${escapeHtml(result.matchDescription || "")}</p>
-            <p class="result-match-extended">${escapeHtml(resultMatchExtended)}</p>
-            <p class="result-match-detail">${escapeHtml(resultMatchDetail)}</p>
-            <p class="result-match-followup">${escapeHtml(buildResultMatchFollowup(result))}</p>
+            ${renderReadableParagraphs(result.matchDescription || "")}
+            ${renderReadableParagraphs(resultMatchExtended, "result-match-extended")}
+            ${renderReadableParagraphs(resultMatchDetail, "result-match-detail")}
+            ${renderReadableParagraphs(buildResultMatchFollowup(result), "result-match-followup")}
           </div>
         </section>
 
