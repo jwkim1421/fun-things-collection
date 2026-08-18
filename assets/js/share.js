@@ -252,7 +252,55 @@ async function buildDynamicShareCanvas() {
   return canvas;
 }
 
-async function downloadResultImage() {
+function showResultImagePreview(file) {
+  const objectUrl = URL.createObjectURL(file);
+  const overlay = document.createElement("div");
+  overlay.className = "result-image-preview";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-label", "결과 이미지 미리보기");
+
+  const panel = document.createElement("div");
+  panel.className = "result-image-preview-panel";
+
+  const heading = document.createElement("strong");
+  heading.textContent = "결과 이미지가 준비됐어요";
+
+  const guide = document.createElement("p");
+  guide.textContent = "이미지를 길게 눌러 사진 앱에 저장하거나 복사해보세요.";
+
+  const image = document.createElement("img");
+  image.src = objectUrl;
+  image.alt = "공유용 결과 카드";
+
+  const closeButton = document.createElement("button");
+  closeButton.type = "button";
+  closeButton.textContent = "닫기";
+
+  const closePreview = () => {
+    overlay.remove();
+    document.body.classList.remove("result-image-preview-open");
+    URL.revokeObjectURL(objectUrl);
+    document.removeEventListener("keydown", handleKeydown);
+  };
+  const handleKeydown = (event) => {
+    if (event.key === "Escape") closePreview();
+  };
+
+  closeButton.addEventListener("click", closePreview);
+  overlay.addEventListener("click", (event) => {
+    if (event.target === overlay) closePreview();
+  });
+  document.addEventListener("keydown", handleKeydown);
+
+  panel.append(heading, guide, image, closeButton);
+  overlay.appendChild(panel);
+  document.body.appendChild(overlay);
+  document.body.classList.add("result-image-preview-open");
+  closeButton.focus();
+}
+
+async function shareResultImage() {
   const canvas = await buildDynamicShareCanvas();
   if (!canvas) {
     alert("결과 화면에서 이미지를 저장할 수 있어요.");
@@ -262,15 +310,32 @@ async function downloadResultImage() {
   const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
   if (!blob) throw new Error("Result image could not be created.");
 
-  const objectUrl = URL.createObjectURL(blob);
-  const link = document.createElement("a");
   const title = document.body.dataset.shareResultTitle || "result";
-  link.href = objectUrl;
-  link.download = `coocoo-${title.replace(/[^0-9A-Za-z가-힣_-]+/g, "-")}.png`;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+  const fileName = `coocoo-${title.replace(/[^0-9A-Za-z가-힣_-]+/g, "-")}.png`;
+  const file = new File([blob], fileName, { type: "image/png" });
+  let canShareFile = false;
+  try {
+    canShareFile = typeof navigator.share === "function" &&
+      typeof navigator.canShare === "function" &&
+      navigator.canShare({ files: [file] });
+  } catch (error) {
+    console.warn("File sharing support check failed.", error);
+  }
+
+  if (canShareFile) {
+    try {
+      await navigator.share({
+        files: [file],
+        title: `${title} | 쿠쿠`
+      });
+      return;
+    } catch (error) {
+      if (error && error.name === "AbortError") return;
+      console.warn("Native result image sharing failed.", error);
+    }
+  }
+
+  showResultImagePreview(file);
 }
 
 async function uploadDynamicShareImage() {
@@ -455,7 +520,7 @@ document.addEventListener("click", (event) => {
 
   if (target.id === "btnSaveResultImage") {
     trackShareClick("save_image");
-    downloadResultImage().catch(() => alert("이미지를 저장하지 못했어요."));
+    shareResultImage().catch(() => alert("결과 이미지를 열지 못했어요."));
     return;
   }
 
@@ -473,5 +538,5 @@ document.addEventListener("click", (event) => {
 
 document.addEventListener("DOMContentLoaded", () => {
   window.shareBySms = shareBySms;
-  window.downloadResultImage = downloadResultImage;
+  window.shareResultImage = shareResultImage;
 });

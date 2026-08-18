@@ -1827,6 +1827,66 @@ button {
   letter-spacing: 0.01em;
 }
 
+body.result-image-preview-open {
+  overflow: hidden;
+}
+
+.result-image-preview {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(33, 30, 28, 0.72);
+}
+
+.result-image-preview-panel {
+  width: min(560px, 100%);
+  max-height: calc(100dvh - 40px);
+  overflow: auto;
+  padding: 18px;
+  border: 2px solid #292520;
+  border-radius: 12px;
+  background: #fffdf8;
+  box-shadow: 4px 5px 0 rgba(41, 37, 32, 0.28);
+  text-align: center;
+}
+
+.result-image-preview-panel > strong {
+  display: block;
+  font-size: 20px;
+}
+
+.result-image-preview-panel > p {
+  margin: 8px 0 14px;
+  color: #6f675f;
+  font-size: 14px;
+}
+
+.result-image-preview-panel img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #d8d0c5;
+  border-radius: 10px;
+  -webkit-touch-callout: default;
+  user-select: auto;
+}
+
+.result-image-preview-panel button {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 14px;
+  border: 2px solid #292520;
+  border-radius: 8px;
+  background: #f2d27f;
+  color: #211e1c;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
 .result-action-row .test-main-button,
 .result-action-row .test-sub-button {
   font-size: 30px;
