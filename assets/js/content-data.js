@@ -39,7 +39,7 @@
       posterTitle: "연애 열차 테스트",
       posterSubtitle: "내 감정 운행 타입은?",
       stickers: ["💌", "🎟️", "☁️", "🫧"],
-      thumb: "linear-gradient(180deg, #fff0b5 0%, #ffe88f 100%)"
+      thumb: "#fff0b5"
     },
     {
       id: "test-002",
@@ -53,7 +53,7 @@
       posterTitle: "회복력 체크",
       posterSubtitle: "요즘 나의 배터리 잔량",
       stickers: ["🌿", "🛋️", "☕"],
-      thumb: "linear-gradient(135deg, #dff4ff, #eef2ff)"
+      thumb: "#dff4ff"
     },
     {
       id: "test-003",
@@ -67,7 +67,7 @@
       posterTitle: "여행 성향 찾기",
       posterSubtitle: "계획파 vs 즉흥파",
       stickers: ["🌤️", "🧳", "🍊"],
-      thumb: "linear-gradient(135deg, #fff0c9, #ffe2e7)"
+      thumb: "#fff0c9"
     },
     {
       id: "test-004",
@@ -81,7 +81,7 @@
       posterTitle: "집중 루틴 진단",
       posterSubtitle: "내 집중 스위치는?",
       stickers: ["📚", "⏰", "✨"],
-      thumb: "linear-gradient(135deg, #ddf5e3, #f4ecff)"
+      thumb: "#ddf5e3"
     },
     {
       id: "test-005",
@@ -95,7 +95,7 @@
       posterTitle: "친구 케미 점수",
       posterSubtitle: "우리 호흡은 몇 점?",
       stickers: ["🎈", "📱", "🌈"],
-      thumb: "linear-gradient(135deg, #ffe6d7, #f7defe)"
+      thumb: "#ffe6d7"
     },
     {
       id: "test-006",
@@ -109,7 +109,7 @@
       posterTitle: "주말 충전 방식",
       posterSubtitle: "밖순이 vs 집순이",
       stickers: ["🌙", "🧺", "🎧"],
-      thumb: "linear-gradient(135deg, #e2ebff, #ffe1ef)"
+      thumb: "#e2ebff"
     }
   ];
 

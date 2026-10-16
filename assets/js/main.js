@@ -184,21 +184,17 @@ function getFilteredCards() {
 }
 
 function getCardTone(card) {
-  const text = `${card.category || ""} ${card.title || ""}`;
-  if (/연애|썸|매력/.test(text)) return "coral";
-  if (/관계|친구|소셜/.test(text)) return "blue";
-  if (/자기관리|심리|집중|스트레스/.test(text)) return "green";
-  if (/취향|라이프|여행|무드/.test(text)) return "yellow";
-  return "paper";
+  if (card.tone) return card.tone;
+  const number = Number(String(card.id || "").replace(/\D/g, "")) || 0;
+  return ["blue", "coral", "mint", "yellow", "green", "paper"][number % 6];
 }
 
 function renderPlayCards() {
   const grid = document.getElementById("playCardGrid");
   if (!grid) return;
 
-  grid.innerHTML = PLAY_CARDS.map((card, index) => `
+  grid.innerHTML = PLAY_CARDS.slice(0, 3).map((card) => `
     <a class="play-card tone-${card.tone}" href="${card.href}" data-content-id="${card.id}">
-      <span class="play-card-number">0${index + 1}</span>
       <div class="play-card-heading">
         <span class="play-card-icon" aria-hidden="true">${card.iconAsset
           ? `<img src="./assets/images/${card.iconAsset}" alt="" />`
@@ -206,8 +202,7 @@ function renderPlayCards() {
         <strong>${card.title}</strong>
       </div>
       <p>${card.description}</p>
-      <small><span>${card.eyebrow}</span><span>${card.time}</span></small>
-      <span class="play-card-arrow" aria-hidden="true">↗</span>
+      <small><span>${card.eyebrow}</span><span class="play-card-duration">${card.time}</span><span class="play-card-arrow" aria-hidden="true">↗</span></small>
       <span class="content-stat" data-participation-count="${card.id}" hidden></span>
     </a>
   `).join("");
@@ -222,7 +217,7 @@ function renderContentShelves() {
     return `
       <section class="content-shelf" aria-labelledby="shelf-${theme.id}">
         <div class="content-shelf-head">
-          <div><span class="section-index">THEME</span><h3 id="shelf-${theme.id}">${escapeHtml(theme.title)}</h3><p>${escapeHtml(theme.description)}</p></div>
+          <div><h3 id="shelf-${theme.id}">${escapeHtml(theme.title)}</h3><p>${escapeHtml(theme.description)}</p></div>
           <a href="./search.html?q=${encodeURIComponent(theme.tags?.[0] || "")}">더 찾아보기 →</a>
         </div>
         <div class="content-shelf-track">
@@ -270,23 +265,18 @@ function renderCards() {
 
   grid.innerHTML = pageCards.map((card) => `
     <a class="tool-card editorial-card tone-${getCardTone(card)}" href="${card.href}" data-content-id="${card.id}">
-      <div class="editorial-card-head">
-        <span>${card.category || "테스트"}</span>
-      </div>
       <div class="editorial-card-art">
-        <div class="editorial-card-title-row">
-          <span class="editorial-card-icon" aria-hidden="true">${card.icon || "◉"}</span>
-          <p>${friendlyHomeCopy(card.posterSubtitle || card.description)}</p>
-        </div>
+        <span class="editorial-card-category">${escapeHtml(card.category || "테스트")}</span>
+        <p>${friendlyHomeCopy(card.posterSubtitle || card.description)}</p>
       </div>
       <div class="tool-body">
         <h4>${card.title}</h4>
-        <p>${friendlyHomeCopy(card.description)}</p>
         <span class="card-open-label"><span>열어보기 <i aria-hidden="true">→</i></span><small>${card.duration || "1분"}</small></span>
         <span class="content-stat" data-participation-count="${card.id}" hidden></span>
       </div>
     </a>
   `).join("");
+  document.dispatchEvent(new CustomEvent("coocoo:content-rendered"));
 }
 
 function renderPagination() {
@@ -302,9 +292,9 @@ function renderPagination() {
 
   pager.hidden = false;
   pager.innerHTML = `
-    <button class="pager-btn" type="button" data-action="prev-page" ${currentPage === 1 ? "disabled" : ""}>&lt;&lt; Prev</button>
+    <button class="pager-btn" type="button" data-action="prev-page" ${currentPage === 1 ? "disabled" : ""}>← 이전</button>
     <span class="pager-status">${currentPage} / ${totalPages}</span>
-    <button class="pager-btn" type="button" data-action="next-page" ${currentPage === totalPages ? "disabled" : ""}>Next &gt;&gt;</button>
+    <button class="pager-btn" type="button" data-action="next-page" ${currentPage === totalPages ? "disabled" : ""}>다음 →</button>
   `;
 
   pager.querySelector('[data-action="prev-page"]')?.addEventListener("click", () => changePage(currentPage - 1));
@@ -344,7 +334,6 @@ function populateHeader() {
 
   if (siteTitle && config.siteName) {
     siteTitle.textContent = config.siteName;
-    document.title = `${config.siteName} | 잠깐 놀다 가는 디지털 놀이터`;
   }
 
   if (siteTagline && config.siteName && config.siteName !== "YOUR_SITE_NAME") {

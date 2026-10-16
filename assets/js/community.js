@@ -55,6 +55,7 @@
   }
 
   async function recordParticipation(contentId) {
+    if (new URLSearchParams(window.location.search).get("qa") === "1") return null;
     if (!contentId) return null;
     return request("/api/participations", {
       method: "POST",
@@ -63,6 +64,7 @@
   }
 
   async function setReaction(contentId, reaction, active) {
+    if (new URLSearchParams(window.location.search).get("qa") === "1") return null;
     return request("/api/reactions", {
       method: "POST",
       body: JSON.stringify({
@@ -136,6 +138,7 @@
 
   document.addEventListener("coocoo:content-rendered", () => hydrate(document));
   document.addEventListener("DOMContentLoaded", () => hydrate(document));
+  window.addEventListener("pageshow", (event) => { if (event.persisted) hydrate(document); });
 
   window.COOCOO_COMMUNITY = { getAnonymousId, getStats, recordParticipation, setReaction, hydrate };
 })();

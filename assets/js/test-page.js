@@ -57,7 +57,7 @@ function applyTestTheme(card) {
     return;
   }
 
-  const thumb = card && card.thumb ? card.thumb : "linear-gradient(135deg, #fff1bf, #e7e7ff)";
+  const thumb = card?.thumb || "#e3f0eb";
   document.body.style.setProperty("--test-theme", thumb);
 }
 
@@ -142,8 +142,8 @@ function applyShareState(page, resultKey) {
   }
 
   const defaultImage = document.querySelector('meta[property="og:image"]')?.getAttribute("content") || "";
-  const defaultTheme = page.thumb || "linear-gradient(135deg, #fff1bf, #e7e7ff)";
-  const mascotUrl = `${window.location.origin}/assets/images/coocoo.png`;
+  const defaultTheme = page.thumb || "#e3f0eb";
+  const mascotUrl = `${window.location.origin}/assets/images/kuku-mascot-full.png`;
 
   if (!resultKey || !page.results || !page.results[resultKey]) {
     document.body.dataset.shareUrl = buildShareUrl("");
@@ -287,6 +287,9 @@ function renderInlineAd(testId, placement = "journey") {
 }
 
 function renderShareIcon(type) {
+  if (type === "link") {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-2 2M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l2-2"></path></svg>';
+  }
   if (type === "copy") {
     return `
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -296,12 +299,11 @@ function renderShareIcon(type) {
     `;
   }
 
-  if (type === "sms") {
+  if (type === "instagram") {
     return `
       <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M5 6h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H9l-4 3v-3H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"></path>
-        <path d="M7 10h10"></path>
-        <path d="M7 13h7"></path>
+        <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+        <circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r=".8"></circle>
       </svg>
     `;
   }
@@ -325,15 +327,6 @@ function buildResultExtendedCopy(result) {
   return [emphasis, tip].filter(Boolean).join(" ");
 }
 
-function buildResultTraitExtended(result) {
-  const strengths = Array.isArray(result.strengths) ? result.strengths.filter(Boolean) : [];
-  const first = strengths[0] || result.summary || "이 타입";
-  const second = strengths[1] || result.matchLabel || "주변 사람";
-  const third = strengths[2] || result.moodItems?.[0] || "일상 패턴";
-
-  return `${first}이 기본 결이라면, ${second}처럼 이어지는 관계나 상황에서 반응이 더 선명해집니다. 특히 ${third} 쪽으로 움직일 때 당신답다는 느낌이 또렷해질 가능성이 큽니다.`;
-}
-
 function toKeywordCandidate(text) {
   const cleaned = String(text || "")
     .replace(/[.,!?]/g, "")
@@ -349,28 +342,6 @@ function toKeywordCandidate(text) {
   }
 
   return cleaned.slice(0, 8);
-}
-
-function buildResultTraitLead(result) {
-  const strengths = Array.isArray(result.strengths) ? result.strengths.filter(Boolean) : [];
-  const summary = result.summary || result.title || "";
-  const first = strengths[0] || "";
-  const second = strengths[1] || "";
-  const lines = [];
-
-  if (summary && first) {
-    lines.push(`${summary}인 만큼, 일상에서는 ${first} 쪽으로 성향이 드러나는 편입니다.`);
-  } else if (summary) {
-    lines.push(`${summary} 성향은 일상에서 비교적 꾸준하게 반복되는 패턴으로 나타납니다.`);
-  }
-
-  if (second) {
-    lines.push(`${second} 감각도 함께 가지고 있어서, 상황에 따라 반응 방식이 더 선명하게 읽힐 수 있어요.`);
-  } else if (first) {
-    lines.push(`${first}이 눈에 띄는 포인트라서 주변 사람도 비교적 빠르게 이 무드를 알아차릴 가능성이 큽니다.`);
-  }
-
-  return lines.join(" ");
 }
 
 function buildResultKeywords(result) {
@@ -406,37 +377,6 @@ function buildResultKeywords(result) {
   });
 
   return unique.slice(0, 5);
-}
-
-function buildResultMatchExtended(result) {
-  const strengths = Array.isArray(result.strengths) ? result.strengths : [];
-  const anchor = strengths[0] || result.summary || "이 결과";
-  const matchLabel = result.matchLabel || "상대";
-
-  return `${matchLabel} 타입은 ${anchor} 쪽 성향을 자연스럽게 받아주거나 보완해주는 편이라, 함께 있을 때 리듬이 더 편안하게 맞춰질 가능성이 큽니다.`;
-}
-
-function buildResultMatchFollowup(result) {
-  const moodItems = Array.isArray(result.moodItems) ? result.moodItems.filter(Boolean) : [];
-  const firstMood = moodItems[0] || "지금의 무드";
-  const secondMood = moodItems[1] || "관계 흐름";
-
-  return `${firstMood}을 더 자연스럽게 꺼내게 해주고, ${secondMood}이 필요한 순간에는 서로의 템포를 조절해주기 쉬운 조합입니다. 그래서 오래 갈수록 편안함과 재미를 같이 느끼기 좋은 편이에요. 가까워질수록 서로를 억지로 바꾸기보다, 각자의 강점을 편하게 살려주는 식의 궁합으로 이어질 가능성이 큽니다.`;
-}
-
-function buildResultTraitFollowup(result) {
-  const firstStrength = Array.isArray(result.strengths) && result.strengths[0] ? result.strengths[0] : "지금의 리듬";
-  const secondStrength = Array.isArray(result.strengths) && result.strengths[1] ? result.strengths[1] : "관계 감각";
-  const tip = result.tip || "지금의 호흡을 믿고 가볍게 조절해보세요.";
-
-  return `${firstStrength}이 핵심 축이라면, ${secondStrength}은 일상에서 그 성향을 더 자연스럽게 드러내는 장치에 가깝습니다. 그래서 지금의 결과는 단순 취향보다, 요즘 내가 어떤 방식으로 반응하고 회복하는지를 비교적 선명하게 보여주는 편이에요. ${tip}`;
-}
-
-function buildResultMatchDetail(result) {
-  const label = result.matchLabel || "상대";
-  const summary = result.summary || "지금의 성향";
-
-  return `${label} 타입과 함께 있을 때는 ${summary}이 조금 더 편안하고 안정적으로 드러나는 경우가 많습니다. 서로의 속도와 거리감이 어긋나기보다 맞물릴 가능성이 높아서, 일상적인 대화나 약속에서도 피로감보다 자연스러운 합이 먼저 느껴질 수 있어요.`;
 }
 
 function scoreAnswers(page, answers) {
@@ -490,6 +430,7 @@ function renderIntroScreen(page) {
         <div class="test-card-tab">${escapeHtml(page.title)}</div>
         <article class="test-card intro-card">
           <div class="intro-art">
+            <h1 class="sr-only">${escapeHtml(page.title)}</h1>
             <div class="intro-stickers">
               ${stickers.map((sticker) => `<span>${escapeHtml(sticker)}</span>`).join("")}
             </div>
@@ -499,19 +440,18 @@ function renderIntroScreen(page) {
               <span>${escapeHtml(page.heroCardSubtitle || page.summary)}</span>
             </div>
           </div>
+          ${page.introNotice ? `<p class="content-disclaimer">${escapeHtml(page.introNotice)}</p>` : ""}
           <button class="test-main-button" type="button" data-action="start-test">
             ${escapeHtml(page.startLabel || "테스트 시작하기")}
           </button>
           <span class="intro-participation content-stat" data-participation-count="${escapeHtml(testId)}" hidden></span>
         </article>
       </section>
-      ${renderInlineAd(testId, "start")}
     </div>
   `;
 }
 
 function renderQuestionScreen(page, questionIndex) {
-  const testId = document.body && document.body.dataset ? document.body.dataset.testId : "";
   const question = page.questions[questionIndex];
   const total = page.questions.length;
   const current = questionIndex + 1;
@@ -559,13 +499,11 @@ function renderQuestionScreen(page, questionIndex) {
           </section>
         </article>
       </section>
-      ${renderInlineAd(testId, "journey")}
     </div>
   `;
 }
 
 function renderLoadingScreen(page) {
-  const testId = document.body && document.body.dataset ? document.body.dataset.testId : "";
   const total = page.questions.length;
   return `
     <div class="test-flow-stack">
@@ -586,7 +524,6 @@ function renderLoadingScreen(page) {
           <p class="loading-hint">${escapeHtml(page.loadingHint || "")}</p>
         </article>
       </section>
-      ${renderInlineAd(testId, "journey")}
     </div>
   `;
 }
@@ -603,12 +540,7 @@ function renderResultScreen(page, resultKey, cards) {
   const relatedSectionTitle = page.relatedSectionTitle || "다음 테스트도 이어서 보기";
   const shareSectionTitle = page.shareSectionTitle || "공유용 요약";
   const sharePrompt = page.sharePrompt || `이 결과를 친구에게 보내고 “너도 나를 이렇게 봤어?”라고 물어보세요.`;
-  const resultExtendedCopy = buildResultExtendedCopy(result);
-  const resultTraitLead = buildResultTraitLead(result);
   const resultKeywords = buildResultKeywords(result);
-  const resultMatchExtended = buildResultMatchExtended(result);
-  const resultTraitFollowup = buildResultTraitFollowup(result);
-  const resultMatchDetail = buildResultMatchDetail(result);
 
   return `
     <div class="test-flow-stack">
@@ -623,29 +555,37 @@ function renderResultScreen(page, resultKey, cards) {
               <strong>${escapeHtml(result.title)}</strong>
             </div>
             <div class="result-summary-box">
-              <div class="result-mini-badge">${escapeHtml(result.matchTitle || "결과")}</div>
+              <div class="result-mini-badge">결과 요약</div>
               <div class="result-summary-copy">
                 <strong>${escapeHtml(result.summary)}</strong>
-                ${renderReadableParagraphs(result.description)}
-                ${renderReadableParagraphs(resultExtendedCopy, "result-summary-extended")}
               </div>
             </div>
           </div>
         </section>
 
+        <p class="result-share-nudge">${escapeHtml(sharePrompt)}</p>
+        <div class="result-share-row result-share-row-four">
+          <button class="share-icon-btn" id="btnCopyResultImage" type="button" aria-label="이미지 복사">${renderShareIcon("copy")}<span class="share-icon-btn-label">이미지 복사</span></button>
+          <button class="share-icon-btn" id="btnCopyLink" type="button" aria-label="링크 복사">${renderShareIcon("link")}<span class="share-icon-btn-label">링크 복사</span></button>
+          <button class="share-icon-btn share-icon-btn-kakao" id="btnKakaoShare" type="button" aria-label="카카오톡 공유">${renderShareIcon("kakao")}<span class="share-icon-btn-label">카카오톡</span></button>
+          <button class="share-icon-btn share-icon-btn-instagram" id="btnInstagramShare" type="button" aria-label="인스타그램 공유">${renderShareIcon("instagram")}<span class="share-icon-btn-label">인스타그램</span></button>
+        </div>
+        <button class="test-main-button result-try-button" type="button" data-action="restart-test">나도 직접 테스트하기</button>
+        <p class="content-disclaimer">재미로 보는 성향 콘텐츠예요. 전문적인 심리 검사나 진단이 아니에요.</p>
+
+        <details class="result-details">
+        <summary>나의 특징과 잘 맞는 타입 자세히 보기</summary>
         <section class="result-section">
           <div class="result-section-title">${escapeHtml(resultTraitTitle)}</div>
           <div class="result-section-body result-traits">
-            ${renderReadableParagraphs(resultTraitLead, "result-traits-lead")}
+            ${renderReadableParagraphs(result.description)}
             ${result.strengths.map((item) => `<p>${escapeHtml(item)}</p>`).join("")}
             ${renderReadableParagraphs(result.tip, "result-tip-line")}
-            ${renderReadableParagraphs(buildResultTraitExtended(result), "result-traits-extended")}
-            ${renderReadableParagraphs(resultTraitFollowup, "result-traits-followup")}
           </div>
         </section>
 
         <aside class="result-kuku-comment">
-          <img src="../assets/images/coocoo.png" alt="" />
+          <img src="../assets/images/apple-touch-icon.png" alt="" width="64" height="64" loading="lazy" />
           <div>
             <span>쿠쿠의 한마디</span>
             <p>${escapeHtml(result.kukuComment || result.tip || "이 결과, 친구 거랑 나란히 놓으면 더 웃길지도 몰라.")}</p>
@@ -664,17 +604,15 @@ function renderResultScreen(page, resultKey, cards) {
           <div class="result-section-body result-match-board">
             <strong>${escapeHtml(result.matchLabel || "")}</strong>
             ${renderReadableParagraphs(result.matchDescription || "")}
-            ${renderReadableParagraphs(resultMatchExtended, "result-match-extended")}
-            ${renderReadableParagraphs(resultMatchDetail, "result-match-detail")}
-            ${renderReadableParagraphs(buildResultMatchFollowup(result), "result-match-followup")}
           </div>
         </section>
 
+        </details>
         <section class="result-section">
           <div class="result-section-title">${escapeHtml(relatedSectionTitle)}</div>
           <div class="result-section-body result-related-grid">
             ${relatedCards.map((card) => `
-              <a class="result-related-card" href="${card.href}">
+              <a class="result-related-card" href="${card.href}" data-content-id="${escapeHtml(card.id)}" data-next-content>
                 <div class="result-related-icon">${escapeHtml(card.icon || "◉")}</div>
                 <strong>${escapeHtml(card.title)}</strong>
                 <span>${escapeHtml(card.description)}</span>
@@ -691,39 +629,18 @@ function renderResultScreen(page, resultKey, cards) {
           </div>
         </section>
 
-        <p class="result-share-nudge">${escapeHtml(sharePrompt)}</p>
         <div class="community-reactions" data-reaction-panel data-content-id="${escapeHtml(testId)}" aria-label="콘텐츠 반응">
           <button type="button" data-reaction="fun" aria-pressed="false"><span aria-hidden="true">☺</span><strong>재밌어요</strong><b data-reaction-count="fun">0</b></button>
           <button type="button" data-reaction="relatable" aria-pressed="false"><span aria-hidden="true">♥</span><strong>공감돼요</strong><b data-reaction-count="relatable">0</b></button>
         </div>
-        <div class="result-share-row result-share-row-four">
-          <button class="share-icon-btn" id="btnSaveResultImage" type="button" aria-label="결과 이미지 저장" title="결과 이미지 저장">
-            ${renderShareIcon("copy")}
-            <span class="share-icon-btn-label">저장</span>
-          </button>
-          <button class="share-icon-btn" id="btnCopyLink" type="button" aria-label="링크 복사" title="링크 복사">
-            ${renderShareIcon("copy")}
-          </button>
-          <button class="share-icon-btn" id="btnSmsShare" type="button" aria-label="문자 공유" title="문자 공유">
-            ${renderShareIcon("sms")}
-          </button>
-          <button class="share-icon-btn share-icon-btn-kakao" id="btnKakaoShare" type="button" aria-label="카카오 공유" title="카카오 공유">
-            ${renderShareIcon("kakao")}
-            <span class="share-icon-btn-label">Kakao</span>
-          </button>
-        </div>
 
         <div class="result-action-row">
-          <button class="test-main-button" type="button" data-action="restart-test">
-            ${escapeHtml(page.resetButtonLabel || "다시 해보기")}
-          </button>
           <a class="test-sub-button" href="../index.html">
             ${escapeHtml(page.otherTestLabel || "다른 테스트 해보기")}
           </a>
         </div>
         </article>
       </section>
-      ${renderInlineAd(testId, "result")}
     </div>
   `;
 }
@@ -735,6 +652,8 @@ function createTestApp(data) {
   }
 
   const initialSharedResultKey = getSharedResultKey(data.page);
+  const fromSharedResult = Boolean(initialSharedResultKey) && new URLSearchParams(window.location.search).get("shared") === "1";
+  if (fromSharedResult) trackContentEvent("shared_result_view", data.page, { result_key: initialSharedResultKey });
 
   const state = {
     screen: initialSharedResultKey ? "result" : "intro",
@@ -819,6 +738,19 @@ function createTestApp(data) {
     }
 
     hydrateCommunity(root);
+    const resultAds = document.getElementById("contentResultAds");
+    if (resultAds) {
+      resultAds.hidden = state.screen !== "result";
+      if (state.screen === "result") {
+        const affiliate = document.getElementById("affiliateResultAd");
+        if (affiliate && !affiliate.dataset.initialized) {
+          affiliate.innerHTML = renderInlineAd(data.testId, "result");
+          affiliate.dataset.initialized = "true";
+          hydrateCoupangSlots(affiliate);
+        }
+        document.dispatchEvent(new CustomEvent("coocoo:ads-rendered"));
+      }
+    }
 
     if (options.scroll !== false) {
       scrollTestToTop();
@@ -865,7 +797,8 @@ function createTestApp(data) {
 
     const action = target.getAttribute("data-action");
 
-    if (action === "start-test") {
+    if (action === "start-test" || action === "restart-test") {
+      clearLoadingTimer();
       const analyticsParams = getContentAnalyticsParams(data.page);
       let completedIds = [];
       try {
@@ -873,7 +806,7 @@ function createTestApp(data) {
       } catch (error) {
         console.warn("Unable to read completed content analytics state.", error);
       }
-      trackContentEvent("content_start", data.page);
+      trackContentEvent("content_start", data.page, { from_shared_result: fromSharedResult });
       getCommunityClient()
         .then((client) => client && client.recordParticipation(data.testId))
         .catch(() => null);
@@ -911,16 +844,6 @@ function createTestApp(data) {
       return;
     }
 
-    if (action === "restart-test") {
-      clearLoadingTimer();
-      state.screen = "intro";
-      state.currentQuestion = 0;
-      state.answers = [];
-      state.resultKey = "";
-      state.startedAt = 0;
-      writeHistory("intro");
-      render();
-    }
   });
 
   function restoreHistoryScreen(historyState) {
@@ -970,11 +893,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const siteName = (window.SITE_CONFIG && window.SITE_CONFIG.siteName) || "쿠쿠";
-  const pageTitle = data.page.title || data.card?.title || document.title;
   const description = data.page.summary || data.card?.description || "";
-
-  document.title = `${pageTitle} | ${siteName}`;
 
   const metaDescription = document.querySelector('meta[name="description"]');
   if (metaDescription && description) {

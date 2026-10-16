@@ -48,7 +48,7 @@
       posterTitle: "썸 대화 체크",
       posterSubtitle: "내 말투의 온도는?",
       stickers: ["📱", "💗", "🫧", "🌙"],
-      thumb: "linear-gradient(135deg, #ffe1ef, #fff0bf)"
+      thumb: "#ffe1ef"
     },
     {
       id: "test-008",
@@ -62,7 +62,7 @@
       posterTitle: "숨은 매력 체크",
       posterSubtitle: "오래가는 내 포인트",
       stickers: ["🌟", "🎀", "💡", "🪞"],
-      thumb: "linear-gradient(135deg, #fff4c8, #ffe2f6)"
+      thumb: "#fff4c8"
     },
     {
       id: "test-009",
@@ -76,7 +76,7 @@
       posterTitle: "결정 타입",
       posterSubtitle: "나는 어떻게 고를까?",
       stickers: ["🗂️", "⚡", "🤝", "🧠"],
-      thumb: "linear-gradient(135deg, #e5f0ff, #f8e1ff)"
+      thumb: "#e5f0ff"
     },
     {
       id: "test-010",
@@ -90,7 +90,7 @@
       posterTitle: "소비 타입 체크",
       posterSubtitle: "나는 어디에 쓸까?",
       stickers: ["👜", "🧾", "☕", "🎁"],
-      thumb: "linear-gradient(135deg, #fff0d1, #ffe4e4)"
+      thumb: "#fff0d1"
     },
     {
       id: "test-011",
@@ -104,7 +104,7 @@
       posterTitle: "팀플 포지션",
       posterSubtitle: "나는 어떤 역할?",
       stickers: ["📎", "📣", "🤝", "🛠️"],
-      thumb: "linear-gradient(135deg, #effad6, #e3f0ff)"
+      thumb: "#effad6"
     },
     {
       id: "test-012",
@@ -118,7 +118,7 @@
       posterTitle: "관계 충전법",
       posterSubtitle: "쉬는 날 누구와?",
       stickers: ["🛋️", "☕", "👥", "🌙"],
-      thumb: "linear-gradient(135deg, #e6f9ec, #f6eaff)"
+      thumb: "#e6f9ec"
     },
     {
       id: "test-013",
@@ -132,7 +132,7 @@
       posterTitle: "플러팅 방식",
       posterSubtitle: "나는 어떻게 티 낼까?",
       stickers: ["💘", "😉", "🎵", "💌"],
-      thumb: "linear-gradient(135deg, #ffe7cf, #ffdff1)"
+      thumb: "#ffe7cf"
     },
     {
       id: "test-014",
@@ -146,7 +146,7 @@
       posterTitle: "사진첩 무드",
       posterSubtitle: "내가 남기는 장면",
       stickers: ["🌤️", "🎞️", "🌊", "☕"],
-      thumb: "linear-gradient(135deg, #eef6ff, #ffe9d9)"
+      thumb: "#eef6ff"
     },
     {
       id: "test-015",
@@ -160,7 +160,7 @@
       posterTitle: "방 무드 체크",
       posterSubtitle: "내 공간 취향은?",
       stickers: ["🪴", "🕯️", "🧸", "📚"],
-      thumb: "linear-gradient(135deg, #fff1d3, #f4e4ff)"
+      thumb: "#fff1d3"
     },
     {
       id: "test-016",
@@ -174,7 +174,7 @@
       posterTitle: "약속 일정 성향",
       posterSubtitle: "나는 어떻게 잡을까?",
       stickers: ["🗓️", "📍", "⏰", "📞"],
-      thumb: "linear-gradient(135deg, #e8f2ff, #ffe7ef)"
+      thumb: "#e8f2ff"
     },
     {
       id: "test-017",
@@ -188,7 +188,7 @@
       posterTitle: "칭찬 반응 체크",
       posterSubtitle: "나는 어떻게 받을까?",
       stickers: ["🌷", "😳", "🔥", "🎉"],
-      thumb: "linear-gradient(135deg, #fff0f0, #fff5bf)"
+      thumb: "#fff0f0"
     },
     {
       id: "test-018",
@@ -202,7 +202,7 @@
       posterTitle: "계절 감성 체크",
       posterSubtitle: "나는 어떤 계절 무드?",
       stickers: ["🌸", "☀️", "🍂", "❄️"],
-      thumb: "linear-gradient(135deg, #e8ffe9, #ffe9f6)"
+      thumb: "#e8ffe9"
     },
     {
       id: "test-019",
@@ -216,7 +216,7 @@
       posterTitle: "스트레스 해소법",
       posterSubtitle: "내 버튼은 어디?",
       stickers: ["🏃", "💬", "🛌", "🎨"],
-      thumb: "linear-gradient(135deg, #fff0d9, #e4f2ff)"
+      thumb: "#fff0d9"
     },
     {
       id: "test-020",
@@ -279,7 +279,124 @@
     }
   ];
 
+  extraCards.push(
+    { id: "test-024", title: "AI와 일할 때 나는 어떤 파트너?", description: "AI에게 일을 부탁하고 결과를 다듬는 6가지 상황으로 나의 협업 스타일을 찾아봐요.", href: "./tests/test-024.html", badge: "AI 협업", category: "성향 테스트", duration: "90초", icon: "🤖", posterTitle: "AI 협업 스타일", posterSubtitle: "기획자? 탐험가? 검증가?", stickers: ["🤖", "💡", "📝", "🔎"], thumb: "#d9e7f4" },
+    { id: "test-025", title: "알림 OFF, 나의 오프라인 모드는?", description: "소식을 잠깐 놓쳐도 괜찮은 시간, 화면 밖에서 내가 고르는 즐거움을 찾아봐요.", href: "./tests/test-025.html", badge: "JOMO", category: "취향 테스트", duration: "90초", icon: "🔕", posterTitle: "나의 오프라인 모드", posterSubtitle: "알림을 끄면 뭘 할까?", stickers: ["🔕", "🌿", "🎨", "☕"], thumb: "#e2ebd5" }
+  );
+
   const extraPages = {
+    "test-024": makePage({
+      category: "성향 테스트",
+      title: "AI와 일할 때 나는 어떤 파트너?",
+      summary: "AI에게 일을 부탁하고 결과를 다듬는 6가지 상황으로 나의 협업 스타일을 찾아봐요.",
+      introNotice: "AI 활용 능력을 평가하지 않아요. 써본 적이 없다면 상상하며 골라도 좋아요. 실제 AI 연결 없이 브라우저에서 계산해요.",
+      heroCardSubtitle: "기획자? 탐험가? 검증가?",
+      heroArt: { centerEmoji: "🤖", stickers: ["💡", "📝", "🔎", "🧭", "✨", "📎"] },
+      loadingMessage: "내가 AI에게 맡기는 일과 직접 챙기는 일을 모으고 있어요.",
+      questions: [
+        { prompt: "친구들과 갈 여행 계획을 AI에게 부탁한다면, 첫 문장은?", options: [
+          { label: "예산·시간·꼭 가고 싶은 곳부터 정리해줄게", scores: { director: 3 } },
+          { label: "내 초안을 줄 테니 동선과 표현을 다듬어줘", scores: { editor: 3 } },
+          { label: "내가 생각 못 한 색다른 코스도 보여줘", scores: { explorer: 3 } },
+          { label: "추천마다 확인할 공식 정보도 함께 알려줘", scores: { verifier: 3 } }
+        ] },
+        { prompt: "AI가 그럴듯한 소개 글을 줬다. 다음 행동은?", options: [
+          { label: "내 말투에 맞게 문장을 하나씩 바꾼다", scores: { editor: 3 } },
+          { label: "완전히 다른 분위기의 버전도 받아본다", scores: { explorer: 3 } },
+          { label: "날짜나 수치가 맞는지 원문을 확인한다", scores: { verifier: 3 } },
+          { label: "처음 정한 독자와 목적에 맞는지 본다", scores: { director: 3 } }
+        ] },
+        { prompt: "답변이 마음에 안 들 때 나는?", options: [
+          { label: "역할이나 형식을 바꿔 실험해본다", scores: { explorer: 3 } },
+          { label: "어떤 근거로 나온 답인지 확인한다", scores: { verifier: 3 } },
+          { label: "원하는 결과와 조건을 더 구체적으로 쓴다", scores: { director: 3 } },
+          { label: "쓸 만한 부분만 남겨 직접 고친다", scores: { editor: 3 } }
+        ] },
+        { prompt: "모임 발표를 준비할 때 내가 가장 오래 붙잡는 것은?", options: [
+          { label: "인용한 자료가 실제로 있는지와 출처", scores: { verifier: 3 } },
+          { label: "누구에게 무엇을 전할지 정한 개요", scores: { director: 3 } },
+          { label: "듣는 사람이 이해하기 쉬운 문장", scores: { editor: 3 } },
+          { label: "시선을 끌 만한 새로운 표현 방식", scores: { explorer: 3 } }
+        ] },
+        { prompt: "시간이 10분 남았다면 AI와 어떤 일을 하고 싶어?", options: [
+          { label: "복잡한 할 일을 실행 순서로 쪼개기", scores: { director: 3 } },
+          { label: "쓰던 글을 내 느낌으로 마무리하기", scores: { editor: 3 } },
+          { label: "엉뚱한 아이디어를 여러 갈래로 펼치기", scores: { explorer: 3 } },
+          { label: "받은 정보 중 확인이 필요한 곳 표시하기", scores: { verifier: 3 } }
+        ] },
+        { prompt: "결과물을 보고 가장 뿌듯한 순간은?", options: [
+          { label: "누가 봐도 내 취향과 목소리가 느껴질 때", scores: { editor: 3 } },
+          { label: "처음엔 없던 새로운 방향을 찾았을 때", scores: { explorer: 3 } },
+          { label: "중요한 사실을 내 손으로 확인했을 때", scores: { verifier: 3 } },
+          { label: "처음 세운 목적에 딱 맞게 완성했을 때", scores: { director: 3 } }
+        ] }
+      ],
+      results: {
+        director: { title: "방향 잡는 기획자", summary: "AI가 달리기 전에 목적지부터 고르는 파트너", description: "당신의 선택은 원하는 결과와 조건을 먼저 정하는 쪽에 모였어요. 할 일을 나누고 순서를 잡는 과정 자체가 협업의 중요한 부분이라고 느끼는 편이에요.", strengths: ["목적을 먼저 정함", "조건을 구체적으로 전달함", "할 일의 순서를 나눔"], tip: "다음에는 꼭 지킬 조건 세 가지와 바뀌어도 되는 한 가지를 나눠 적어보세요.", moodTitle: "협업 키워드", moodItems: ["목적지", "조건", "실행 순서"], matchTitle: "서로 보완할 파트너", matchLabel: "옆길 찾는 탐험가", matchDescription: "분명한 방향에 예상 밖의 아이디어를 더해볼 수 있어요.", heroEmoji: "🧭" },
+        editor: { title: "내 색 입히는 편집자", summary: "초안에 나의 말투와 취향을 남기는 파트너", description: "당신의 선택은 받은 답을 그대로 쓰기보다 직접 손보는 쪽에 모였어요. 문장 하나의 분위기나 읽는 사람의 느낌까지 챙길 때 결과물이 내 것이 된다고 느끼는 편이에요.", strengths: ["자기 목소리를 남김", "쓸 부분을 골라냄", "읽는 사람을 생각함"], tip: "다음에는 바꾸고 싶은 문장과 마음에 드는 문장을 하나씩 표시해서 비교해보세요.", moodTitle: "협업 키워드", moodItems: ["내 말투", "다듬기", "마지막 손길"], matchTitle: "서로 보완할 파트너", matchLabel: "근거 챙기는 검증가", matchDescription: "자연스러운 표현에 사실 확인을 더하면 함께 읽기 편해져요.", heroEmoji: "📝" },
+        explorer: { title: "옆길 찾는 탐험가", summary: "첫 답을 출발점 삼아 다른 가능성을 여는 파트너", description: "당신의 선택은 여러 버전을 비교하고 새로운 시도를 해보는 쪽에 모였어요. 빠른 정답보다 생각의 범위가 넓어지는 순간에 재미를 느끼는 편이에요.", strengths: ["다른 관점을 시도함", "여러 버전을 비교함", "낯선 아이디어를 반김"], tip: "마지막에는 가장 해보고 싶은 아이디어 하나를 골라 작은 행동으로 바꿔보세요.", moodTitle: "협업 키워드", moodItems: ["만약에", "다른 버전", "새로운 길"], matchTitle: "서로 보완할 파트너", matchLabel: "방향 잡는 기획자", matchDescription: "많은 가능성 중 지금 실행할 것을 함께 고르기 좋아요.", heroEmoji: "💡" },
+        verifier: { title: "근거 챙기는 검증가", summary: "매끈한 답변에도 확인할 곳을 남겨두는 파트너", description: "당신의 선택은 출처와 날짜, 사실을 직접 확인하는 쪽에 모였어요. 답변이 자신 있게 쓰였다는 이유만으로 믿기보다 확인할 자료를 찾는 과정을 중요하게 여기는 편이에요.", strengths: ["출처를 찾아봄", "불확실한 부분을 구분함", "중요한 사실을 재확인함"], tip: "다음에는 반드시 확인할 사실과 자유롭게 상상해도 되는 부분을 먼저 나눠보세요.", moodTitle: "협업 키워드", moodItems: ["원문", "확인 표시", "최종 판단"], matchTitle: "서로 보완할 파트너", matchLabel: "내 색 입히는 편집자", matchDescription: "확인한 내용이 잘 전달되도록 함께 문장을 다듬기 좋아요.", heroEmoji: "🔎" }
+      },
+      resultPreview: ["방향 잡는 기획자", "내 색 입히는 편집자", "옆길 찾는 탐험가", "근거 챙기는 검증가"],
+      relatedIds: ["test-011", "test-009", "test-025"],
+      callout: "재미용 선택 테스트예요. AI 활용 능력이나 직무 적합도를 평가하지 않아요. 동점이면 결과 소개 순서의 유형이 표시돼요."
+    }),
+    "test-025": makePage({
+      category: "취향 테스트",
+      title: "알림 OFF, 나의 오프라인 모드는?",
+      summary: "소식을 잠깐 놓쳐도 괜찮은 시간, 화면 밖에서 내가 고르는 즐거움을 찾아봐요.",
+      introNotice: "JOMO는 소식을 잠깐 놓쳐도 지금의 시간을 즐기는 태도예요. 휴대폰 사용량이나 건강을 진단하지 않는 취향 테스트예요.",
+      heroCardSubtitle: "알림을 끄면 뭘 할까?",
+      heroArt: { centerEmoji: "🔕", stickers: ["🌿", "🎨", "☕", "📚", "🚶", "🫖"] },
+      loadingMessage: "화면 밖에서 눈길이 가는 순간들을 모으고 있어요.",
+      questions: [
+        { prompt: "한 시간 동안 알림을 꺼두기로 했다. 제일 먼저 손이 가는 것은?", options: [
+          { label: "낙서할 종이나 만들다 만 소품", scores: { maker: 3 } },
+          { label: "가볍게 신고 나갈 운동화", scores: { wanderer: 3 } },
+          { label: "편한 담요와 읽던 책", scores: { keeper: 3 } },
+          { label: "같이 차 마실 사람의 빈 의자", scores: { connector: 3 } }
+        ] },
+        { prompt: "친구가 인기 장소에 갔다는데, 오늘 내 선택은?", options: [
+          { label: "집 앞 처음 보는 골목으로 걷는다", scores: { wanderer: 3 } },
+          { label: "늘 가던 조용한 곳에서 쉰다", scores: { keeper: 3 } },
+          { label: "가까운 사람과 편하게 수다 떤다", scores: { connector: 3 } },
+          { label: "내가 해보고 싶던 작은 작업을 한다", scores: { maker: 3 } }
+        ] },
+        { prompt: "카페에서 휴대폰을 가방에 넣었다. 내 눈길은?", options: [
+          { label: "늘 마시는 차의 향과 맛", scores: { keeper: 3 } },
+          { label: "맞은편 사람이 꺼내는 이야기", scores: { connector: 3 } },
+          { label: "냅킨에 그려보고 싶은 모양", scores: { maker: 3 } },
+          { label: "창밖의 낯선 간판과 지나는 풍경", scores: { wanderer: 3 } }
+        ] },
+        { prompt: "사진으로 남기지 않아도 좋았던 순간은?", options: [
+          { label: "대화가 잘 통해 한참 웃었던 시간", scores: { connector: 3 } },
+          { label: "서툴지만 내 손으로 완성한 것", scores: { maker: 3 } },
+          { label: "걷다가 우연히 발견한 작은 공원", scores: { wanderer: 3 } },
+          { label: "좋아하는 음악을 한 곡 끝까지 들은 때", scores: { keeper: 3 } }
+        ] },
+        { prompt: "아무 약속 없는 오후, 무엇 하나만 챙긴다면?", options: [
+          { label: "재료를 꺼내 무언가 만들기", scores: { maker: 3 } },
+          { label: "정해둔 길 없이 잠깐 걷기", scores: { wanderer: 3 } },
+          { label: "익숙한 자리를 편하게 정돈하기", scores: { keeper: 3 } },
+          { label: "반가운 사람과 함께 밥 먹기", scores: { connector: 3 } }
+        ] },
+        { prompt: "알림을 다시 켜기 전, 가장 듣고 싶은 내 한마디는?", options: [
+          { label: "오늘 새로운 풍경을 하나 찾았네", scores: { wanderer: 3 } },
+          { label: "평소 좋아하던 걸 충분히 즐겼네", scores: { keeper: 3 } },
+          { label: "같이 있는 사람에게 집중해서 좋았네", scores: { connector: 3 } },
+          { label: "작아도 내 손으로 하나 남겼네", scores: { maker: 3 } }
+        ] }
+      ],
+      results: {
+        maker: { title: "손끝 몰입 모드", summary: "스크롤 대신 내 손으로 작은 흔적을 남기는 시간", description: "당신의 선택은 그리기나 만들기처럼 직접 해보는 즐거움에 모였어요. 누군가의 완성작을 보는 것보다 조금 서툴러도 내가 만든 결과를 볼 때 시간이 꽉 찬 느낌이 드는 편이에요.", strengths: ["작은 시작을 즐김", "과정에 눈길을 줌", "내 흔적을 남김"], tip: "새 도구를 사기 전에 집에 있는 종이 한 장으로 10분만 놀아보세요.", moodTitle: "오프라인 키워드", moodItems: ["손끝", "낙서", "작은 완성"], matchTitle: "같이 즐길 친구", matchLabel: "골목 탐험 모드", matchDescription: "산책에서 찾은 장면을 함께 그리고 만들어보기 좋아요.", heroEmoji: "🎨" },
+        wanderer: { title: "골목 탐험 모드", summary: "추천 피드 밖에서 나만의 장면을 발견하는 시간", description: "당신의 선택은 주변을 걷고 우연한 풍경을 만나는 쪽에 모였어요. 유명한 장소를 다 챙기기보다 오늘 내 눈에 들어오는 작은 변화를 찾을 때 재미를 느끼는 편이에요.", strengths: ["새로운 풍경을 발견함", "정해진 계획 없이 즐김", "주변을 세밀하게 봄"], tip: "다음 산책에는 평소와 다른 모퉁이 하나만 골라 걸어보세요.", moodTitle: "오프라인 키워드", moodItems: ["한 블록", "발견", "우연한 풍경"], matchTitle: "같이 즐길 친구", matchLabel: "손끝 몰입 모드", matchDescription: "발견한 풍경을 말이나 그림으로 나누기 좋아요.", heroEmoji: "🌿" },
+        keeper: { title: "익숙한 평온 모드", summary: "새로운 소식보다 좋아하던 감각을 오래 누리는 시간", description: "당신의 선택은 익숙한 자리와 취향을 충분히 즐기는 쪽에 모였어요. 뭔가 특별한 일을 해야 한다는 부담이 줄어들 때 차 한 잔이나 음악 한 곡도 만족스러운 시간이 되는 편이에요.", strengths: ["내 취향을 알고 있음", "작은 감각을 즐김", "편안한 자리를 만듦"], tip: "좋아하는 노래 한 곡을 다른 일을 하지 않고 끝까지 들어보세요.", moodTitle: "오프라인 키워드", moodItems: ["단골 자리", "차 한 잔", "한 곡 끝까지"], matchTitle: "같이 즐길 친구", matchLabel: "눈앞의 대화 모드", matchDescription: "편안한 자리에 부담 없는 대화가 더해지기 좋아요.", heroEmoji: "🫖" },
+        connector: { title: "눈앞의 대화 모드", summary: "단체방 소식 대신 지금 함께 있는 사람을 만나는 시간", description: "당신의 선택은 가까운 사람과 얼굴을 보며 시간을 나누는 쪽에 모였어요. 많은 소식을 아는 것보다 한 사람의 이야기를 충분히 듣고 함께 웃는 순간을 더 오래 기억하는 편이에요.", strengths: ["상대 이야기에 집중함", "작은 일상을 나눔", "함께 있는 시간을 챙김"], tip: "함께 식사할 때 서로 오늘 가장 웃겼던 일 하나씩만 들려줘보세요.", moodTitle: "오프라인 키워드", moodItems: ["마주 보기", "한 끼", "같이 웃기"], matchTitle: "같이 즐길 친구", matchLabel: "익숙한 평온 모드", matchDescription: "소란스럽지 않은 공간에서 편하게 이야기하기 좋아요.", heroEmoji: "☕" }
+      },
+      resultPreview: ["손끝 몰입 모드", "골목 탐험 모드", "익숙한 평온 모드", "눈앞의 대화 모드"],
+      relatedIds: ["test-020", "test-002", "test-024"],
+      callout: "어느 모드가 더 건강하거나 좋은 것은 아니에요. 오늘 선택한 즐거움만 가볍게 비교해요. 동점이면 결과 소개 순서의 유형이 표시돼요."
+    }),
     "test-007": makePage({
       category: "연애 테스트",
       title: "썸 대화 온도 체크",
@@ -344,11 +461,11 @@
       questions: [
         q("메뉴를 고를 때 나는?", "후기나 실패 확률을 먼저 본다.", { logic: 2 }, "지금 당기는 쪽으로 빠르게 간다.", { gut: 2, quick: 1 }),
         q("중요한 선택을 앞두면?", "혼자 정리하고 기준을 세운다.", { logic: 2, harmony: 1 }, "생각보다 느낌과 직감이 크게 작용한다.", { gut: 2 }),
-        q("다른 사람 의견은 내게?", "참고는 하지만 내 기준이 더 중요하다.", { logic: 2, quick: 1 }, "최종 선택 전에 꼭 한 번 더 듣는다.", { harmony: 2 }),
+        q("다른 사람 의견은 내게?", "참고는 하지만 내 기준이 더 중요하다.", { logic: 2, quick: 1 }, "최종 선택 전에 꼭 한 번 더 듣는다.", { harmony: 4 }),
         q("선택이 길어질 때 나는?", "정보가 부족해서라고 느낀다.", { logic: 2 }, "결정 피로가 와서 빨리 끝내고 싶어진다.", { quick: 2 }),
         q("갑자기 기회가 생기면?", "기본 조건부터 빠르게 체크한다.", { logic: 2, quick: 1 }, "끌리면 일단 잡고 본다.", { gut: 2 }),
         q("후회가 적은 결정은?", "충분히 따져보고 내린 결정", { logic: 2 }, "당시 마음이 확실했던 결정", { gut: 2 }),
-        q("친구와 같이 정할 때 나는?", "각자 원하는 걸 정리하며 중간점을 찾는다.", { harmony: 2 }, "대략 방향이 보이면 빨리 결론 내린다.", { quick: 2, logic: 1 }),
+        q("친구와 같이 정할 때 나는?", "각자 원하는 걸 정리하며 중간점을 찾는다.", { harmony: 4 }, "대략 방향이 보이면 빨리 결론 내린다.", { quick: 2, logic: 1 }),
         q("내 선택 스타일을 한마디로 말하면?", "이해하고 납득되면 움직이는 편", { logic: 2, harmony: 1 }, "감이 오면 망설임이 줄어드는 편", { gut: 2, quick: 1 })
       ],
       results: {
@@ -426,11 +543,11 @@
         q("바쁜 한 주가 끝난 주말, 가장 먼저 떠오르는 건?", "조용히 혼자 쉬고 싶다.", { solo: 2, vanish: 1 }, "편한 사람 한두 명은 보고 싶다.", { duo: 2, circle: 1 }),
         q("갑자기 약속이 취소되면 나는?", "오히려 숨통이 트여서 좋을 때가 있다.", { solo: 2, vanish: 1 }, "아쉽지만 다른 친구에게 연락해볼 수도 있다.", { circle: 2, duo: 1 }),
         q("휴식에 더 가까운 건?", "말 수가 적어도 편한 시간", { solo: 2 }, "좋아하는 사람과 도란도란 있는 시간", { duo: 2 }),
-        q("사람 많은 자리에 다녀온 뒤 나는?", "생각보다 에너지가 금방 닳는다.", { vanish: 2, solo: 1 }, "즐겁지만 결국 친한 사람과 정리하고 싶어진다.", { duo: 2, circle: 1 }),
+        q("사람 많은 자리에 다녀온 뒤 나는?", "연락과 약속을 끊고 완전히 쉬고 싶다.", { vanish: 4 }, "즐겁지만 결국 친한 사람과 정리하고 싶어진다.", { duo: 2, circle: 1 }),
         q("쉬는 날 연락이 많이 오면?", "답장 템포를 늦추며 내 호흡을 찾는다.", { solo: 2, vanish: 1 }, "지금 가능한 사람들과 가볍게 이어간다.", { circle: 2 }),
         q("가장 편한 약속은?", "정해진 시간 없이 느슨한 만남", { duo: 2, solo: 1 }, "여럿이 만나도 역할 없는 편한 모임", { circle: 2 }),
         q("사람에게서 힘을 얻는 방식은?", "깊게 연결되는 한두 명의 대화", { duo: 2 }, "그날그날 가볍게 섞이는 활기", { circle: 2 }),
-        q("내 충전 버튼에 가까운 건?", "아예 잠수 타듯 쉬기", { vanish: 2, solo: 1 }, "편한 관계와 적당히 이어져 있기", { duo: 2, circle: 1 })
+        q("내 충전 버튼에 가까운 건?", "아예 잠수 타듯 쉬기", { vanish: 4 }, "편한 관계와 적당히 이어져 있기", { duo: 2, circle: 1 })
       ],
       results: {
         solo: { title: "혼자 숨고르기형", summary: "혼자 있는 시간이 있어야 진짜 충전되는 타입", description: "당신은 관계를 싫어한다기보다, 쉬는 날만큼은 혼자 내 호흡을 회복해야 에너지가 차는 편입니다. 조용한 시간이 큰 회복 자원입니다.", strengths: ["자기 회복 감각", "혼자서도 안정적으로 쉬는 힘", "과잉 연결을 조절하는 능력"], tip: "혼자 쉬는 시간은 꼭 필요하지만, 미리 한두 사람에겐 충전 모드라고 알려두면 관계 피로가 줄어요.", moodTitle: "충전 키워드", moodItems: ["조용한 시간", "혼자 루틴", "느린 호흡"], matchTitle: "찰떡 케미", matchLabel: "도란도란 1대1형", matchDescription: "혼자 충전한 뒤엔 깊이 있는 한 사람과의 연결이 가장 편안하게 느껴질 수 있어요.", heroEmoji: "🌙" },
@@ -504,13 +621,13 @@
       heroArt: { centerEmoji: "🛋️", stickers: ["🪴", "🕯️", "🧸", "📚", "🖼️", "☁️"] },
       loadingMessage: "답변을 조합해서 당신의 공간 취향 무드를 정리하고 있습니다.",
       questions: [
-        q("방에 들어왔을 때 제일 먼저 보이는 건?", "조명이랑 색감 같은 전체 분위기", { cozy: 2, color: 1 }, "정리된 구조와 비어 있는 면", { minimal: 2, collector: 1 }),
+        q("방에 들어왔을 때 제일 먼저 보이는 건?", "방 전체의 색 조합과 포인트 컬러", { color: 3, cozy: 1 }, "정리된 구조와 비어 있는 면", { minimal: 2, collector: 1 }),
         q("침대 주변에 더 잘 어울리는 건?", "포근한 쿠션과 담요", { cozy: 2 }, "딱 필요한 것만 놓인 깔끔함", { minimal: 2 }),
         q("내 방의 만족도를 올리는 건?", "좋아하는 소품이 조금씩 보이는 것", { collector: 2, color: 1 }, "눈에 거슬리는 것이 없는 정돈감", { minimal: 2 }),
         q("벽을 꾸민다면?", "사진, 포스터, 메모로 나답게 채우고 싶다.", { collector: 2 }, "한두 포인트만 두고 여백을 살리고 싶다.", { minimal: 2, cozy: 1 }),
         q("가장 편안한 공간은?", "따뜻한 조명과 폭신한 텍스처가 있는 공간", { cozy: 2 }, "선이 단정하고 시야가 정리된 공간", { minimal: 2 }),
         q("소품을 고를 때 나는?", "내 취향이 드러나는 디테일을 본다.", { collector: 2, color: 1 }, "전체 공간을 해치지 않는지를 본다.", { minimal: 2, cozy: 1 }),
-        q("방의 기분 전환은 보통 어떻게 하나?", "커버, 향, 조명처럼 감각적인 걸 바꾼다.", { cozy: 2, color: 1 }, "정리부터 하며 구조를 다시 맞춘다.", { minimal: 2 }),
+        q("방의 기분 전환은 보통 어떻게 하나?", "침구와 소품의 색 조합을 바꾼다.", { color: 3, cozy: 1 }, "정리부터 하며 구조를 다시 맞춘다.", { minimal: 2 }),
         q("내 공간을 한마디로 하면?", "나를 편하게 감싸는 아지트", { cozy: 2, collector: 1 }, "불필요한 걸 덜어낸 안심 구역", { minimal: 2, color: 1 })
       ],
       results: {
@@ -535,9 +652,9 @@
         q("친구가 '아무 때나 좋아'라고 하면 나는?", "그럴수록 후보 시간을 정확히 제안한다.", { anchor: 2 }, "그날 가까워지면 다시 얘기해도 괜찮다.", { pulse: 2 }),
         q("약속 장소 선택은?", "이동 동선과 편의성을 먼저 본다.", { anchor: 2, curator: 1 }, "그날 끌리는 분위기가 더 중요하다.", { flex: 2, pulse: 1 }),
         q("시간이 조금 바뀌면 나는?", "왜 바뀌는지 알아야 마음이 놓인다.", { anchor: 2 }, "괜찮아, 그럴 수 있지 하고 맞춘다.", { flex: 2 }),
-        q("모임 일정 정리에서 더 가까운 건?", "대화가 길어지기 전에 결론을 내고 싶다.", { curator: 2, anchor: 1 }, "사람들이 되는 흐름을 보며 자연스럽게 정해진다.", { pulse: 2, flex: 1 }),
+        q("모임 일정 정리에서 더 가까운 건?", "장소와 이동 순서를 묶어 전체 일정을 제안한다.", { curator: 4, anchor: 1 }, "사람들이 되는 흐름을 보며 자연스럽게 정해진다.", { pulse: 2, flex: 1 }),
         q("당일 약속이 가장 편한 경우는?", "거의 없다. 미리 알아야 좋다.", { anchor: 2, curator: 1 }, "컨디션 좋으면 오히려 더 가볍고 좋다.", { pulse: 2 }),
-        q("나와 약속 잡기 쉬운 사람은?", "정확하게 답을 주는 사람", { curator: 2, anchor: 1 }, "조금 바뀌어도 서로 가볍게 맞출 수 있는 사람", { flex: 2 }),
+        q("나와 약속 잡기 쉬운 사람은?", "동선과 준비할 일을 함께 정리해주는 사람", { curator: 4, anchor: 1 }, "조금 바뀌어도 서로 가볍게 맞출 수 있는 사람", { flex: 2 }),
         q("내 일정 스타일을 한마디로 하면?", "안정적으로 맞춰야 마음이 편하다.", { anchor: 2, curator: 1 }, "유연하게 흘러가도 충분히 괜찮다.", { flex: 2, pulse: 1 })
       ],
       results: {
@@ -588,10 +705,10 @@
         q("날씨가 바뀌는 걸 느끼면 먼저 떠오르는 건?", "새로운 시작의 기분", { bloom: 2 }, "옷, 향, 음악 같은 분위기 변화", { hush: 2, frost: 1 }),
         q("가장 좋아하는 공기는?", "햇살이 선명하고 움직이기 좋은 공기", { blaze: 2, bloom: 1 }, "조용히 생각이 많아지는 서늘한 공기", { hush: 2, frost: 1 }),
         q("계절이 바뀌면 내 플레이리스트는?", "좀 더 가볍고 밝아진다.", { bloom: 2, blaze: 1 }, "더 차분하고 깊어진다.", { hush: 2, frost: 1 }),
-        q("기분 전환 방식은?", "밖으로 나가 몸을 움직이며 바꾸기", { blaze: 2 }, "혼자 정리하거나 기록하며 바꾸기", { frost: 2, hush: 1 }),
+        q("기분 전환 방식은?", "밖으로 나가 몸을 움직이며 바꾸기", { blaze: 2 }, "혼자 정리하거나 기록하며 바꾸기", { frost: 4 }),
         q("옷을 고를 때 끌리는 건?", "경쾌한 색과 가벼운 실루엣", { bloom: 2, blaze: 1 }, "톤 다운된 색과 포근한 질감", { hush: 2, frost: 1 }),
         q("지금의 계절을 느끼는 포인트는?", "거리의 활기와 에너지", { blaze: 2, bloom: 1 }, "빛, 바람, 냄새 같은 미묘한 변화", { hush: 2, frost: 1 }),
-        q("내 감성이 가장 살아나는 시간은?", "새 계획을 세우는 낮", { bloom: 2 }, "생각이 깊어지는 밤", { frost: 2, hush: 1 }),
+        q("내 감성이 가장 살아나는 시간은?", "새 계획을 세우는 낮", { bloom: 2 }, "하루를 차분히 정리하는 밤", { frost: 4 }),
         q("계절의 변화가 내게 주는 건?", "다시 움직일 이유", { blaze: 2, bloom: 1 }, "내 마음을 돌아볼 틈", { hush: 2, frost: 1 })
       ],
       results: {
@@ -643,10 +760,10 @@
       loadingMessage: "답변을 모아 소셜 배터리 사용법을 정리하고 있어요.",
       questions: [
         q("사람 많은 모임에 다녀온 뒤 나는?", "조금 피곤해도 기분은 오르는 편", { crowd: 2, observer: 1 }, "즐겁더라도 결국 혼자 정리 시간이 필요하다", { recharge: 2, deep: 1 }),
-        q("새 사람을 만나는 자리에선?", "어색해도 금방 섞이는 편", { crowd: 2 }, "처음엔 조용히 보다가 한두 사람과 연결된다", { observer: 2, deep: 1 }),
+        q("새 사람을 만나는 자리에선?", "어색해도 금방 섞이는 편", { crowd: 2 }, "처음엔 조용히 보다가 한두 사람과 연결된다", { observer: 4, deep: 1 }),
         q("가장 편한 대화는?", "여러 명이 왔다 갔다 하는 활기", { crowd: 2 }, "깊이 있는 1대1 대화", { deep: 2 }),
         q("주말 약속이 연달아 잡히면?", "은근히 신나고 살아나는 느낌", { crowd: 2 }, "하루쯤은 꼭 비워둬야 버틸 수 있다", { recharge: 2 }),
-        q("내가 사람 자리에서 자주 하는 건?", "반응하고 섞이며 분위기를 따라간다", { crowd: 2, observer: 1 }, "사람들을 보며 흐름과 거리감을 읽는다", { observer: 2 }),
+        q("내가 사람 자리에서 자주 하는 건?", "반응하고 섞이며 분위기를 따라간다", { crowd: 2, observer: 1 }, "사람들을 보며 흐름과 거리감을 읽는다", { observer: 4 }),
         q("관계에서 더 중요한 건?", "다양한 연결과 활기", { crowd: 2 }, "적어도 깊이 있는 몇 사람", { deep: 2, recharge: 1 }),
         q("대화가 길어지면 나는?", "새 사람, 새 주제가 들어와도 괜찮다", { crowd: 2 }, "깊은 얘기 한 번이 더 기억에 남는다", { deep: 2 }),
         q("내 소셜 배터리를 한마디로 하면?", "사람 속에서 켜지는 편", { crowd: 2, observer: 1 }, "사람을 고르고 쉬며 쓰는 편", { recharge: 2, deep: 1 })
@@ -949,7 +1066,9 @@
     "test-020": { start: "relation", journey: "rest", result: "digital" },
     "test-021": { start: "rest", journey: "rest", result: "digital" },
     "test-022": { start: "mood", journey: "mood", result: "mood" },
-    "test-023": { start: "focus", journey: "rest", result: "rest" }
+    "test-023": { start: "focus", journey: "rest", result: "rest" },
+    "test-024": { start: "focus", journey: "focus", result: "digital" },
+    "test-025": { start: "rest", journey: "rest", result: "rest" }
   };
 
   const placementMeta = {

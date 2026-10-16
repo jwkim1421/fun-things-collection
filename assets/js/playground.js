@@ -284,11 +284,11 @@ function applyPlayShare(content, resultTitle, resultLine, resultKey) {
   body.dataset.shareResultDescription = resultLine;
   body.dataset.shareResultIcon = content.icon;
   body.dataset.shareTheme = content.type === "chat"
-    ? "linear-gradient(135deg, #f5b8a8, #fffdf8)"
+    ? "#f5b8a8"
     : content.type === "bingo"
-      ? "linear-gradient(135deg, #b8d3df, #fffdf8)"
-      : "linear-gradient(135deg, #f2d27f, #fffdf8)";
-  body.dataset.shareMascot = `${window.location.origin}/assets/images/coocoo.png`;
+      ? "#b8d3df"
+      : "#f2d27f";
+  body.dataset.shareMascot = `${window.location.origin}/assets/images/kuku-mascot-full.png`;
   body.dataset.shareButtonTitle = "결과 확인하기";
 }
 
@@ -307,15 +307,19 @@ function hydratePlayCommunity(root) {
 }
 
 function resultActions(contentId) {
+  const nextId = contentId === "chat-temperature" ? "procrastination-bingo" : "chat-temperature";
   return `
+    <div class="play-share-actions">
+      <button type="button" id="btnCopyResultImage">이미지 복사</button>
+      <button type="button" id="btnCopyLink">링크 복사</button>
+      <button type="button" id="btnKakaoShare">카카오톡</button>
+      <button type="button" id="btnInstagramShare">인스타그램</button>
+    </div>
+    <button class="play-primary-button result-try-button" type="button" data-action="restart">나도 직접 해보기</button>
+    <a class="play-home-link" href="./${nextId}.html" data-content-id="${nextId}" data-next-content>다음 놀이: ${escapePlayHtml(PLAY_CONTENT[nextId].title)} →</a>
     <div class="community-reactions" data-reaction-panel data-content-id="${escapePlayHtml(contentId)}" aria-label="콘텐츠 반응">
       <button type="button" data-reaction="fun" aria-pressed="false"><span aria-hidden="true">☺</span><strong>재밌어요</strong><b data-reaction-count="fun">0</b></button>
       <button type="button" data-reaction="relatable" aria-pressed="false"><span aria-hidden="true">♥</span><strong>공감돼요</strong><b data-reaction-count="relatable">0</b></button>
-    </div>
-    <div class="play-share-actions">
-      <button type="button" id="btnSaveResultImage">결과 이미지 저장</button>
-      <button type="button" id="btnCopyLink">링크 복사</button>
-      <button type="button" id="btnKakaoShare">Kakao 공유</button>
     </div>
     <a class="play-home-link" href="../index.html#play">다른 놀이 고르기 →</a>
   `;
@@ -352,10 +356,28 @@ function getLocalDateKey() {
 
 let playgroundAdScriptPromise = null;
 
+function getDailyBoxes(dateKey = getLocalDateKey()) {
+  const missions = [
+    { title: "먼저 말 걸기", detail: "오늘 떠오른 사람 한 명에게 짧게 안부를 보내보세요." },
+    { title: "10분 비우기", detail: "화면을 잠깐 내려놓고 아무것도 하지 않는 10분을 만들어보세요." },
+    { title: "작은 완료 만들기", detail: "미뤄둔 일 중 5분 안에 끝나는 것 하나를 골라 지워보세요." },
+    { title: "익숙한 길 바꾸기", detail: "안전한 가까운 길 하나를 다르게 걸으며 눈에 들어온 것을 찾아봐요." },
+    { title: "오늘의 한 장 남기기", detail: "지금 기분과 닮은 풍경이나 물건을 사진 한 장으로 남겨보세요." },
+    { title: "작은 취향 챙기기", detail: "좋아하는 노래 한 곡이나 간식 하나를 천천히 즐겨보세요." },
+    { title: "고마웠던 순간 적기", detail: "오늘 고마웠던 일 하나를 나만 보는 메모에 적어보세요." }
+  ];
+  const day = Math.floor(Date.parse(`${dateKey}T00:00:00Z`) / 86400000);
+  return PLAY_CONTENT["today-box"].boxes.map((box, index) => ({ ...box, ...missions[((day * 3 + index) % missions.length + missions.length) % missions.length] }));
+}
+
 function hydratePlayResultAd() {
   const slot = document.getElementById("playResultAd");
   if (!slot) return;
+  document.getElementById("contentResultAds").hidden = false;
+  document.dispatchEvent(new CustomEvent("coocoo:ads-rendered"));
   hydratePlayCommunity(document.getElementById("playgroundApp") || document);
+  if (slot.dataset.initialized) return;
+  slot.dataset.initialized = "true";
 
   if (!playgroundAdScriptPromise) {
     playgroundAdScriptPromise = new Promise((resolve, reject) => {
@@ -380,6 +402,10 @@ function hydratePlayResultAd() {
   }
 
   playgroundAdScriptPromise.then(() => {
+    if (!(window.PartnersCoupang && window.PartnersCoupang.G)) {
+      slot.textContent = "광고를 불러오지 못했어요.";
+      return;
+    }
     slot.textContent = "";
     const slotWidth = Math.max(300, Math.min(680, Math.floor(slot.clientWidth || 680)));
     const script = document.createElement("script");
@@ -395,8 +421,8 @@ function createPlaygroundApp() {
   const playId = document.body.dataset.playId;
   const content = PLAY_CONTENT[playId];
   if (!root || !content) return;
+  const fromSharedResult = new URLSearchParams(window.location.search).get("shared") === "1";
 
-  document.title = `${content.title} | 쿠쿠`;
   const state = {
     screen: "intro",
     index: 0,
@@ -410,7 +436,8 @@ function createPlaygroundApp() {
     allocation: {},
     storyNode: "",
     storyPath: [],
-    rouletteEnabled: []
+    rouletteEnabled: [],
+    dailyDateKey: ""
   };
   let restoringHistory = false;
 
@@ -429,6 +456,7 @@ function createPlaygroundApp() {
       storyNode: state.storyNode,
       storyPath: [...state.storyPath],
       rouletteEnabled: [...state.rouletteEnabled],
+      dailyDateKey: state.dailyDateKey,
       resultKey
     };
   }
@@ -445,6 +473,7 @@ function createPlaygroundApp() {
     state.storyNode = snapshot.storyNode || content.startNode || "";
     state.storyPath = Array.isArray(snapshot.storyPath) ? [...snapshot.storyPath] : [];
     state.rouletteEnabled = Array.isArray(snapshot.rouletteEnabled) ? [...snapshot.rouletteEnabled] : [];
+    state.dailyDateKey = snapshot.dailyDateKey || getLocalDateKey();
   }
 
   function writeHistory(screen, options = {}) {
@@ -453,6 +482,8 @@ function createPlaygroundApp() {
     const resultKey = options.resultKey || "";
     const url = new URL(window.location.href);
     resultKey ? url.searchParams.set("result", resultKey) : url.searchParams.delete("result");
+    if (content.type === "daily" && resultKey) url.searchParams.set("date", state.dailyDateKey);
+    else url.searchParams.delete("date");
     const historyState = {
       coocooPlay: true,
       playId,
@@ -475,6 +506,8 @@ function createPlaygroundApp() {
   }
 
   function renderIntro() {
+    const resultAds = document.getElementById("contentResultAds");
+    if (resultAds) resultAds.hidden = true;
     const introTone = {
       chat: "coral",
       bingo: "blue",
@@ -610,7 +643,6 @@ function createPlaygroundApp() {
     if (shouldTrack) trackPlayEvent("content_complete", content, { result_key: resultKey, game_score: score, duration_seconds: Math.max(1, Math.round((Date.now() - state.startedAt) / 1000)) });
     root.innerHTML = renderPlayResult(content, result.icon, result.title, result.line, result.detail, {
       resultLabel: "충전 결과",
-      restart: true,
       comment: getKukuComment("battery", result.key)
     });
     hydratePlayResultAd();
@@ -619,8 +651,9 @@ function createPlaygroundApp() {
 
   function renderDaily(useSavedResult = true) {
     const todayKey = getLocalDateKey();
-    const saved = window.localStorage.getItem(`coocoo_today_box_${todayKey}`);
-    if (useSavedResult && saved !== null) {
+    let saved = null;
+    try { saved = window.localStorage.getItem(`coocoo_today_box_${todayKey}`); } catch (error) { /* Storage is optional. */ }
+    if (useSavedResult && saved !== null && /^[0-2]$/.test(saved)) {
       finishDaily(Number(saved), false);
       return;
     }
@@ -636,10 +669,14 @@ function createPlaygroundApp() {
     `;
   }
 
-  function finishDaily(index, shouldTrack = true) {
-    const box = content.boxes[index] || content.boxes[0];
-    const todayKey = getLocalDateKey();
-    window.localStorage.setItem(`coocoo_today_box_${todayKey}`, String(index));
+  function finishDaily(index, shouldTrack = true, dateKey = getLocalDateKey()) {
+    const parsedDate = new Date(`${dateKey}T00:00:00Z`);
+    state.dailyDateKey = !Number.isNaN(parsedDate.getTime()) && parsedDate.toISOString().slice(0, 10) === dateKey ? dateKey : getLocalDateKey();
+    const boxes = getDailyBoxes(state.dailyDateKey);
+    const box = boxes[index] || boxes[0];
+    if (shouldTrack) {
+      try { window.localStorage.setItem(`coocoo_today_box_${getLocalDateKey()}`, String(index)); } catch (error) { /* Storage is optional. */ }
+    }
     const resultKey = `box-${index}`;
     writeHistory("result", { resultKey, replace: !shouldTrack });
     applyPlayShare(content, box.title, box.detail, resultKey);
@@ -866,7 +903,7 @@ function createPlaygroundApp() {
     writeHistory("result", { resultKey, replace: !shouldTrack });
     applyPlayShare(content, selectedItem, `오늘의 선택은 '${selectedItem}'이에요.`, resultKey);
     if (shouldTrack) trackPlayEvent("content_complete", content, { result_key: resultKey, enabled_count: state.rouletteEnabled.length, duration_seconds: Math.max(1, Math.round((Date.now() - state.startedAt) / 1000)) });
-    root.innerHTML = renderPlayResult(content, "↻", selectedItem, `오늘의 선택은 '${selectedItem}'이에요.`, "룰렛은 골랐고, 따를지 말지는 여전히 네 마음이에요. 결과를 보자마자 다른 후보가 아쉬웠다면 그것도 꽤 정확한 답이에요.", { resultLabel: "선택 룰렛 결과", comment: getKukuComment("roulette"), restart: true });
+    root.innerHTML = renderPlayResult(content, "↻", selectedItem, `오늘의 선택은 '${selectedItem}'이에요.`, "룰렛은 골랐고, 따를지 말지는 여전히 네 마음이에요. 결과를 보자마자 다른 후보가 아쉬웠다면 그것도 꽤 정확한 답이에요.", { resultLabel: "선택 룰렛 결과", comment: getKukuComment("roulette") });
     hydratePlayResultAd();
     scrollPlaygroundToTop();
   }
@@ -879,20 +916,17 @@ function createPlaygroundApp() {
         <div class="play-result-icon" aria-hidden="true">${icon}</div>
         <h1>${escapePlayHtml(title)}</h1>
         <strong>${escapePlayHtml(line)}</strong>
-        <p>${escapePlayHtml(detail)}</p>
-        <div class="kuku-comment"><img src="../assets/images/coocoo.png" alt="" /><span>쿠쿠의 한마디</span><p>${escapePlayHtml(options.comment || "친구 결과랑 나란히 놓으면 더 웃길지도 몰라.")}</p></div>
-        ${options.restart ? `<button class="play-primary-button" type="button" data-action="restart">다시 도전하기</button>` : ""}
         ${resultActions(playId)}
-        <div class="play-result-ad-wrap">
-          <span>AD</span>
-          <div id="playResultAd" class="play-result-ad">680 × 110</div>
-          <small>이 페이지는 쿠팡 파트너스 활동의 일환으로 일정액의 수수료를 제공받을 수 있습니다.</small>
-        </div>
+        <p class="content-disclaimer">재미로 즐기는 콘텐츠예요. 전문적인 심리 검사나 진단이 아니에요.</p>
+        <p>${escapePlayHtml(detail)}</p>
+        <div class="kuku-comment"><img src="../assets/images/apple-touch-icon.png" alt="" width="72" height="72" loading="lazy" /><span>쿠쿠의 한마디</span><p>${escapePlayHtml(options.comment || "친구 결과랑 나란히 놓으면 더 웃길지도 몰라.")}</p></div>
       </section>
     `;
   }
 
   function startContent() {
+    const resultAds = document.getElementById("contentResultAds");
+    if (resultAds) resultAds.hidden = true;
     window.clearInterval(state.timer);
     state.timer = null;
     state.screen = "play";
@@ -910,7 +944,7 @@ function createPlaygroundApp() {
     state.rouletteEnabled = content.type === "roulette" ? content.items.map((item, index) => index) : [];
     state.startedAt = Date.now();
     writeHistory("play");
-    trackPlayEvent("content_start", content);
+    trackPlayEvent("content_start", content, { from_shared_result: fromSharedResult });
     getPlayCommunityClient()
       .then((client) => client && client.recordParticipation(playId))
       .catch(() => null);
@@ -1044,6 +1078,8 @@ function createPlaygroundApp() {
     state.timer = null;
     restoreSnapshot(historyState.snapshot);
     state.screen = historyState.screen;
+    const resultAds = document.getElementById("contentResultAds");
+    if (resultAds) resultAds.hidden = state.screen !== "result";
 
     if (state.screen === "intro") renderIntro();
     if (state.screen === "play" && content.type === "chat") renderChat();
@@ -1066,7 +1102,7 @@ function createPlaygroundApp() {
       finishBingo(Number(selectedCount), Number(bingos), false);
     }
     if (state.screen === "result" && content.type === "battery") finishBattery(Number(resultKey.replace("battery-", "")), false);
-    if (state.screen === "result" && content.type === "daily") finishDaily(Number(resultKey.replace("box-", "")), false);
+    if (state.screen === "result" && content.type === "daily") finishDaily(Number(resultKey.replace("box-", "")), false, state.dailyDateKey);
     if (state.screen === "result" && content.type === "ranking") finishRanking(resultKey.replace("rank-", ""), false);
     if (state.screen === "result" && content.type === "allocation") finishAllocation(resultKey.split("-")[1] || "", false);
     if (state.screen === "result" && content.type === "story") finishStory(resultKey.replace("story-", ""), false);
@@ -1089,7 +1125,7 @@ function createPlaygroundApp() {
   } else if (content.type === "battery" && /^battery-\d+$/.test(sharedResult)) {
     finishBattery(Number(sharedResult.replace("battery-", "")), false);
   } else if (content.type === "daily" && /^box-[0-2]$/.test(sharedResult)) {
-    finishDaily(Number(sharedResult.replace("box-", "")), false);
+    finishDaily(Number(sharedResult.replace("box-", "")), false, new URLSearchParams(window.location.search).get("date") || getLocalDateKey());
   } else if (content.type === "ranking" && /^rank-[a-z]+$/.test(sharedResult)) {
     state.order = content.items.map((item) => item.id);
     finishRanking(sharedResult.replace("rank-", ""), false);
@@ -1109,6 +1145,7 @@ function createPlaygroundApp() {
     renderIntro();
     writeHistory("intro", { replace: true });
   }
+  if (fromSharedResult && state.screen === "result") trackPlayEvent("shared_result_view", content, { result_key: sharedResult });
 }
 
 document.addEventListener("DOMContentLoaded", createPlaygroundApp);

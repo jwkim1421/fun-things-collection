@@ -23,12 +23,12 @@ function loadAdsenseScript(client) {
 }
 
 function initAdsenseSlots() {
-  if (!hasAdsenseConfig()) {
+  if (!hasAdsenseConfig() || window.SITE_CONFIG.adsenseEnabled !== true) {
     return;
   }
 
   const config = window.SITE_CONFIG;
-  const slots = document.querySelectorAll(".adsbygoogle");
+  const slots = document.querySelectorAll("[data-adsense-placement]");
 
   if (!slots.length) {
     return;
@@ -37,6 +37,10 @@ function initAdsenseSlots() {
   loadAdsenseScript(config.adsenseClient);
 
   slots.forEach((slot) => {
+    const placement = slot.closest(".adsense-placement");
+    if (placement.parentElement.closest("[hidden]")) return;
+    placement.hidden = false;
+    slot.classList.add("adsbygoogle");
     slot.dataset.adClient = config.adsenseClient;
     slot.dataset.adSlot = config.adsenseSlot;
 
@@ -54,3 +58,4 @@ function initAdsenseSlots() {
 }
 
 document.addEventListener("DOMContentLoaded", initAdsenseSlots);
+document.addEventListener("coocoo:ads-rendered", initAdsenseSlots);

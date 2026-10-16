@@ -5,6 +5,7 @@
   const tagRoot = document.getElementById("recommendedTags");
   const resultRoot = document.getElementById("searchResultGrid");
   const summary = document.getElementById("searchSummary");
+  const contentType = new URLSearchParams(window.location.search).get("type") || "";
   if (!catalog || !form || !input || !tagRoot || !resultRoot || !summary) return;
 
   const recommendedTags = ["연애", "관계", "대학생", "라이프", "감정", "취향", "성향", "회복", "짧은놀이", "게임"];
@@ -26,7 +27,7 @@
 
   function render(query) {
     const safeQuery = normalized(query);
-    const results = catalog.items.filter((item) => matches(item, safeQuery));
+    const results = catalog.items.filter((item) => (!contentType || item.type === contentType) && matches(item, safeQuery));
     summary.textContent = safeQuery ? `‘${query.trim()}’ 검색 결과 ${results.length}개` : `테스트와 짧은 놀이 ${results.length}개를 모았어요.`;
     resultRoot.innerHTML = results.length ? results.map((item) => `
       <a class="search-result-card" href="${escapeHtml(item.href)}" data-content-id="${escapeHtml(item.id)}">

@@ -44,6 +44,19 @@ function getShareImage() {
   return meta && meta.content ? meta.content : "";
 }
 
+function buildSharedLink(method) {
+  const current = new URL(getSiteUrl());
+  const url = new URL(current.pathname, current.origin);
+  ["result", "date"].forEach((key) => {
+    if (current.searchParams.has(key)) url.searchParams.set(key, current.searchParams.get(key));
+  });
+  url.searchParams.set("shared", "1");
+  url.searchParams.set("utm_source", method);
+  url.searchParams.set("utm_medium", "social");
+  url.searchParams.set("utm_campaign", "content_share");
+  return url.toString();
+}
+
 function trackShareClick(method) {
   if (!(window.COOCOO_ANALYTICS && typeof window.COOCOO_ANALYTICS.track === "function")) {
     return;
@@ -153,7 +166,7 @@ function getDynamicSharePayload() {
     resultSummary: bodyData.shareResultSummary || "",
     resultDescription: bodyData.shareResultDescription || "",
     resultIcon: bodyData.shareResultIcon || "✨",
-    mascotUrl: bodyData.shareMascot || `${window.location.origin}/assets/images/coocoo.png`
+    mascotUrl: bodyData.shareMascot || `${window.location.origin}/assets/images/kuku-mascot-full.png`
   };
 }
 
@@ -188,54 +201,50 @@ async function buildDynamicShareCanvas() {
   ctx.fill();
 
   ctx.fillStyle = "#2f2435";
-  ctx.font = "700 30px Arial";
-  ctx.fillText(payload.testTitle, 382, 126);
+  ctx.font = "700 28px Arial";
+  wrapCanvasText(ctx, payload.testTitle, 680, 2).forEach((line, index) => ctx.fillText(line, 382, 112 + index * 34));
 
   ctx.fillStyle = "#f2d27f";
-  drawRoundedRect(ctx, 382, 160, 692, 72, 24);
+  drawRoundedRect(ctx, 382, 166, 692, 128, 24);
   ctx.fill();
 
   ctx.fillStyle = "#2f2435";
-  ctx.font = "800 48px Arial";
+  ctx.font = "800 42px Arial";
   const resultTitleLines = wrapCanvasText(ctx, payload.resultTitle, 644, 2);
   resultTitleLines.forEach((line, index) => {
-    ctx.fillText(line, 420, 212 + (index * 56));
+    ctx.fillText(line, 406, 218 + (index * 52));
   });
 
   ctx.fillStyle = "#fff4b9";
-  drawRoundedRect(ctx, 382, 260, 692, 208, 26);
+  drawRoundedRect(ctx, 382, 312, 692, 140, 26);
   ctx.fill();
 
   ctx.fillStyle = "#3f3326";
   ctx.font = "700 24px Arial";
-  const summaryLines = wrapCanvasText(ctx, payload.resultSummary, 628, 2);
+  const summaryLines = wrapCanvasText(ctx, payload.resultSummary || payload.resultDescription, 628, 2);
   summaryLines.forEach((line, index) => {
-    ctx.fillText(line, 420, 312 + (index * 34));
-  });
-
-  ctx.font = "500 22px Arial";
-  const descriptionLines = wrapCanvasText(ctx, payload.resultDescription, 628, 5);
-  descriptionLines.forEach((line, index) => {
-    ctx.fillText(line, 420, 382 + (index * 34));
+    ctx.fillText(line, 406, 360 + (index * 36));
   });
 
   ctx.fillStyle = "#b8d3df";
-  drawRoundedRect(ctx, 382, 500, 470, 46, 22);
+  drawRoundedRect(ctx, 382, 478, 692, 54, 18);
   ctx.fill();
   ctx.fillStyle = "#6f5375";
   ctx.font = "700 22px Arial";
-  ctx.fillText("쿠쿠에서 결과 확인하기", 420, 532);
+  ctx.fillText("친구랑 비교하기 · 나도 직접 해보기", 406, 513);
+  ctx.font = "700 25px Arial";
+  ctx.fillText(new URL(getSiteUrl()).hostname, 406, 567);
 
-  ctx.font = "110px Arial";
+  ctx.font = "90px Arial";
   ctx.fillStyle = "#2f2435";
   ctx.textAlign = "center";
-  ctx.fillText(payload.resultIcon, 213, 264);
+  ctx.fillText(payload.resultIcon, 213, 350);
 
   ctx.textAlign = "center";
-  ctx.font = "800 42px Arial";
-  const sideTitleLines = wrapCanvasText(ctx, payload.resultTitle, 190, 3);
+  ctx.font = "800 34px Arial";
+  const sideTitleLines = wrapCanvasText(ctx, payload.siteName, 190, 2);
   sideTitleLines.forEach((line, index) => {
-    ctx.fillText(line, 213, 372 + (index * 46));
+    ctx.fillText(line, 213, 432 + (index * 40));
   });
   ctx.textAlign = "left";
 
@@ -243,7 +252,7 @@ async function buildDynamicShareCanvas() {
     const mascot = await loadShareImageAsset(payload.mascotUrl);
     ctx.save();
     ctx.globalAlpha = 0.94;
-    ctx.drawImage(mascot, 904, 88, 132, 132);
+    ctx.drawImage(mascot, 143, 110, 140, 140);
     ctx.restore();
   } catch (error) {
     console.warn("Failed to load mascot image for share card.", error);
@@ -252,90 +261,63 @@ async function buildDynamicShareCanvas() {
   return canvas;
 }
 
-function showResultImagePreview(file) {
-  const objectUrl = URL.createObjectURL(file);
-  const overlay = document.createElement("div");
-  overlay.className = "result-image-preview";
-  overlay.setAttribute("role", "dialog");
-  overlay.setAttribute("aria-modal", "true");
-  overlay.setAttribute("aria-label", "결과 이미지 미리보기");
-
-  const panel = document.createElement("div");
-  panel.className = "result-image-preview-panel";
-
-  const heading = document.createElement("strong");
-  heading.textContent = "결과 이미지가 준비됐어요";
-
-  const guide = document.createElement("p");
-  guide.textContent = "이미지를 길게 눌러 사진 앱에 저장하거나 복사해보세요.";
-
-  const image = document.createElement("img");
-  image.src = objectUrl;
-  image.alt = "공유용 결과 카드";
-
-  const closeButton = document.createElement("button");
-  closeButton.type = "button";
-  closeButton.textContent = "닫기";
-
-  const closePreview = () => {
-    overlay.remove();
-    document.body.classList.remove("result-image-preview-open");
-    URL.revokeObjectURL(objectUrl);
-    document.removeEventListener("keydown", handleKeydown);
-  };
-  const handleKeydown = (event) => {
-    if (event.key === "Escape") closePreview();
-  };
-
-  closeButton.addEventListener("click", closePreview);
-  overlay.addEventListener("click", (event) => {
-    if (event.target === overlay) closePreview();
-  });
-  document.addEventListener("keydown", handleKeydown);
-
-  panel.append(heading, guide, image, closeButton);
-  overlay.appendChild(panel);
-  document.body.appendChild(overlay);
-  document.body.classList.add("result-image-preview-open");
-  closeButton.focus();
-}
-
-async function shareResultImage() {
+async function getResultImageBlob() {
   const canvas = await buildDynamicShareCanvas();
-  if (!canvas) {
-    alert("결과 화면에서 이미지를 저장할 수 있어요.");
-    return;
-  }
-
+  if (!canvas) throw new Error("No result image is available");
   const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
   if (!blob) throw new Error("Result image could not be created.");
+  return blob;
+}
 
-  const title = document.body.dataset.shareResultTitle || "result";
-  const fileName = `coocoo-${title.replace(/[^0-9A-Za-z가-힣_-]+/g, "-")}.png`;
-  const file = new File([blob], fileName, { type: "image/png" });
-  let canShareFile = false;
-  try {
-    canShareFile = typeof navigator.share === "function" &&
-      typeof navigator.canShare === "function" &&
-      navigator.canShare({ files: [file] });
-  } catch (error) {
-    console.warn("File sharing support check failed.", error);
+function showShareFeedback(message, instagram = false, download = false) {
+  document.getElementById("shareFeedback")?.remove();
+  const panel = document.createElement("div");
+  panel.id = "shareFeedback";
+  panel.className = "share-feedback";
+  panel.setAttribute("role", "status");
+  const text = document.createElement("p");
+  text.textContent = message;
+  panel.appendChild(text);
+  if (instagram) {
+    const link = document.createElement("a");
+    link.href = "https://www.instagram.com/";
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "인스타그램 열기";
+    panel.appendChild(link);
   }
-
-  if (canShareFile) {
-    try {
-      await navigator.share({
-        files: [file],
-        title: `${title} | 쿠쿠`
-      });
-      return;
-    } catch (error) {
-      if (error && error.name === "AbortError") return;
-      console.warn("Native result image sharing failed.", error);
-    }
+  if (download) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = "이미지 내려받기";
+    button.addEventListener("click", () => downloadResultImage().catch(() => showShareFeedback("이미지를 만들지 못했어요. 다시 시도해주세요.")));
+    panel.appendChild(button);
   }
+  document.querySelector(".result-share-row, .play-share-actions")?.after(panel);
+}
 
-  showResultImagePreview(file);
+async function copyResultImage() {
+  if (!navigator.clipboard?.write || typeof ClipboardItem === "undefined") throw new Error("Image clipboard is unavailable");
+  // Call write during the click; Safari accepts the asynchronously rendered PNG as a promise.
+  const item = new ClipboardItem({ "image/png": getResultImageBlob() });
+  await navigator.clipboard.write([item]);
+}
+
+async function downloadResultImage() {
+  const url = URL.createObjectURL(await getResultImageBlob());
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "coocoo-result.png";
+  link.click();
+  window.setTimeout(() => URL.revokeObjectURL(url), 30000);
+}
+
+async function shareToInstagram() {
+  let copied = false;
+  try { await copyResultImage(); copied = true; } catch (error) { /* Download remains available when image copying is blocked. */ }
+  showShareFeedback(copied
+    ? "이미지를 복사했어요. 붙여넣기를 지원하는 인스타그램 화면에서 사용하거나, 이미지를 내려받아 새 게시물·스토리에 올려주세요."
+    : "이 브라우저에서는 이미지 복사가 제한돼요. 이미지를 내려받은 뒤 인스타그램 새 게시물·스토리에서 선택해주세요.", true, true);
 }
 
 async function uploadDynamicShareImage() {
@@ -430,15 +412,15 @@ function initKakao() {
 
 async function copyLink(options = {}) {
   const { silent = false } = options;
-  const url = getSiteUrl();
+  const url = buildSharedLink("copy_link");
   await navigator.clipboard.writeText(url);
   if (!silent) {
-    alert("링크를 복사했어요.");
+    showShareFeedback("링크를 복사했어요. 친구에게 붙여넣어 보내주세요!");
   }
 }
 
 async function shareWithKakao() {
-  const url = getSiteUrl();
+  const url = buildSharedLink("kakao");
   const description = getShareDescription();
   const title = getShareTitle();
   const imageUrl = getShareImage();
@@ -447,8 +429,12 @@ async function shareWithKakao() {
     : "테스트 열기";
 
   if (!initKakao()) {
-    await copyLink({ silent: true }).catch(() => null);
-    alert("카카오 공유를 열지 못해 링크를 복사했어요. 카카오 개발자 설정에 현재 도메인이 등록되어 있는지도 확인해 주세요.");
+    try {
+      await copyLink({ silent: true });
+      showShareFeedback("카카오톡을 열지 못해 링크를 복사했어요. 채팅창에 붙여넣어 보내주세요.");
+    } catch (error) {
+      showShareFeedback("카카오톡과 링크 복사를 사용할 수 없어요. 브라우저 주소를 복사해 보내주세요.");
+    }
     return;
   }
 
@@ -496,47 +482,42 @@ async function shareWithKakao() {
     });
   } catch (error) {
     console.warn("Kakao sharing failed.", error);
-    await copyLink({ silent: true }).catch(() => null);
-    alert("카카오 공유를 열지 못해 링크를 복사했어요. 카카오 개발자 설정에 https://coocooing.kro.kr 도메인이 등록되어 있는지 확인해 주세요.");
+    try {
+      await copyLink({ silent: true });
+      showShareFeedback("카카오톡을 열지 못해 링크를 복사했어요. 채팅창에 붙여넣어 보내주세요.");
+    } catch (copyError) {
+      showShareFeedback("공유를 열지 못했어요. 브라우저 주소를 복사해 보내주세요.");
+    }
   }
 }
 
-function shareBySms() {
-  const url = getSiteUrl();
-  window.location.href = `sms:?&body=${encodeURIComponent(url)}`;
-}
-
 document.addEventListener("click", (event) => {
-  const target = event.target instanceof HTMLElement ? event.target.closest("button") : null;
+  const target = event.target instanceof Element ? event.target.closest("button") : null;
   if (!target || !target.id) {
     return;
   }
 
   if (target.id === "btnCopyLink") {
     trackShareClick("copy_link");
-    copyLink().catch(() => alert("복사에 실패했어요."));
+    copyLink().catch(() => showShareFeedback("링크 복사가 제한됐어요. 브라우저 주소를 복사해주세요."));
     return;
   }
 
-  if (target.id === "btnSaveResultImage") {
-    trackShareClick("save_image");
-    shareResultImage().catch(() => alert("결과 이미지를 열지 못했어요."));
+  if (target.id === "btnCopyResultImage") {
+    trackShareClick("copy_image");
+    copyResultImage().then(() => showShareFeedback("이미지를 복사했어요. 채팅창이나 편집기에 붙여넣어보세요!"))
+      .catch(() => showShareFeedback("이 브라우저에서는 이미지 복사가 제한돼요. Chrome·Safari 같은 브라우저에서 열거나 이미지를 내려받아주세요.", false, true));
     return;
   }
 
   if (target.id === "btnKakaoShare") {
     trackShareClick("kakao");
-    shareWithKakao().catch(() => alert("카카오 공유를 열지 못했어요."));
+    shareWithKakao().catch(() => showShareFeedback("카카오톡 공유를 열지 못했어요. 잠시 후 다시 시도해주세요."));
     return;
   }
 
-  if (target.id === "btnSmsShare") {
-    trackShareClick("sms");
-    shareBySms();
+  if (target.id === "btnInstagramShare") {
+    trackShareClick("instagram");
+    shareToInstagram();
   }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  window.shareBySms = shareBySms;
-  window.shareResultImage = shareResultImage;
 });
