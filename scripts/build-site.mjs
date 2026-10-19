@@ -1,8 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
+import vm from "node:vm";
 import { loadContent, root, escapeHtml as esc } from "./content.mjs";
+import { generateArtwork } from "./artwork.mjs";
 
-const { config, cards, pages, catalog, play } = loadContent();
+const { context, config, cards, pages, catalog, play } = loadContent();
 const siteUrl = config.siteUrl;
 if (!/^ca-pub-\d{16}$/.test(config.adsenseClient)) throw new Error("Invalid AdSense publisher ID in site-config.js");
 const metadata = catalog.items.map((item) => {
@@ -16,6 +18,15 @@ if (process.argv.includes("--metadata")) {
   console.log(JSON.stringify(metadata));
   process.exit(0);
 }
+const resultMetadata = Object.entries(pages).flatMap(([id, page]) => Object.entries(page.results).map(([key, result]) => ({
+  id, key, file: `results/${id}-${key}.html`, title: `${result.title} · ${page.title} | 쿠쿠`,
+  heading: result.title, description: result.summary, image: `assets/images/og/results/${id}-${key}.png`, type: "test"
+})));
+if (process.argv.includes("--result-metadata")) {
+  console.log(JSON.stringify(resultMetadata));
+  process.exit(0);
+}
+generateArtwork(pages, catalog);
 
 function replaceRequired(text, expression, replacement, label) {
   if (!expression.test(text)) throw new Error(`Missing template: ${label}`);
@@ -25,6 +36,8 @@ function replaceRequired(text, expression, replacement, label) {
 fs.writeFileSync(path.join(root, "ads.txt"), `google.com, ${config.adsenseClient.replace(/^ca-/, "")}, DIRECT, f08c47fec0942fa0\n`);
 
 function setHead(html, meta) {
+  // Windows checkouts may contain CRLF or lone CR from earlier generated heads.
+  html = html.replace(/\r\n?/g, "\n");
   const url = new URL(meta.file === "index.html" ? "" : meta.file, siteUrl).href;
   const image = new URL(meta.image || "assets/images/kuku-og-card.png", siteUrl).href;
   const head = [
@@ -87,7 +100,7 @@ const rootPages = [
 ];
 
 function cardLink(item) {
-  return `<a class="search-result-card" href="${esc(item.href)}" data-content-id="${esc(item.id)}"><div><small>${esc(item.type === "play" ? "짧은 놀이" : item.category)}</small><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p><small>${esc(item.duration)}</small></div></a>`;
+  return `<a class="search-result-card" href="${esc(item.href)}" data-content-id="${esc(item.id)}"><img class="search-result-cover" src="./assets/images/covers/${item.id}.svg" alt="" width="720" height="480" loading="lazy" /><div><small>${esc(item.type === "play" ? "짧은 놀이" : item.category)}</small><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p><small>${esc(item.duration)}</small></div></a>`;
 }
 
 for (const meta of rootPages) {
@@ -114,6 +127,18 @@ for (const name of ["index.html", "contact.html", "privacy.html", "404.html"]) r
 
 // All sitemap pages have generated metadata updated in this release.
 const sitemapFile = path.join(root, "sitemap.xml");
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...rootPages, ...metadata].map((meta) => `  <url><loc>${new URL(meta.file === "index.html" ? "" : meta.file, siteUrl).href}</loc><lastmod>2026-10-15</lastmod></url>`).join("\n")}\n</urlset>\n`;
+// Use the browser renderer for the static result too, so crawlers and visitors read the same copy.
+vm.runInContext(fs.readFileSync(path.join(root, "assets/js/test-page.js"), "utf8"), context);
+fs.mkdirSync(path.join(root, "results"), { recursive: true });
+for (const meta of resultMetadata) {
+  let html = setHead(fs.readFileSync(path.join(root, `tests/${meta.id}.html`), "utf8"), meta);
+  html = html.replace(`data-test-id="${meta.id}"`, `data-test-id="${meta.id}" data-initial-result="${meta.key}"`);
+  context.document.body = { dataset: { testId: meta.id } };
+  const resultHtml = context.renderResultScreen(pages[meta.id], meta.key, cards, { shared: true });
+  html = replaceRequired(html, /(<section[^>]*id="testApp"[^>]*>)[\s\S]*?<\/section>(?=\s*<!-- content-generated:start -->)/,
+    `$1${resultHtml}<noscript><p>버튼을 사용하려면 JavaScript를 켜주세요. <a href="../tests/${meta.id}.html">테스트 소개 보기</a></p></noscript></section>`, meta.file);
+  fs.writeFileSync(path.join(root, meta.file), html.replace(/[\t ]+$/gm, ""));
+}
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...rootPages, ...metadata, ...resultMetadata].map((meta) => `  <url><loc>${new URL(meta.file === "index.html" ? "" : meta.file, siteUrl).href}</loc></url>`).join("\n")}\n</urlset>\n`;
 fs.writeFileSync(sitemapFile, sitemap);
-console.log(`Built ${metadata.length} content pages, 4 root pages and legacy address redirects.`);
+console.log(`Built ${metadata.length} content pages, ${resultMetadata.length} result pages, 4 root pages and legacy address redirects.`);

@@ -10,6 +10,7 @@ import { packageSite } from "./package-site.mjs";
 
 const source = (name) => fs.readFileSync(path.join(root, `assets/js/${name}.js`), "utf8");
 const data = loadContent();
+const previewSourceHash = () => createHash("sha256").update(["scripts/artwork.mjs", "scripts/render-previews.mjs"].map((file) => fs.readFileSync(path.join(root, file), "utf8").replace(/\r\n/g, "\n")).join("\n")).digest("hex");
 vm.runInContext(source("test-page"), data.context);
 const score = data.context.scoreAnswers;
 
@@ -109,7 +110,9 @@ function runtime(id, query = "") {
   const store = new Map();
   const session = new Map();
   const events = [];
-  const timers = [];
+  const windowListeners = {};
+  const timers = new Map();
+  let timerId = 0;
   const history = [];
   let starts = 0;
   const elements = { [isTest ? "testApp" : "playgroundApp"]: app, contentResultAds: ads, affiliateResultAd: affiliate, playResultAd: playAd };
@@ -132,15 +135,15 @@ function runtime(id, query = "") {
     COOCOO_ANALYTICS: { track: (name, parameters) => events.push({ name, parameters }) },
     COOCOO_COMMUNITY: { hydrate() {}, recordParticipation() { starts++; return Promise.resolve(); } },
     PartnersCoupang: { G() {} },
-    setTimeout: (callback) => { timers.push(callback); return timers.length; }, clearTimeout() {},
-    setInterval: () => 1, clearInterval() {}, requestAnimationFrame() {}, addEventListener() {},
+    setTimeout: (callback) => { timers.set(++timerId, callback); return timerId; }, clearTimeout: (id) => timers.delete(id),
+    setInterval: () => 1, clearInterval() {}, requestAnimationFrame() {}, addEventListener: (name, callback) => { windowListeners[name] = callback; },
     matchMedia: () => ({ matches: true }), crypto: { getRandomValues: (array) => array.fill(0) },
     history: Object.fromEntries(["pushState", "replaceState"].map((method) => [method, (state, _, url) => { history.push(state); context.window.location = new URL(url); }]))
   });
   if (isTest) vm.runInContext(source("test-page"), context);
   if (isTest) context.createTestApp({ testId: id, page: pages[id], cards });
   else context.createPlaygroundApp();
-  return { context, app, ads, store, events, history, config, starts: () => starts, click(action, extras = {}) { app.listeners.click({ target: new ElementStub({ action, ...extras }) }); }, flush() { while (timers.length) timers.shift()(); } };
+  return { context, app, ads, store, events, history, config, starts: () => starts, restore(state) { windowListeners.popstate({ state }); }, click(action, extras = {}) { app.listeners.click({ target: new ElementStub({ action, ...extras }) }); }, flush() { while (timers.size) { const [id, callback] = timers.entries().next().value; timers.delete(id); callback(); } } };
 }
 
 test("25 test flows start, complete, share, restart without ads during questions or duplicate share buttons", async () => {
@@ -148,11 +151,13 @@ test("25 test flows start, complete, share, restart without ads during questions
     const app = runtime(card.id);
     app.click("start-test");
     assert.equal(app.ads.hidden, true);
-    data.pages[card.id].questions.forEach((_, index) => app.click("choose-answer", { questionIndex: String(index), optionIndex: "0" }));
+    data.pages[card.id].questions.forEach((_, index) => { app.click("choose-answer", { questionIndex: String(index), optionIndex: "0" }); app.flush(); });
     app.flush();
     assert.equal(app.ads.hidden, false, card.id);
     assert.equal((app.app.innerHTML.match(/id="btnCopyLink"/g) || []).length, 1);
-    assert.ok(app.app.innerHTML.indexOf('id="btnCopyLink"') < app.app.innerHTML.indexOf('class="result-details"'));
+    assert.ok(app.app.innerHTML.indexOf('class="result-reading"') < app.app.innerHTML.indexOf('id="btnCopyLink"'));
+    assert.doesNotMatch(app.app.innerHTML, /<details class="result-details"/);
+    assert.match(app.app.innerHTML, /data-action="restart-test">다시 하기/);
     assert.equal(app.events.filter((event) => event.name === "content_complete").length, 1);
     app.click("restart-test");
     assert.equal(app.ads.hidden, true);
@@ -165,9 +170,33 @@ test("a shared test result is a visit, not a completion; direct participation ne
   const app = runtime("test-020", "?result=observer&shared=1");
   assert.equal(app.events.filter((event) => event.name === "shared_result_view").length, 1);
   assert.equal(app.events.filter((event) => event.name === "content_complete").length, 0);
+  assert.match(app.app.innerHTML, /data-action="restart-test">나도 테스트하기/);
   app.click("restart-test");
   assert.match(app.app.innerHTML, /QUESTION 1/);
   assert.equal(app.events.find((event) => event.name === "content_start").parameters.from_shared_result, true);
+});
+
+test("revising a finished test or play result is one completion; restarting creates a new attempt", () => {
+  const app = runtime("test-024");
+  const answers = [0, 0, 2, 2, 1, 3];
+  const finish = () => answers.forEach((answer, index) => { app.click("choose-answer", { questionIndex: String(index), optionIndex: String(answer) }); app.flush(); });
+  app.click("start-test"); finish();
+  assert.equal(app.context.document.body.dataset.shareResultTitle, "방향 잡는 기획자");
+  const lastQuestion = app.history.findLast((entry) => entry.screen === "question");
+  // A fresh app loses its in-memory completion set; the tab's storage still deduplicates it.
+  app.context.createTestApp({ testId: "test-024", page: app.context.window.SITE_CONTENT.pages["test-024"], cards: app.context.window.SITE_CONTENT.cards });
+  app.restore(lastQuestion);
+  app.click("choose-answer", { questionIndex: "5", optionIndex: "0" }); app.flush();
+  assert.equal(app.context.document.body.dataset.shareResultTitle, "내 색 입히는 편집자");
+  assert.equal(app.events.filter((event) => event.name === "content_complete").length, 1);
+  app.click("restart-test"); finish();
+  assert.equal(app.events.filter((event) => event.name === "content_complete").length, 2);
+  const play = runtime("relationship-ranking");
+  play.click("start"); play.click("finish-ranking");
+  play.restore(play.history.findLast((entry) => entry.screen === "play")); play.click("finish-ranking");
+  assert.equal(play.events.filter((event) => event.name === "content_complete").length, 1);
+  play.click("restart"); play.click("finish-ranking");
+  assert.equal(play.events.filter((event) => event.name === "content_complete").length, 2);
 });
 
 test("all 9 play formats complete, retain share actions and keep ads outside active play", async () => {
@@ -222,7 +251,111 @@ test("all 101 result HTML variants have balanced elements, unique IDs and one pr
       assert.equal(new Set(ids).size, ids.length);
       assert.equal((html.match(/data-action="restart-test"/g) || []).length, 1);
       assert.doesNotMatch(html, /undefined|\[object Object\]/);
+      assert.match(html, /data-reaction-count="fun">—</);
+      assert.ok(html.indexOf('class="result-reading"') < html.indexOf('id="btnCopyResultImage"'));
+      assert.ok(html.indexOf('class="result-match-grid"') < html.indexOf('id="btnCopyResultImage"'));
+      assert.ok(!html.includes("<details"));
     }
+  }
+});
+
+test("all result stories are specific, visible, and linked to two real distinct types", () => {
+  const scenes = new Set();
+  const cautions = new Set();
+  for (const [id, page] of Object.entries(data.pages)) {
+    assert.ok(page.resultMethodNote.includes(page.scoringMode === "range-total" ? "0~6점" : "동점이면"), id);
+    for (const [key, result] of Object.entries(page.results)) {
+      for (const field of ["description", "scene", "watchOut", "action", "matchReason", "contrastReason"]) {
+        assert.ok(result[field]?.length > 15, `${id}/${key}: ${field}`);
+        assert.doesNotMatch(result[field], /undefined|\[object Object\]/);
+      }
+      assert.ok(!scenes.has(result.scene), `${id}/${key}: repeated scene`); scenes.add(result.scene);
+      assert.ok(!cautions.has(result.watchOut), `${id}/${key}: repeated caution`); cautions.add(result.watchOut);
+      assert.ok(page.results[result.matchKey], `${id}/${key}: nonexistent match`);
+      assert.ok(page.results[result.contrastKey], `${id}/${key}: nonexistent comparison`);
+      assert.equal(new Set([key, result.matchKey, result.contrastKey]).size, 3, `${id}/${key}`);
+    }
+  }
+  assert.equal(scenes.size, 101);
+});
+
+test("share clicks, completed copies and failed handoffs are different events", async () => {
+  const app = runtime("test-020", "?result=crowd&qa=1");
+  app.context.console = { warn() {} };
+  let clickHandler;
+  app.context.document.addEventListener = (name, callback) => { if (name === "click") clickHandler = callback; };
+  let completeCopy;
+  app.context.navigator = { clipboard: { writeText: () => new Promise((resolve) => { completeCopy = resolve; }) } };
+  vm.runInContext(source("share"), app.context);
+  app.context.showShareFeedback = () => {};
+  const button = new ElementStub(); button.id = "btnCopyLink";
+  clickHandler({ target: button });
+  assert.equal(app.events.filter((event) => event.name === "share_click").length, 1);
+  assert.equal(app.events.filter((event) => event.name === "share_copy_success").length, 0);
+  completeCopy(); await new Promise((resolve) => setImmediate(resolve));
+  assert.equal(app.events.filter((event) => event.name === "share_copy_success").length, 1);
+  app.context.navigator.clipboard.writeText = async () => { throw new Error("Permission denied"); };
+  clickHandler({ target: button }); await new Promise((resolve) => setImmediate(resolve));
+  assert.equal(app.events.filter((event) => event.name === "share_copy_success").length, 1);
+  assert.equal(app.events.filter((event) => event.name === "share_error").length, 1);
+  app.context.Kakao = app.context.window.Kakao = { isInitialized: () => true, Share: { sendDefault: async () => { throw new Error("Cancelled handoff"); } } };
+  await app.context.shareWithKakao();
+  assert.equal(app.events.filter((event) => event.name === "share_handoff").length, 0);
+});
+
+test("unavailable reaction totals stay unknown; a successful zero is displayed as zero", async () => {
+  const { context } = loadContent();
+  context.console = { warn() {} };
+  context.window.localStorage = { getItem: () => "local-anonymous-id" };
+  context.window.addEventListener = () => {};
+  const count = { textContent: "—" };
+  const button = new ElementStub({ reaction: "fun" }); button.querySelector = () => count;
+  const panel = new ElementStub({ contentId: "test-020" }); panel.querySelectorAll = () => [button];
+  const rootElement = { querySelectorAll: (selector) => selector === "[data-participation-count]" ? [] : [panel] };
+  context.fetch = async () => ({ ok: false, status: 503 });
+  vm.runInContext(source("community"), context);
+  await context.window.COOCOO_COMMUNITY.hydrate(rootElement);
+  assert.equal(count.textContent, "—");
+  context.fetch = async () => ({ ok: true, json: async () => ({ stats: { "test-020": { funCount: 0, viewer: {} } } }) });
+  await context.window.COOCOO_COMMUNITY.hydrate(rootElement);
+  assert.equal(count.textContent, "0");
+});
+
+test("rapid and stale answers do not skip questions; previous answers remain selected and changes recalculate", () => {
+  const app = runtime("test-024");
+  app.click("start-test");
+  app.click("choose-answer", { questionIndex: "0", optionIndex: "0" });
+  app.click("choose-answer", { questionIndex: "0", optionIndex: "1" });
+  app.flush();
+  assert.match(app.app.innerHTML, /QUESTION 2/);
+  app.click("choose-answer", { questionIndex: "0", optionIndex: "3" });
+  app.flush();
+  assert.match(app.app.innerHTML, /QUESTION 2/);
+  app.click("previous-question");
+  assert.match(app.app.innerHTML, /class="question-choice is-selected[\s\S]*?aria-pressed="true"[\s\S]*?data-option-index="0"/);
+  [1, 0, 3, 2, 1, 0].forEach((answer, index) => { app.click("choose-answer", { questionIndex: String(index), optionIndex: String(answer) }); app.flush(); });
+  assert.equal(app.events.filter((event) => event.name === "content_complete").length, 1);
+  assert.equal(app.events.find((event) => event.name === "content_complete").parameters.result_key, "editor");
+});
+
+test("all 101 static result URLs expose the same text and type-specific crawler previews without JavaScript", () => {
+  const raw = execFileSync(process.execPath, ["scripts/build-site.mjs", "--result-metadata"], { cwd: root, encoding: "utf8" }).trim();
+  const entries = JSON.parse(raw);
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, "assets/images/og/results/manifest.json"), "utf8"));
+  assert.equal(entries.length, 101);
+  assert.equal(manifest.metadataSha256, createHash("sha256").update(raw).digest("hex"));
+  assert.equal(manifest.sourceSha256, previewSourceHash(), "Preview artwork/renderer changed: run npm run build:previews");
+  for (const meta of entries) {
+    const html = fs.readFileSync(path.join(root, meta.file), "utf8");
+    assert.ok(html.includes(`<title>${meta.title}</title>`));
+    assert.ok(html.includes(`data-initial-result="${meta.key}"`));
+    assert.ok(html.replace(/<[^>]+>/g, "").replace(/\s/g, "").includes(data.pages[meta.id].results[meta.key].scene.replace(/\s/g, "")), meta.file);
+    assert.ok(html.includes(`property="og:image" content="https://coocooing.kro.kr/${meta.image}"`));
+    assert.ok(html.includes(`rel="canonical" href="https://coocooing.kro.kr/${meta.file}"`));
+    assert.equal((html.match(/rel="canonical"/g) || []).length, 1, meta.file);
+    assert.equal((html.match(/property="og:title"/g) || []).length, 1, meta.file);
+    const png = fs.readFileSync(path.join(root, meta.image));
+    assert.equal(png.readUInt32BE(16), 1200); assert.equal(png.readUInt32BE(20), 630);
   }
 });
 
@@ -257,7 +390,8 @@ test("share links preserve only result/date and replace the incoming marketing s
 test("static titles/canonical/preview images are unique; all content remains described without JavaScript", () => {
   const metadata = execFileSync(process.execPath, ["scripts/build-site.mjs", "--metadata"], { cwd: root, encoding: "utf8" }).trim();
   const manifest = JSON.parse(fs.readFileSync(path.join(root, "assets/images/og/manifest.json"), "utf8"));
-  assert.equal(manifest.metadataSha256, createHash("sha256").update(metadata).digest("hex"), "Preview images are stale: run scripts/render-assets.ps1");
+  assert.equal(manifest.sourceSha256, previewSourceHash(), "Preview artwork/renderer changed: run npm run build:previews");
+  assert.equal(manifest.metadataSha256, createHash("sha256").update(metadata).digest("hex"), "Preview images are stale: run npm run build:previews");
   const titles = new Set();
   for (const item of data.catalog.items) {
     const file = item.href.replace(/^\.\//, "");
@@ -311,12 +445,13 @@ test("image copying writes a promised PNG during the click without an OS share w
 });
 
 test("generation is repeatable without accumulating nested markup", () => {
-  const files = ["index.html", "search.html", "tests/test-020.html", "play/today-box.html"];
+  const files = ["index.html", "search.html", "privacy.html", "contact.html", "tests/test-020.html", "play/today-box.html", "results/test-020-crowd.html"];
   const hashes = () => files.map((file) => createHash("sha256").update(fs.readFileSync(path.join(root, file))).digest("hex"));
   execFileSync(process.execPath, ["scripts/build-site.mjs"], { cwd: root });
   const first = hashes();
   execFileSync(process.execPath, ["scripts/build-site.mjs"], { cwd: root });
   assert.deepEqual(hashes(), first);
+  for (const file of files) assert.equal((fs.readFileSync(path.join(root, file), "utf8").match(/rel="canonical"/g) || []).length, 1, file);
 });
 
 test("the deploy artifact excludes reports, plans, server config and old scripts; old URLs are redirects", () => {

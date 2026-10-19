@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "node scripts/build-site.mjs",
+    "build:previews": "node scripts/render-previews.mjs",
     "test": "node --test scripts/site.test.mjs",
     "test:browser": "node scripts/browser-check.mjs",
     "package:site": "node scripts/package-site.mjs"

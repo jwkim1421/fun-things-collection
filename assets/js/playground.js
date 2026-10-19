@@ -306,7 +306,7 @@ function hydratePlayCommunity(root) {
   getPlayCommunityClient().then((client) => client && client.hydrate(root)).catch(() => null);
 }
 
-function resultActions(contentId) {
+function resultActions(contentId, shared = false) {
   const nextId = contentId === "chat-temperature" ? "procrastination-bingo" : "chat-temperature";
   return `
     <div class="play-share-actions">
@@ -315,11 +315,11 @@ function resultActions(contentId) {
       <button type="button" id="btnKakaoShare">카카오톡</button>
       <button type="button" id="btnInstagramShare">인스타그램</button>
     </div>
-    <button class="play-primary-button result-try-button" type="button" data-action="restart">나도 직접 해보기</button>
+    <button class="play-primary-button result-try-button" type="button" data-action="restart">${shared ? "나도 해보기" : "다시 하기"}</button>
     <a class="play-home-link" href="./${nextId}.html" data-content-id="${nextId}" data-next-content>다음 놀이: ${escapePlayHtml(PLAY_CONTENT[nextId].title)} →</a>
     <div class="community-reactions" data-reaction-panel data-content-id="${escapePlayHtml(contentId)}" aria-label="콘텐츠 반응">
-      <button type="button" data-reaction="fun" aria-pressed="false"><span aria-hidden="true">☺</span><strong>재밌어요</strong><b data-reaction-count="fun">0</b></button>
-      <button type="button" data-reaction="relatable" aria-pressed="false"><span aria-hidden="true">♥</span><strong>공감돼요</strong><b data-reaction-count="relatable">0</b></button>
+      <button type="button" data-reaction="fun" aria-pressed="false"><span aria-hidden="true">☺</span><strong>재밌어요</strong><b data-reaction-count="fun">—</b></button>
+      <button type="button" data-reaction="relatable" aria-pressed="false"><span aria-hidden="true">♥</span><strong>공감돼요</strong><b data-reaction-count="relatable">—</b></button>
     </div>
     <a class="play-home-link" href="../index.html#play">다른 놀이 고르기 →</a>
   `;
@@ -432,6 +432,7 @@ function createPlaygroundApp() {
     timer: null,
     direction: 1,
     startedAt: 0,
+    attemptId: "",
     order: [],
     allocation: {},
     storyNode: "",
@@ -440,6 +441,8 @@ function createPlaygroundApp() {
     dailyDateKey: ""
   };
   let restoringHistory = false;
+  let attemptSequence = 0;
+  const completedAttempts = new Set();
 
   root.setAttribute("tabindex", "-1");
 
@@ -451,6 +454,7 @@ function createPlaygroundApp() {
       battery: state.battery,
       direction: state.direction,
       startedAt: state.startedAt,
+      attemptId: state.attemptId,
       order: [...state.order],
       allocation: Object.assign({}, state.allocation),
       storyNode: state.storyNode,
@@ -467,7 +471,8 @@ function createPlaygroundApp() {
     state.selected = new Set(Array.isArray(snapshot.selected) ? snapshot.selected : []);
     state.battery = Number(snapshot.battery) || 0;
     state.direction = Number(snapshot.direction) || 1;
-    state.startedAt = Number(snapshot.startedAt) || Date.now();
+    state.startedAt = Number(snapshot.startedAt) || 0;
+    state.attemptId = snapshot.attemptId || String(state.startedAt);
     state.order = Array.isArray(snapshot.order) ? [...snapshot.order] : [];
     state.allocation = Object.assign({}, snapshot.allocation || {});
     state.storyNode = snapshot.storyNode || content.startNode || "";
@@ -498,6 +503,16 @@ function createPlaygroundApp() {
     if (state.screen === "play") writeHistory("play", { replace: true });
   }
 
+  function recordCompletion(parameters) {
+    const completionKey = `coocoo_completed_attempt_${playId}_${state.attemptId}`;
+    let completed = completedAttempts.has(state.attemptId);
+    try { completed ||= window.sessionStorage.getItem(completionKey) === "1"; } catch (error) { /* Memory still covers history when storage is blocked. */ }
+    if (completed) return;
+    completedAttempts.add(state.attemptId);
+    try { window.sessionStorage.setItem(completionKey, "1"); } catch (error) { /* Do not block the result. */ }
+    trackPlayEvent("content_complete", content, { ...parameters, duration_seconds: Math.max(1, Math.round((Date.now() - state.startedAt) / 1000)) });
+  }
+
   function scrollPlaygroundToTop() {
     window.requestAnimationFrame(() => {
       const top = Math.max(0, root.getBoundingClientRect().top + window.scrollY - 12);
@@ -522,7 +537,7 @@ function createPlaygroundApp() {
     root.innerHTML = `
       <section class="play-intro tone-${introTone}">
         <span class="play-content-type">${escapePlayHtml(content.category)}</span>
-        <div class="play-intro-icon" aria-hidden="true">${renderPlayIcon(content.icon, content.iconAsset)}</div>
+        <img class="play-intro-cover" src="../assets/images/covers/${escapePlayHtml(playId)}.svg" alt="" width="720" height="480" fetchpriority="high" />
         <h1>${escapePlayHtml(content.title)}</h1>
         <p>${escapePlayHtml(content.intro)}</p>
         <button class="play-primary-button" type="button" data-action="start">시작하기</button>
@@ -554,7 +569,7 @@ function createPlaygroundApp() {
     const result = content.results[resultKey];
     writeHistory("result", { resultKey, replace: !shouldTrack });
     applyPlayShare(content, result.title, result.line, resultKey);
-    if (shouldTrack) trackPlayEvent("content_complete", content, { result_key: resultKey, duration_seconds: Math.max(1, Math.round((Date.now() - state.startedAt) / 1000)) });
+    if (shouldTrack) recordCompletion({ result_key: resultKey });
     root.innerHTML = renderPlayResult(content, result.icon, result.title, result.line, result.detail, { comment: getKukuComment("chat") });
     hydratePlayResultAd();
     scrollPlaygroundToTop();
@@ -594,7 +609,7 @@ function createPlaygroundApp() {
     const resultKey = `bingo-${selectedCount}-${bingos}`;
     writeHistory("result", { resultKey, replace: !shouldTrack });
     applyPlayShare(content, result.title, result.line, resultKey);
-    if (shouldTrack) trackPlayEvent("content_complete", content, { result_key: resultKey, bingo_count: bingos, duration_seconds: Math.max(1, Math.round((Date.now() - state.startedAt) / 1000)) });
+    if (shouldTrack) recordCompletion({ result_key: resultKey, bingo_count: bingos });
     root.innerHTML = renderPlayResult(content, result.icon, result.title, `${result.line} · 완성 빙고 ${bingos}개`, result.detail, { comment: getKukuComment("bingo") });
     hydratePlayResultAd();
     scrollPlaygroundToTop();
@@ -640,7 +655,7 @@ function createPlaygroundApp() {
     const resultKey = `battery-${Math.round(batteryValue)}`;
     writeHistory("result", { resultKey, replace: !shouldTrack });
     applyPlayShare(content, result.title, result.line, resultKey);
-    if (shouldTrack) trackPlayEvent("content_complete", content, { result_key: resultKey, game_score: score, duration_seconds: Math.max(1, Math.round((Date.now() - state.startedAt) / 1000)) });
+    if (shouldTrack) recordCompletion({ result_key: resultKey, game_score: score });
     root.innerHTML = renderPlayResult(content, result.icon, result.title, result.line, result.detail, {
       resultLabel: "충전 결과",
       comment: getKukuComment("battery", result.key)
@@ -680,7 +695,7 @@ function createPlaygroundApp() {
     const resultKey = `box-${index}`;
     writeHistory("result", { resultKey, replace: !shouldTrack });
     applyPlayShare(content, box.title, box.detail, resultKey);
-    if (shouldTrack) trackPlayEvent("content_complete", content, { result_key: `box-${index}`, duration_seconds: Math.max(1, Math.round((Date.now() - state.startedAt) / 1000)) });
+    if (shouldTrack) recordCompletion({ result_key: `box-${index}` });
     root.innerHTML = renderPlayResult(content, box.icon, box.title, "오늘 쿠쿠가 꺼내준 작은 미션", box.detail, { comment: getKukuComment("daily") });
     hydratePlayResultAd();
     scrollPlaygroundToTop();
@@ -730,7 +745,7 @@ function createPlaygroundApp() {
     const result = content.results[resultKey] || content.results[content.items[0].id];
     writeHistory("result", { resultKey: `rank-${resultKey}`, replace: !shouldTrack });
     applyPlayShare(content, result.title, result.line, `rank-${resultKey}`);
-    if (shouldTrack) trackPlayEvent("content_complete", content, { result_key: resultKey, duration_seconds: Math.max(1, Math.round((Date.now() - state.startedAt) / 1000)) });
+    if (shouldTrack) recordCompletion({ result_key: resultKey });
     root.innerHTML = renderPlayResult(content, result.icon, result.title, result.line, result.detail, { resultLabel: "관계 순위 결과", comment: getKukuComment("ranking") });
     hydratePlayResultAd();
     scrollPlaygroundToTop();
@@ -773,7 +788,7 @@ function createPlaygroundApp() {
     const sharedKey = `energy-${resultKey}-${values}`;
     writeHistory("result", { resultKey: sharedKey, replace: !shouldTrack });
     applyPlayShare(content, result.title, result.line, sharedKey);
-    if (shouldTrack) trackPlayEvent("content_complete", content, { result_key: resultKey, allocation_total: getAllocationTotal(), duration_seconds: Math.max(1, Math.round((Date.now() - state.startedAt) / 1000)) });
+    if (shouldTrack) recordCompletion({ result_key: resultKey, allocation_total: getAllocationTotal() });
     root.innerHTML = renderPlayResult(content, result.icon, result.title, result.line, result.detail, { resultLabel: "에너지 배분 결과", comment: getKukuComment("allocation") });
     hydratePlayResultAd();
     scrollPlaygroundToTop();
@@ -824,7 +839,7 @@ function createPlaygroundApp() {
     const sharedKey = `story-${resultKey}`;
     writeHistory("result", { resultKey: sharedKey, replace: !shouldTrack });
     applyPlayShare(content, result.title, result.line, sharedKey);
-    if (shouldTrack) trackPlayEvent("content_complete", content, { result_key: resultKey, story_path: state.storyPath.join("-"), duration_seconds: Math.max(1, Math.round((Date.now() - state.startedAt) / 1000)) });
+    if (shouldTrack) recordCompletion({ result_key: resultKey, story_path: state.storyPath.join("-") });
     root.innerHTML = renderPlayResult(content, result.icon, result.title, result.line, result.detail, { resultLabel: "축제 이야기 결말", comment: getKukuComment("story") });
     hydratePlayResultAd();
     scrollPlaygroundToTop();
@@ -853,7 +868,7 @@ function createPlaygroundApp() {
     const resultKey = "trash-done";
     writeHistory("result", { resultKey, replace: !shouldTrack });
     applyPlayShare(content, "여기 두고 가기 완료", "걸리던 말을 적고 화면 밖으로 보냈어요.", resultKey);
-    if (shouldTrack) trackPlayEvent("content_complete", content, { result_key: resultKey, duration_seconds: Math.max(1, Math.round((Date.now() - state.startedAt) / 1000)) });
+    if (shouldTrack) recordCompletion({ result_key: resultKey });
     root.innerHTML = renderPlayResult(content, "○", "여기 두고 가기 완료", "걸리던 말을 적고 화면 밖으로 보냈어요.", "무슨 말을 적었는지는 어디에도 남지 않아요. 잠깐 적어낸 것만으로 충분하니, 이 화면에서는 가볍게 두고 가요.", { resultLabel: "감정 비우기 완료", comment: getKukuComment("trash") });
     hydratePlayResultAd();
     scrollPlaygroundToTop();
@@ -902,7 +917,7 @@ function createPlaygroundApp() {
     const resultKey = `roulette-${safeIndex}`;
     writeHistory("result", { resultKey, replace: !shouldTrack });
     applyPlayShare(content, selectedItem, `오늘의 선택은 '${selectedItem}'이에요.`, resultKey);
-    if (shouldTrack) trackPlayEvent("content_complete", content, { result_key: resultKey, enabled_count: state.rouletteEnabled.length, duration_seconds: Math.max(1, Math.round((Date.now() - state.startedAt) / 1000)) });
+    if (shouldTrack) recordCompletion({ result_key: resultKey, enabled_count: state.rouletteEnabled.length });
     root.innerHTML = renderPlayResult(content, "↻", selectedItem, `오늘의 선택은 '${selectedItem}'이에요.`, "룰렛은 골랐고, 따를지 말지는 여전히 네 마음이에요. 결과를 보자마자 다른 후보가 아쉬웠다면 그것도 꽤 정확한 답이에요.", { resultLabel: "선택 룰렛 결과", comment: getKukuComment("roulette") });
     hydratePlayResultAd();
     scrollPlaygroundToTop();
@@ -916,10 +931,11 @@ function createPlaygroundApp() {
         <div class="play-result-icon" aria-hidden="true">${icon}</div>
         <h1>${escapePlayHtml(title)}</h1>
         <strong>${escapePlayHtml(line)}</strong>
-        ${resultActions(playId)}
-        <p class="content-disclaimer">재미로 즐기는 콘텐츠예요. 전문적인 심리 검사나 진단이 아니에요.</p>
         <p>${escapePlayHtml(detail)}</p>
         <div class="kuku-comment"><img src="../assets/images/apple-touch-icon.png" alt="" width="72" height="72" loading="lazy" /><span>쿠쿠의 한마디</span><p>${escapePlayHtml(options.comment || "친구 결과랑 나란히 놓으면 더 웃길지도 몰라.")}</p></div>
+        <p class="content-disclaimer">재미로 즐기는 콘텐츠예요. 전문적인 심리 검사나 진단이 아니에요.</p>
+        <h2 class="play-share-title">친구의 선택도 궁금하다면</h2>
+        ${resultActions(playId, !state.startedAt)}
       </section>
     `;
   }
@@ -943,6 +959,7 @@ function createPlaygroundApp() {
     state.storyPath = [];
     state.rouletteEnabled = content.type === "roulette" ? content.items.map((item, index) => index) : [];
     state.startedAt = Date.now();
+    state.attemptId = `${state.startedAt}-${++attemptSequence}`;
     writeHistory("play");
     trackPlayEvent("content_start", content, { from_shared_result: fromSharedResult });
     getPlayCommunityClient()

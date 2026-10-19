@@ -110,7 +110,7 @@ function getRelatedCards(page, cards) {
 function getSharedResultKey(page) {
   try {
     const currentUrl = new URL(window.location.href);
-    const resultKey = currentUrl.searchParams.get("result");
+    const resultKey = currentUrl.searchParams.get("result") || document.body.dataset.initialResult;
     return resultKey && page.results && page.results[resultKey] ? resultKey : "";
   } catch (error) {
     return "";
@@ -128,8 +128,11 @@ function getAdSlotData(testId, placement) {
 function buildShareUrl(resultKey) {
   const currentUrl = new URL(window.location.href);
   if (resultKey) {
+    const testId = document.body.dataset.testId;
+    currentUrl.pathname = `/results/${testId}-${resultKey}.html`;
     currentUrl.searchParams.set("result", resultKey);
   } else {
+    if (currentUrl.pathname.startsWith("/results/")) currentUrl.pathname = `/tests/${document.body.dataset.testId}.html`;
     currentUrl.searchParams.delete("result");
   }
 
@@ -159,6 +162,7 @@ function applyShareState(page, resultKey) {
     document.body.dataset.shareResultIcon = page.heroEmoji || page.icon || "✨";
     document.body.dataset.shareTheme = defaultTheme;
     document.body.dataset.shareMascot = mascotUrl;
+    document.body.dataset.shareArtwork = "";
     return;
   }
 
@@ -170,7 +174,7 @@ function applyShareState(page, resultKey) {
   document.body.dataset.shareUrl = buildShareUrl(resultKey);
   document.body.dataset.shareTitle = result.shareTitle || `${page.title} - ${result.title} | ${siteName}`;
   document.body.dataset.shareDescription = shareDescription;
-  document.body.dataset.shareImage = result.shareImage || page.shareImage || defaultImage;
+  document.body.dataset.shareImage = `${window.location.origin}/assets/images/og/results/${document.body.dataset.testId}-${resultKey}.png`;
   document.body.dataset.shareButtonTitle = "결과 확인하기";
   document.body.dataset.shareContext = "result";
   document.body.dataset.shareTestTitle = page.title || "";
@@ -180,6 +184,7 @@ function applyShareState(page, resultKey) {
   document.body.dataset.shareResultIcon = result.heroEmoji || page.heroEmoji || page.icon || "✨";
   document.body.dataset.shareTheme = defaultTheme;
   document.body.dataset.shareMascot = mascotUrl;
+  document.body.dataset.shareArtwork = `${window.location.origin}/assets/images/covers/${document.body.dataset.testId}-${resultKey}.svg`;
 }
 
 function decorateNavPills() {
@@ -421,8 +426,7 @@ function scoreAnswers(page, answers) {
 
 function renderIntroScreen(page) {
   const testId = document.body && document.body.dataset ? document.body.dataset.testId : "";
-  const stickers = (page.heroArt && page.heroArt.stickers) || [];
-  const centerEmoji = (page.heroArt && page.heroArt.centerEmoji) || "🚂";
+  const card = window.SITE_CONTENT?.cards?.find((item) => item.id === testId);
 
   return `
     <div class="test-flow-stack">
@@ -431,15 +435,13 @@ function renderIntroScreen(page) {
         <article class="test-card intro-card">
           <div class="intro-art">
             <h1 class="sr-only">${escapeHtml(page.title)}</h1>
-            <div class="intro-stickers">
-              ${stickers.map((sticker) => `<span>${escapeHtml(sticker)}</span>`).join("")}
-            </div>
-            <div class="intro-center-mark">${escapeHtml(centerEmoji)}</div>
+            <img class="intro-cover" src="../assets/images/covers/${escapeHtml(testId)}.svg" alt="" width="720" height="480" fetchpriority="high" />
             <div class="intro-copy">
               <strong>${escapeHtml(page.heroCardTitle || page.title)}</strong>
               <span>${escapeHtml(page.heroCardSubtitle || page.summary)}</span>
             </div>
           </div>
+          <p class="intro-facts">${page.questions.length}문항 · 약 ${escapeHtml(card?.duration || "2분")} · 결과 ${Object.keys(page.results).length}종</p>
           ${page.introNotice ? `<p class="content-disclaimer">${escapeHtml(page.introNotice)}</p>` : ""}
           <button class="test-main-button" type="button" data-action="start-test">
             ${escapeHtml(page.startLabel || "테스트 시작하기")}
@@ -451,7 +453,7 @@ function renderIntroScreen(page) {
   `;
 }
 
-function renderQuestionScreen(page, questionIndex) {
+function renderQuestionScreen(page, questionIndex, answers = []) {
   const question = page.questions[questionIndex];
   const total = page.questions.length;
   const current = questionIndex + 1;
@@ -468,17 +470,18 @@ function renderQuestionScreen(page, questionIndex) {
             <strong>QUESTION ${current} / ${total}</strong>
             <span>${progressPercent}%</span>
           </div>
-          <div class="test-progress-track" aria-hidden="true">
+          <div class="test-progress-track" role="progressbar" aria-label="답변 진행" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${answeredCount}">
             <div class="test-progress-fill" style="width:${progressPercent}%"></div>
             <div class="test-progress-train" style="left:clamp(18px, ${progressPercent}%, calc(100% - 18px))">🚂</div>
           </div>
           <section class="question-panel">
-            <h1>${escapeHtml(question.prompt)}</h1>
+            <h1 tabindex="-1">${escapeHtml(question.prompt)}</h1>
             <div class="question-choice-list ${layout === "image-grid" ? "is-image-grid" : ""} ${layout === "five-choice" ? "is-five-choice" : ""}">
               ${question.options.map((option, optionIndex) => `
                 <button
-                  class="question-choice ${layout === "image-grid" ? "question-choice-image" : ""} ${layout === "five-choice" ? "question-choice-compact" : ""}"
+                  class="question-choice ${answers[questionIndex] === optionIndex ? "is-selected" : ""} ${layout === "image-grid" ? "question-choice-image" : ""} ${layout === "five-choice" ? "question-choice-compact" : ""}"
                   type="button"
+                  aria-pressed="${answers[questionIndex] === optionIndex}"
                   data-action="choose-answer"
                   data-question-index="${questionIndex}"
                   data-option-index="${optionIndex}">
@@ -496,6 +499,8 @@ function renderQuestionScreen(page, questionIndex) {
                 </button>
               `).join("")}
             </div>
+            ${questionIndex > 0 ? '<button class="question-back" type="button" data-action="previous-question">← 이전 질문</button>' : ''}
+            <p class="question-help">가까운 답 하나를 골라주세요. 이전 질문에서 답을 바꿀 수 있어요.</p>
           </section>
         </article>
       </section>
@@ -528,17 +533,13 @@ function renderLoadingScreen(page) {
   `;
 }
 
-function renderResultScreen(page, resultKey, cards) {
+function renderResultScreen(page, resultKey, cards, options = {}) {
   const testId = document.body && document.body.dataset ? document.body.dataset.testId : "";
   const result = page.results[resultKey];
   const relatedCards = getRelatedCards(page, cards);
-  const preview = (page.resultPreview || [])
-    .map((label) => `<span class="result-pill">${escapeHtml(label)}</span>`)
-    .join("");
   const resultHeaderTitle = page.resultHeaderTitle || "나의 결과는?";
   const resultTraitTitle = page.resultTraitTitle || "이런 타입이에요";
   const relatedSectionTitle = page.relatedSectionTitle || "다음 테스트도 이어서 보기";
-  const shareSectionTitle = page.shareSectionTitle || "공유용 요약";
   const sharePrompt = page.sharePrompt || `이 결과를 친구에게 보내고 “너도 나를 이렇게 봤어?”라고 물어보세요.`;
   const resultKeywords = buildResultKeywords(result);
 
@@ -547,73 +548,73 @@ function renderResultScreen(page, resultKey, cards) {
       <section class="test-card-shell result-shell">
         <div class="test-card-tab">${escapeHtml(page.title)}</div>
         <article class="test-card result-card">
-        <section class="result-header-board">
-          <div class="result-header-title">${escapeHtml(resultHeaderTitle)}</div>
-          <div class="result-header-body">
-            <div class="result-avatar-box">
-              <div class="result-avatar">${escapeHtml(result.heroEmoji || "💗")}</div>
-              <strong>${escapeHtml(result.title)}</strong>
-            </div>
-            <div class="result-summary-box">
-              <div class="result-mini-badge">결과 요약</div>
-              <div class="result-summary-copy">
-                <strong>${escapeHtml(result.summary)}</strong>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <p class="result-share-nudge">${escapeHtml(sharePrompt)}</p>
-        <div class="result-share-row result-share-row-four">
-          <button class="share-icon-btn" id="btnCopyResultImage" type="button" aria-label="이미지 복사">${renderShareIcon("copy")}<span class="share-icon-btn-label">이미지 복사</span></button>
-          <button class="share-icon-btn" id="btnCopyLink" type="button" aria-label="링크 복사">${renderShareIcon("link")}<span class="share-icon-btn-label">링크 복사</span></button>
-          <button class="share-icon-btn share-icon-btn-kakao" id="btnKakaoShare" type="button" aria-label="카카오톡 공유">${renderShareIcon("kakao")}<span class="share-icon-btn-label">카카오톡</span></button>
-          <button class="share-icon-btn share-icon-btn-instagram" id="btnInstagramShare" type="button" aria-label="인스타그램 공유">${renderShareIcon("instagram")}<span class="share-icon-btn-label">인스타그램</span></button>
-        </div>
-        <button class="test-main-button result-try-button" type="button" data-action="restart-test">나도 직접 테스트하기</button>
-        <p class="content-disclaimer">재미로 보는 성향 콘텐츠예요. 전문적인 심리 검사나 진단이 아니에요.</p>
-
-        <details class="result-details">
-        <summary>나의 특징과 잘 맞는 타입 자세히 보기</summary>
+        <header class="result-cover">
+          <img src="../assets/images/covers/${escapeHtml(testId)}-${escapeHtml(resultKey)}.svg" alt="" width="720" height="480" />
+          <p>${escapeHtml(resultHeaderTitle)}</p>
+          <h1 tabindex="-1">${escapeHtml(result.title)}</h1>
+          <strong>${escapeHtml(result.summary)}</strong>
+        </header>
+        <div class="result-reading">
         <section class="result-section">
-          <div class="result-section-title">${escapeHtml(resultTraitTitle)}</div>
+          <h2 class="result-section-title">${escapeHtml(resultTraitTitle)}</h2>
           <div class="result-section-body result-traits">
             ${renderReadableParagraphs(result.description)}
-            ${result.strengths.map((item) => `<p>${escapeHtml(item)}</p>`).join("")}
-            ${renderReadableParagraphs(result.tip, "result-tip-line")}
+            <h3>이런 순간, 나답죠</h3>
+            ${renderReadableParagraphs(result.scene)}
+            <ul class="result-strengths">${result.strengths.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+            <h3>놓치기 쉬운 부분</h3>
+            ${renderReadableParagraphs(result.watchOut)}
           </div>
         </section>
-
+        <section class="result-section result-action-tip">
+          <h2 class="result-section-title">오늘 해볼 한 가지</h2>
+          <div class="result-section-body">${renderReadableParagraphs(result.action || result.tip)}</div>
+        </section>
         <aside class="result-kuku-comment">
           <img src="../assets/images/apple-touch-icon.png" alt="" width="64" height="64" loading="lazy" />
           <div>
             <span>쿠쿠의 한마디</span>
-            <p>${escapeHtml(result.kukuComment || result.tip || "이 결과, 친구 거랑 나란히 놓으면 더 웃길지도 몰라.")}</p>
+            <p>${escapeHtml(result.kukuComment || result.tip)}</p>
           </div>
         </aside>
 
         <section class="result-section">
-          <div class="result-section-title">${escapeHtml(result.moodTitle || "추천 무드")}</div>
+          <h2 class="result-section-title">${escapeHtml(result.moodTitle || "추천 무드")}</h2>
           <div class="result-section-body result-chip-board">
             ${resultKeywords.map((item) => `<span class="result-pill">${escapeHtml(item)}</span>`).join("")}
           </div>
         </section>
 
         <section class="result-section">
-          <div class="result-section-title">${escapeHtml(result.matchTitle || "찰떡 궁합")}</div>
-          <div class="result-section-body result-match-board">
-            <strong>${escapeHtml(result.matchLabel || "")}</strong>
-            ${renderReadableParagraphs(result.matchDescription || "")}
+          <h2 class="result-section-title">다른 타입과 나란히 보면</h2>
+          <div class="result-section-body result-match-grid">
+            ${[[result.matchKey, "함께하면 좋은 점", result.matchReason], [result.contrastKey, "방식이 달라도 괜찮아요", result.contrastReason]].map(([key, label, reason]) => page.results[key] ? `
+              <a class="result-type-link" href="../results/${escapeHtml(testId)}-${escapeHtml(key)}.html">
+                <small>${label}</small><strong>${escapeHtml(page.results[key].title)} <span aria-hidden="true">↗</span></strong>
+                <p>${escapeHtml(reason)}</p><span>이 타입 읽어보기 →</span>
+              </a>` : "").join("")}
           </div>
         </section>
-
-        </details>
+        <p class="content-disclaimer">재미로 보는 성향 콘텐츠예요. 전문적인 심리 검사나 진단이 아니며, 타입 간 관계도 비교를 위한 이야기예요.</p>
+        <p class="result-calculation">${escapeHtml(page.resultMethodNote || "")}</p>
+        </div>
+        <section class="result-sharing" aria-label="결과 공유">
+          <h2>읽어봤다면, 친구와 비교해볼까요?</h2>
+          <p class="result-share-nudge">${escapeHtml(sharePrompt)}</p>
+          <div class="result-share-row result-share-row-four">
+            <button class="share-icon-btn" id="btnCopyResultImage" type="button" aria-label="이미지 복사">${renderShareIcon("copy")}<span class="share-icon-btn-label">이미지 복사</span></button>
+            <button class="share-icon-btn" id="btnCopyLink" type="button" aria-label="링크 복사">${renderShareIcon("link")}<span class="share-icon-btn-label">링크 복사</span></button>
+            <button class="share-icon-btn share-icon-btn-kakao" id="btnKakaoShare" type="button" aria-label="카카오톡 공유">${renderShareIcon("kakao")}<span class="share-icon-btn-label">카카오톡</span></button>
+            <button class="share-icon-btn share-icon-btn-instagram" id="btnInstagramShare" type="button" aria-label="인스타그램 공유">${renderShareIcon("instagram")}<span class="share-icon-btn-label">인스타그램</span></button>
+          </div>
+        </section>
+        <button class="test-main-button result-try-button" type="button" data-action="restart-test">${options.shared ? "나도 테스트하기" : "다시 하기"}</button>
         <section class="result-section">
           <div class="result-section-title">${escapeHtml(relatedSectionTitle)}</div>
           <div class="result-section-body result-related-grid">
             ${relatedCards.map((card) => `
-              <a class="result-related-card" href="${card.href}" data-content-id="${escapeHtml(card.id)}" data-next-content>
-                <div class="result-related-icon">${escapeHtml(card.icon || "◉")}</div>
+              <a class="result-related-card" href="${card.href.replace(/^\.\//, "../")}" data-content-id="${escapeHtml(card.id)}" data-next-content>
+                <img src="../assets/images/covers/${escapeHtml(card.id)}.svg" alt="" width="720" height="480" loading="lazy" />
                 <strong>${escapeHtml(card.title)}</strong>
                 <span>${escapeHtml(card.description)}</span>
               </a>
@@ -621,17 +622,9 @@ function renderResultScreen(page, resultKey, cards) {
           </div>
         </section>
 
-        <section class="result-section">
-          <div class="result-section-title">${escapeHtml(shareSectionTitle)}</div>
-          <div class="result-section-body result-preview-board">
-            <p>${escapeHtml(page.callout || "")}</p>
-            <div class="result-preview-pills">${preview}</div>
-          </div>
-        </section>
-
         <div class="community-reactions" data-reaction-panel data-content-id="${escapeHtml(testId)}" aria-label="콘텐츠 반응">
-          <button type="button" data-reaction="fun" aria-pressed="false"><span aria-hidden="true">☺</span><strong>재밌어요</strong><b data-reaction-count="fun">0</b></button>
-          <button type="button" data-reaction="relatable" aria-pressed="false"><span aria-hidden="true">♥</span><strong>공감돼요</strong><b data-reaction-count="relatable">0</b></button>
+          <button type="button" data-reaction="fun" aria-pressed="false"><span aria-hidden="true">☺</span><strong>재밌어요</strong><b data-reaction-count="fun">—</b></button>
+          <button type="button" data-reaction="relatable" aria-pressed="false"><span aria-hidden="true">♥</span><strong>공감돼요</strong><b data-reaction-count="relatable">—</b></button>
         </div>
 
         <div class="result-action-row">
@@ -660,10 +653,15 @@ function createTestApp(data) {
     currentQuestion: 0,
     answers: [],
     resultKey: initialSharedResultKey,
-    startedAt: 0
+    startedAt: 0,
+    shared: Boolean(initialSharedResultKey),
+    attemptId: ""
   };
 
   let loadingTimer = null;
+  let answerTimer = null;
+  let attemptSequence = 0;
+  const completedAttempts = new Set();
   let restoringHistory = false;
 
   function snapshotState() {
@@ -671,7 +669,9 @@ function createTestApp(data) {
       currentQuestion: state.currentQuestion,
       answers: [...state.answers],
       resultKey: state.resultKey,
-      startedAt: state.startedAt
+      startedAt: state.startedAt,
+      shared: state.shared,
+      attemptId: state.attemptId
     };
   }
 
@@ -680,6 +680,8 @@ function createTestApp(data) {
     state.answers = Array.isArray(snapshot.answers) ? [...snapshot.answers] : [];
     state.resultKey = snapshot.resultKey || "";
     state.startedAt = Number(snapshot.startedAt) || 0;
+    state.shared = Boolean(snapshot.shared);
+    state.attemptId = snapshot.attemptId || String(state.startedAt);
   }
 
   function writeHistory(screen, options = {}) {
@@ -688,6 +690,7 @@ function createTestApp(data) {
     }
 
     const url = new URL(window.location.href);
+    if (screen !== "result" && url.pathname.startsWith("/results/")) url.pathname = `/tests/${data.testId}.html`;
     if (screen === "result" && state.resultKey) {
       url.searchParams.set("result", state.resultKey);
     } else {
@@ -712,6 +715,10 @@ function createTestApp(data) {
   }
 
   function clearLoadingTimer() {
+    if (answerTimer) {
+      window.clearTimeout(answerTimer);
+      answerTimer = null;
+    }
     if (loadingTimer) {
       window.clearTimeout(loadingTimer);
       loadingTimer = null;
@@ -725,7 +732,7 @@ function createTestApp(data) {
       hydrateCoupangSlots(root);
     } else if (state.screen === "question") {
       applyShareState(data.page, "");
-      root.innerHTML = renderQuestionScreen(data.page, state.currentQuestion);
+      root.innerHTML = renderQuestionScreen(data.page, state.currentQuestion, state.answers);
       hydrateCoupangSlots(root);
     } else if (state.screen === "loading") {
       applyShareState(data.page, "");
@@ -733,7 +740,7 @@ function createTestApp(data) {
       hydrateCoupangSlots(root);
     } else if (state.screen === "result") {
       applyShareState(data.page, state.resultKey);
-      root.innerHTML = renderResultScreen(data.page, state.resultKey, data.cards);
+      root.innerHTML = renderResultScreen(data.page, state.resultKey, data.cards, { shared: state.shared });
       hydrateCoupangSlots(root);
     }
 
@@ -754,6 +761,7 @@ function createTestApp(data) {
 
     if (options.scroll !== false) {
       scrollTestToTop();
+      root.querySelector("h1")?.focus({ preventScroll: true });
     }
   }
 
@@ -762,10 +770,14 @@ function createTestApp(data) {
     const durationSeconds = state.startedAt
       ? Math.max(1, Math.round((Date.now() - state.startedAt) / 1000))
       : 0;
-    trackContentEvent("content_complete", data.page, {
-      result_key: state.resultKey,
-      duration_seconds: durationSeconds
-    });
+    const completionKey = `coocoo_completed_attempt_${data.testId}_${state.attemptId}`;
+    let completed = completedAttempts.has(state.attemptId);
+    try { completed ||= window.sessionStorage.getItem(completionKey) === "1"; } catch (error) { /* Memory still covers history when storage is blocked. */ }
+    if (!completed) {
+      trackContentEvent("content_complete", data.page, { result_key: state.resultKey, duration_seconds: durationSeconds });
+      completedAttempts.add(state.attemptId);
+      try { window.sessionStorage.setItem(completionKey, "1"); } catch (error) { /* Do not block the result. */ }
+    }
     try {
       const completedIds = JSON.parse(window.sessionStorage.getItem("coocoo_completed_content_ids") || "[]");
       const currentId = getContentAnalyticsParams(data.page).content_id;
@@ -777,6 +789,7 @@ function createTestApp(data) {
       console.warn("Unable to persist completed content analytics state.", error);
     }
     state.screen = "result";
+    state.shared = false;
     writeHistory("result", { replace: true });
     render();
   }
@@ -786,7 +799,7 @@ function createTestApp(data) {
     writeHistory("loading", { replace: Boolean(options.replaceHistory) });
     render();
     clearLoadingTimer();
-    loadingTimer = window.setTimeout(resolveResult, 1400);
+    loadingTimer = window.setTimeout(resolveResult, 450);
   }
 
   root.addEventListener("click", (event) => {
@@ -822,6 +835,8 @@ function createTestApp(data) {
       state.answers = [];
       state.resultKey = "";
       state.startedAt = Date.now();
+      state.attemptId = `${state.startedAt}-${++attemptSequence}`;
+      state.shared = false;
       writeHistory("question");
       render();
       return;
@@ -830,20 +845,33 @@ function createTestApp(data) {
     if (action === "choose-answer") {
       const questionIndex = Number(target.getAttribute("data-question-index"));
       const optionIndex = Number(target.getAttribute("data-option-index"));
-
+      if (state.screen !== "question" || questionIndex !== state.currentQuestion || answerTimer || !data.page.questions[questionIndex]?.options[optionIndex]) return;
       state.answers[questionIndex] = optionIndex;
-
-      if (questionIndex >= data.page.questions.length - 1) {
-        startLoadingAndResolve();
-        return;
-      }
-
-      state.currentQuestion = questionIndex + 1;
-      writeHistory("question");
-      render();
+      // Save the answered screen before advancing so Back restores the selected answer.
+      writeHistory("question", { replace: true });
+      root.querySelectorAll('[data-action="choose-answer"]').forEach((button) => {
+        const selected = Number(button.dataset.optionIndex) === optionIndex;
+        button.classList.toggle("is-selected", selected);
+        button.setAttribute("aria-pressed", String(selected));
+        button.disabled = true;
+      });
+      answerTimer = window.setTimeout(() => {
+        answerTimer = null;
+        if (questionIndex >= data.page.questions.length - 1) startLoadingAndResolve();
+        else {
+          state.currentQuestion = questionIndex + 1;
+          writeHistory("question");
+          render();
+        }
+      }, 160);
       return;
     }
-
+    if (action === "previous-question" && state.screen === "question" && state.currentQuestion > 0) {
+      clearLoadingTimer();
+      state.currentQuestion--;
+      writeHistory("question", { replace: true });
+      render();
+    }
   });
 
   function restoreHistoryScreen(historyState) {
@@ -867,7 +895,7 @@ function createTestApp(data) {
 
   window.addEventListener("popstate", handlePopState);
 
-  render();
+  render({ scroll: false });
   writeHistory(state.screen, { replace: true });
   return {
     destroy() {
@@ -893,7 +921,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const description = data.page.summary || data.card?.description || "";
+  const initialResult = getSharedResultKey(data.page);
+  const description = data.page.results[initialResult]?.summary || data.page.summary || data.card?.description || "";
 
   const metaDescription = document.querySelector('meta[name="description"]');
   if (metaDescription && description) {

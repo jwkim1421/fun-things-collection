@@ -23,6 +23,7 @@ export function packageSite() {
   walk("assets", (file) => /\.(?:js|css|png|svg|webp|woff2?)$/.test(file));
   walk("tests", (file) => /^tests\/(?:tests\/)?test-\d{3}\.html$/.test(file));
   walk("play", (file) => /^play\/[a-z-]+\.html$/.test(file));
+  walk("results", (file) => /^results\/test-\d{3}-[a-z]+\.html$/.test(file));
   walk("github-pages-starter", (file) => /^(?:github-pages-starter\/(?:index|contact|privacy|404)\.html|github-pages-starter\/tests\/test-\d{3}\.html)$/.test(file));
   return destination;
 }

@@ -1,0 +1,1518 @@
+{
+  "currentRevision": "e7b165cbb6b989095d6f69c2f9f01878e6874178",
+  "previousRevision": "bc5aa50a5f6865c56263e57012c31e8761e5d7a0",
+  "sourceSha256": {
+    "site-config": "f8a364a55955238523303b8527dbcfe87e03da657d2c85ed7f648696cdbfc292",
+    "content-data": "f5a4506337221eee9f3aa6549ac2bab1e88fa3ffcbf3b89012686b2569ccf290",
+    "extra-content-data": "ae46c779e6ac810926aa5ffe34674650f903f9de1b3358d8991b722189976e1c",
+    "catalog": "df1abba540f0fcb6b702c246e8811586d4f1c84f9bf4738ebddc9fb9722fcf75",
+    "playground": "9f125e49b404e5d1cbf3f9135d37e93fe3d7507127a53d83d0905f11f2dd90ae"
+  },
+  "rendererSha256": {
+    "previous": "f6defa9549ea26ac588c9a5c15a29fd3b7e5013daa9d10551a86852f8f9e6093",
+    "current": "39033bebe6dcb851d3cdb7d2c07482c4b7c18f58f747ef111719512b5a6aac94"
+  },
+  "method": "UTF-16 string length excluding whitespace in summary/traits/comment/match; hidden means inside a closed details element; same current data in both renderers",
+  "results": [
+    {
+      "id": "test-001",
+      "key": "engine",
+      "title": "내 연애 열차 운행 타입은?",
+      "result": "직진 기관사형",
+      "previous": {
+        "explanationChars": 1070,
+        "visibleExplanationChars": 1070,
+        "paragraphs": 23
+      },
+      "current": {
+        "explanationChars": 305,
+        "visibleExplanationChars": 18,
+        "paragraphs": 8
+      }
+    },
+    {
+      "id": "test-001",
+      "key": "station",
+      "title": "내 연애 열차 운행 타입은?",
+      "result": "안정 역장형",
+      "previous": {
+        "explanationChars": 1076,
+        "visibleExplanationChars": 1076,
+        "paragraphs": 24
+      },
+      "current": {
+        "explanationChars": 319,
+        "visibleExplanationChars": 20,
+        "paragraphs": 9
+      }
+    },
+    {
+      "id": "test-001",
+      "key": "guide",
+      "title": "내 연애 열차 운행 타입은?",
+      "result": "다정 안내원형",
+      "previous": {
+        "explanationChars": 1082,
+        "visibleExplanationChars": 1082,
+        "paragraphs": 24
+      },
+      "current": {
+        "explanationChars": 310,
+        "visibleExplanationChars": 24,
+        "paragraphs": 9
+      }
+    },
+    {
+      "id": "test-001",
+      "key": "signal",
+      "title": "내 연애 열차 운행 타입은?",
+      "result": "관찰 신호등형",
+      "previous": {
+        "explanationChars": 1078,
+        "visibleExplanationChars": 1078,
+        "paragraphs": 24
+      },
+      "current": {
+        "explanationChars": 317,
+        "visibleExplanationChars": 22,
+        "paragraphs": 9
+      }
+    },
+    {
+      "id": "test-002",
+      "key": "sprint",
+      "title": "직장인 회복력 체크",
+      "result": "버티는 스프린터형",
+      "previous": {
+        "explanationChars": 950,
+        "visibleExplanationChars": 950,
+        "paragraphs": 23
+      },
+      "current": {
+        "explanationChars": 223,
+        "visibleExplanationChars": 16,
+        "paragraphs": 8
+      }
+    },
+    {
+      "id": "test-002",
+      "key": "buffer",
+      "title": "직장인 회복력 체크",
+      "result": "회복 쿠션형",
+      "previous": {
+        "explanationChars": 998,
+        "visibleExplanationChars": 998,
+        "paragraphs": 23
+      },
+      "current": {
+        "explanationChars": 245,
+        "visibleExplanationChars": 19,
+        "paragraphs": 8
+      }
+    },
+    {
+      "id": "test-002",
+      "key": "reset",
+      "title": "직장인 회복력 체크",
+      "result": "리셋 설계형",
+      "previous": {
+        "explanationChars": 989,
+        "visibleExplanationChars": 989,
+        "paragraphs": 23
+      },
+      "current": {
+        "explanationChars": 240,
+        "visibleExplanationChars": 15,
+        "paragraphs": 8
+      }
+    },
+    {
+      "id": "test-002",
+      "key": "alert",
+      "title": "직장인 회복력 체크",
+      "result": "방전 경고형",
+      "previous": {
+        "explanationChars": 1049,
+        "visibleExplanationChars": 1049,
+        "paragraphs": 23
+      },
+      "current": {
+        "explanationChars": 264,
+        "visibleExplanationChars": 19,
+        "paragraphs": 8
+      }
+    },
+    {
+      "id": "test-003",
+      "key": "planner",
+      "title": "나만의 여행 성향 찾기",
+      "result": "동선 설계자형",
+      "previous": {
+        "explanationChars": 983,
+        "visibleExplanationChars": 983,
+        "paragraphs": 23
+      },
+      "current": {
+        "explanationChars": 240,
+        "visibleExplanationChars": 18,
+        "paragraphs": 8
+      }
+    },
+    {
+      "id": "test-003",
+      "key": "explorer",
+      "title": "나만의 여행 성향 찾기",
+      "result": "즉흥 모험가형",
+      "previous": {
+        "explanationChars": 968,
+        "visibleExplanationChars": 968,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 236,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-003",
+      "key": "comfort",
+      "title": "나만의 여행 성향 찾기",
+      "result": "안정 휴양형",
+      "previous": {
+        "explanationChars": 937,
+        "visibleExplanationChars": 937,
+        "paragraphs": 23
+      },
+      "current": {
+        "explanationChars": 224,
+        "visibleExplanationChars": 20,
+        "paragraphs": 8
+      }
+    },
+    {
+      "id": "test-003",
+      "key": "local",
+      "title": "나만의 여행 성향 찾기",
+      "result": "동네 산책가형",
+      "previous": {
+        "explanationChars": 965,
+        "visibleExplanationChars": 965,
+        "paragraphs": 23
+      },
+      "current": {
+        "explanationChars": 229,
+        "visibleExplanationChars": 19,
+        "paragraphs": 8
+      }
+    },
+    {
+      "id": "test-004",
+      "key": "timer",
+      "title": "집중력 루틴 진단",
+      "result": "시간 설계형",
+      "previous": {
+        "explanationChars": 935,
+        "visibleExplanationChars": 935,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 221,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-004",
+      "key": "diver",
+      "title": "집중력 루틴 진단",
+      "result": "몰입 잠수형",
+      "previous": {
+        "explanationChars": 920,
+        "visibleExplanationChars": 920,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 212,
+        "visibleExplanationChars": 16,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-004",
+      "key": "ritual",
+      "title": "집중력 루틴 진단",
+      "result": "루틴 관리자형",
+      "previous": {
+        "explanationChars": 978,
+        "visibleExplanationChars": 978,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 243,
+        "visibleExplanationChars": 19,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-004",
+      "key": "spark",
+      "title": "집중력 루틴 진단",
+      "result": "반짝 아이디어형",
+      "previous": {
+        "explanationChars": 1009,
+        "visibleExplanationChars": 1009,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 245,
+        "visibleExplanationChars": 21,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-005",
+      "key": "manager",
+      "title": "친구 케미 점수 보기",
+      "result": "든든한 총무형",
+      "previous": {
+        "explanationChars": 956,
+        "visibleExplanationChars": 956,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 235,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-005",
+      "key": "listener",
+      "title": "친구 케미 점수 보기",
+      "result": "다정한 공감형",
+      "previous": {
+        "explanationChars": 940,
+        "visibleExplanationChars": 940,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 224,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-005",
+      "key": "spark",
+      "title": "친구 케미 점수 보기",
+      "result": "분위기 메이커형",
+      "previous": {
+        "explanationChars": 945,
+        "visibleExplanationChars": 945,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 225,
+        "visibleExplanationChars": 15,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-005",
+      "key": "free",
+      "title": "친구 케미 점수 보기",
+      "result": "자유로운 즉흥형",
+      "previous": {
+        "explanationChars": 976,
+        "visibleExplanationChars": 976,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 246,
+        "visibleExplanationChars": 22,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-006",
+      "key": "cocoon",
+      "title": "주말 충전 방식 찾기",
+      "result": "포근 집콕형",
+      "previous": {
+        "explanationChars": 955,
+        "visibleExplanationChars": 955,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 228,
+        "visibleExplanationChars": 19,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-006",
+      "key": "social",
+      "title": "주말 충전 방식 찾기",
+      "result": "약속 충전형",
+      "previous": {
+        "explanationChars": 955,
+        "visibleExplanationChars": 955,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 223,
+        "visibleExplanationChars": 16,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-006",
+      "key": "reset",
+      "title": "주말 충전 방식 찾기",
+      "result": "리듬 회복형",
+      "previous": {
+        "explanationChars": 1009,
+        "visibleExplanationChars": 1009,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 245,
+        "visibleExplanationChars": 17,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-006",
+      "key": "roam",
+      "title": "주말 충전 방식 찾기",
+      "result": "가벼운 산책형",
+      "previous": {
+        "explanationChars": 1001,
+        "visibleExplanationChars": 1001,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 239,
+        "visibleExplanationChars": 16,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-007",
+      "key": "spark",
+      "title": "썸 대화 온도 체크",
+      "result": "직진 온도상승형",
+      "previous": {
+        "explanationChars": 977,
+        "visibleExplanationChars": 977,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 225,
+        "visibleExplanationChars": 19,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-007",
+      "key": "steady",
+      "title": "썸 대화 온도 체크",
+      "result": "편안한 스며듦형",
+      "previous": {
+        "explanationChars": 906,
+        "visibleExplanationChars": 906,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 203,
+        "visibleExplanationChars": 16,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-007",
+      "key": "tease",
+      "title": "썸 대화 온도 체크",
+      "result": "장난 센스형",
+      "previous": {
+        "explanationChars": 896,
+        "visibleExplanationChars": 896,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 209,
+        "visibleExplanationChars": 16,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-007",
+      "key": "calm",
+      "title": "썸 대화 온도 체크",
+      "result": "차분 관찰형",
+      "previous": {
+        "explanationChars": 900,
+        "visibleExplanationChars": 900,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 211,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-008",
+      "key": "glow",
+      "title": "첫인상보다 오래가는 내 매력은?",
+      "result": "은근 발광형",
+      "previous": {
+        "explanationChars": 878,
+        "visibleExplanationChars": 878,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 199,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-008",
+      "key": "comfort",
+      "title": "첫인상보다 오래가는 내 매력은?",
+      "result": "포근 안정형",
+      "previous": {
+        "explanationChars": 903,
+        "visibleExplanationChars": 903,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 203,
+        "visibleExplanationChars": 13,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-008",
+      "key": "wit",
+      "title": "첫인상보다 오래가는 내 매력은?",
+      "result": "위트 레이더형",
+      "previous": {
+        "explanationChars": 882,
+        "visibleExplanationChars": 882,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 200,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-008",
+      "key": "mystery",
+      "title": "첫인상보다 오래가는 내 매력은?",
+      "result": "미스터리 잔상형",
+      "previous": {
+        "explanationChars": 914,
+        "visibleExplanationChars": 914,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 213,
+        "visibleExplanationChars": 15,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-009",
+      "key": "logic",
+      "title": "결정을 내리는 순간의 나",
+      "result": "분석 나침반형",
+      "previous": {
+        "explanationChars": 864,
+        "visibleExplanationChars": 864,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 197,
+        "visibleExplanationChars": 16,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-009",
+      "key": "gut",
+      "title": "결정을 내리는 순간의 나",
+      "result": "직감 스위치형",
+      "previous": {
+        "explanationChars": 852,
+        "visibleExplanationChars": 852,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 193,
+        "visibleExplanationChars": 15,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-009",
+      "key": "harmony",
+      "title": "결정을 내리는 순간의 나",
+      "result": "조율 밸런스형",
+      "previous": {
+        "explanationChars": 843,
+        "visibleExplanationChars": 843,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 188,
+        "visibleExplanationChars": 16,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-009",
+      "key": "quick",
+      "title": "결정을 내리는 순간의 나",
+      "result": "빠른 결정형",
+      "previous": {
+        "explanationChars": 850,
+        "visibleExplanationChars": 850,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 200,
+        "visibleExplanationChars": 15,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-010",
+      "key": "planner",
+      "title": "돈 쓸 때 드러나는 소비 타입",
+      "result": "예산 설계형",
+      "previous": {
+        "explanationChars": 842,
+        "visibleExplanationChars": 842,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 185,
+        "visibleExplanationChars": 15,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-010",
+      "key": "joy",
+      "title": "돈 쓸 때 드러나는 소비 타입",
+      "result": "기분 충전형",
+      "previous": {
+        "explanationChars": 874,
+        "visibleExplanationChars": 874,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 191,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-010",
+      "key": "curator",
+      "title": "돈 쓸 때 드러나는 소비 타입",
+      "result": "취향 수집형",
+      "previous": {
+        "explanationChars": 894,
+        "visibleExplanationChars": 894,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 204,
+        "visibleExplanationChars": 22,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-010",
+      "key": "saver",
+      "title": "돈 쓸 때 드러나는 소비 타입",
+      "result": "절제 저축형",
+      "previous": {
+        "explanationChars": 848,
+        "visibleExplanationChars": 848,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 196,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-011",
+      "key": "captain",
+      "title": "팀플에서 맡게 되는 역할",
+      "result": "흐름 리더형",
+      "previous": {
+        "explanationChars": 859,
+        "visibleExplanationChars": 859,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 202,
+        "visibleExplanationChars": 14,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-011",
+      "key": "maker",
+      "title": "팀플에서 맡게 되는 역할",
+      "result": "실행 메이커형",
+      "previous": {
+        "explanationChars": 768,
+        "visibleExplanationChars": 768,
+        "paragraphs": 20
+      },
+      "current": {
+        "explanationChars": 158,
+        "visibleExplanationChars": 13,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-011",
+      "key": "mediator",
+      "title": "팀플에서 맡게 되는 역할",
+      "result": "조율 브릿지형",
+      "previous": {
+        "explanationChars": 872,
+        "visibleExplanationChars": 872,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 207,
+        "visibleExplanationChars": 17,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-011",
+      "key": "spark",
+      "title": "팀플에서 맡게 되는 역할",
+      "result": "분위기 점화형",
+      "previous": {
+        "explanationChars": 882,
+        "visibleExplanationChars": 882,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 213,
+        "visibleExplanationChars": 13,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-012",
+      "key": "solo",
+      "title": "쉬는 날 인간관계 충전법",
+      "result": "혼자 숨고르기형",
+      "previous": {
+        "explanationChars": 945,
+        "visibleExplanationChars": 945,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 226,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-012",
+      "key": "duo",
+      "title": "쉬는 날 인간관계 충전법",
+      "result": "도란도란 1대1형",
+      "previous": {
+        "explanationChars": 918,
+        "visibleExplanationChars": 918,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 214,
+        "visibleExplanationChars": 21,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-012",
+      "key": "circle",
+      "title": "쉬는 날 인간관계 충전법",
+      "result": "가벼운 모임형",
+      "previous": {
+        "explanationChars": 947,
+        "visibleExplanationChars": 947,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 219,
+        "visibleExplanationChars": 21,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-012",
+      "key": "vanish",
+      "title": "쉬는 날 인간관계 충전법",
+      "result": "잠수 회복형",
+      "previous": {
+        "explanationChars": 975,
+        "visibleExplanationChars": 975,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 237,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-013",
+      "key": "direct",
+      "title": "나의 플러팅 방식 찾기",
+      "result": "직진 시그널형",
+      "previous": {
+        "explanationChars": 879,
+        "visibleExplanationChars": 879,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 204,
+        "visibleExplanationChars": 19,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-013",
+      "key": "play",
+      "title": "나의 플러팅 방식 찾기",
+      "result": "장난 유도형",
+      "previous": {
+        "explanationChars": 861,
+        "visibleExplanationChars": 861,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 191,
+        "visibleExplanationChars": 16,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-013",
+      "key": "care",
+      "title": "나의 플러팅 방식 찾기",
+      "result": "다정 배려형",
+      "previous": {
+        "explanationChars": 869,
+        "visibleExplanationChars": 869,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 201,
+        "visibleExplanationChars": 16,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-013",
+      "key": "subtle",
+      "title": "나의 플러팅 방식 찾기",
+      "result": "은근 스며듦형",
+      "previous": {
+        "explanationChars": 876,
+        "visibleExplanationChars": 876,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 204,
+        "visibleExplanationChars": 15,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-014",
+      "key": "archive",
+      "title": "사진첩 무드로 보는 감성 타입",
+      "result": "무드 아카이버형",
+      "previous": {
+        "explanationChars": 895,
+        "visibleExplanationChars": 895,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 208,
+        "visibleExplanationChars": 17,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-014",
+      "key": "aesthetic",
+      "title": "사진첩 무드로 보는 감성 타입",
+      "result": "빛과 구도형",
+      "previous": {
+        "explanationChars": 852,
+        "visibleExplanationChars": 852,
+        "paragraphs": 20
+      },
+      "current": {
+        "explanationChars": 193,
+        "visibleExplanationChars": 17,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-014",
+      "key": "candid",
+      "title": "사진첩 무드로 보는 감성 타입",
+      "result": "순간 포착형",
+      "previous": {
+        "explanationChars": 901,
+        "visibleExplanationChars": 901,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 206,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-014",
+      "key": "story",
+      "title": "사진첩 무드로 보는 감성 타입",
+      "result": "이야기 편집형",
+      "previous": {
+        "explanationChars": 873,
+        "visibleExplanationChars": 873,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 201,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-015",
+      "key": "cozy",
+      "title": "내 방이 말해주는 취향 무드",
+      "result": "포근 아지트형",
+      "previous": {
+        "explanationChars": 907,
+        "visibleExplanationChars": 907,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 202,
+        "visibleExplanationChars": 21,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-015",
+      "key": "minimal",
+      "title": "내 방이 말해주는 취향 무드",
+      "result": "여백 미니멀형",
+      "previous": {
+        "explanationChars": 894,
+        "visibleExplanationChars": 894,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 212,
+        "visibleExplanationChars": 14,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-015",
+      "key": "collector",
+      "title": "내 방이 말해주는 취향 무드",
+      "result": "취향 수집형",
+      "previous": {
+        "explanationChars": 858,
+        "visibleExplanationChars": 858,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 195,
+        "visibleExplanationChars": 19,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-015",
+      "key": "color",
+      "title": "내 방이 말해주는 취향 무드",
+      "result": "색감 포인트형",
+      "previous": {
+        "explanationChars": 901,
+        "visibleExplanationChars": 901,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 216,
+        "visibleExplanationChars": 19,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-016",
+      "key": "anchor",
+      "title": "약속 잡을 때 드러나는 일정 성향",
+      "result": "정시 앵커형",
+      "previous": {
+        "explanationChars": 945,
+        "visibleExplanationChars": 945,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 233,
+        "visibleExplanationChars": 16,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-016",
+      "key": "flex",
+      "title": "약속 잡을 때 드러나는 일정 성향",
+      "result": "유연 적응형",
+      "previous": {
+        "explanationChars": 883,
+        "visibleExplanationChars": 883,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 206,
+        "visibleExplanationChars": 17,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-016",
+      "key": "pulse",
+      "title": "약속 잡을 때 드러나는 일정 성향",
+      "result": "당일 펄스형",
+      "previous": {
+        "explanationChars": 891,
+        "visibleExplanationChars": 891,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 207,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-016",
+      "key": "curator",
+      "title": "약속 잡을 때 드러나는 일정 성향",
+      "result": "정리 큐레이터형",
+      "previous": {
+        "explanationChars": 881,
+        "visibleExplanationChars": 881,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 205,
+        "visibleExplanationChars": 17,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-017",
+      "key": "shy",
+      "title": "칭찬 들었을 때 반응 타입",
+      "result": "수줍 수납형",
+      "previous": {
+        "explanationChars": 885,
+        "visibleExplanationChars": 885,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 210,
+        "visibleExplanationChars": 15,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-017",
+      "key": "fuel",
+      "title": "칭찬 들었을 때 반응 타입",
+      "result": "에너지 충전형",
+      "previous": {
+        "explanationChars": 884,
+        "visibleExplanationChars": 884,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 201,
+        "visibleExplanationChars": 15,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-017",
+      "key": "cool",
+      "title": "칭찬 들었을 때 반응 타입",
+      "result": "덤덤 흡수형",
+      "previous": {
+        "explanationChars": 959,
+        "visibleExplanationChars": 959,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 224,
+        "visibleExplanationChars": 17,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-017",
+      "key": "joke",
+      "title": "칭찬 들었을 때 반응 타입",
+      "result": "장난 회피형",
+      "previous": {
+        "explanationChars": 876,
+        "visibleExplanationChars": 876,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 200,
+        "visibleExplanationChars": 17,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-018",
+      "key": "bloom",
+      "title": "계절이 바뀌면 깨어나는 감성은?",
+      "result": "봄빛 시작형",
+      "previous": {
+        "explanationChars": 877,
+        "visibleExplanationChars": 877,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 204,
+        "visibleExplanationChars": 20,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-018",
+      "key": "blaze",
+      "title": "계절이 바뀌면 깨어나는 감성은?",
+      "result": "여름 활력형",
+      "previous": {
+        "explanationChars": 845,
+        "visibleExplanationChars": 845,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 195,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-018",
+      "key": "hush",
+      "title": "계절이 바뀌면 깨어나는 감성은?",
+      "result": "가을 사색형",
+      "previous": {
+        "explanationChars": 878,
+        "visibleExplanationChars": 878,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 204,
+        "visibleExplanationChars": 20,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-018",
+      "key": "frost",
+      "title": "계절이 바뀌면 깨어나는 감성은?",
+      "result": "겨울 정리형",
+      "previous": {
+        "explanationChars": 868,
+        "visibleExplanationChars": 868,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 207,
+        "visibleExplanationChars": 17,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-019",
+      "key": "move",
+      "title": "스트레스 해소 버튼 찾기",
+      "result": "몸부터 전환형",
+      "previous": {
+        "explanationChars": 887,
+        "visibleExplanationChars": 887,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 208,
+        "visibleExplanationChars": 14,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-019",
+      "key": "talk",
+      "title": "스트레스 해소 버튼 찾기",
+      "result": "말로 정리형",
+      "previous": {
+        "explanationChars": 892,
+        "visibleExplanationChars": 892,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 214,
+        "visibleExplanationChars": 15,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-019",
+      "key": "nest",
+      "title": "스트레스 해소 버튼 찾기",
+      "result": "포근 잠수형",
+      "previous": {
+        "explanationChars": 902,
+        "visibleExplanationChars": 902,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 221,
+        "visibleExplanationChars": 17,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-019",
+      "key": "create",
+      "title": "스트레스 해소 버튼 찾기",
+      "result": "몰입 창작형",
+      "previous": {
+        "explanationChars": 913,
+        "visibleExplanationChars": 913,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 228,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-020",
+      "key": "crowd",
+      "title": "소셜 배터리 사용법",
+      "result": "활기 충전형",
+      "previous": {
+        "explanationChars": 844,
+        "visibleExplanationChars": 844,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 174,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-020",
+      "key": "deep",
+      "title": "소셜 배터리 사용법",
+      "result": "깊은 대화형",
+      "previous": {
+        "explanationChars": 843,
+        "visibleExplanationChars": 843,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 172,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-020",
+      "key": "observer",
+      "title": "소셜 배터리 사용법",
+      "result": "조용한 관찰형",
+      "previous": {
+        "explanationChars": 836,
+        "visibleExplanationChars": 836,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 174,
+        "visibleExplanationChars": 16,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-020",
+      "key": "recharge",
+      "title": "소셜 배터리 사용법",
+      "result": "휴식 보존형",
+      "previous": {
+        "explanationChars": 862,
+        "visibleExplanationChars": 862,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 177,
+        "visibleExplanationChars": 22,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-021",
+      "key": "full",
+      "title": "지금 내 에너지 레벨은?",
+      "result": "에너지 만땅형",
+      "previous": {
+        "explanationChars": 829,
+        "visibleExplanationChars": 829,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 165,
+        "visibleExplanationChars": 17,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-021",
+      "key": "steady",
+      "title": "지금 내 에너지 레벨은?",
+      "result": "안정 유지형",
+      "previous": {
+        "explanationChars": 816,
+        "visibleExplanationChars": 816,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 164,
+        "visibleExplanationChars": 19,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-021",
+      "key": "saving",
+      "title": "지금 내 에너지 레벨은?",
+      "result": "선택 절전형",
+      "previous": {
+        "explanationChars": 836,
+        "visibleExplanationChars": 836,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 177,
+        "visibleExplanationChars": 16,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-021",
+      "key": "low",
+      "title": "지금 내 에너지 레벨은?",
+      "result": "느린 충전형",
+      "previous": {
+        "explanationChars": 874,
+        "visibleExplanationChars": 874,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 184,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-021",
+      "key": "empty",
+      "title": "지금 내 에너지 레벨은?",
+      "result": "완전 방전형",
+      "previous": {
+        "explanationChars": 876,
+        "visibleExplanationChars": 876,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 186,
+        "visibleExplanationChars": 17,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-022",
+      "key": "open",
+      "title": "오늘 끌리는 장면은?",
+      "result": "바람 환기형",
+      "previous": {
+        "explanationChars": 900,
+        "visibleExplanationChars": 900,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 188,
+        "visibleExplanationChars": 16,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-022",
+      "key": "sparkle",
+      "title": "오늘 끌리는 장면은?",
+      "result": "반짝 점화형",
+      "previous": {
+        "explanationChars": 899,
+        "visibleExplanationChars": 899,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 192,
+        "visibleExplanationChars": 16,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-022",
+      "key": "calm",
+      "title": "오늘 끌리는 장면은?",
+      "result": "고요 관찰형",
+      "previous": {
+        "explanationChars": 892,
+        "visibleExplanationChars": 892,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 191,
+        "visibleExplanationChars": 16,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-022",
+      "key": "cozy",
+      "title": "오늘 끌리는 장면은?",
+      "result": "포근한 귀가형",
+      "previous": {
+        "explanationChars": 898,
+        "visibleExplanationChars": 898,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 187,
+        "visibleExplanationChars": 17,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-023",
+      "key": "wide",
+      "title": "요즘 내 여유 잔량은?",
+      "result": "여백 넉넉형",
+      "previous": {
+        "explanationChars": 907,
+        "visibleExplanationChars": 907,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 191,
+        "visibleExplanationChars": 18,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-023",
+      "key": "room",
+      "title": "요즘 내 여유 잔량은?",
+      "result": "숨통 한 칸형",
+      "previous": {
+        "explanationChars": 864,
+        "visibleExplanationChars": 864,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 175,
+        "visibleExplanationChars": 20,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-023",
+      "key": "tight",
+      "title": "요즘 내 여유 잔량은?",
+      "result": "빽빽 일정형",
+      "previous": {
+        "explanationChars": 924,
+        "visibleExplanationChars": 924,
+        "paragraphs": 22
+      },
+      "current": {
+        "explanationChars": 199,
+        "visibleExplanationChars": 24,
+        "paragraphs": 7
+      }
+    },
+    {
+      "id": "test-023",
+      "key": "packed",
+      "title": "요즘 내 여유 잔량은?",
+      "result": "여백 실종형",
+      "previous": {
+        "explanationChars": 885,
+        "visibleExplanationChars": 885,
+        "paragraphs": 21
+      },
+      "current": {
+        "explanationChars": 193,
+        "visibleExplanationChars": 20,
+        "paragraphs": 7
+      }
+    }
+  ],
+  "averages": {
+    "previous": {
+      "explanationChars": 910,
+      "visibleExplanationChars": 910,
+      "paragraphs": 21.70967741935484
+    },
+    "current": {
+      "explanationChars": 212.04301075268816,
+      "visibleExplanationChars": 17.56989247311828,
+      "paragraphs": 7.150537634408602
+    }
+  }
+}

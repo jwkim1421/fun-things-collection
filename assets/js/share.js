@@ -57,21 +57,24 @@ function buildSharedLink(method) {
   return url.toString();
 }
 
-function trackShareClick(method) {
+function trackShareOutcome(eventName, method) {
   if (!(window.COOCOO_ANALYTICS && typeof window.COOCOO_ANALYTICS.track === "function")) {
     return;
   }
 
   const bodyData = document.body && document.body.dataset ? document.body.dataset : {};
-  window.COOCOO_ANALYTICS.track("share_click", {
+  window.COOCOO_ANALYTICS.track(eventName, {
     content_id: bodyData.testId || bodyData.playId || "home",
     content_title: bodyData.shareTestTitle || document.title,
-    result_key: new URLSearchParams(window.location.search).get("result") || "",
+    result_key: new URLSearchParams(window.location.search).get("result") || bodyData.initialResult || "",
     share_method: method
   });
 }
 
 const kakaoImageCache = new Map();
+function trackShareClick(method) {
+  trackShareOutcome("share_click", method);
+}
 
 function wrapCanvasText(ctx, text, maxWidth, maxLines) {
   const words = String(text || "").trim().split(/\s+/).filter(Boolean);
@@ -166,7 +169,8 @@ function getDynamicSharePayload() {
     resultSummary: bodyData.shareResultSummary || "",
     resultDescription: bodyData.shareResultDescription || "",
     resultIcon: bodyData.shareResultIcon || "✨",
-    mascotUrl: bodyData.shareMascot || `${window.location.origin}/assets/images/kuku-mascot-full.png`
+    mascotUrl: bodyData.shareMascot || `${window.location.origin}/assets/images/kuku-mascot-full.png`,
+    artworkUrl: bodyData.shareArtwork || ""
   };
 }
 
@@ -182,6 +186,12 @@ async function buildDynamicShareCanvas() {
   const ctx = canvas.getContext("2d");
   if (!ctx) {
     return null;
+  }
+  if (payload.artworkUrl) {
+    // The copied PNG and crawler preview use the same type-specific asset.
+    const preview = await loadShareImageAsset(getShareImage());
+    ctx.drawImage(preview, 0, 0, 1200, 630);
+    return canvas;
   }
 
   ctx.fillStyle = "#f4f0e8";
@@ -296,11 +306,12 @@ function showShareFeedback(message, instagram = false, download = false) {
   document.querySelector(".result-share-row, .play-share-actions")?.after(panel);
 }
 
-async function copyResultImage() {
+async function copyResultImage(method = "copy_image") {
   if (!navigator.clipboard?.write || typeof ClipboardItem === "undefined") throw new Error("Image clipboard is unavailable");
   // Call write during the click; Safari accepts the asynchronously rendered PNG as a promise.
   const item = new ClipboardItem({ "image/png": getResultImageBlob() });
   await navigator.clipboard.write([item]);
+  trackShareOutcome("share_copy_success", method);
 }
 
 async function downloadResultImage() {
@@ -314,7 +325,7 @@ async function downloadResultImage() {
 
 async function shareToInstagram() {
   let copied = false;
-  try { await copyResultImage(); copied = true; } catch (error) { /* Download remains available when image copying is blocked. */ }
+  try { await copyResultImage("instagram"); copied = true; } catch (error) { trackShareOutcome("share_error", "instagram"); }
   showShareFeedback(copied
     ? "이미지를 복사했어요. 붙여넣기를 지원하는 인스타그램 화면에서 사용하거나, 이미지를 내려받아 새 게시물·스토리에 올려주세요."
     : "이 브라우저에서는 이미지 복사가 제한돼요. 이미지를 내려받은 뒤 인스타그램 새 게시물·스토리에서 선택해주세요.", true, true);
@@ -414,6 +425,7 @@ async function copyLink(options = {}) {
   const { silent = false } = options;
   const url = buildSharedLink("copy_link");
   await navigator.clipboard.writeText(url);
+  trackShareOutcome("share_copy_success", "copy_link");
   if (!silent) {
     showShareFeedback("링크를 복사했어요. 친구에게 붙여넣어 보내주세요!");
   }
@@ -429,6 +441,7 @@ async function shareWithKakao() {
     : "테스트 열기";
 
   if (!initKakao()) {
+    trackShareOutcome("share_error", "kakao");
     try {
       await copyLink({ silent: true });
       showShareFeedback("카카오톡을 열지 못해 링크를 복사했어요. 채팅창에 붙여넣어 보내주세요.");
@@ -450,7 +463,7 @@ async function shareWithKakao() {
       throw new Error("No Kakao share API is available.");
     }
 
-    const uploadedDynamicImageUrl = await uploadDynamicShareImage();
+    const uploadedDynamicImageUrl = document.body.dataset.shareArtwork ? "" : await uploadDynamicShareImage();
     const resolvedImageUrl = uploadedDynamicImageUrl || await resolveKakaoImageUrl(imageUrl);
     const content = {
       title,
@@ -467,7 +480,7 @@ async function shareWithKakao() {
       content.imageHeight = 630;
     }
 
-    shareApi.sendDefault({
+    await shareApi.sendDefault({
       objectType: "feed",
       content,
       buttons: [
@@ -480,7 +493,10 @@ async function shareWithKakao() {
         }
       ]
     });
+    // SDK handoff is observable; recipient selection and message delivery are not.
+    trackShareOutcome("share_handoff", "kakao");
   } catch (error) {
+    trackShareOutcome("share_error", "kakao");
     console.warn("Kakao sharing failed.", error);
     try {
       await copyLink({ silent: true });
@@ -499,14 +515,14 @@ document.addEventListener("click", (event) => {
 
   if (target.id === "btnCopyLink") {
     trackShareClick("copy_link");
-    copyLink().catch(() => showShareFeedback("링크 복사가 제한됐어요. 브라우저 주소를 복사해주세요."));
+    copyLink().catch(() => { trackShareOutcome("share_error", "copy_link"); showShareFeedback("링크 복사가 제한됐어요. 브라우저 주소를 복사해주세요."); });
     return;
   }
 
   if (target.id === "btnCopyResultImage") {
     trackShareClick("copy_image");
     copyResultImage().then(() => showShareFeedback("이미지를 복사했어요. 채팅창이나 편집기에 붙여넣어보세요!"))
-      .catch(() => showShareFeedback("이 브라우저에서는 이미지 복사가 제한돼요. Chrome·Safari 같은 브라우저에서 열거나 이미지를 내려받아주세요.", false, true));
+      .catch(() => { trackShareOutcome("share_error", "copy_image"); showShareFeedback("이 브라우저에서는 이미지 복사가 제한돼요. Chrome·Safari 같은 브라우저에서 열거나 이미지를 내려받아주세요.", false, true); });
     return;
   }
 

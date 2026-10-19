@@ -195,10 +195,8 @@ function renderPlayCards() {
 
   grid.innerHTML = PLAY_CARDS.slice(0, 3).map((card) => `
     <a class="play-card tone-${card.tone}" href="${card.href}" data-content-id="${card.id}">
+      <img class="play-card-cover" src="./assets/images/covers/${card.id}.svg" alt="" width="720" height="480" loading="lazy" />
       <div class="play-card-heading">
-        <span class="play-card-icon" aria-hidden="true">${card.iconAsset
-          ? `<img src="./assets/images/${card.iconAsset}" alt="" />`
-          : card.icon}</span>
         <strong>${card.title}</strong>
       </div>
       <p>${card.description}</p>
@@ -266,10 +264,10 @@ function renderCards() {
   grid.innerHTML = pageCards.map((card) => `
     <a class="tool-card editorial-card tone-${getCardTone(card)}" href="${card.href}" data-content-id="${card.id}">
       <div class="editorial-card-art">
-        <span class="editorial-card-category">${escapeHtml(card.category || "테스트")}</span>
-        <p>${friendlyHomeCopy(card.posterSubtitle || card.description)}</p>
+        <img src="./assets/images/covers/${card.id}.svg" alt="" width="720" height="480" loading="lazy" />
       </div>
       <div class="tool-body">
+        <span class="editorial-card-category">${escapeHtml(card.category || "테스트")}</span>
         <h4>${card.title}</h4>
         <span class="card-open-label"><span>열어보기 <i aria-hidden="true">→</i></span><small>${card.duration || "1분"}</small></span>
         <span class="content-stat" data-participation-count="${card.id}" hidden></span>

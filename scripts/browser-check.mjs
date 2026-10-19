@@ -8,9 +8,10 @@ import { packageSite } from "./package-site.mjs";
 
 const live = process.argv.includes("--live");
 const useWebKit = process.argv.includes("--webkit");
+const regressionOnly = process.argv.includes("--regression-only");
 const api = live ? "" : process.env.COOCOO_TEST_API_URL || "";
 if (api && !/^http:\/\/(?:127\.0\.0\.1|localhost):\d+$/.test(api)) throw new Error("Participation tests require a local API; production writes are forbidden");
-const output = path.join(root, ".artifacts", live ? "qa-live" : useWebKit ? "qa-webkit" : "qa-local");
+const output = path.join(root, ".artifacts", regressionOnly ? "qa-regression" : live ? "qa-live" : useWebKit ? "qa-webkit" : "qa-local");
 fs.mkdirSync(output, { recursive: true });
 const site = packageSite();
 const mime = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".png": "image/png", ".svg": "image/svg+xml" };
@@ -24,7 +25,7 @@ const server = createServer((request, response) => {
 });
 await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
 const base = live ? "https://coocooing.kro.kr" : `http://127.0.0.1:${server.address().port}`;
-const report = { target: base, browser: await browser.version(), engine: useWebKit ? "WebKit" : "Chromium", participation: api ? "real local Worker and D1" : "not exercised", screenshots: [], completedTests: [], completedPlay: [], counts: [], clipboard: [], issues: [] };
+const report = { target: base, scope: regressionOnly ? "completion revision regression" : "full", browser: await browser.version(), engine: useWebKit ? "WebKit" : "Chromium", participation: api ? "real local Worker and D1" : "not exercised", screenshots: [], completedTests: [], completedPlay: [], counts: [], clipboard: [], issues: [] };
 const attempts = [];
 let page;
 async function getCount(id) {
@@ -71,6 +72,16 @@ async function checkClipboard(id, width) {
   const bytes = Buffer.from(png);
   assert.equal(bytes.readUInt32BE(16), 1200); assert.equal(bytes.readUInt32BE(20), 630);
   fs.writeFileSync(path.join(output, `${id}-clipboard-${width}.png`), bytes);
+  if (id.startsWith("test-")) {
+    const matchesPreview = await page.evaluate(async (data) => {
+      const preview = new Image(); preview.src = document.body.dataset.shareImage; await preview.decode();
+      const copied = await createImageBitmap(new Blob([new Uint8Array(data)], { type: "image/png" }));
+      const pixels = (image) => { const canvas = document.createElement("canvas"); canvas.width = 1200; canvas.height = 630; const ctx = canvas.getContext("2d"); ctx.drawImage(image, 0, 0); return ctx.getImageData(0, 0, 1200, 630).data; };
+      const expected = pixels(preview), actual = pixels(copied);
+      return expected.every((value, index) => value === actual[index]);
+    }, png);
+    assert.equal(matchesPreview, true, "Clipboard image differs from crawler preview");
+  }
   await page.evaluate(() => {
     window.__qaPastedImage = false;
     const target = document.createElement("div"); target.id = "qaPasteTarget"; target.contentEditable = "true"; target.textContent = "Paste test";
@@ -132,7 +143,7 @@ try {
       }
     }
     await go("index.html"); await layout(`home-${width}`, true);
-    const mascot = await page.locator(".hero-mascot img").evaluate((image) => ({ fit: getComputedStyle(image).objectFit, height: image.getBoundingClientRect().height, natural: image.naturalHeight }));
+    const mascot = await page.locator(".hero-kuku").evaluate((image) => ({ fit: getComputedStyle(image).objectFit, height: image.getBoundingClientRect().height, natural: image.naturalHeight }));
     assert.equal(mascot.fit, "contain"); assert.ok(mascot.height > 60 && mascot.natural > 0);
     const overlap = await page.locator(".play-card").evaluateAll((cards) => cards.some((card) => {
       const time = card.querySelector(".play-card-duration").getBoundingClientRect(), arrow = card.querySelector(".play-card-arrow").getBoundingClientRect();
@@ -140,18 +151,45 @@ try {
     }));
     assert.equal(overlap, false, "Play-card duration overlaps its arrow");
     await go("search.html"); await layout(`search-${width}`, width === 390);
-    const cards = live || useWebKit ? data.cards.filter((card) => ["test-020", "test-024", "test-025"].includes(card.id)) : data.cards;
+    const cards = regressionOnly ? data.cards.filter((card) => card.id === "test-024") : live || useWebKit ? data.cards.filter((card) => ["test-020", "test-024", "test-025"].includes(card.id)) : data.cards;
     for (const card of cards) {
       const id = card.id;
       await go(card.href.replace(/^\.\//, "")); await action("start-test").waitFor();
       await layout(`${id}-intro-${width}`, id === "test-024");
       await start(id, action("start-test"));
+      if (id === "test-020") {
+        const first = page.locator('[data-action="choose-answer"][data-question-index="0"]').first();
+        if (width === 1440) {
+          const normal = await first.evaluate((button) => getComputedStyle(button).backgroundColor);
+          await first.hover();
+          assert.notEqual(await first.evaluate((button) => getComputedStyle(button).backgroundColor), normal, "PC hover has no feedback");
+          await page.mouse.down();
+          assert.notEqual(await first.evaluate((button) => getComputedStyle(button).transform), "none", "PC press has no feedback");
+          await layout(`test-020-pressed-${width}`, true);
+          await page.mouse.up();
+        } else await first.click();
+        await page.locator('[data-question-index="1"]').first().waitFor();
+        await action("previous-question").click();
+        assert.equal(await page.locator('[data-question-index="0"][data-option-index="0"]').getAttribute("aria-pressed"), "true");
+        await layout(`test-020-restored-${width}`, true);
+        if (width === 1440) {
+          const selected = page.locator('[data-question-index="0"][data-option-index="0"]');
+          await selected.focus(); await page.keyboard.press("Space");
+          await page.locator('[data-question-index="1"]').first().waitFor();
+          await action("previous-question").click();
+        }
+      }
       for (let index = 0; index < data.pages[id].questions.length; index++) {
         assert.equal(await page.locator("#contentResultAds").isVisible(), false);
         await layout(`${id}-question-${index}-${width}`, id === "test-024" && index === 0);
         await page.locator(`[data-action="choose-answer"][data-question-index="${index}"][data-option-index="0"]`).click();
       }
       await action("restart-test").waitFor();
+      assert.equal(await action("restart-test").textContent(), "다시 하기");
+      const reading = await page.locator(".result-reading").boundingBox();
+      const sharing = await page.locator(".result-sharing").boundingBox();
+      assert.ok(reading.y + reading.height <= sharing.y, `${id}: sharing interrupts explanation`);
+      assert.equal(await page.locator(".result-reading h2").first().evaluate((heading) => getComputedStyle(heading).backgroundColor), "rgba(0, 0, 0, 0)", `${id}: stale result heading style`);
       assert.deepEqual(await page.locator(".result-share-row button").evaluateAll((buttons) => buttons.map((button) => button.id)), ["btnCopyResultImage", "btnCopyLink", "btnKakaoShare", "btnInstagramShare"]);
       await layout(`${id}-result-${width}`, ["test-020", "test-024", "test-025"].includes(id));
       if (!live && id === "test-024") {
@@ -169,6 +207,7 @@ try {
         const shared = await context.newPage();
         await shared.goto(`${page.url()}&shared=1`, { waitUntil: "domcontentloaded" });
         await shared.locator('[data-action="restart-test"]').waitFor();
+        assert.equal(await shared.locator('[data-action="restart-test"]').textContent(), "나도 테스트하기");
         const events = await shared.evaluate(() => window.dataLayer.filter((entry) => entry[0] === "event").map((entry) => entry[1]));
         assert.equal(events.filter((name) => name === "shared_result_view").length, 1);
         assert.equal(events.includes("content_complete"), false);
@@ -176,11 +215,20 @@ try {
         await shared.close(); await page.bringToFront();
         const resultUrl = page.url(); await page.goBack(); await action("choose-answer").first().waitFor(); await page.goForward(); await action("restart-test").waitFor(); assert.equal(page.url(), resultUrl);
         if (api) assert.equal(await getCount(id), before, "Back/forward navigation must not add a participation");
+        const completions = await page.evaluate(() => window.dataLayer.filter((entry) => entry[0] === "event" && entry[1] === "content_complete").length);
+        await page.goBack(); await action("previous-question").click();
+        await page.locator('[data-question-index="4"][data-option-index="1"]').click();
+        await page.locator('[data-question-index="5"][data-option-index="0"]').click();
+        await action("restart-test").waitFor();
+        assert.equal(await page.locator(".result-cover h1").textContent(), "내 색 입히는 편집자");
+        assert.equal(await page.evaluate(() => window.dataLayer.filter((entry) => entry[0] === "event" && entry[1] === "content_complete").length), completions, "Revising answers must not emit another completion");
+        if (api) assert.equal(await getCount(id), before, "Revising answers must not add a participation");
         await start(id, action("restart-test")); await action("choose-answer").first().waitFor();
       }
       report.completedTests.push(`${id}@${width}`);
+      if (report.completedTests.length % 5 === 0) console.log(`Verified ${report.completedTests.length} test flows.`);
     }
-    if (!live) for (const item of useWebKit ? data.catalog.playCards.slice(0, 2) : data.catalog.playCards) {
+    if (!live) for (const item of regressionOnly ? data.catalog.playCards.filter((card) => card.id === "relationship-ranking") : useWebKit ? data.catalog.playCards.slice(0, 2) : data.catalog.playCards) {
       await go(item.href.replace(/^\.\//, "")); await start(item.id, action("start"));
       await layout(`${item.id}-play-${width}`);
       switch (item.id) {
@@ -197,9 +245,32 @@ try {
       await action("restart").waitFor(); await layout(`${item.id}-result-${width}`, item.id === "chat-temperature");
       assert.deepEqual(await page.locator(".play-share-actions button").evaluateAll((buttons) => buttons.map((button) => button.id)), ["btnCopyResultImage", "btnCopyLink", "btnKakaoShare", "btnInstagramShare"]);
       if (item.id === "chat-temperature") await checkClipboard(item.id, width);
+      if (item.id === "relationship-ranking") {
+        const count = api ? await getCount(item.id) : null;
+        const completions = await page.evaluate(() => window.dataLayer.filter((entry) => entry[0] === "event" && entry[1] === "content_complete").length);
+        await page.goBack(); await action("rank-down").first().click(); await action("finish-ranking").click();
+        await action("restart").waitFor();
+        assert.equal(await page.evaluate(() => window.dataLayer.filter((entry) => entry[0] === "event" && entry[1] === "content_complete").length), completions, "Revising a play result must not emit another completion");
+        if (api) assert.equal(await getCount(item.id), count);
+      }
       report.completedPlay.push(`${item.id}@${width}`);
     }
     if (!live) {
+      // Every advertised result also has a direct, crawlable URL and readable mobile/PC layout.
+      let checkedResults = 0;
+      for (const [id, quiz] of regressionOnly ? [] : Object.entries(data.pages)) {
+        for (const [key, result] of Object.entries(quiz.results)) {
+          await go(`results/${id}-${key}.html`);
+          assert.equal(await page.locator(".result-cover h1").textContent(), result.title);
+          assert.equal(await page.locator(".result-reading details").count(), 0);
+          assert.equal(await action("restart-test").textContent(), "나도 테스트하기");
+          const images = await page.locator(".result-cover img").evaluateAll((items) => items.every((image) => image.complete && image.naturalWidth > 0));
+          assert.ok(images, `${id}/${key}: missing artwork`);
+          await layout(`direct-${id}-${key}-${width}`);
+          checkedResults++;
+        }
+      }
+      report[`directResults${width}`] = checkedResults;
       await go("index.html"); await page.locator('[data-action="next-page"]').click();
       if (api) await page.waitForFunction(() => [...document.querySelectorAll("#cardGrid [data-participation-count]")].every((element) => !element.hidden));
       if (api) {
@@ -208,7 +279,11 @@ try {
       }
       await page.locator('[data-mood="love"]').click();
       if (api) await page.waitForFunction(() => [...document.querySelectorAll("#cardGrid [data-participation-count]")].every((element) => !element.hidden));
-      for (const smallWidth of [320, 430]) { await page.setViewportSize({ width: smallWidth, height: 844 }); await go("index.html"); await layout(`home-${smallWidth}-${width}`, width === 390); }
+      for (const smallWidth of [320, 360, 430, 768, 1024]) {
+        await page.setViewportSize({ width: smallWidth, height: 844 });
+        await go("index.html"); await layout(`home-${smallWidth}-${width}`, width === 390 && [320, 430].includes(smallWidth));
+        await go("results/test-020-crowd.html"); await layout(`result-${smallWidth}-${width}`, width === 390 && [320, 768].includes(smallWidth));
+      }
     }
     await context.close(); console.log(`Completed ${width}px: ${cards.length} test flows.`);
   }

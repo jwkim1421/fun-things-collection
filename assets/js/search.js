@@ -31,8 +31,9 @@
     summary.textContent = safeQuery ? `‘${query.trim()}’ 검색 결과 ${results.length}개` : `테스트와 짧은 놀이 ${results.length}개를 모았어요.`;
     resultRoot.innerHTML = results.length ? results.map((item) => `
       <a class="search-result-card" href="${escapeHtml(item.href)}" data-content-id="${escapeHtml(item.id)}">
-        <span class="search-result-icon" aria-hidden="true">${escapeHtml(item.icon || "◉")}</span>
+        <img class="search-result-cover" src="./assets/images/covers/${escapeHtml(item.id)}.svg" alt="" width="720" height="480" loading="lazy" />
         <div><small>${escapeHtml(item.type === "play" ? "짧은 놀이" : item.category || "테스트")}</small><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.description)}</p>
+          <small>${escapeHtml(item.duration || "")}</small>
           <div class="search-result-tags">${(item.tags || []).slice(0, 4).map((tag) => `<span>#${escapeHtml(tag)}</span>`).join("")}</div>
         </div>
         <span class="content-stat" data-participation-count="${escapeHtml(item.id)}" hidden></span>
