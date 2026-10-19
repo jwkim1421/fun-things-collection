@@ -4,7 +4,7 @@
 
 이 문서는 앞으로 유지보수할 때 함께 갱신하는 운영 문서입니다. **목표 → 확인한 문제 → 해결책 → 검증 결과 → 남은 일** 순서로 읽습니다. 코드를 고친 것과 운영 사이트에 배포한 것은 구분합니다.
 
-**지금 상태 · 2026-10-19:** [벤치마킹 기준서](COOCOO_SIMSIMTEST_BENCHMARK_20261019.md)의 개발 순서에 따라 결과 읽기·101종 설명·선택 반응을 고치고, 테스트 25개·놀이 9개·메인·검색·공유에 적용했습니다. **커밋·푸시·배포와 운영 확인을 완료했습니다.** 운영 코드 `cf3c68b`의 [배포 실행](https://github.com/jwkim1421/fun-things-collection/actions/runs/39203813042)이 성공했고, 서버의 자동 검사 21개·브라우저 68회 진행과 운영 사이트의 대표 테스트 6회 검사를 통과했습니다. 아래 ‘벤치마킹 적용’ 절에 화면과 검증 범위를 정리했습니다. 실물 휴대폰·실제 앱 공유·분석 계정 확인은 별도로 남으며, AdSense·애드핏은 계속 비활성입니다.
+**지금 상태 · 2026-10-19:** [벤치마킹 기준서](COOCOO_SIMSIMTEST_BENCHMARK_20261019.md)에 따른 개선을 배포했고, 운영 사이트의 테스트 25개·놀이 9개를 모바일·PC에서 각각 완료했습니다. **총 68회 완료와 실제 시작 71회의 +1 집계, 새 브라우저의 목록 표시 일치를 확인했습니다.** 누적은 19→90회이며, 증가한 71회는 이번 검사 참여로 구분합니다. 운영 코드 `cf3c68b`의 [배포 실행](https://github.com/jwkim1421/fun-things-collection/actions/runs/39203813042)과 자동 검사 21개도 성공했습니다. 자세한 범위는 아래 ‘운영 전체 진행·참여 수 검사’ 절에 있습니다. 실물 휴대폰·실제 앱 공유·분석 계정 확인은 남으며, AdSense·애드핏은 계속 비활성입니다.
 
 ## 1. 목표와 운영 원칙
 
@@ -63,7 +63,7 @@
 | 1 | 테스트 009·012·015·016·018·020에서 각 1개 결과가 나오지 않음 | 답변 의미에 맞는 점수와 문구로 수정. 전 조합·대표 답변 검사 통과 | 배포 완료 |
 | 1 | 현재 주소의 AdSense 등록 불가, 애드핏 승인 거절 | 두 광고망을 활성화하지 않고 기존 쿠팡 배너 유지. 대체 광고는 별도 검토·승인 후 연결 | 애드핏 거절 확인 / 대체 광고 미연결 |
 | 2 | 테스트 14개의 원본 제목·공유 제목이 같음, 본문·목록이 JS에 의존 | 34개 콘텐츠의 고유 메타·소개·정적 검색을 유지. 추가로 결과 101종에 고유 주소·본문·PNG 미리보기 생성 | 배포 완료 / 결과 101개 HTTP 200·내용 일치 확인 |
-| 1 | 공유를 해석보다 앞에 두고 결과 문장을 줄여 읽는 흐름을 훼손 | 설명·상황·주의점·행동·유형 비교를 기본 공개하고 그 뒤에 공유. 101개 고유 상황·주의점·행동 추가 | 배포 완료 / 운영 대표 테스트 6회 확인 |
+| 1 | 공유를 해석보다 앞에 두고 결과 문장을 줄여 읽는 흐름을 훼손 | 설명·상황·주의점·행동·유형 비교를 기본 공개하고 그 뒤에 공유. 101개 고유 상황·주의점·행동 추가 | 배포 완료 / 운영 테스트 25개·놀이 9개 두 화면에서 완료 |
 | 1 | PC 답변에 마우스 올림·누름 반응이 없고 이전 답의 선택 강조 부족 | 올림·누름·선택·처리 중 구분, 이전 질문과 선택 복원, 연타 차단·답 변경 재계산 | 배포 완료 / 운영 PC 누름·선택 복원 확인 |
 | 2 | 구버전 폴더가 공개되고 일부 참조 파일이 404 | 예전 HTML 44개는 현재 주소로 이동 안내. 공개 배포 허용 목록으로 사본 자산·문서 제외 | 배포 완료 / 현재 제외 경로 10개 HTTP 404 확인 |
 | 2 | 성과 판단에 필요한 방문·시작·완료·공유 수신 측정 부족 | 기존 수신·시작·완료 이벤트에 복사 성공·SDK 요청 전달·실패를 구분. 새 버전은 `benchmark-20261019` | 코드 배포 완료 / GA4 계정 수신 확인 남음 |
@@ -77,7 +77,7 @@
 | 2 | 대표 영역과 목록 바깥의 불필요한 패딩 | 페이지·대표 영역·기분 필터·검색 대표 영역 패딩 0. 카드 본문은 좌우 패딩 0, 클릭·읽기 간격은 유지 | 배포 완료 / 7개 너비는 로컬 검사 |
 | 2 | 쿠쿠 얼굴 아래 잘림, 놀이 시간과 화살표 겹침 | 마스코트 원본 여백 보완, 시간·화살표를 간격 있는 한 줄로 배치 | 배포 완료 / 운영 PC·모바일 모사 확인 |
 | 2 | 이미지 저장 버튼이 불필요한 OS 공유 창을 엶 | PNG 이미지 복사·링크 복사·카카오톡·인스타그램 순서로 변경, 문자 공유 제거 | 배포 완료 / 실제 휴대폰 확인 남음 |
-| 2 | 홈에서 페이지를 넘기면 참여 횟수가 표시되지 않음 | 목록을 다시 그릴 때 수치를 재연결하고 뒤로가기 복원 때도 조회 | 배포 완료 / 로컬 DB 증가·중복 방지 확인, 운영 DB 쓰기는 미검사 |
+| 2 | 홈에서 페이지를 넘기면 참여 횟수가 표시되지 않음 | 목록을 다시 그릴 때 수치를 재연결하고 뒤로가기 복원 때도 조회 | 배포 완료 / 운영 시작 71건의 +1 반영·중복 방지·새 브라우저 목록 표시 확인 |
 
 나오지 않던 결과: 결정 ‘조율 밸런스형’, 인간관계 충전 ‘잠수 회복형’, 방 취향 ‘색감 포인트형’, 일정 ‘정리 큐레이터형’, 계절 ‘겨울 정리형’, 소셜 배터리 ‘조용한 관찰형’입니다. 도달 가능 검사는 계산 구조 검사이며 심리적 타당성 검증이 아닙니다.
 
@@ -245,7 +245,7 @@ https://coocooing.kro.kr/play/procrastination-bingo.html?utm_source=instagram&ut
 | 독립 검토 후 완료 회귀 검사 | 테스트·순위 놀이를 두 너비에서 완료 후 돌아가 수정. 결과는 바뀌지만 완료 이벤트와 참여 수는 증가하지 않음. 새 시작 6회만 증가 | 전체 흐름 검사와 별도의 대표 회귀 검사 |
 | 생성·포장 | 결과 101개에도 고유 제목·대표 주소·미리보기. 대표 주소 중복 오류 수정·반복 생성 검사. 공개 파일 483개에 결과 101페이지 포함, 끊어진 내부 참조·비공개 자료 포함 0건 | 같은 묶음을 게시 / 운영 확인은 아래 기록 |
 
-검사 원본은 `.artifacts/qa-local/report.json`, WebKit은 `.artifacts/qa-webkit/report.json`, 답 수정 회귀는 `.artifacts/qa-regression/report.json`, 최종 문구·표지·8너비는 `.artifacts/benchmark-apply/final-check.json`, 공개 파일 포장은 `.artifacts/benchmark-apply/package-check.json`입니다. 전체 흐름 검사 뒤 보강한 문구·표지와 완료 집계는 추가 검사로 따로 확인했습니다. Edge 전체 실행의 증가분은 70회이며, 이후 WebKit 12회·완료 회귀 6회를 더한 이 로컬 DB의 누적은 88회입니다. 모두 검사 기록이며 운영 성과가 아닙니다.
+검사 원본은 `.artifacts/qa-local/report.json`, WebKit은 `.artifacts/qa-webkit/report.json`, 최종 문구·표지·8너비는 `.artifacts/benchmark-apply/final-check.json`, 공개 파일 포장은 `.artifacts/benchmark-apply/package-check.json`입니다. 전체 흐름 검사 뒤 보강한 문구·표지와 완료 집계는 추가 검사로 따로 확인했습니다. Edge 전체 실행의 증가분은 70회이며, 이후 WebKit 12회·완료 회귀 6회를 더한 로컬 DB 누적은 88회입니다. 최신 기본 회귀 `.artifacts/qa-regression/report.json`은 API를 모사한 4회 진행으로 교체됐습니다. 로컬 DB의 88회·34개 콘텐츠와 마지막 6개 시작은 읽기 전용 SQL로 재조회해 `.artifacts/benchmark-apply/local-db-audit-20261019.json`에 따로 보존했습니다. 모두 로컬 검사 기록이며 운영 성과가 아닙니다.
 
 **집계 단위:** 시작 버튼을 누를 때 새 참여이고, 그 참여의 첫 결과만 완료 1회로 기록합니다. 뒤로 가서 답·순위를 수정하면 결과만 다시 계산하고 완료를 추가하지 않습니다. ‘다시 하기’는 새 참여입니다. 반응 수를 아직 받지 못했거나 조회가 실패하면 `—`로 두고, 정상 조회한 값이 0일 때만 0을 표시합니다. 카카오 연결 실패 뒤 링크 복사에 성공한 경우는 ‘카카오 실패 + 링크 복사 성공’이며 카카오 전송 성공이 아닙니다.
 
@@ -257,7 +257,7 @@ https://coocooing.kro.kr/play/procrastination-bingo.html?utm_source=instagram&ut
 
 [PC 메인 전체](docs/images/benchmark-home-pc-20261019.png) · [PC 결과 전체](docs/images/benchmark-result-pc-20261019.png) · [PC 선택 복원](docs/images/benchmark-choice-pc-20261019.png) · [모바일 결과 전체](docs/images/benchmark-result-mobile-20261019.png)
 
-**이번 배포의 운영 확인:**
+**게시 직후의 QA 확인:** 이 단계는 참여 쓰기를 막은 검사입니다. 이후 실제 참여·전체 진행 검사는 다음 절에 기록합니다.
 
 | 확인 | 결과 | 범위와 한계 |
 |---|---|---|
@@ -270,6 +270,66 @@ https://coocooing.kro.kr/play/procrastination-bingo.html?utm_source=instagram&ut
 운영 확인 원본은 `.artifacts/benchmark-deploy-verification.json`, `.artifacts/qa-live/report.json`, `.artifacts/deploy-run.json`, 서버 로그는 `.artifacts/deploy-job-117902200298.log`입니다. 운영 캡처: [PC 메인](docs/images/benchmark-live-home-pc-20261019.png) · [모바일 메인](docs/images/benchmark-live-home-mobile-20261019.png) · [PC 결과](docs/images/benchmark-live-result-pc-20261019.png) · [모바일 결과](docs/images/benchmark-live-result-mobile-20261019.png). 캡처에서도 외부 광고 요청을 차단했으므로 실제 광고 노출을 보여주는 자료는 아닙니다.
 
 실물 Android·iPhone, 실제 카카오 전송과 인스타그램 이미지 선택·게시, GA4·Search Console, 광고 계정 확인은 별도로 남습니다.
+
+### 운영 전체 진행·참여 수 검사 · 2026-10-19
+
+**확인 완료:** 테스트 25개와 놀이 9개를 390px 모바일·1440px PC 화면에서 각각 끝까지 진행했습니다. 총 **68회 완료**, 실제 시작 **71회가 모두 +1회씩 반영**됐습니다. 운영 API 누적 합계는 **19 → 90회**입니다. 원래 누적과 이번 검사 참여를 분리하며, 이번 증가를 방문자·홍보 성과로 사용하지 않습니다.
+
+시작 전 화면 표시·별도의 서버 조회 → 실제 시작 버튼 → HTTP 201 응답 수치 → 새 서버 조회를 대조했습니다. 별도의 새 브라우저에서도 두 화면 크기마다 검색 목록 34개·메인 테스트 목록 25개의 수치가 서버 값과 일치했습니다. 광고·GA4 전송과 참여 외 쓰기는 차단했으며 참여 API는 모사하지 않았습니다. 운영 DB를 직접 SQL로 조회한 검사는 아닙니다.
+
+| 검사 | 확인 결과 | 남은 범위 |
+|---|---|---|
+| 실제 진행·화면 | 모바일 25테스트·9놀이, PC 25테스트·9놀이 완료. PC는 다른 선택지도 사용. 최종 진행에서 JS 오류·사이트/API 오류 응답·가로 넘침 없음. 요청한 단색 기준에 따라 보이는 요소의 그라데이션 배경도 없음 확인 | 각 테스트의 대표 경로. 모든 답변 조합을 실제 브라우저로 누른 것은 아님 |
+| 실제 집계 | 관찰한 UI 시작 71건 모두 시작 응답과 별도 API 조회가 +1로 일치. 검사 전후 콘텐츠별 증가도 관찰한 시작 횟수와 일치 | 같은 시간 외부 참여가 생기면 별도 판별 필요. 방문자 수가 아님 |
+| 중복 방지 | 대표 테스트의 결과 링크 열람·뒤로/앞으로·답 수정, 순위 놀이 수정에서 추가 집계 없음. 같은 시작 요청 재전송도 추가 0회. 다시 하기는 새 참여 | 모든 콘텐츠의 모든 이력 조합을 반복한 검사는 아님 |
+| 결과·공유 | 결과 101종 직접 주소를 두 화면에서 확인. Edge에서 AI 협업 테스트와 답장 온도 놀이를 각 화면에서 한 번씩, 총 4회 검사. 각각 PNG 복사·실제 붙여넣기·링크 복사·인스타그램용 다운로드 성공. OS 공유 API 호출 0 | 실제 휴대폰·카카오 전송·인스타그램 앱 게시는 미확인 |
+| 자동·회귀 검사 | Node 21개 통과. 기본 회귀는 API를 모사한 테스트 2회·놀이 2회도 통과 | 실제 참여 검사는 위 운영 API 결과와 구분 |
+
+**검사 도구 수정:** 첫 PC 진행에서 다음 문항이 나타나기 전에 선택지 수를 읽어 중단됐습니다. 선택지가 표시될 때까지 기다리도록 도구를 고치고 PC 검사만 재실행했습니다. 그 중단 시도 1회와 AI 협업 테스트의 재시작 2회가 실제 시작 수에 포함됩니다. 따라서 완료 68회와 실제 시작 71회는 다릅니다. 확인한 대표 진행에서 사이트 기능 오류는 발견하지 못했습니다.
+
+아래 수치는 검사 시점의 누적입니다. ‘내 연애 열차 운행 타입은?’은 중단 시도 때문에 +3, ‘AI와 일할 때 나는 어떤 파트너?’는 두 화면의 재시작 때문에 +4이며, 나머지는 모바일·PC 각 한 번씩 +2입니다.
+
+| 종류 | 콘텐츠 · 모바일·PC 모두 완료 | 검사 전(회) | 검사 후(회) | 증가 |
+|---|---|---:|---:|---:|
+| 테스트 | [내 연애 열차 운행 타입은?](https://coocooing.kro.kr/tests/test-001.html) | 1 | 4 | +3 |
+| 테스트 | [직장인 회복력 체크](https://coocooing.kro.kr/tests/test-002.html) | 0 | 2 | +2 |
+| 테스트 | [나만의 여행 성향 찾기](https://coocooing.kro.kr/tests/test-003.html) | 0 | 2 | +2 |
+| 테스트 | [집중력 루틴 진단](https://coocooing.kro.kr/tests/test-004.html) | 0 | 2 | +2 |
+| 테스트 | [친구 케미 점수 보기](https://coocooing.kro.kr/tests/test-005.html) | 0 | 2 | +2 |
+| 테스트 | [주말 충전 방식 찾기](https://coocooing.kro.kr/tests/test-006.html) | 0 | 2 | +2 |
+| 테스트 | [썸 대화 온도 체크](https://coocooing.kro.kr/tests/test-007.html) | 0 | 2 | +2 |
+| 테스트 | [첫인상보다 오래가는 내 매력은?](https://coocooing.kro.kr/tests/test-008.html) | 0 | 2 | +2 |
+| 테스트 | [결정을 내리는 순간의 나](https://coocooing.kro.kr/tests/test-009.html) | 0 | 2 | +2 |
+| 테스트 | [돈 쓸 때 드러나는 소비 타입](https://coocooing.kro.kr/tests/test-010.html) | 0 | 2 | +2 |
+| 테스트 | [팀플에서 맡게 되는 역할](https://coocooing.kro.kr/tests/test-011.html) | 1 | 3 | +2 |
+| 테스트 | [쉬는 날 인간관계 충전법](https://coocooing.kro.kr/tests/test-012.html) | 0 | 2 | +2 |
+| 테스트 | [나의 플러팅 방식 찾기](https://coocooing.kro.kr/tests/test-013.html) | 0 | 2 | +2 |
+| 테스트 | [사진첩 무드로 보는 감성 타입](https://coocooing.kro.kr/tests/test-014.html) | 0 | 2 | +2 |
+| 테스트 | [내 방이 말해주는 취향 무드](https://coocooing.kro.kr/tests/test-015.html) | 0 | 2 | +2 |
+| 테스트 | [약속 잡을 때 드러나는 일정 성향](https://coocooing.kro.kr/tests/test-016.html) | 0 | 2 | +2 |
+| 테스트 | [칭찬 들었을 때 반응 타입](https://coocooing.kro.kr/tests/test-017.html) | 0 | 2 | +2 |
+| 테스트 | [계절이 바뀌면 깨어나는 감성은?](https://coocooing.kro.kr/tests/test-018.html) | 0 | 2 | +2 |
+| 테스트 | [스트레스 해소 버튼 찾기](https://coocooing.kro.kr/tests/test-019.html) | 0 | 2 | +2 |
+| 테스트 | [소셜 배터리 사용법](https://coocooing.kro.kr/tests/test-020.html) | 5 | 7 | +2 |
+| 테스트 | [지금 내 에너지 레벨은?](https://coocooing.kro.kr/tests/test-021.html) | 0 | 2 | +2 |
+| 테스트 | [오늘 끌리는 장면은?](https://coocooing.kro.kr/tests/test-022.html) | 0 | 2 | +2 |
+| 테스트 | [요즘 내 여유 잔량은?](https://coocooing.kro.kr/tests/test-023.html) | 0 | 2 | +2 |
+| 테스트 | [AI와 일할 때 나는 어떤 파트너?](https://coocooing.kro.kr/tests/test-024.html) | 0 | 4 | +4 |
+| 테스트 | [알림 OFF, 나의 오프라인 모드는?](https://coocooing.kro.kr/tests/test-025.html) | 0 | 2 | +2 |
+| 놀이 | [썸 탈 때 내 답장 온도는?](https://coocooing.kro.kr/play/chat-temperature.html) | 3 | 5 | +2 |
+| 놀이 | [대학생 미루기 습관 빙고](https://coocooing.kro.kr/play/procrastination-bingo.html) | 3 | 5 | +2 |
+| 놀이 | [쿠쿠 배터리 100%에 멈추기](https://coocooing.kro.kr/play/battery-stop.html) | 1 | 3 | +2 |
+| 놀이 | [쿠쿠의 오늘 상자](https://coocooing.kro.kr/play/today-box.html) | 0 | 2 | +2 |
+| 놀이 | [관계에서 포기 못 하는 것 순위](https://coocooing.kro.kr/play/relationship-ranking.html) | 1 | 3 | +2 |
+| 놀이 | [이번 주 에너지 100을 어디에 쓸까?](https://coocooing.kro.kr/play/weekly-energy-budget.html) | 1 | 3 | +2 |
+| 놀이 | [축제 날, 쿠쿠를 어디서 만날까?](https://coocooing.kro.kr/play/campus-festival-story.html) | 1 | 3 | +2 |
+| 놀이 | [오늘 마음, 여기 두고 갈래?](https://coocooing.kro.kr/play/emotion-trash.html) | 1 | 3 | +2 |
+| 놀이 | [쿠쿠야, 하나만 골라줘](https://coocooing.kro.kr/play/choice-roulette.html) | 1 | 3 | +2 |
+| 합계 | 완료 68회 · 실제 시작 71회 | 19 | 90 | +71 |
+
+검증 원본: `.artifacts/qa-live-counts/report-mobile-and-pc-interrupted.json`은 모바일 완료·PC 중단 기록, `.artifacts/qa-live-counts/report.json`은 수정 후 PC 전체 성공 기록, `.artifacts/qa-live-counts/summary.json`은 두 실행의 합산과 새 브라우저 표시 대조입니다. 원본 JSON·임시 캡처는 공개 사이트와 Git 커밋에 넣지 않습니다.
+
+전체 검사 명령은 `node scripts/browser-check.mjs --live-counts`, PC만 확인하는 명령은 `node scripts/browser-check.mjs --live-counts --pc-only`입니다. **둘 다 실제 운영 참여 수를 올립니다.** 일반 CI·로컬 회귀와 기존 `--live`는 운영 참여를 쓰지 않으며, 최신 보고서 실행 전 이전 보고서를 시간별 파일로 보관합니다.
 
 ### 디자인 기준과 검사 기록 · 2026-10-16~19
 
