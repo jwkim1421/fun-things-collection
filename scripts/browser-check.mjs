@@ -140,7 +140,7 @@ try {
     }));
     assert.equal(overlap, false, "Play-card duration overlaps its arrow");
     await go("search.html"); await layout(`search-${width}`, width === 390);
-    const cards = live ? data.cards.filter((card) => card.id === "test-020") : useWebKit ? data.cards.filter((card) => ["test-020", "test-024", "test-025"].includes(card.id)) : data.cards;
+    const cards = live || useWebKit ? data.cards.filter((card) => ["test-020", "test-024", "test-025"].includes(card.id)) : data.cards;
     for (const card of cards) {
       const id = card.id;
       await go(card.href.replace(/^\.\//, "")); await action("start-test").waitFor();
