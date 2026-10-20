@@ -187,10 +187,29 @@ async function buildDynamicShareCanvas() {
   if (!ctx) {
     return null;
   }
-  if (payload.artworkUrl) {
+  if (payload.artworkUrl && document.body.dataset.testId) {
     // The copied PNG and crawler preview use the same type-specific asset.
     const preview = await loadShareImageAsset(getShareImage());
     ctx.drawImage(preview, 0, 0, 1200, 630);
+    return canvas;
+  }
+  if (payload.artworkUrl) {
+    const artwork = await loadShareImageAsset(payload.artworkUrl);
+    ctx.fillStyle = "#fffdf7";
+    ctx.fillRect(0, 0, 1200, 630);
+    const scale = Math.min(630 / artwork.naturalWidth, 630 / artwork.naturalHeight);
+    const width = artwork.naturalWidth * scale;
+    const height = artwork.naturalHeight * scale;
+    ctx.drawImage(artwork, (630 - width) / 2, (630 - height) / 2, width, height);
+    ctx.fillStyle = "#263d37";
+    ctx.font = "700 26px Arial";
+    wrapCanvasText(ctx, payload.testTitle, 470, 2).forEach((line, index) => ctx.fillText(line, 670, 108 + index * 36));
+    ctx.font = "800 40px Arial";
+    wrapCanvasText(ctx, payload.resultTitle, 470, 3).forEach((line, index) => ctx.fillText(line, 670, 234 + index * 52));
+    ctx.font = "26px Arial";
+    wrapCanvasText(ctx, payload.resultSummary, 470, 3).forEach((line, index) => ctx.fillText(line, 670, 420 + index * 36));
+    ctx.font = "700 24px Arial";
+    ctx.fillText("쿠쿠 · coocooing.kro.kr", 670, 578);
     return canvas;
   }
 

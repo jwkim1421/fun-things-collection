@@ -195,7 +195,7 @@ function renderPlayCards() {
 
   grid.innerHTML = PLAY_CARDS.slice(0, 3).map((card) => `
     <a class="play-card tone-${card.tone}" href="${card.href}" data-content-id="${card.id}">
-      <img class="play-card-cover" src="./assets/images/covers/${card.id}.svg" alt="" width="720" height="480" loading="lazy" />
+      <img class="play-card-cover" src="./${contentArtwork(card.id)}" alt="" width="720" height="480" loading="lazy" />
       <div class="play-card-heading">
         <strong>${card.title}</strong>
       </div>
@@ -264,7 +264,7 @@ function renderCards() {
   grid.innerHTML = pageCards.map((card) => `
     <a class="tool-card editorial-card tone-${getCardTone(card)}" href="${card.href}" data-content-id="${card.id}">
       <div class="editorial-card-art">
-        <img src="./assets/images/covers/${card.id}.svg" alt="" width="720" height="480" loading="lazy" />
+        <img src="./${contentArtwork(card.id)}" alt="" width="720" height="480" loading="lazy" />
       </div>
       <div class="tool-body">
         <span class="editorial-card-category">${escapeHtml(card.category || "테스트")}</span>

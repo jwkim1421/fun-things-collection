@@ -1,0 +1,173 @@
+{
+  "date": "2026-10-20",
+  "status": "pilot-only-not-live",
+  "newGenerationCalls": 8,
+  "reusedCovers": 4,
+  "totalImages": 12,
+  "sets": [
+    {
+      "style": "S1",
+      "id": "test-020",
+      "title": "소셜 배터리 사용법",
+      "cover": {
+        "file": "test-020/cover.png",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 3193011,
+        "sha256": "594b0703498eaa4dc1bca85f52e01bbcae41a7d7b5c82f607212cef3de8078ca",
+        "reused": true
+      },
+      "results": [
+        {
+          "key": "crowd",
+          "title": "활기 충전형",
+          "keyType": "quiz-source-key",
+          "file": "test-020/result-crowd.png",
+          "width": 1536,
+          "height": 1024,
+          "bytes": 3118414,
+          "sha256": "7ed274c6f1a7d69dddb54d81bce4a68f8a0e96b035802871b9871664fbc6ffba",
+          "sourceReference": "docs/illustration-style/kuku-gouache-v1/reference.png",
+          "inputSha256": "594b0703498eaa4dc1bca85f52e01bbcae41a7d7b5c82f607212cef3de8078ca",
+          "outputFileName": "exec-d65ae563-1bdc-418b-9bee-d8e22335a0c7.png"
+        },
+        {
+          "key": "recharge",
+          "title": "휴식 보존형",
+          "keyType": "quiz-source-key",
+          "file": "test-020/result-recharge.png",
+          "width": 1536,
+          "height": 1024,
+          "bytes": 3071328,
+          "sha256": "811cb869f877e77d7dd80125f54be0622e2fb4264ac47a4e1f1cb0cd992365d0",
+          "sourceReference": "docs/illustration-style/kuku-gouache-v1/reference.png",
+          "inputSha256": "594b0703498eaa4dc1bca85f52e01bbcae41a7d7b5c82f607212cef3de8078ca",
+          "outputFileName": "exec-943660cf-82bb-4c25-b627-c52ba785153c.png"
+        }
+      ]
+    },
+    {
+      "style": "S2",
+      "id": "procrastination-bingo",
+      "title": "대학생 미루기 습관 빙고",
+      "cover": {
+        "file": "procrastination-bingo/cover.png",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 1996261,
+        "sha256": "214c9c80cf56a84dc3c500816fdfb73e905c2f8f47dcec54f84a20d8030024e1",
+        "reused": true
+      },
+      "results": [
+        {
+          "key": "count-low",
+          "title": "미루기 방어 우등생",
+          "keyType": "art-production-key",
+          "file": "procrastination-bingo/result-count-low.png",
+          "width": 1536,
+          "height": 1024,
+          "bytes": 2042988,
+          "sha256": "bc3e5dc75f4fb7de6f0ed04914ae1065623e2c0bf3be263d3fc1cd66da587de5",
+          "sourceReference": "docs/illustration-style/kuku-ink-comic-v1/reference.png",
+          "inputSha256": "214c9c80cf56a84dc3c500816fdfb73e905c2f8f47dcec54f84a20d8030024e1",
+          "outputFileName": "exec-fab44106-9fe6-4b2d-8bfa-0bdbbcebfc2b.png"
+        },
+        {
+          "key": "count-high",
+          "title": "마감 직전 집중 각성형",
+          "keyType": "art-production-key",
+          "file": "procrastination-bingo/result-count-high.png",
+          "width": 1536,
+          "height": 1024,
+          "bytes": 2056638,
+          "sha256": "ec94a801482e805fd2dfc3a93ad44af6bfd0a496c420ec0d78dc40e2f169fbcf",
+          "sourceReference": "docs/illustration-style/kuku-ink-comic-v1/reference.png",
+          "inputSha256": "214c9c80cf56a84dc3c500816fdfb73e905c2f8f47dcec54f84a20d8030024e1",
+          "outputFileName": "exec-d87aaa78-50e1-43f4-b12e-f7367291465f.png"
+        }
+      ]
+    },
+    {
+      "style": "S3",
+      "id": "test-022",
+      "title": "오늘 끌리는 장면은?",
+      "cover": {
+        "file": "test-022/cover.png",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 3806675,
+        "sha256": "0ad02afa946a82da9b3561e0c153bf07d88c49c4e1ba0dbcfc8167c3dbbbbb3d",
+        "reused": true
+      },
+      "results": [
+        {
+          "key": "open",
+          "title": "바람 환기형",
+          "keyType": "quiz-source-key",
+          "file": "test-022/result-open.png",
+          "width": 1536,
+          "height": 1024,
+          "bytes": 3983159,
+          "sha256": "e2ae73dc07ee5e316ffcbcd2364ad17fc05d8a13d186b410359a71839ddcacb5",
+          "sourceReference": "docs/illustration-style/kuku-colored-pencil-v1/reference.png",
+          "inputSha256": "0ad02afa946a82da9b3561e0c153bf07d88c49c4e1ba0dbcfc8167c3dbbbbb3d",
+          "outputFileName": "exec-65c0a49a-a8c0-494f-b52d-3a3d78d8d3b1.png"
+        },
+        {
+          "key": "sparkle",
+          "title": "반짝 점화형",
+          "keyType": "quiz-source-key",
+          "file": "test-022/result-sparkle.png",
+          "width": 1536,
+          "height": 1024,
+          "bytes": 3573108,
+          "sha256": "be87448b543185075467cf8975dc3242749357effe1c2e668fa66a8ce6b8b109",
+          "sourceReference": "docs/illustration-style/kuku-colored-pencil-v1/reference.png",
+          "inputSha256": "0ad02afa946a82da9b3561e0c153bf07d88c49c4e1ba0dbcfc8167c3dbbbbb3d",
+          "outputFileName": "exec-551eb5ab-60b7-4be7-b9b9-7780ec53cf4a.png"
+        }
+      ]
+    },
+    {
+      "style": "S4",
+      "id": "test-015",
+      "title": "내 방이 말해주는 취향 무드",
+      "cover": {
+        "file": "test-015/cover.png",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 2463672,
+        "sha256": "aaf9f08a46fa6450c8642c146775ec8c0e5128b98dd7d147912f7967ac2b63fc",
+        "reused": true
+      },
+      "results": [
+        {
+          "key": "cozy",
+          "title": "포근 아지트형",
+          "keyType": "quiz-source-key",
+          "file": "test-015/result-cozy.png",
+          "width": 1536,
+          "height": 1024,
+          "bytes": 2611963,
+          "sha256": "9b1c76f59eb45d2b7befec7637ff167452ba9a353796e2e585767f25bf535a49",
+          "sourceReference": "docs/illustration-style/kuku-felt-miniature-v1/reference.png",
+          "inputSha256": "aaf9f08a46fa6450c8642c146775ec8c0e5128b98dd7d147912f7967ac2b63fc",
+          "outputFileName": "exec-3e102e15-e60a-4a4a-9138-a5cc677e04fc.png"
+        },
+        {
+          "key": "minimal",
+          "title": "여백 미니멀형",
+          "keyType": "quiz-source-key",
+          "file": "test-015/result-minimal.png",
+          "width": 1536,
+          "height": 1024,
+          "bytes": 2391366,
+          "sha256": "97ca3256d4ffa96b7a259c7eb6ae4a93b0c95c338930f60ed71bbc3e0227e5f8",
+          "sourceReference": "docs/illustration-style/kuku-felt-miniature-v1/reference.png",
+          "inputSha256": "aaf9f08a46fa6450c8642c146775ec8c0e5128b98dd7d147912f7967ac2b63fc",
+          "outputFileName": "exec-6ccc153b-8af5-4fde-a14f-e4e1de55ec3e.png"
+        }
+      ]
+    }
+  ]
+}

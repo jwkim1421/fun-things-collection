@@ -7,12 +7,76 @@ import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { loadContent, root } from "./content.mjs";
 import { packageSite } from "./package-site.mjs";
+import { previewSourceHash, playResultArtworkKeys } from "./artwork.mjs";
 
 const source = (name) => fs.readFileSync(path.join(root, `assets/js/${name}.js`), "utf8");
 const data = loadContent();
-const previewSourceHash = () => createHash("sha256").update(["scripts/artwork.mjs", "scripts/render-previews.mjs"].map((file) => fs.readFileSync(path.join(root, file), "utf8").replace(/\r\n/g, "\n")).join("\n")).digest("hex");
 vm.runInContext(source("test-page"), data.context);
 const score = data.context.scoreAnswers;
+
+test("every quiz result and meaningful play outcome has a distinct, verified illustration", () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, "docs/art-production/20261020/production.json"), "utf8"));
+  const expected = data.catalog.items.flatMap(item => [data.context.contentArtwork(item.id), ...(data.pages[item.id] ? Object.keys(data.pages[item.id].results) : playResultArtworkKeys(data.play[item.id])).map(key => data.context.contentArtwork(item.id, key))]);
+  assert.equal(expected.length, 161);
+  assert.equal(new Set(expected).size, 161);
+  assert.deepEqual(new Set(manifest.assets.map(item => item.file)), new Set(expected));
+  for (const file of ["docs/illustration-style/kuku-ink-comic-v1/reference.png", "docs/mascots/human-companion-v1/reference.png", "docs/art-pilots/20261020/procrastination-bingo/cover.png"]) {
+    assert.equal(createHash("sha256").update(fs.readFileSync(path.join(root, file))).digest("hex"), "214c9c80cf56a84dc3c500816fdfb73e905c2f8f47dcec54f84a20d8030024e1", "Preserve the owner's chosen first mascot reference");
+  }
+  const hashes = new Set();
+  for (const item of manifest.assets) {
+    const bytes = fs.readFileSync(path.join(root, item.file));
+    assert.equal(bytes.toString("ascii", 0, 4), "RIFF", item.file);
+    assert.equal(bytes.toString("ascii", 8, 12), "WEBP", item.file);
+    const hash = createHash("sha256").update(bytes).digest("hex");
+    assert.equal(hash, item.sha256, item.file);
+    assert.ok(!hashes.has(hash), `Duplicate illustration: ${item.file}`); hashes.add(hash);
+    assert.ok(bytes.length < 350000, `Illustration exceeds the page weight budget: ${item.file}`);
+  }
+});
+
+test("play illustrations follow actual result categories while preserving user values", () => {
+  for (const [id, query, key] of [
+    ["procrastination-bingo", "bingo-4-0", "count-low"],
+    ["procrastination-bingo", "bingo-5-0", "count-mid"],
+    ["procrastination-bingo", "bingo-9-0", "count-mid"],
+    ["procrastination-bingo", "bingo-10-0", "count-high"],
+    ["battery-stop", "battery-89", "wild"],
+    ["battery-stop", "battery-90", "close"],
+    ["battery-stop", "battery-97", "close"],
+    ["battery-stop", "battery-98", "perfect"],
+    ["battery-stop", "battery-111", "wild"],
+    ["today-box", "box-1&date=2026-10-20", "mission-shared"],
+    ["relationship-ranking", "rank-space", "space"],
+    ["weekly-energy-budget", "energy-rest-0-0-0-0-100", "rest"],
+    ["campus-festival-story", "story-mischief", "mischief"],
+    ["emotion-trash", "trash-done", "trash-done"],
+    ["choice-roulette", "roulette-5", "roulette-shared"]
+  ]) {
+    const app = runtime(id, `?result=${query}`);
+    assert.ok(app.context.document.body.dataset.shareArtwork.endsWith(`/${id}-${key}.webp`), `${id}/${query}`);
+    assert.ok(app.context.document.body.dataset.shareImage.endsWith(`/${id}-${key}.png`), `${id}/${query}`);
+    assert.ok(app.app.innerHTML.includes(app.context.document.body.dataset.shareArtwork), `${id}/${query}`);
+    assert.equal(app.events.filter(event => event.name === "content_complete").length, 0);
+  }
+});
+
+test("all 26 play preview cards are current, complete and use visitor-facing source text", () => {
+  const raw = execFileSync(process.execPath, ["scripts/build-site.mjs", "--play-result-metadata"], { cwd: root, encoding: "utf8" }).trim();
+  const entries = JSON.parse(raw);
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, "assets/images/og/play-results/manifest.json"), "utf8"));
+  assert.equal(entries.length, 26);
+  assert.equal(manifest.count, entries.length);
+  assert.equal(manifest.metadataSha256, createHash("sha256").update(raw).digest("hex"));
+  assert.equal(manifest.sourceSha256, previewSourceHash());
+  for (const entry of entries) {
+    const content = data.play[entry.id];
+    assert.equal(entry.heading, content.results?.[entry.key]?.title || content.title);
+    assert.doesNotMatch(entry.heading, /공통.*장면/);
+    const png = fs.readFileSync(path.join(root, entry.image));
+    assert.equal(png.readUInt32BE(16), 1200); assert.equal(png.readUInt32BE(20), 630);
+  }
+});
 
 test("all 542,689 answer combinations produce valid results and every advertised type is reachable", () => {
   let combinations = 0;

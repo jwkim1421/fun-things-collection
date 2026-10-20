@@ -23,7 +23,7 @@ const scope = liveCounts ? `all content on production (${widths.join(",")}px)` :
 if (fs.existsSync(path.join(output, "report.json"))) fs.copyFileSync(path.join(output, "report.json"), path.join(output, `report-${Date.now()}.json`));
 fs.writeFileSync(path.join(output, "report.json"), JSON.stringify({ startedAt, scope, passed: false, stage: "setup" }, null, 2));
 const site = packageSite();
-const mime = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".png": "image/png", ".svg": "image/svg+xml" };
+const mime = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".png": "image/png", ".webp": "image/webp", ".svg": "image/svg+xml" };
 const browser = await (useWebKit ? webkit : chromium).launch({ headless: true, ...(!useWebKit && process.platform === "win32" ? { channel: process.env.COOCOO_BROWSER_CHANNEL || "msedge" } : {}) });
 const server = createServer((request, response) => {
   const pathname = decodeURIComponent(new URL(request.url, "http://localhost").pathname);

@@ -51,7 +51,12 @@ const PLAY_CONTENT = {
       "책상 정리 시작", "관련 없는 검색", "친구 진행률 물어봄", "5분만 누워 있기",
       "제목만 작성", "갑자기 빨래", "완벽한 시작 기다림", "마감 전날 각성",
       "파일명만 만들기", "카페 자리 탐색", "타이머만 설정", "결국 해내긴 함"
-    ]
+    ],
+    results: {
+      "count-low": {"icon":"✓","title":"미루기 방어 우등생","line":"시작 허들이 낮고 할 일을 비교적 빠르게 손에 잡는 편","detail":"해야 할 일을 오래 바라보기보다 작은 행동으로 옮기는 힘이 있어요. 컨디션이 흔들릴 때도 평소에 쓰던 시작 신호 하나만 지키면 리듬을 금방 되찾습니다."},
+      "count-mid": {"icon":"…","title":"합리적 미루기 협상가","line":"조금 미루지만 마감과 타협하며 결국 완성하는 편","detail":"본격적으로 시작하기 전 준비 동작이 긴 편이지만, 해야 할 시점은 놓치지 않습니다. 준비를 하나만 줄이고 10분짜리 초안을 먼저 만들면 훨씬 가벼워져요."},
+      "count-high": {"icon":"!","title":"마감 직전 집중 각성형","line":"압박이 생기면 놀라운 집중력이 켜지는 극적인 완성 타입","detail":"미루는 동안 마음은 편하지 않지만 마지막 순간의 집중력으로 결과를 만들어냅니다. 능력이 없는 게 아니라 시작 조건이 까다로운 편이니, 가짜 마감을 하루 앞에 두는 방식이 잘 맞아요."}
+    }
   },
   "battery-stop": {
     type: "battery",
@@ -59,7 +64,12 @@ const PLAY_CONTENT = {
     category: "30초 게임",
     intro: "버튼을 누르면 배터리가 빠르게 차올라요. 100%에 가장 가깝다고 느낀 순간 다시 눌러 멈춰보세요.",
     icon: "⚡",
-    iconAsset: "kuku-battery.svg"
+    iconAsset: "kuku-battery.svg",
+    results: {
+      "perfect": {"icon":"🏆","title":"쿠쿠 충전 장인","line":"거의 정답 같은 손끝 감각!","detail":"멈춰야 할 순간을 정확하게 잡았어요. 숫자가 차오르는 속도와 손끝 타이밍이 제대로 맞아떨어졌네요."},
+      "close": {"icon":"🔋","title":"감 좋은 충전러","line":"100 근처를 제대로 읽었어요.","detail":"완벽한 숫자는 살짝 비켜갔지만 타이밍 감각은 충분히 가까웠어요. 이번 기록은 꽤 자랑해도 돼요."},
+      "wild": {"icon":"⚡","title":"과감한 타이밍 탐험가","line":"망설임보다 손이 먼저 움직였어요.","detail":"정확함보다 과감함이 먼저 나온 기록이에요. 숫자보다 순간의 속도감을 즐긴 쪽에 가까워요."}
+    }
   },
   "today-box": {
     type: "daily",
@@ -208,9 +218,9 @@ const PLAY_CONTENT = {
     },
     results: {
       spotlight: { icon: "!", title: "현장 돌파형 결말", line: "궁금한 장면이 보이면 사람들 사이로 먼저 들어가는 타입", detail: "쿠쿠는 무대 장비를 옮기던 중이었어요. 당신이 찾아오자 기다렸다는 듯 손수건을 흔들고, 둘은 공연보다 더 정신없는 백스테이지 구경을 시작했어요." },
-      together: { icon: "♪", title: "같이 즐기는 결말", line: "찾는 일도 중요하지만 지금 옆의 사람과 순간을 놓치지 않는 타입", detail: "노래가 끝나자 쿠쿠가 바로 뒤에서 박수를 치고 있었어요. 결국 모두 같은 공연을 보고 있었던 셈이죠. 친구들과 웃다가 자연스럽게 합류한 저녁이 오래 남았어요." },
-      mischief: { icon: "?", title: "장난 선공형 결말", line: "반가운 마음을 진지한 인사보다 장난으로 먼저 보여주는 타입", detail: "쿠쿠는 화들짝 놀라 카드를 떨어뜨렸지만 곧바로 웃었어요. 둘은 서로의 오늘 운세를 마음대로 지어주며 부스 마감 시간까지 눌러앉았어요." },
-      observer: { icon: "○", title: "느긋한 관찰형 결말", line: "서두르지 않고 상대가 나를 발견하는 순간을 즐기는 타입", detail: "세 장째 카드를 넘기던 쿠쿠가 드디어 당신을 보고 눈을 동그랗게 떴어요. 말없이 웃은 뒤 둘은 가장 한산한 길로 축제를 한 바퀴 돌았어요." }
+      together: { icon: "♪", title: "같이 즐기는 결말", line: "찾는 일도 중요하지만 지금 옆의 사람과 순간을 놓치지 않는 타입", detail: "손을 흔들자 쿠쿠가 당신과 친구들을 발견하고 웃으며 다가왔어요. 마침 멀리서 들려온 공연의 마지막 곡에 모두 함께 박수를 보냈어요. 찾는 일도 축제를 즐기는 일도 함께한 저녁이 오래 남았어요." },
+      mischief: { icon: "?", title: "장난 선공형 결말", line: "반가운 마음을 진지한 인사보다 장난으로 먼저 보여주는 타입", detail: "커튼 옆 소품 모자를 쓰고 나타나자 쿠쿠가 화들짝 놀라 들고 있던 천을 놓쳤어요. 곧바로 둘 다 웃음을 터뜨렸고, 장비 정리를 마친 뒤 함께 우스운 기념사진을 남겼어요." },
+      observer: { icon: "○", title: "느긋한 관찰형 결말", line: "서두르지 않고 상대가 나를 발견하는 순간을 즐기는 타입", detail: "두리번거리던 쿠쿠가 앉아 있는 당신을 발견하고 눈을 동그랗게 떴어요. 먼저 웃어 보이자 쿠쿠도 안심하며 곁으로 다가왔어요. 둘은 가장 한산한 길로 축제를 천천히 한 바퀴 돌았어요." }
     }
   },
   "emotion-trash": {
@@ -270,7 +280,7 @@ function trackPlayEvent(eventName, content, params = {}) {
   }
 }
 
-function applyPlayShare(content, resultTitle, resultLine, resultKey) {
+function applyPlayShare(content, resultTitle, resultLine, resultKey, artworkKey = playArtworkKey(content.type, resultKey)) {
   const body = document.body;
   const shareUrl = new URL(window.location.href);
   shareUrl.searchParams.set("result", resultKey);
@@ -289,6 +299,8 @@ function applyPlayShare(content, resultTitle, resultLine, resultKey) {
       ? "#b8d3df"
       : "#f2d27f";
   body.dataset.shareMascot = `${window.location.origin}/assets/images/kuku-mascot-full.png`;
+  body.dataset.shareArtwork = `${window.location.origin}/${contentArtwork(document.body.dataset.playId, artworkKey)}`;
+  body.dataset.shareImage = `${window.location.origin}/assets/images/og/play-results/${document.body.dataset.playId}-${artworkKey}.png`;
   body.dataset.shareButtonTitle = "결과 확인하기";
 }
 
@@ -537,7 +549,7 @@ function createPlaygroundApp() {
     root.innerHTML = `
       <section class="play-intro tone-${introTone}">
         <span class="play-content-type">${escapePlayHtml(content.category)}</span>
-        <img class="play-intro-cover" src="../assets/images/covers/${escapePlayHtml(playId)}.svg" alt="" width="720" height="480" fetchpriority="high" />
+        <img class="play-intro-cover" src="../${contentArtwork(playId)}" alt="" width="720" height="480" fetchpriority="high" />
         <h1>${escapePlayHtml(content.title)}</h1>
         <p>${escapePlayHtml(content.intro)}</p>
         <button class="play-primary-button" type="button" data-action="start">시작하기</button>
@@ -570,7 +582,7 @@ function createPlaygroundApp() {
     writeHistory("result", { resultKey, replace: !shouldTrack });
     applyPlayShare(content, result.title, result.line, resultKey);
     if (shouldTrack) recordCompletion({ result_key: resultKey });
-    root.innerHTML = renderPlayResult(content, result.icon, result.title, result.line, result.detail, { comment: getKukuComment("chat") });
+    root.innerHTML = renderPlayResult(content, result.title, result.line, result.detail, { comment: getKukuComment("chat") });
     hydratePlayResultAd();
     scrollPlaygroundToTop();
   }
@@ -601,16 +613,13 @@ function createPlaygroundApp() {
   function finishBingo(forcedSelectedCount = null, forcedBingos = null, shouldTrack = true) {
     const selectedCount = forcedSelectedCount === null ? state.selected.size : forcedSelectedCount;
     const bingos = forcedBingos === null ? countBingos() : forcedBingos;
-    const result = selectedCount <= 4
-      ? { icon: "✓", title: "미루기 방어 우등생", line: "시작 허들이 낮고 할 일을 비교적 빠르게 손에 잡는 편", detail: "해야 할 일을 오래 바라보기보다 작은 행동으로 옮기는 힘이 있어요. 컨디션이 흔들릴 때도 평소에 쓰던 시작 신호 하나만 지키면 리듬을 금방 되찾습니다." }
-      : selectedCount <= 9
-        ? { icon: "…", title: "합리적 미루기 협상가", line: "조금 미루지만 마감과 타협하며 결국 완성하는 편", detail: "본격적으로 시작하기 전 준비 동작이 긴 편이지만, 해야 할 시점은 놓치지 않습니다. 준비를 하나만 줄이고 10분짜리 초안을 먼저 만들면 훨씬 가벼워져요." }
-        : { icon: "!", title: "마감 직전 집중 각성형", line: "압박이 생기면 놀라운 집중력이 켜지는 극적인 완성 타입", detail: "미루는 동안 마음은 편하지 않지만 마지막 순간의 집중력으로 결과를 만들어냅니다. 능력이 없는 게 아니라 시작 조건이 까다로운 편이니, 가짜 마감을 하루 앞에 두는 방식이 잘 맞아요." };
+    const artworkKey = selectedCount <= 4 ? "count-low" : selectedCount <= 9 ? "count-mid" : "count-high";
+    const result = content.results[artworkKey];
     const resultKey = `bingo-${selectedCount}-${bingos}`;
     writeHistory("result", { resultKey, replace: !shouldTrack });
     applyPlayShare(content, result.title, result.line, resultKey);
     if (shouldTrack) recordCompletion({ result_key: resultKey, bingo_count: bingos });
-    root.innerHTML = renderPlayResult(content, result.icon, result.title, `${result.line} · 완성 빙고 ${bingos}개`, result.detail, { comment: getKukuComment("bingo") });
+    root.innerHTML = renderPlayResult(content, result.title, `${result.line} · 완성 빙고 ${bingos}개`, result.detail, { comment: getKukuComment("bingo") });
     hydratePlayResultAd();
     scrollPlaygroundToTop();
   }
@@ -647,16 +656,13 @@ function createPlaygroundApp() {
     state.timer = null;
     const batteryValue = forcedBattery === null ? state.battery : forcedBattery;
     const score = Math.max(0, 100 - Math.round(Math.abs(100 - batteryValue)));
-    const result = score >= 98
-      ? { key: "perfect", icon: "🏆", title: "쿠쿠 충전 장인", line: `${Math.round(batteryValue)}%에서 정지. 거의 정답 같은 손끝 감각!`, detail: "멈춰야 할 순간을 정확하게 잡았어요. 숫자가 차오르는 속도와 손끝 타이밍이 제대로 맞아떨어졌네요." }
-      : score >= 90
-        ? { key: "close", icon: "🔋", title: "감 좋은 충전러", line: `${Math.round(batteryValue)}%에서 정지. 100 근처를 제대로 읽었어요.`, detail: "완벽한 숫자는 살짝 비켜갔지만 타이밍 감각은 충분히 가까웠어요. 이번 기록은 꽤 자랑해도 돼요." }
-        : { key: "wild", icon: "⚡", title: "과감한 타이밍 탐험가", line: `${Math.round(batteryValue)}%에서 정지. 망설임보다 손이 먼저 움직였어요.`, detail: "정확함보다 과감함이 먼저 나온 기록이에요. 숫자보다 순간의 속도감을 즐긴 쪽에 가까워요." };
+    const artworkKey = score >= 98 ? "perfect" : score >= 90 ? "close" : "wild";
+    const result = { key: artworkKey, ...content.results[artworkKey], line: `${Math.round(batteryValue)}%에서 정지. ${content.results[artworkKey].line}` };
     const resultKey = `battery-${Math.round(batteryValue)}`;
     writeHistory("result", { resultKey, replace: !shouldTrack });
-    applyPlayShare(content, result.title, result.line, resultKey);
+    applyPlayShare(content, result.title, result.line, resultKey, result.key);
     if (shouldTrack) recordCompletion({ result_key: resultKey, game_score: score });
-    root.innerHTML = renderPlayResult(content, result.icon, result.title, result.line, result.detail, {
+    root.innerHTML = renderPlayResult(content, result.title, result.line, result.detail, {
       resultLabel: "충전 결과",
       comment: getKukuComment("battery", result.key)
     });
@@ -696,7 +702,7 @@ function createPlaygroundApp() {
     writeHistory("result", { resultKey, replace: !shouldTrack });
     applyPlayShare(content, box.title, box.detail, resultKey);
     if (shouldTrack) recordCompletion({ result_key: `box-${index}` });
-    root.innerHTML = renderPlayResult(content, box.icon, box.title, "오늘 쿠쿠가 꺼내준 작은 미션", box.detail, { comment: getKukuComment("daily") });
+    root.innerHTML = renderPlayResult(content, box.title, "오늘 쿠쿠가 꺼내준 작은 미션", box.detail, { comment: getKukuComment("daily") });
     hydratePlayResultAd();
     scrollPlaygroundToTop();
   }
@@ -746,7 +752,7 @@ function createPlaygroundApp() {
     writeHistory("result", { resultKey: `rank-${resultKey}`, replace: !shouldTrack });
     applyPlayShare(content, result.title, result.line, `rank-${resultKey}`);
     if (shouldTrack) recordCompletion({ result_key: resultKey });
-    root.innerHTML = renderPlayResult(content, result.icon, result.title, result.line, result.detail, { resultLabel: "관계 순위 결과", comment: getKukuComment("ranking") });
+    root.innerHTML = renderPlayResult(content, result.title, result.line, result.detail, { resultLabel: "관계 순위 결과", comment: getKukuComment("ranking") });
     hydratePlayResultAd();
     scrollPlaygroundToTop();
   }
@@ -789,7 +795,7 @@ function createPlaygroundApp() {
     writeHistory("result", { resultKey: sharedKey, replace: !shouldTrack });
     applyPlayShare(content, result.title, result.line, sharedKey);
     if (shouldTrack) recordCompletion({ result_key: resultKey, allocation_total: getAllocationTotal() });
-    root.innerHTML = renderPlayResult(content, result.icon, result.title, result.line, result.detail, { resultLabel: "에너지 배분 결과", comment: getKukuComment("allocation") });
+    root.innerHTML = renderPlayResult(content, result.title, result.line, result.detail, { resultLabel: "에너지 배분 결과", comment: getKukuComment("allocation") });
     hydratePlayResultAd();
     scrollPlaygroundToTop();
   }
@@ -840,7 +846,7 @@ function createPlaygroundApp() {
     writeHistory("result", { resultKey: sharedKey, replace: !shouldTrack });
     applyPlayShare(content, result.title, result.line, sharedKey);
     if (shouldTrack) recordCompletion({ result_key: resultKey, story_path: state.storyPath.join("-") });
-    root.innerHTML = renderPlayResult(content, result.icon, result.title, result.line, result.detail, { resultLabel: "축제 이야기 결말", comment: getKukuComment("story") });
+    root.innerHTML = renderPlayResult(content, result.title, result.line, result.detail, { resultLabel: "축제 이야기 결말", comment: getKukuComment("story") });
     hydratePlayResultAd();
     scrollPlaygroundToTop();
   }
@@ -869,7 +875,7 @@ function createPlaygroundApp() {
     writeHistory("result", { resultKey, replace: !shouldTrack });
     applyPlayShare(content, "여기 두고 가기 완료", "걸리던 말을 적고 화면 밖으로 보냈어요.", resultKey);
     if (shouldTrack) recordCompletion({ result_key: resultKey });
-    root.innerHTML = renderPlayResult(content, "○", "여기 두고 가기 완료", "걸리던 말을 적고 화면 밖으로 보냈어요.", "무슨 말을 적었는지는 어디에도 남지 않아요. 잠깐 적어낸 것만으로 충분하니, 이 화면에서는 가볍게 두고 가요.", { resultLabel: "감정 비우기 완료", comment: getKukuComment("trash") });
+    root.innerHTML = renderPlayResult(content, "여기 두고 가기 완료", "걸리던 말을 적고 화면 밖으로 보냈어요.", "무슨 말을 적었는지는 어디에도 남지 않아요. 잠깐 적어낸 것만으로 충분하니, 이 화면에서는 가볍게 두고 가요.", { resultLabel: "감정 비우기 완료", comment: getKukuComment("trash") });
     hydratePlayResultAd();
     scrollPlaygroundToTop();
   }
@@ -918,17 +924,17 @@ function createPlaygroundApp() {
     writeHistory("result", { resultKey, replace: !shouldTrack });
     applyPlayShare(content, selectedItem, `오늘의 선택은 '${selectedItem}'이에요.`, resultKey);
     if (shouldTrack) recordCompletion({ result_key: resultKey, enabled_count: state.rouletteEnabled.length });
-    root.innerHTML = renderPlayResult(content, "↻", selectedItem, `오늘의 선택은 '${selectedItem}'이에요.`, "룰렛은 골랐고, 따를지 말지는 여전히 네 마음이에요. 결과를 보자마자 다른 후보가 아쉬웠다면 그것도 꽤 정확한 답이에요.", { resultLabel: "선택 룰렛 결과", comment: getKukuComment("roulette") });
+    root.innerHTML = renderPlayResult(content, selectedItem, `오늘의 선택은 '${selectedItem}'이에요.`, "룰렛은 골랐고, 따를지 말지는 여전히 네 마음이에요. 결과를 보자마자 다른 후보가 아쉬웠다면 그것도 꽤 정확한 답이에요.", { resultLabel: "선택 룰렛 결과", comment: getKukuComment("roulette") });
     hydratePlayResultAd();
     scrollPlaygroundToTop();
   }
 
-  function renderPlayResult(source, icon, title, line, detail, options = {}) {
+  function renderPlayResult(source, title, line, detail, options = {}) {
     const resultLabel = options.resultLabel || `${source.category} 결과`;
     return `
       <section class="play-result">
         <span class="play-content-type">${escapePlayHtml(resultLabel)}</span>
-        <div class="play-result-icon" aria-hidden="true">${icon}</div>
+        <img class="play-result-art" src="${escapePlayHtml(document.body.dataset.shareArtwork)}" alt="" width="1200" height="800" />
         <h1>${escapePlayHtml(title)}</h1>
         <strong>${escapePlayHtml(line)}</strong>
         <p>${escapePlayHtml(detail)}</p>

@@ -184,7 +184,7 @@ function applyShareState(page, resultKey) {
   document.body.dataset.shareResultIcon = result.heroEmoji || page.heroEmoji || page.icon || "✨";
   document.body.dataset.shareTheme = defaultTheme;
   document.body.dataset.shareMascot = mascotUrl;
-  document.body.dataset.shareArtwork = `${window.location.origin}/assets/images/covers/${document.body.dataset.testId}-${resultKey}.svg`;
+  document.body.dataset.shareArtwork = `${window.location.origin}/${contentArtwork(document.body.dataset.testId, resultKey)}`;
 }
 
 function decorateNavPills() {
@@ -435,7 +435,7 @@ function renderIntroScreen(page) {
         <article class="test-card intro-card">
           <div class="intro-art">
             <h1 class="sr-only">${escapeHtml(page.title)}</h1>
-            <img class="intro-cover" src="../assets/images/covers/${escapeHtml(testId)}.svg" alt="" width="720" height="480" fetchpriority="high" />
+            <img class="intro-cover" src="../${contentArtwork(testId)}" alt="" width="720" height="480" fetchpriority="high" />
             <div class="intro-copy">
               <strong>${escapeHtml(page.heroCardTitle || page.title)}</strong>
               <span>${escapeHtml(page.heroCardSubtitle || page.summary)}</span>
@@ -549,7 +549,7 @@ function renderResultScreen(page, resultKey, cards, options = {}) {
         <div class="test-card-tab">${escapeHtml(page.title)}</div>
         <article class="test-card result-card">
         <header class="result-cover">
-          <img src="../assets/images/covers/${escapeHtml(testId)}-${escapeHtml(resultKey)}.svg" alt="" width="720" height="480" />
+          <img src="../${contentArtwork(testId, resultKey)}" alt="" width="720" height="480" />
           <p>${escapeHtml(resultHeaderTitle)}</p>
           <h1 tabindex="-1">${escapeHtml(result.title)}</h1>
           <strong>${escapeHtml(result.summary)}</strong>
@@ -614,7 +614,7 @@ function renderResultScreen(page, resultKey, cards, options = {}) {
           <div class="result-section-body result-related-grid">
             ${relatedCards.map((card) => `
               <a class="result-related-card" href="${card.href.replace(/^\.\//, "../")}" data-content-id="${escapeHtml(card.id)}" data-next-content>
-                <img src="../assets/images/covers/${escapeHtml(card.id)}.svg" alt="" width="720" height="480" loading="lazy" />
+                <img src="../${contentArtwork(card.id)}" alt="" width="720" height="480" loading="lazy" />
                 <strong>${escapeHtml(card.title)}</strong>
                 <span>${escapeHtml(card.description)}</span>
               </a>

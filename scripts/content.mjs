@@ -12,7 +12,7 @@ export function loadContent() {
     URLSearchParams,
     console
   });
-  for (const name of ["site-config", "content-data", "extra-content-data", "catalog", "playground"]) {
+  for (const name of ["site-config", "artwork", "content-data", "extra-content-data", "catalog", "playground"]) {
     vm.runInContext(fs.readFileSync(path.join(root, `assets/js/${name}.js`), "utf8"), context, { filename: name });
   }
   return {

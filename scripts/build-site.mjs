@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
 import { loadContent, root, escapeHtml as esc } from "./content.mjs";
-import { generateArtwork } from "./artwork.mjs";
+import { validateArtwork } from "./artwork.mjs";
 
 const { context, config, cards, pages, catalog, play } = loadContent();
 const siteUrl = config.siteUrl;
@@ -26,7 +26,19 @@ if (process.argv.includes("--result-metadata")) {
   console.log(JSON.stringify(resultMetadata));
   process.exit(0);
 }
-generateArtwork(pages, catalog);
+if (process.argv.includes("--play-result-metadata")) {
+  const production = JSON.parse(fs.readFileSync(path.join(root, "docs/art-production/20261020/production.json"), "utf8"));
+  console.log(JSON.stringify(production.assets.filter(item => item.key && play[item.id]).map(item => {
+    const content = play[item.id];
+    const result = content.results?.[item.key];
+    return { id: item.id, key: item.key,
+      title: result ? `${result.title} · ${content.title} | 쿠쿠` : `${content.title} | 쿠쿠`,
+      heading: result?.title || content.title, description: result?.line || content.intro,
+      image: `assets/images/og/play-results/${item.id}-${item.key}.png`, type: "play" };
+  })));
+  process.exit(0);
+}
+validateArtwork(pages, catalog, play);
 
 function replaceRequired(text, expression, replacement, label) {
   if (!expression.test(text)) throw new Error(`Missing template: ${label}`);
@@ -59,6 +71,9 @@ function setHead(html, meta) {
   html = html.replace(/^\s*<link rel="canonical"[^>]*>\r?\n/gm, "");
   html = replaceRequired(html, /<title>[\s\S]*?<\/title>/, `<title>${esc(meta.title)}</title>\n  ${head}`, meta.file);
   html = html.replace(/assets\/images\/coocoo\.png/g, "assets/images/apple-touch-icon.png");
+  if (!html.includes('assets/js/artwork.js')) {
+    html = html.replace(/(<script\b)/, `<script defer src="${meta.file.includes("/") ? "../" : "./"}assets/js/artwork.js"></script>\n  $1`);
+  }
   html = html.replace(/(<link rel="icon"[^>]*href=")[^"]+/, (_, prefix) => `${prefix}${meta.file.includes("/") ? "../" : "./"}assets/images/favicon-32x32.png`);
   if (meta.type === "test" || meta.type === "play" || meta.file === "index.html") {
     if (!html.includes('src="' + (meta.file.includes("/") ? "../" : "./") + 'assets/js/ads.js"')) {
@@ -100,13 +115,14 @@ const rootPages = [
 ];
 
 function cardLink(item) {
-  return `<a class="search-result-card" href="${esc(item.href)}" data-content-id="${esc(item.id)}"><img class="search-result-cover" src="./assets/images/covers/${item.id}.svg" alt="" width="720" height="480" loading="lazy" /><div><small>${esc(item.type === "play" ? "짧은 놀이" : item.category)}</small><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p><small>${esc(item.duration)}</small></div></a>`;
+  return `<a class="search-result-card" href="${esc(item.href)}" data-content-id="${esc(item.id)}"><img class="search-result-cover" src="./${context.contentArtwork(item.id)}" alt="" width="1200" height="800" loading="lazy" /><div><small>${esc(item.type === "play" ? "짧은 놀이" : item.category)}</small><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p><small>${esc(item.duration)}</small></div></a>`;
 }
 
 for (const meta of rootPages) {
   const file = path.join(root, meta.file);
   let html = setHead(fs.readFileSync(file, "utf8"), meta);
   if (meta.file === "index.html") {
+    html = html.replace(/(class="hero-scene" src=")[^"]+/, `$1./${context.contentArtwork("test-020")}`);
     html = replaceRequired(html, /(<div class="play-card-grid" id="playCardGrid">)[\s\S]*?<\/div>(?=\s*<p><a class="ghost-link")/, `$1${catalog.playCards.slice(0, 3).map(cardLink).join("\n")}</div>`, "home play grid");
     html = replaceRequired(html, /(<section class="card-grid" id="cardGrid"[^>]*>)[\s\S]*?<\/section>/, `$1${[...catalog.tests].reverse().slice(0, 12).map(cardLink).join("\n")}</section>`, "home tests");
   }
@@ -118,7 +134,9 @@ for (const meta of rootPages) {
 
 function redirect(file, destination) {
   const url = new URL(destination, siteUrl).href;
-  fs.writeFileSync(path.join(root, file), `<!doctype html>\n<html lang="ko"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="robots" content="noindex,follow" /><meta http-equiv="refresh" content="0;url=${url}" /><link rel="canonical" href="${url}" /><title>쿠쿠 새 페이지로 이동</title></head><body><p>주소가 바뀌었어요. <a href="${url}">현재 쿠쿠 페이지 열기</a></p></body></html>\n`);
+  const target = path.join(root, file);
+  const html = `<!doctype html>\n<html lang="ko"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="robots" content="noindex,follow" /><meta http-equiv="refresh" content="0;url=${url}" /><link rel="canonical" href="${url}" /><title>쿠쿠 새 페이지로 이동</title></head><body><p>주소가 바뀌었어요. <a href="${url}">현재 쿠쿠 페이지 열기</a></p></body></html>\n`;
+  if (!fs.existsSync(target) || fs.readFileSync(target, "utf8") !== html) fs.writeFileSync(target, html);
 }
 
 for (const name of fs.readdirSync(path.join(root, "tests/tests")).filter((file) => file.endsWith(".html"))) redirect(`tests/tests/${name}`, `tests/${name}`);
