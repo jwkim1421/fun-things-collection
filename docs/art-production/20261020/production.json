@@ -1,6 +1,6 @@
 {
   "date": "2026-10-20",
-  "phase": "stage-6-assets-complete",
+  "phase": "stage-6-deployed",
   "policy": "사이트 틀 통일, 테스트별 작품 기준, 한 테스트 내 캐릭터·화풍 일관성",
   "sets": [
     {
@@ -3590,5 +3590,12 @@
     }
   ],
   "selectedCount": 161,
-  "rejectedCount": 13
+  "rejectedCount": 13,
+  "deployment": {
+    "revision": "0dd3d8a5795ae2cf938b6936330af088289e7684",
+    "url": "https://github.com/jwkim1421/fun-things-collection/actions/runs/39422821771",
+    "verifiedAt": "2026-10-20T12:37:19.666Z",
+    "matchingPublicFiles": 535,
+    "excluded404": 17
+  }
 }
