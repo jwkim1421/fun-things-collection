@@ -1,0 +1,246 @@
+{
+  "verifiedAt": "2026-10-21T08:05:48.067Z",
+  "revision": "d509ed0f7372147a85ccc821eeff75d9057d8e7b",
+  "workflow": {
+    "id": 39565501573,
+    "url": "https://github.com/jwkim1421/fun-things-collection/actions/runs/39565501573",
+    "status": "completed",
+    "conclusion": "success",
+    "steps": [
+      {
+        "job": "build",
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "job": "build",
+        "name": "Run actions/checkout@v6",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "job": "build",
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "job": "build",
+        "name": "Run npm run build",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "job": "build",
+        "name": "Run npm test",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "job": "build",
+        "name": "Run npm ci",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "job": "build",
+        "name": "Run npx playwright install --with-deps chromium",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "job": "build",
+        "name": "Run npm run test:browser",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "job": "build",
+        "name": "Run npm run test:artwork",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "job": "build",
+        "name": "Run npm run test:review",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "job": "build",
+        "name": "Run actions/configure-pages@v5",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "job": "build",
+        "name": "Package public files",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "job": "build",
+        "name": "Run actions/upload-pages-artifact@v4",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "job": "build",
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "job": "build",
+        "name": "Post Run actions/checkout@v6",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "job": "build",
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "job": "deploy",
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "job": "deploy",
+        "name": "Run actions/deploy-pages@v4",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "job": "deploy",
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "publicFiles": {
+    "checked": 535,
+    "matching": 535,
+    "excluded404": 22,
+    "excluded": [
+      {
+        "file": "COOCOO_REVIEW_UPDATE_20261021.md",
+        "status": 404
+      },
+      {
+        "file": "COOCOO_CLAUDE_REVIEW_PLAN_20261021.md",
+        "status": 404
+      },
+      {
+        "file": "docs/reviews/20261021/scoring-spec.json",
+        "status": 404
+      },
+      {
+        "file": "docs/reviews/20261021/semantic-pilot.json",
+        "status": 404
+      },
+      {
+        "file": "scripts/review-check.mjs",
+        "status": 404
+      },
+      {
+        "file": "COOCOO_GROWTH_PLAN.md",
+        "status": 404
+      },
+      {
+        "file": "COOCOO_SITE_UPDATE_PLAN.md",
+        "status": 404
+      },
+      {
+        "file": "COOCOO_SIMSIMTEST_BENCHMARK_20261019.md",
+        "status": 404
+      },
+      {
+        "file": "package.json",
+        "status": 404
+      },
+      {
+        "file": "scripts/build-site.mjs",
+        "status": 404
+      },
+      {
+        "file": "cloudflare/coocoo-api/wrangler.jsonc",
+        "status": 404
+      },
+      {
+        "file": "docs/images/benchmark-home-pc-20261019.png",
+        "status": 404
+      },
+      {
+        "file": ".github/workflows/pages.yml",
+        "status": 404
+      },
+      {
+        "file": "assets/images/og/manifest.json",
+        "status": 404
+      },
+      {
+        "file": "assets/images/og/results/manifest.json",
+        "status": 404
+      },
+      {
+        "file": "COOCOO_ILLUSTRATION_ROLLOUT_20261020.md",
+        "status": 404
+      },
+      {
+        "file": "docs/art-production/20261020/production.json",
+        "status": 404
+      },
+      {
+        "file": "docs/illustration-style/kuku-ink-comic-v1/reference.png",
+        "status": 404
+      },
+      {
+        "file": "docs/mascots/human-companion-v1/reference.png",
+        "status": 404
+      },
+      {
+        "file": "scripts/artwork-check.mjs",
+        "status": 404
+      },
+      {
+        "file": "assets/images/og/play-results/manifest.json",
+        "status": 404
+      },
+      {
+        "file": "assets/images/covers/test-020.svg",
+        "status": 404
+      }
+    ]
+  },
+  "browser": {
+    "quizFlows": 6,
+    "playFlows": 0,
+    "clipboardChecks": 0,
+    "issues": [],
+    "scope": "representative production flows; statistics mocked; writes blocked"
+  },
+  "reviewUi": {
+    "introScreens": 18,
+    "bingo": {
+      "width": 375,
+      "selected": 4,
+      "lines": 1,
+      "highlighted": 4
+    },
+    "errors": [],
+    "unexpectedWrites": [],
+    "scope": "production UI and actual public stats GET; non-read requests blocked"
+  },
+  "productionWrites": 0,
+  "remaining": [
+    "Physical phones and Safari",
+    "Actual Kakao/Instagram app delivery and device clipboard permissions",
+    "Observed acquisition, completion, sharing visits and revenue"
+  ]
+}
