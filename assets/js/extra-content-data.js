@@ -25,16 +25,6 @@
     );
   }
 
-  function q(prompt, leftLabel, leftScores, rightLabel, rightScores) {
-    return {
-      prompt,
-      options: [
-        { label: leftLabel, scores: leftScores },
-        { label: rightLabel, scores: rightScores }
-      ]
-    };
-  }
-
   const extraCards = [
     {
       id: "test-007",
@@ -169,7 +159,7 @@
       href: "./tests/test-016.html",
       badge: "생활",
       category: "라이프",
-      duration: "90초",
+      duration: "2분",
       icon: "📅",
       posterTitle: "약속 일정 성향",
       posterSubtitle: "나는 어떻게 잡을까?",
@@ -183,7 +173,7 @@
       href: "./tests/test-017.html",
       badge: "심리",
       category: "성격 테스트",
-      duration: "90초",
+      duration: "2분",
       icon: "🫶",
       posterTitle: "칭찬 반응 체크",
       posterSubtitle: "나는 어떻게 받을까?",
@@ -293,43 +283,15 @@
       heroCardSubtitle: "기획자? 탐험가? 검증가?",
       heroArt: { centerEmoji: "🤖", stickers: ["💡", "📝", "🔎", "🧭", "✨", "📎"] },
       loadingMessage: "내가 AI에게 맡기는 일과 직접 챙기는 일을 모으고 있어요.",
+      scoringVersion: "meaning-20261021",
+      tieBreakQuestions: [5,4,3,2,1,0],
       questions: [
-        { prompt: "친구들과 갈 여행 계획을 AI에게 부탁한다면, 첫 문장은?", options: [
-          { label: "예산·시간·꼭 가고 싶은 곳부터 정리해줄게", scores: { director: 3 } },
-          { label: "내 초안을 줄 테니 동선과 표현을 다듬어줘", scores: { editor: 3 } },
-          { label: "내가 생각 못 한 색다른 코스도 보여줘", scores: { explorer: 3 } },
-          { label: "추천마다 확인할 공식 정보도 함께 알려줘", scores: { verifier: 3 } }
-        ] },
-        { prompt: "AI가 그럴듯한 소개 글을 줬다. 다음 행동은?", options: [
-          { label: "내 말투에 맞게 문장을 하나씩 바꾼다", scores: { editor: 3 } },
-          { label: "완전히 다른 분위기의 버전도 받아본다", scores: { explorer: 3 } },
-          { label: "날짜나 수치가 맞는지 원문을 확인한다", scores: { verifier: 3 } },
-          { label: "처음 정한 독자와 목적에 맞는지 본다", scores: { director: 3 } }
-        ] },
-        { prompt: "답변이 마음에 안 들 때 나는?", options: [
-          { label: "역할이나 형식을 바꿔 실험해본다", scores: { explorer: 3 } },
-          { label: "어떤 근거로 나온 답인지 확인한다", scores: { verifier: 3 } },
-          { label: "원하는 결과와 조건을 더 구체적으로 쓴다", scores: { director: 3 } },
-          { label: "쓸 만한 부분만 남겨 직접 고친다", scores: { editor: 3 } }
-        ] },
-        { prompt: "모임 발표를 준비할 때 내가 가장 오래 붙잡는 것은?", options: [
-          { label: "인용한 자료가 실제로 있는지와 출처", scores: { verifier: 3 } },
-          { label: "누구에게 무엇을 전할지 정한 개요", scores: { director: 3 } },
-          { label: "듣는 사람이 이해하기 쉬운 문장", scores: { editor: 3 } },
-          { label: "시선을 끌 만한 새로운 표현 방식", scores: { explorer: 3 } }
-        ] },
-        { prompt: "시간이 10분 남았다면 AI와 어떤 일을 하고 싶어?", options: [
-          { label: "복잡한 할 일을 실행 순서로 쪼개기", scores: { director: 3 } },
-          { label: "쓰던 글을 내 느낌으로 마무리하기", scores: { editor: 3 } },
-          { label: "엉뚱한 아이디어를 여러 갈래로 펼치기", scores: { explorer: 3 } },
-          { label: "받은 정보 중 확인이 필요한 곳 표시하기", scores: { verifier: 3 } }
-        ] },
-        { prompt: "결과물을 보고 가장 뿌듯한 순간은?", options: [
-          { label: "누가 봐도 내 취향과 목소리가 느껴질 때", scores: { editor: 3 } },
-          { label: "처음엔 없던 새로운 방향을 찾았을 때", scores: { explorer: 3 } },
-          { label: "중요한 사실을 내 손으로 확인했을 때", scores: { verifier: 3 } },
-          { label: "처음 세운 목적에 딱 맞게 완성했을 때", scores: { director: 3 } }
-        ] }
+        {"prompt":"친구들과 갈 여행 계획을 AI에게 부탁한다면, 첫 문장은?","options":[{"label":"예산·시간·꼭 가고 싶은 곳부터 정리해줄게","scores":{"director":3}},{"label":"내 초안을 줄 테니 동선과 표현을 다듬어줘","scores":{"editor":3}},{"label":"내가 생각 못 한 색다른 코스도 보여줘","scores":{"explorer":3}},{"label":"추천마다 확인할 공식 정보도 함께 알려줘","scores":{"verifier":3}}]},
+        {"prompt":"AI가 그럴듯한 소개 글을 줬다. 다음 행동은?","options":[{"label":"내 말투에 맞게 문장을 하나씩 바꾼다","scores":{"editor":3}},{"label":"완전히 다른 분위기의 버전도 받아본다","scores":{"explorer":3}},{"label":"날짜나 수치가 맞는지 원문을 확인한다","scores":{"verifier":3}},{"label":"처음 정한 독자와 목적에 맞는지 본다","scores":{"director":3}}]},
+        {"prompt":"답변이 마음에 안 들 때 나는?","options":[{"label":"역할이나 형식을 바꿔 실험해본다","scores":{"explorer":3}},{"label":"어떤 근거로 나온 답인지 확인한다","scores":{"verifier":3}},{"label":"원하는 결과와 조건을 더 구체적으로 쓴다","scores":{"director":3}},{"label":"쓸 만한 부분만 남겨 직접 고친다","scores":{"editor":3}}]},
+        {"prompt":"모임 발표를 준비할 때 내가 가장 오래 붙잡는 것은?","options":[{"label":"인용한 자료가 실제로 있는지와 출처","scores":{"verifier":3}},{"label":"누구에게 무엇을 전할지 정한 개요","scores":{"director":3}},{"label":"듣는 사람이 이해하기 쉬운 문장","scores":{"editor":3}},{"label":"시선을 끌 만한 새로운 표현 방식","scores":{"explorer":3}}]},
+        {"prompt":"시간이 10분 남았다면 AI와 어떤 일을 하고 싶어?","options":[{"label":"복잡한 할 일을 실행 순서로 쪼개기","scores":{"director":3}},{"label":"쓰던 글을 내 느낌으로 마무리하기","scores":{"editor":3}},{"label":"엉뚱한 아이디어를 여러 갈래로 펼치기","scores":{"explorer":3}},{"label":"받은 정보 중 확인이 필요한 곳 표시하기","scores":{"verifier":3}}]},
+        {"prompt":"결과물을 보고 가장 뿌듯한 순간은?","options":[{"label":"누가 봐도 내 취향과 목소리가 느껴질 때","scores":{"editor":3}},{"label":"처음엔 없던 새로운 방향을 찾았을 때","scores":{"explorer":3}},{"label":"중요한 사실을 내 손으로 확인했을 때","scores":{"verifier":3}},{"label":"처음 세운 목적에 딱 맞게 완성했을 때","scores":{"director":3}}]}
       ],
       results: {
         director: { title: "방향 잡는 기획자", summary: "AI가 달리기 전에 목적지부터 고르는 파트너", description: "당신의 선택은 원하는 결과와 조건을 먼저 정하는 쪽에 모였어요. 할 일을 나누고 순서를 잡는 과정 자체가 협업의 중요한 부분이라고 느끼는 편이에요.", strengths: ["목적을 먼저 정함", "조건을 구체적으로 전달함", "할 일의 순서를 나눔"], tip: "다음에는 꼭 지킬 조건 세 가지와 바뀌어도 되는 한 가지를 나눠 적어보세요.", moodTitle: "협업 키워드", moodItems: ["목적지", "조건", "실행 순서"], matchTitle: "서로 보완할 파트너", matchLabel: "옆길 찾는 탐험가", matchDescription: "분명한 방향에 예상 밖의 아이디어를 더해볼 수 있어요.", heroEmoji: "🧭" },
@@ -339,7 +301,7 @@
       },
       resultPreview: ["방향 잡는 기획자", "내 색 입히는 편집자", "옆길 찾는 탐험가", "근거 챙기는 검증가"],
       relatedIds: ["test-011", "test-009", "test-025"],
-      callout: "재미용 선택 테스트예요. AI 활용 능력이나 직무 적합도를 평가하지 않아요. 동점이면 결과 소개 순서의 유형이 표시돼요."
+      callout: "재미용 선택 테스트예요. AI 활용 능력이나 직무 적합도를 평가하지 않아요. 동점이면 마지막 자기 설명부터 문항별 답을 다시 비교해요."
     }),
     "test-025": makePage({
       category: "취향 테스트",
@@ -349,43 +311,15 @@
       heroCardSubtitle: "알림을 끄면 뭘 할까?",
       heroArt: { centerEmoji: "🔕", stickers: ["🌿", "🎨", "☕", "📚", "🚶", "🫖"] },
       loadingMessage: "화면 밖에서 눈길이 가는 순간들을 모으고 있어요.",
+      scoringVersion: "meaning-20261021",
+      tieBreakQuestions: [5,4,3,2,1,0],
       questions: [
-        { prompt: "한 시간 동안 알림을 꺼두기로 했다. 제일 먼저 손이 가는 것은?", options: [
-          { label: "낙서할 종이나 만들다 만 소품", scores: { maker: 3 } },
-          { label: "가볍게 신고 나갈 운동화", scores: { wanderer: 3 } },
-          { label: "편한 담요와 읽던 책", scores: { keeper: 3 } },
-          { label: "같이 차 마실 사람의 빈 의자", scores: { connector: 3 } }
-        ] },
-        { prompt: "친구가 인기 장소에 갔다는데, 오늘 내 선택은?", options: [
-          { label: "집 앞 처음 보는 골목으로 걷는다", scores: { wanderer: 3 } },
-          { label: "늘 가던 조용한 곳에서 쉰다", scores: { keeper: 3 } },
-          { label: "가까운 사람과 편하게 수다 떤다", scores: { connector: 3 } },
-          { label: "내가 해보고 싶던 작은 작업을 한다", scores: { maker: 3 } }
-        ] },
-        { prompt: "카페에서 휴대폰을 가방에 넣었다. 내 눈길은?", options: [
-          { label: "늘 마시는 차의 향과 맛", scores: { keeper: 3 } },
-          { label: "맞은편 사람이 꺼내는 이야기", scores: { connector: 3 } },
-          { label: "냅킨에 그려보고 싶은 모양", scores: { maker: 3 } },
-          { label: "창밖의 낯선 간판과 지나는 풍경", scores: { wanderer: 3 } }
-        ] },
-        { prompt: "사진으로 남기지 않아도 좋았던 순간은?", options: [
-          { label: "대화가 잘 통해 한참 웃었던 시간", scores: { connector: 3 } },
-          { label: "서툴지만 내 손으로 완성한 것", scores: { maker: 3 } },
-          { label: "걷다가 우연히 발견한 작은 공원", scores: { wanderer: 3 } },
-          { label: "좋아하는 음악을 한 곡 끝까지 들은 때", scores: { keeper: 3 } }
-        ] },
-        { prompt: "아무 약속 없는 오후, 무엇 하나만 챙긴다면?", options: [
-          { label: "재료를 꺼내 무언가 만들기", scores: { maker: 3 } },
-          { label: "정해둔 길 없이 잠깐 걷기", scores: { wanderer: 3 } },
-          { label: "익숙한 자리를 편하게 정돈하기", scores: { keeper: 3 } },
-          { label: "반가운 사람과 함께 밥 먹기", scores: { connector: 3 } }
-        ] },
-        { prompt: "알림을 다시 켜기 전, 가장 듣고 싶은 내 한마디는?", options: [
-          { label: "오늘 새로운 풍경을 하나 찾았네", scores: { wanderer: 3 } },
-          { label: "평소 좋아하던 걸 충분히 즐겼네", scores: { keeper: 3 } },
-          { label: "같이 있는 사람에게 집중해서 좋았네", scores: { connector: 3 } },
-          { label: "작아도 내 손으로 하나 남겼네", scores: { maker: 3 } }
-        ] }
+        {"prompt":"한 시간 동안 알림을 꺼두기로 했다. 제일 먼저 손이 가는 것은?","options":[{"label":"낙서할 종이나 만들다 만 소품","scores":{"maker":3}},{"label":"가볍게 신고 나갈 운동화","scores":{"wanderer":3}},{"label":"편한 담요와 읽던 책","scores":{"keeper":3}},{"label":"같이 차 마실 사람의 빈 의자","scores":{"connector":3}}]},
+        {"prompt":"친구가 인기 장소에 갔다는데, 오늘 내 선택은?","options":[{"label":"집 앞 처음 보는 골목으로 걷는다","scores":{"wanderer":3}},{"label":"늘 가던 조용한 곳에서 쉰다","scores":{"keeper":3}},{"label":"가까운 사람과 편하게 수다 떤다","scores":{"connector":3}},{"label":"내가 해보고 싶던 작은 작업을 한다","scores":{"maker":3}}]},
+        {"prompt":"카페에서 휴대폰을 가방에 넣었다. 내 눈길은?","options":[{"label":"늘 마시는 차의 향과 맛","scores":{"keeper":3}},{"label":"맞은편 사람이 꺼내는 이야기","scores":{"connector":3}},{"label":"냅킨에 그려보고 싶은 모양","scores":{"maker":3}},{"label":"창밖의 낯선 간판과 지나는 풍경","scores":{"wanderer":3}}]},
+        {"prompt":"사진으로 남기지 않아도 좋았던 순간은?","options":[{"label":"대화가 잘 통해 한참 웃었던 시간","scores":{"connector":3}},{"label":"서툴지만 내 손으로 완성한 것","scores":{"maker":3}},{"label":"걷다가 우연히 발견한 작은 공원","scores":{"wanderer":3}},{"label":"좋아하는 음악을 한 곡 끝까지 들은 때","scores":{"keeper":3}}]},
+        {"prompt":"아무 약속 없는 오후, 무엇 하나만 챙긴다면?","options":[{"label":"재료를 꺼내 무언가 만들기","scores":{"maker":3}},{"label":"정해둔 길 없이 잠깐 걷기","scores":{"wanderer":3}},{"label":"익숙한 자리를 편하게 정돈하기","scores":{"keeper":3}},{"label":"반가운 사람과 함께 밥 먹기","scores":{"connector":3}}]},
+        {"prompt":"알림을 다시 켜기 전, 가장 듣고 싶은 내 한마디는?","options":[{"label":"오늘 새로운 풍경을 하나 찾았네","scores":{"wanderer":3}},{"label":"평소 좋아하던 걸 충분히 즐겼네","scores":{"keeper":3}},{"label":"같이 있는 사람에게 집중해서 좋았네","scores":{"connector":3}},{"label":"작아도 내 손으로 하나 남겼네","scores":{"maker":3}}]}
       ],
       results: {
         maker: { title: "손끝 몰입 모드", summary: "스크롤 대신 내 손으로 작은 흔적을 남기는 시간", description: "당신의 선택은 그리기나 만들기처럼 직접 해보는 즐거움에 모였어요. 누군가의 완성작을 보는 것보다 조금 서툴러도 내가 만든 결과를 볼 때 시간이 꽉 찬 느낌이 드는 편이에요.", strengths: ["작은 시작을 즐김", "과정에 눈길을 줌", "내 흔적을 남김"], tip: "새 도구를 사기 전에 집에 있는 종이 한 장으로 10분만 놀아보세요.", moodTitle: "오프라인 키워드", moodItems: ["손끝", "낙서", "작은 완성"], matchTitle: "같이 즐길 친구", matchLabel: "골목 탐험 모드", matchDescription: "산책에서 찾은 장면을 함께 그리고 만들어보기 좋아요.", heroEmoji: "🎨" },
@@ -395,7 +329,7 @@
       },
       resultPreview: ["손끝 몰입 모드", "골목 탐험 모드", "익숙한 평온 모드", "눈앞의 대화 모드"],
       relatedIds: ["test-020", "test-002", "test-024"],
-      callout: "어느 모드가 더 건강하거나 좋은 것은 아니에요. 오늘 선택한 즐거움만 가볍게 비교해요. 동점이면 결과 소개 순서의 유형이 표시돼요."
+      callout: "어느 모드가 더 건강하거나 좋은 것은 아니에요. 오늘 선택한 즐거움만 가볍게 비교해요. 동점이면 마지막 자기 설명부터 문항별 답을 다시 비교해요."
     }),
     "test-007": makePage({
       category: "연애 테스트",
@@ -404,15 +338,17 @@
       heroCardSubtitle: "내 말투의 온도는?",
       heroArt: { centerEmoji: "💬", stickers: ["📱", "💗", "🫧", "🌙", "💌", "😉"] },
       loadingMessage: "답변을 조합해서 당신의 썸 대화 리듬을 정리하고 있습니다.",
+      scoringVersion: "meaning-20261021",
+      tieBreakQuestions: [7,4,0,6,5,3,2,1],
       questions: [
-        q("호감 가는 사람이 스토리를 올리면 나는?", "가볍게 반응하며 먼저 물꼬를 튼다.", { spark: 2, tease: 1 }, "괜히 티 날까 봐 한 번 더 보고 지나간다.", { calm: 2, steady: 1 }),
-        q("답장이 늦게 왔을 때 더 가까운 반응은?", "내 텐션은 유지하되 분위기를 끌고 간다.", { spark: 2 }, "상대 속도에 맞춰 차분하게 템포를 조절한다.", { steady: 2, calm: 1 }),
-        q("썸 대화에서 내가 자주 쓰는 방식은?", "농담이나 이모지로 분위기를 가볍게 만든다.", { tease: 2, spark: 1 }, "상대 하루를 묻고 공감하며 흐름을 잇는다.", { steady: 2 }),
-        q("연락이 잘 통하는 순간 나는?", "이 기세로 더 재밌는 대화를 이어가고 싶다.", { spark: 2, tease: 1 }, "좋은 흐름을 깨지 않게 적당한 템포를 유지한다.", { steady: 2, calm: 1 }),
-        q("상대가 장난을 걸어오면 나는?", "더 센스 있게 받아치며 분위기를 살린다.", { tease: 2 }, "웃으며 받아주되 과하지 않게 맞춘다.", { calm: 2, steady: 1 }),
-        q("호감 표현에서 더 가까운 것은?", "은근히 티 내기보다 제법 잘 드러나는 편", { spark: 2 }, "조금씩 편안함을 쌓다가 자연스럽게 표현하는 편", { steady: 2, calm: 1 }),
-        q("대화가 끊길 것 같을 때 나는?", "새 화제나 장난을 던져 다시 살린다.", { tease: 2, spark: 1 }, "굳이 억지로 잇지 않고 다음 타이밍을 본다.", { calm: 2 }),
-        q("내가 가장 듣고 싶은 말은?", "너랑 대화하면 텐션이 올라가", { spark: 2, tease: 1 }, "너랑 대화하면 편하고 마음이 놓여", { steady: 2, calm: 1 })
+        {"prompt":"썸 상대와 대화를 시작할 때 나는?","options":[{"label":"먼저 반응하고 새 화제를 꺼낸다.","scores":{"spark":2}},{"label":"가벼운 안부를 꾸준히 주고받는다.","scores":{"steady":2}},{"label":"웃긴 이야기나 장난으로 말을 건다.","scores":{"tease":2}},{"label":"지금 이야기하기 좋은 때인지 살핀다.","scores":{"calm":2}}]},
+        {"prompt":"답장이 늦게 왔을 때 더 가까운 반응은?","options":[{"label":"내 텐션은 유지하되 분위기를 끌고 간다.","scores":{"spark":1}},{"label":"상대 속도에 맞춰 차분하게 템포를 조절한다.","scores":{"calm":1}}]},
+        {"prompt":"썸 대화에서 내가 자주 쓰는 방식은?","options":[{"label":"농담이나 이모지로 분위기를 가볍게 만든다.","scores":{"tease":1}},{"label":"상대 하루를 묻고 공감하며 흐름을 잇는다.","scores":{"steady":1}}]},
+        {"prompt":"연락이 잘 통하는 순간 나는?","options":[{"label":"이 기세로 더 재밌는 대화를 이어가고 싶다.","scores":{"spark":1}},{"label":"좋은 흐름을 깨지 않게 적당한 템포를 유지한다.","scores":{"steady":1}}]},
+        {"prompt":"상대의 답장을 보고 내가 자주 하는 행동은?","options":[{"label":"신나서 다음 화제를 적극적으로 연다.","scores":{"spark":2}},{"label":"하루 이야기를 묻고 자연스럽게 이어간다.","scores":{"steady":2}},{"label":"재치 있게 받아치며 웃을 일을 만든다.","scores":{"tease":2}},{"label":"말투와 반응을 읽고 답장 템포를 맞춘다.","scores":{"calm":2}}]},
+        {"prompt":"호감 표현에서 더 가까운 것은?","options":[{"label":"은근히 티 내기보다 제법 잘 드러나는 편","scores":{"spark":1}},{"label":"조금씩 편안함을 쌓다가 자연스럽게 표현하는 편","scores":{"steady":1}}]},
+        {"prompt":"대화가 끊길 것 같을 때 나는?","options":[{"label":"새 화제나 장난을 던져 다시 살린다.","scores":{"tease":1}},{"label":"굳이 억지로 잇지 않고 다음 타이밍을 본다.","scores":{"calm":1}}]},
+        {"prompt":"내 대화의 매력에 가까운 것은?","options":[{"label":"먼저 불을 붙이는 활기","scores":{"spark":2}},{"label":"부담 없이 이어지는 꾸준함","scores":{"steady":2}},{"label":"둘만 웃게 되는 장난과 센스","scores":{"tease":2}},{"label":"상대의 온도와 타이밍을 읽는 섬세함","scores":{"calm":2}}]}
       ],
       results: {
         spark: { title: "직진 온도상승형", summary: "대화에 불이 붙으면 먼저 분위기를 살리는 타입", description: "당신은 썸 대화에서 텐션을 살리는 힘이 좋습니다. 답장이 오면 흐름을 놓치지 않고, 감정이 생기면 비교적 솔직하게 드러나는 편입니다.", strengths: ["대화 텐션을 살리는 추진력", "호감이 생기면 흐름을 주도하는 편", "어색함을 길게 끌지 않음"], tip: "당신의 빠른 텐션이 매력이지만, 상대 속도를 한 박자만 읽어주면 훨씬 안정적으로 이어집니다.", moodTitle: "대화 무드 키워드", moodItems: ["빠른 티키타카", "먼저 반응하기", "설렘 텐션"], matchTitle: "찰떡 케미", matchLabel: "편안한 스며듦형", matchDescription: "당신의 생동감에 상대의 안정감이 더해지면 대화가 오래 갑니다.", heroEmoji: "🔥" },
@@ -431,15 +367,17 @@
       heroCardSubtitle: "오래가는 내 포인트",
       heroArt: { centerEmoji: "✨", stickers: ["🌟", "🎀", "💡", "🪞", "🌼", "🫶"] },
       loadingMessage: "답변을 조합해서 당신의 오래가는 매력 포지션을 정리하고 있습니다.",
+      scoringVersion: "meaning-20261021",
+      tieBreakQuestions: [7,4,0,6,5,3,2,1],
       questions: [
-        q("사람들이 나와 친해진 뒤 자주 말하는 것은?", "생각보다 훨씬 따뜻하다는 말", { comfort: 2, glow: 1 }, "생각보다 더 재밌고 센스 있다는 말", { wit: 2, mystery: 1 }),
-        q("내가 편한 분위기는?", "누군가가 마음 놓고 쉴 수 있는 분위기", { comfort: 2 }, "이야기 흐름이 살아 있고 반응이 오가는 분위기", { wit: 2, glow: 1 }),
-        q("처음엔 조용해 보여도 실제로는?", "은근히 배려가 많고 챙기는 편", { comfort: 2, mystery: 1 }, "한마디씩 툭툭 던지는 포인트가 있다", { wit: 2 }),
-        q("사람들이 나를 오래 기억하는 이유는?", "함께 있으면 기분이 차분해져서", { comfort: 2 }, "생각보다 인상이 남는 포인트가 있어서", { mystery: 2, glow: 1 }),
-        q("내가 자주 듣는 칭찬은?", "말이나 행동이 다정하다는 말", { glow: 2, comfort: 1 }, "은근히 웃기고 매력 있다는 말", { wit: 2 }),
-        q("친해질수록 더 드러나는 건?", "편안함과 신뢰", { comfort: 2, glow: 1 }, "개성과 의외성", { mystery: 2, wit: 1 }),
-        q("사람과 가까워질 때 나는?", "작은 걸 기억하고 챙기며 스며든다.", { glow: 2, comfort: 1 }, "타이밍 좋은 말과 반응으로 존재감이 커진다.", { wit: 2 }),
-        q("내 매력을 한 단어로 고른다면?", "포근함", { comfort: 2, glow: 1 }, "여운", { mystery: 2, wit: 1 })
+        {"prompt":"친해진 사람이 내게 자주 하는 말은?","options":[{"label":"작은 것도 기억하고 따뜻하게 챙겨준다.","scores":{"glow":2}},{"label":"같이 있으면 애쓰지 않아도 편하다.","scores":{"comfort":2}},{"label":"한마디씩 하는 말이 재밌고 센스 있다.","scores":{"wit":2}},{"label":"알수록 예상 못 한 취향과 생각이 나온다.","scores":{"mystery":2}}]},
+        {"prompt":"내가 편한 분위기는?","options":[{"label":"누군가가 마음 놓고 쉴 수 있는 분위기","scores":{"comfort":1}},{"label":"이야기 흐름이 살아 있고 반응이 오가는 분위기","scores":{"wit":1}}]},
+        {"prompt":"처음엔 조용해 보여도 실제로는?","options":[{"label":"은근히 배려가 많고 챙기는 편","scores":{"glow":1}},{"label":"한마디씩 툭툭 던지는 포인트가 있다","scores":{"wit":1}}]},
+        {"prompt":"사람들이 나를 오래 기억하는 이유는?","options":[{"label":"함께 있으면 기분이 차분해져서","scores":{"comfort":1}},{"label":"생각보다 인상이 남는 포인트가 있어서","scores":{"mystery":1}}]},
+        {"prompt":"누군가와 더 친해질 때 드러나는 내 모습은?","options":[{"label":"필요했던 것을 기억해 작은 배려를 건넨다.","scores":{"glow":2}},{"label":"침묵도 어색하지 않은 분위기를 만든다.","scores":{"comfort":2}},{"label":"타이밍 좋은 반응으로 웃게 한다.","scores":{"wit":2}},{"label":"평소와 다른 취향이나 깊은 이야기를 나눈다.","scores":{"mystery":2}}]},
+        {"prompt":"친해질수록 더 드러나는 건?","options":[{"label":"편안함과 신뢰","scores":{"comfort":1}},{"label":"개성과 의외성","scores":{"mystery":1}}]},
+        {"prompt":"사람과 가까워질 때 나는?","options":[{"label":"작은 걸 기억하고 챙기며 스며든다.","scores":{"glow":1}},{"label":"타이밍 좋은 말과 반응으로 존재감이 커진다.","scores":{"wit":1}}]},
+        {"prompt":"오래 기억되고 싶은 나의 매력은?","options":[{"label":"다정한 온기","scores":{"glow":2}},{"label":"마음 놓이는 편안함","scores":{"comfort":2}},{"label":"재치 있는 말과 반응","scores":{"wit":2}},{"label":"계속 궁금해지는 깊이와 의외성","scores":{"mystery":2}}]}
       ],
       results: {
         glow: { title: "은근 발광형", summary: "시간이 지날수록 따뜻함이 선명해지는 타입", description: "당신의 매력은 처음부터 화려하게 튀기보다, 알고 지낼수록 점점 크게 느껴지는 쪽에 가깝습니다. 사소한 배려와 온기가 오래 남습니다.", strengths: ["자연스러운 따뜻함", "부담 없는 호감", "작게 오래 남는 여운"], tip: "이미 좋은 빛을 갖고 있으니, 가끔은 스스로를 더 드러내는 순간도 만들어보세요.", moodTitle: "내 매력 키워드", moodItems: ["온기", "배려", "잔잔한 존재감"], matchTitle: "찰떡 포인트", matchLabel: "위트 레이더형", matchDescription: "당신의 따뜻함에 상대의 재치가 더해지면 공기가 더 풍성해집니다.", heroEmoji: "🌟" },
@@ -458,15 +396,17 @@
       heroCardSubtitle: "나는 어떻게 고를까?",
       heroArt: { centerEmoji: "🧭", stickers: ["🧠", "⚡", "🤝", "📋", "🎯", "☁️"] },
       loadingMessage: "답변을 조합해서 당신의 결정 스타일을 정리하고 있습니다.",
+      scoringVersion: "meaning-20261021",
+      tieBreakQuestions: [7,5,0,6,4,3,2,1],
       questions: [
-        q("메뉴를 고를 때 나는?", "후기나 실패 확률을 먼저 본다.", { logic: 2 }, "지금 당기는 쪽으로 빠르게 간다.", { gut: 2, quick: 1 }),
-        q("중요한 선택을 앞두면?", "혼자 정리하고 기준을 세운다.", { logic: 2, harmony: 1 }, "생각보다 느낌과 직감이 크게 작용한다.", { gut: 2 }),
-        q("다른 사람 의견은 내게?", "참고는 하지만 내 기준이 더 중요하다.", { logic: 2, quick: 1 }, "최종 선택 전에 꼭 한 번 더 듣는다.", { harmony: 4 }),
-        q("선택이 길어질 때 나는?", "정보가 부족해서라고 느낀다.", { logic: 2 }, "결정 피로가 와서 빨리 끝내고 싶어진다.", { quick: 2 }),
-        q("갑자기 기회가 생기면?", "기본 조건부터 빠르게 체크한다.", { logic: 2, quick: 1 }, "끌리면 일단 잡고 본다.", { gut: 2 }),
-        q("후회가 적은 결정은?", "충분히 따져보고 내린 결정", { logic: 2 }, "당시 마음이 확실했던 결정", { gut: 2 }),
-        q("친구와 같이 정할 때 나는?", "각자 원하는 걸 정리하며 중간점을 찾는다.", { harmony: 4 }, "대략 방향이 보이면 빨리 결론 내린다.", { quick: 2, logic: 1 }),
-        q("내 선택 스타일을 한마디로 말하면?", "이해하고 납득되면 움직이는 편", { logic: 2, harmony: 1 }, "감이 오면 망설임이 줄어드는 편", { gut: 2, quick: 1 })
+        {"prompt":"메뉴를 정할 때 가장 먼저 하는 것은?","options":[{"label":"후기와 조건을 비교한다.","scores":{"logic":2}},{"label":"지금 제일 당기는 것을 고른다.","scores":{"gut":2}},{"label":"같이 먹는 사람들의 취향을 묻는다.","scores":{"harmony":2}},{"label":"오래 걸리지 않게 빠르게 정한다.","scores":{"quick":2}}]},
+        {"prompt":"중요한 선택을 앞두면?","options":[{"label":"혼자 정리하고 기준을 세운다.","scores":{"logic":1}},{"label":"생각보다 느낌과 직감이 크게 작용한다.","scores":{"gut":1}}]},
+        {"prompt":"다른 사람 의견은 내게?","options":[{"label":"참고는 하지만 내 기준이 더 중요하다.","scores":{"logic":1}},{"label":"최종 선택 전에 꼭 한 번 더 듣는다.","scores":{"harmony":1}}]},
+        {"prompt":"선택이 길어질 때 나는?","options":[{"label":"정보가 부족해서라고 느낀다.","scores":{"logic":1}},{"label":"결정 피로가 와서 빨리 끝내고 싶어진다.","scores":{"quick":1}}]},
+        {"prompt":"갑자기 기회가 생기면?","options":[{"label":"기본 조건부터 빠르게 체크한다.","scores":{"logic":1}},{"label":"끌리면 일단 잡고 본다.","scores":{"gut":1}}]},
+        {"prompt":"후회가 적은 선택에 가장 가까운 것은?","options":[{"label":"조건을 따져보고 납득한 선택","scores":{"logic":2}},{"label":"그때 내 마음이 확실했던 선택","scores":{"gut":2}},{"label":"함께하는 사람들의 사정을 맞춘 선택","scores":{"harmony":2}},{"label":"정해둔 시한 안에 끝낸 선택","scores":{"quick":2}}]},
+        {"prompt":"친구와 같이 정할 때 나는?","options":[{"label":"각자 원하는 걸 정리하며 중간점을 찾는다.","scores":{"harmony":1}},{"label":"대략 방향이 보이면 빨리 결론 내린다.","scores":{"quick":1}}]},
+        {"prompt":"내 결정 방식을 가장 잘 설명하는 말은?","options":[{"label":"근거와 기준이 있어야 움직인다.","scores":{"logic":2}},{"label":"끌리는 느낌을 믿고 고른다.","scores":{"gut":2}},{"label":"사람과 상황의 균형을 맞춘다.","scores":{"harmony":2}},{"label":"방향이 보이면 결론부터 낸다.","scores":{"quick":2}}]}
       ],
       results: {
         logic: { title: "분석 나침반형", summary: "기준을 세우고 납득해야 움직이는 타입", description: "당신은 선택 앞에서 구조와 근거를 중시합니다. 충분히 이해한 뒤 결정해야 후회가 적고, 그래서 중요한 문제일수록 더 안정적인 결론을 내립니다.", strengths: ["기준이 분명함", "후회가 적은 결정", "복잡한 선택에 강함"], tip: "충분한 분석은 강점이지만, 작은 선택까지 같은 에너지를 쓰면 지칠 수 있어요.", moodTitle: "선택 키워드", moodItems: ["기준", "납득", "정리"], matchTitle: "찰떡 보완", matchLabel: "직감 스위치형", matchDescription: "상대의 직감이 당신의 긴 검토 시간을 가볍게 풀어줄 수 있습니다.", heroEmoji: "🧠" },
@@ -485,15 +425,17 @@
       heroCardSubtitle: "나는 어디에 쓸까?",
       heroArt: { centerEmoji: "💳", stickers: ["👜", "🧾", "☕", "🎁", "💸", "🛍️"] },
       loadingMessage: "답변을 조합해서 당신의 소비 스타일을 정리하고 있습니다.",
+      scoringVersion: "meaning-20261021",
+      tieBreakQuestions: [7,6,0,5,4,3,2,1],
       questions: [
-        q("월급날이 오면 먼저 하는 일은?", "고정 지출과 예산부터 확인한다.", { planner: 2, saver: 1 }, "갖고 싶던 것부터 장바구니를 다시 본다.", { joy: 2, curator: 1 }),
-        q("할인 문자를 받았을 때 나는?", "정말 필요할 때만 반응한다.", { saver: 2, planner: 1 }, "원래 고민하던 거면 지금이다 싶다.", { joy: 2, curator: 1 }),
-        q("더 돈이 아깝지 않은 쪽은?", "기억에 남는 경험", { joy: 2 }, "오래 쓰는 물건", { curator: 2, planner: 1 }),
-        q("예상치 못한 지출이 생기면?", "다른 항목을 줄여 균형을 맞춘다.", { planner: 2 }, "일단 해결하고 나중에 정리한다.", { joy: 2, saver: 1 }),
-        q("선물 고를 때 나는?", "받는 사람이 오래 쓸 걸 생각한다.", { curator: 2 }, "딱 지금 기분 좋아질 걸 고른다.", { joy: 2 }),
-        q("내 소비 후회는 주로 언제 오나?", "계획 없이 연달아 결제했을 때", { saver: 2, planner: 1 }, "너무 참다가 결국 한 번에 크게 쓸 때", { joy: 2, curator: 1 }),
-        q("쇼핑 만족도가 큰 순간은?", "예산 안에서 깔끔하게 마무리됐을 때", { planner: 2, saver: 1 }, "딱 마음에 드는 걸 찾았을 때", { curator: 2, joy: 1 }),
-        q("내 소비를 한마디로 하면?", "흐름을 계산하며 쓰는 편", { planner: 2, saver: 1 }, "필요와 기분 사이에서 의미를 찾는 편", { joy: 2, curator: 1 })
+        {"prompt":"돈이 들어오면 먼저 하는 일은?","options":[{"label":"고정 지출과 항목별 예산을 정한다.","scores":{"planner":2}},{"label":"지금 즐길 경험이나 물건을 고른다.","scores":{"joy":2}},{"label":"오래 고민한 취향의 물건을 살핀다.","scores":{"curator":2}},{"label":"꼭 필요한 몫 외에는 남겨둔다.","scores":{"saver":2}}]},
+        {"prompt":"할인 문자를 받았을 때 나는?","options":[{"label":"정말 필요할 때만 반응한다.","scores":{"saver":1}},{"label":"원래 고민하던 거면 지금이다 싶다.","scores":{"curator":1}}]},
+        {"prompt":"더 돈이 아깝지 않은 쪽은?","options":[{"label":"기억에 남는 경험","scores":{"joy":1}},{"label":"오래 쓰는 물건","scores":{"curator":1}}]},
+        {"prompt":"예상치 못한 지출이 생기면?","options":[{"label":"다른 항목을 줄여 균형을 맞춘다.","scores":{"planner":1}},{"label":"일단 해결하고 나중에 정리한다.","scores":{"joy":1}}]},
+        {"prompt":"선물 고를 때 나는?","options":[{"label":"받는 사람이 오래 쓸 걸 생각한다.","scores":{"saver":1}},{"label":"딱 지금 기분 좋아질 걸 고른다.","scores":{"joy":1}}]},
+        {"prompt":"내 소비 후회는 주로 언제 오나?","options":[{"label":"계획 없이 연달아 결제했을 때","scores":{"planner":1}},{"label":"너무 참다가 결국 한 번에 크게 쓸 때","scores":{"joy":1}}]},
+        {"prompt":"소비하고 가장 만족스러운 순간은?","options":[{"label":"예산과 실제 지출이 깔끔하게 맞았을 때","scores":{"planner":2}},{"label":"원하던 경험으로 오늘이 즐거워졌을 때","scores":{"joy":2}},{"label":"오래 좋아할 만한 물건을 제대로 골랐을 때","scores":{"curator":2}},{"label":"사지 않아도 괜찮았고 여유 자금이 남았을 때","scores":{"saver":2}}]},
+        {"prompt":"내가 돈을 쓸 때 가장 지키는 것은?","options":[{"label":"전체 지출의 계획과 균형","scores":{"planner":2}},{"label":"지금 누리는 즐거움","scores":{"joy":2}},{"label":"내 취향에 꼭 맞는 가치","scores":{"curator":2}},{"label":"무리하지 않고 남기는 안전감","scores":{"saver":2}}]}
       ],
       results: {
         planner: { title: "예산 설계형", summary: "큰 흐름을 먼저 보는 안정적 소비 타입", description: "당신은 소비에서도 구조를 중시합니다. 예산과 우선순위를 먼저 보고, 무리 없는 선에서 만족도를 만드는 편입니다.", strengths: ["예산 감각", "후회가 적은 소비", "장기 흐름 관리"], tip: "계획이 강점인 만큼, 가끔은 작은 기쁨 예산도 따로 잡아두면 더 균형이 좋아집니다.", moodTitle: "소비 키워드", moodItems: ["예산", "우선순위", "안정감"], matchTitle: "찰떡 보완", matchLabel: "기분 충전형", matchDescription: "당신의 구조에 상대의 작은 즐거움 감각이 더해지면 더 풍성해집니다.", heroEmoji: "📊" },
@@ -512,15 +454,17 @@
       heroCardSubtitle: "나는 어떤 역할?",
       heroArt: { centerEmoji: "🧩", stickers: ["📣", "📎", "🛠️", "🤝", "🗂️", "💡"] },
       loadingMessage: "답변을 조합해서 당신의 팀플 포지션을 정리하고 있습니다.",
+      scoringVersion: "meaning-20261021",
+      tieBreakQuestions: [7,3,0,6,5,4,2,1],
       questions: [
-        q("팀 과제가 시작되면 나는?", "큰 방향과 역할 분배부터 본다.", { captain: 2, mediator: 1 }, "실제로 해야 할 작업부터 손에 잡는다.", { maker: 2, spark: 1 }),
-        q("회의가 길어질 때 더 가까운 역할은?", "정리해서 결론을 내리게 한다.", { captain: 2 }, "무거워진 분위기를 풀어준다.", { spark: 2, mediator: 1 }),
-        q("마감이 다가오면 나는?", "누가 어디까지 했는지 체크한다.", { captain: 2, mediator: 1 }, "내 파트를 끝까지 책임지고 밀어붙인다.", { maker: 2 }),
-        q("갈등이 생기면 나는?", "오해를 풀고 중간 지점을 찾는다.", { mediator: 2 }, "일단 할 일부터 끝내고 보자고 한다.", { maker: 2, captain: 1 }),
-        q("팀플에서 제일 중요하게 보는 건?", "전체 흐름이 안 무너지는 것", { captain: 2 }, "각자 잘할 수 있게 분위기가 유지되는 것", { mediator: 2, spark: 1 }),
-        q("내가 칭찬받는 포인트는?", "든든하고 믿음직하다는 말", { captain: 2, maker: 1 }, "같이 하면 덜 힘들고 재밌다는 말", { spark: 2, mediator: 1 }),
-        q("처음 만난 팀원과도 나는?", "일단 해야 할 구조를 빨리 맞춘다.", { captain: 2 }, "분위기를 보며 편하게 말 걸어본다.", { mediator: 2, spark: 1 }),
-        q("내 포지션을 한마디로 말하면?", "흐름을 잡는 사람", { captain: 2, mediator: 1 }, "분위기와 실행을 살리는 사람", { maker: 2, spark: 1 })
+        {"prompt":"팀 과제가 시작되면 먼저 하는 일은?","options":[{"label":"목표와 역할, 전체 순서를 정한다.","scores":{"captain":2}},{"label":"일단 쓸 수 있는 초안을 만든다.","scores":{"maker":2}},{"label":"각자 의견과 어려운 점을 듣는다.","scores":{"mediator":2}},{"label":"말 걸기 쉬운 분위기를 만든다.","scores":{"spark":2}}]},
+        {"prompt":"회의가 길어질 때 더 가까운 역할은?","options":[{"label":"정리해서 결론을 내리게 한다.","scores":{"captain":1}},{"label":"무거워진 분위기를 풀어준다.","scores":{"spark":1}}]},
+        {"prompt":"마감이 다가오면 나는?","options":[{"label":"누가 어디까지 했는지 체크한다.","scores":{"captain":1}},{"label":"내 파트를 끝까지 책임지고 밀어붙인다.","scores":{"maker":1}}]},
+        {"prompt":"회의가 막혔을 때 나의 역할은?","options":[{"label":"할 일을 정리하고 결론을 잡는다.","scores":{"captain":2}},{"label":"직접 예시를 만들어 보여준다.","scores":{"maker":2}},{"label":"엇갈린 의견에서 공통점을 찾는다.","scores":{"mediator":2}},{"label":"농담이나 격려로 무거운 공기를 푼다.","scores":{"spark":2}}]},
+        {"prompt":"팀플에서 제일 중요하게 보는 건?","options":[{"label":"전체 흐름이 안 무너지는 것","scores":{"captain":1}},{"label":"각자 잘할 수 있게 분위기가 유지되는 것","scores":{"mediator":1}}]},
+        {"prompt":"내가 칭찬받는 포인트는?","options":[{"label":"든든하고 믿음직하다는 말","scores":{"captain":1}},{"label":"같이 하면 덜 힘들고 재밌다는 말","scores":{"spark":1}}]},
+        {"prompt":"처음 만난 팀원과도 나는?","options":[{"label":"일단 해야 할 구조를 빨리 맞춘다.","scores":{"captain":1}},{"label":"분위기를 보며 편하게 말 걸어본다.","scores":{"mediator":1}}]},
+        {"prompt":"팀원이 내게 부탁할 법한 일은?","options":[{"label":"전체 흐름과 마감 잡아주기","scores":{"captain":2}},{"label":"실제로 쓸 결과물 만들어주기","scores":{"maker":2}},{"label":"사람 사이 의견 조율해주기","scores":{"mediator":2}},{"label":"지친 팀에 활기 넣어주기","scores":{"spark":2}}]}
       ],
       results: {
         captain: { title: "흐름 리더형", summary: "전체 방향과 구조를 먼저 잡는 타입", description: "당신은 팀 안에서 큰 흐름을 보고 구조를 세우는 데 강합니다. 누가 무엇을 해야 하는지, 언제까지 가야 하는지를 비교적 빠르게 파악합니다.", strengths: ["전체 구조 파악", "역할 분배", "마감 관리"], tip: "리더십이 강점인 만큼, 팀원마다 일하는 속도 차이를 읽어주면 더 부드럽게 이끌 수 있어요.", moodTitle: "팀플 키워드", moodItems: ["구조", "마감", "방향"], matchTitle: "찰떡 조합", matchLabel: "분위기 점화형", matchDescription: "당신의 구조 위에 상대의 공기 조절 능력이 더해지면 팀플 만족도가 확 올라갑니다.", heroEmoji: "📣" },
@@ -539,15 +483,17 @@
       heroCardSubtitle: "쉬는 날 누구와?",
       heroArt: { centerEmoji: "🌿", stickers: ["🛋️", "☕", "👥", "🌙", "📵", "🎧"] },
       loadingMessage: "답변을 조합해서 당신의 인간관계 충전 방식을 정리하고 있습니다.",
+      scoringVersion: "meaning-20261021",
+      tieBreakQuestions: [7,3,0,6,5,4,2,1],
       questions: [
-        q("바쁜 한 주가 끝난 주말, 가장 먼저 떠오르는 건?", "조용히 혼자 쉬고 싶다.", { solo: 2, vanish: 1 }, "편한 사람 한두 명은 보고 싶다.", { duo: 2, circle: 1 }),
-        q("갑자기 약속이 취소되면 나는?", "오히려 숨통이 트여서 좋을 때가 있다.", { solo: 2, vanish: 1 }, "아쉽지만 다른 친구에게 연락해볼 수도 있다.", { circle: 2, duo: 1 }),
-        q("휴식에 더 가까운 건?", "말 수가 적어도 편한 시간", { solo: 2 }, "좋아하는 사람과 도란도란 있는 시간", { duo: 2 }),
-        q("사람 많은 자리에 다녀온 뒤 나는?", "연락과 약속을 끊고 완전히 쉬고 싶다.", { vanish: 4 }, "즐겁지만 결국 친한 사람과 정리하고 싶어진다.", { duo: 2, circle: 1 }),
-        q("쉬는 날 연락이 많이 오면?", "답장 템포를 늦추며 내 호흡을 찾는다.", { solo: 2, vanish: 1 }, "지금 가능한 사람들과 가볍게 이어간다.", { circle: 2 }),
-        q("가장 편한 약속은?", "정해진 시간 없이 느슨한 만남", { duo: 2, solo: 1 }, "여럿이 만나도 역할 없는 편한 모임", { circle: 2 }),
-        q("사람에게서 힘을 얻는 방식은?", "깊게 연결되는 한두 명의 대화", { duo: 2 }, "그날그날 가볍게 섞이는 활기", { circle: 2 }),
-        q("내 충전 버튼에 가까운 건?", "아예 잠수 타듯 쉬기", { vanish: 4 }, "편한 관계와 적당히 이어져 있기", { duo: 2, circle: 1 })
+        {"prompt":"바쁜 한 주가 끝난 뒤 가장 원하는 쉬는 시간은?","options":[{"label":"혼자 취미를 하며 내 시간을 보내기","scores":{"solo":2}},{"label":"편한 한 사람과 도란도란 이야기하기","scores":{"duo":2}},{"label":"여럿과 부담 없이 만나 웃기","scores":{"circle":2}},{"label":"알림과 약속을 모두 끄고 잠수 타기","scores":{"vanish":2}}]},
+        {"prompt":"갑자기 약속이 취소되면 나는?","options":[{"label":"오히려 숨통이 트여서 좋을 때가 있다.","scores":{"solo":1}},{"label":"아쉽지만 다른 친구에게 연락해볼 수도 있다.","scores":{"circle":1}}]},
+        {"prompt":"휴식에 더 가까운 건?","options":[{"label":"말 수가 적어도 편한 시간","scores":{"solo":1}},{"label":"좋아하는 사람과 도란도란 있는 시간","scores":{"duo":1}}]},
+        {"prompt":"사람 많은 자리에 다녀온 뒤 더 필요한 것은?","options":[{"label":"혼자 좋아하는 일을 하며 내 리듬 찾기","scores":{"solo":2}},{"label":"가장 편한 한 사람과 이야기 마무리하기","scores":{"duo":2}},{"label":"아쉬우니 몇 사람과 더 가볍게 놀기","scores":{"circle":2}},{"label":"누구에게도 반응하지 않고 완전히 쉬기","scores":{"vanish":2}}]},
+        {"prompt":"쉬는 날 연락이 많이 오면?","options":[{"label":"답장 템포를 늦추며 내 호흡을 찾는다.","scores":{"solo":1}},{"label":"지금 가능한 사람들과 가볍게 이어간다.","scores":{"circle":1}}]},
+        {"prompt":"가장 편한 약속은?","options":[{"label":"정해진 시간 없이 느슨한 만남","scores":{"duo":1}},{"label":"여럿이 만나도 역할 없는 편한 모임","scores":{"circle":1}}]},
+        {"prompt":"사람에게서 힘을 얻는 방식은?","options":[{"label":"깊게 연결되는 한두 명의 대화","scores":{"duo":1}},{"label":"그날그날 가볍게 섞이는 활기","scores":{"circle":1}}]},
+        {"prompt":"내 충전 버튼에 가장 가까운 것은?","options":[{"label":"내 취미와 혼자만의 시간","scores":{"solo":2}},{"label":"편한 한 사람과의 연결","scores":{"duo":2}},{"label":"여럿과 섞이는 가벼운 활기","scores":{"circle":2}},{"label":"연락까지 내려놓는 완전한 잠수","scores":{"vanish":2}}]}
       ],
       results: {
         solo: { title: "혼자 숨고르기형", summary: "혼자 있는 시간이 있어야 진짜 충전되는 타입", description: "당신은 관계를 싫어한다기보다, 쉬는 날만큼은 혼자 내 호흡을 회복해야 에너지가 차는 편입니다. 조용한 시간이 큰 회복 자원입니다.", strengths: ["자기 회복 감각", "혼자서도 안정적으로 쉬는 힘", "과잉 연결을 조절하는 능력"], tip: "혼자 쉬는 시간은 꼭 필요하지만, 미리 한두 사람에겐 충전 모드라고 알려두면 관계 피로가 줄어요.", moodTitle: "충전 키워드", moodItems: ["조용한 시간", "혼자 루틴", "느린 호흡"], matchTitle: "찰떡 케미", matchLabel: "도란도란 1대1형", matchDescription: "혼자 충전한 뒤엔 깊이 있는 한 사람과의 연결이 가장 편안하게 느껴질 수 있어요.", heroEmoji: "🌙" },
@@ -566,15 +512,17 @@
       heroCardSubtitle: "나는 어떻게 티 낼까?",
       heroArt: { centerEmoji: "😏", stickers: ["💘", "😉", "🎵", "💌", "✨", "🌹"] },
       loadingMessage: "답변을 조합해서 당신의 플러팅 방식을 정리하고 있습니다.",
+      scoringVersion: "meaning-20261021",
+      tieBreakQuestions: [7,4,0,6,5,3,2,1],
       questions: [
-        q("호감 가는 사람이 생기면 먼저 드는 생각은?", "이왕이면 확실히 다가가고 싶다.", { direct: 2, play: 1 }, "일단 상대가 편한지부터 살핀다.", { care: 2, subtle: 1 }),
-        q("상대의 변화가 보이면 나는?", "바로 말 걸며 반응을 던져본다.", { direct: 2 }, "작은 칭찬이나 배려로 티를 낸다.", { care: 2, subtle: 1 }),
-        q("내가 자주 쓰는 방식은?", "장난스럽게 분위기를 띄우며 다가간다.", { play: 2 }, "조용히 챙기고 필요한 걸 기억한다.", { care: 2 }),
-        q("플러팅의 핵심은 내게?", "상대가 내 호감을 눈치채는 것", { direct: 2 }, "부담 없이 자연스럽게 스며드는 것", { subtle: 2, care: 1 }),
-        q("대화할 때 더 가까운 쪽은?", "분명한 호감 표현을 은근히 섞는다.", { direct: 2, play: 1 }, "상대 말에 집중하며 편안함을 만든다.", { care: 2 }),
-        q("썸에서 내가 강한 순간은?", "분위기를 전환하며 확실히 끌어당길 때", { play: 2, direct: 1 }, "관심을 행동으로 오래 보여줄 때", { subtle: 2, care: 1 }),
-        q("상대가 먼저 다가오면 나는?", "좋아, 이제 텐션을 올려본다.", { direct: 2, play: 1 }, "그제야 조금 더 선명하게 표현한다.", { subtle: 2, care: 1 }),
-        q("내 플러팅을 한마디로 하면?", "분위기와 속도를 만드는 편", { direct: 2, play: 1 }, "편안함 속에서 천천히 보이는 편", { care: 2, subtle: 1 })
+        {"prompt":"호감 가는 사람과 가까워지고 싶을 때 나는?","options":[{"label":"둘이 만나자고 솔직하게 제안한다.","scores":{"direct":2}},{"label":"가벼운 장난으로 둘만 웃을 일을 만든다.","scores":{"play":2}},{"label":"필요한 것을 기억하고 먼저 챙겨준다.","scores":{"care":2}},{"label":"공통 관심사를 조금씩 드러내며 반응을 본다.","scores":{"subtle":2}}]},
+        {"prompt":"상대의 변화가 보이면 나는?","options":[{"label":"바로 말 걸며 반응을 던져본다.","scores":{"direct":1}},{"label":"작은 칭찬이나 배려로 티를 낸다.","scores":{"care":1}}]},
+        {"prompt":"내가 자주 쓰는 방식은?","options":[{"label":"장난스럽게 분위기를 띄우며 다가간다.","scores":{"play":1}},{"label":"조용히 챙기고 필요한 걸 기억한다.","scores":{"care":1}}]},
+        {"prompt":"플러팅의 핵심은 내게?","options":[{"label":"상대가 내 호감을 눈치채는 것","scores":{"direct":1}},{"label":"부담 없이 자연스럽게 스며드는 것","scores":{"subtle":1}}]},
+        {"prompt":"둘이 대화할 때 나의 호감은 어떻게 드러날까?","options":[{"label":"보고 싶었다고 말로 전한다.","scores":{"direct":2}},{"label":"서로 받아치는 농담과 별명에 묻어난다.","scores":{"play":2}},{"label":"상대 이야기를 기억하고 안부를 묻는다.","scores":{"care":2}},{"label":"좋아하는 취향을 한 가지씩 조심스럽게 나눈다.","scores":{"subtle":2}}]},
+        {"prompt":"썸에서 내가 강한 순간은?","options":[{"label":"분위기를 전환하며 확실히 끌어당길 때","scores":{"direct":1}},{"label":"관심을 행동으로 오래 보여줄 때","scores":{"care":1}}]},
+        {"prompt":"상대가 먼저 다가오면 나는?","options":[{"label":"좋아, 이제 텐션을 올려본다.","scores":{"play":1}},{"label":"그제야 조금 더 선명하게 표현한다.","scores":{"subtle":1}}]},
+        {"prompt":"내가 가장 자연스럽게 할 수 있는 표현은?","options":[{"label":"너랑 둘이 더 만나보고 싶어.","scores":{"direct":2}},{"label":"우리 또 웃긴 이야기 하나 만들러 갈까?","scores":{"play":2}},{"label":"지난번 힘들다던 일, 오늘은 좀 괜찮아?","scores":{"care":2}},{"label":"네가 말한 노래 들어봤어. 이런 곡도 좋아해?","scores":{"subtle":2}}]}
       ],
       results: {
         direct: { title: "직진 시그널형", summary: "호감이 생기면 비교적 선명하게 드러나는 타입", description: "당신은 좋아하는 마음을 마냥 숨기기보다, 어느 정도는 보여줘야 흐름이 생긴다고 느끼는 편입니다. 분명하고 빠른 신호에 강점이 있습니다.", strengths: ["분명한 시그널", "관계 전개 속도", "호감 표현의 솔직함"], tip: "당신의 확실함은 매력이지만, 상대가 숨 고를 공간도 함께 주면 더 편안한 썸이 됩니다.", moodTitle: "플러팅 키워드", moodItems: ["선명함", "추진력", "시그널"], matchTitle: "찰떡 케미", matchLabel: "다정 배려형", matchDescription: "상대의 부드러움이 당신의 빠른 속도를 편안하게 받아주기 좋습니다.", heroEmoji: "💘" },
@@ -593,15 +541,17 @@
       heroCardSubtitle: "내가 남기는 장면",
       heroArt: { centerEmoji: "📸", stickers: ["🌤️", "🎞️", "🌊", "☕", "🍃", "📔"] },
       loadingMessage: "답변을 조합해서 당신의 감성 기록 타입을 정리하고 있습니다.",
+      scoringVersion: "meaning-20261021",
+      tieBreakQuestions: [7,4,0,6,5,3,2,1],
       questions: [
-        q("사진을 찍을 때 더 자주 멈추는 건?", "풍경과 빛이 예쁜 순간", { aesthetic: 2, archive: 1 }, "사람들의 표정과 분위기", { candid: 2, story: 1 }),
-        q("앨범을 다시 볼 때 좋은 건?", "색감과 구도가 예뻐서 만족되는 사진", { aesthetic: 2 }, "그날의 공기가 떠오르는 사진", { story: 2, candid: 1 }),
-        q("여행지에서 사진을 찍는 방식은?", "장면이 가장 예쁘게 보이게 잡는다.", { aesthetic: 2, archive: 1 }, "순간을 놓치지 않게 바로 찍는다.", { candid: 2 }),
-        q("지우지 못하는 사진은?", "흐려도 추억이 강한 사진", { story: 2, candid: 1 }, "구도는 완벽하지 않아도 취향인 사진", { archive: 2, aesthetic: 1 }),
-        q("사진첩을 꾸민다면?", "분위기 맞는 컷끼리 모아둔다.", { archive: 2, aesthetic: 1 }, "순서대로 넘기며 흐름을 남긴다.", { story: 2 }),
-        q("나를 가장 설레게 하는 건?", "한 컷만 봐도 감성이 살아나는 장면", { aesthetic: 2 }, "사람들의 순간이 자연스럽게 남은 장면", { candid: 2, story: 1 }),
-        q("사진을 찍는 이유에 더 가까운 건?", "예쁜 걸 오래 간직하고 싶어서", { archive: 2, aesthetic: 1 }, "그 순간의 감정을 놓치고 싶지 않아서", { story: 2, candid: 1 }),
-        q("내 사진첩 무드를 한마디로 하면?", "취향을 모아둔 보드", { archive: 2, aesthetic: 1 }, "하루의 장면을 꿰맨 기록", { story: 2, candid: 1 })
+        {"prompt":"사진을 찍고 싶어지는 순간에 가장 가까운 것은?","options":[{"label":"내 취향인 물건이나 장면을 발견했을 때","scores":{"archive":2}},{"label":"빛과 구도가 아름답게 맞았을 때","scores":{"aesthetic":2}},{"label":"누군가의 자연스러운 표정이 나왔을 때","scores":{"candid":2}},{"label":"하루의 흐름 중 남기고 싶은 장면이 생겼을 때","scores":{"story":2}}]},
+        {"prompt":"앨범을 다시 볼 때 좋은 건?","options":[{"label":"색감과 구도가 예뻐서 만족되는 사진","scores":{"aesthetic":1}},{"label":"그날의 공기가 떠오르는 사진","scores":{"story":1}}]},
+        {"prompt":"여행지에서 사진을 찍는 방식은?","options":[{"label":"장면이 가장 예쁘게 보이게 잡는다.","scores":{"aesthetic":1}},{"label":"순간을 놓치지 않게 바로 찍는다.","scores":{"candid":1}}]},
+        {"prompt":"지우지 못하는 사진은?","options":[{"label":"흐려도 추억이 강한 사진","scores":{"story":1}},{"label":"구도는 완벽하지 않아도 취향인 사진","scores":{"archive":1}}]},
+        {"prompt":"사진첩을 정리할 때 가장 즐거운 방식은?","options":[{"label":"좋아하는 소재와 취향별로 모으기","scores":{"archive":2}},{"label":"색과 구도가 어울리는 컷만 고르기","scores":{"aesthetic":2}},{"label":"꾸미지 않은 표정과 순간을 살리기","scores":{"candid":2}},{"label":"시간순으로 그날 이야기를 이어두기","scores":{"story":2}}]},
+        {"prompt":"나를 가장 설레게 하는 건?","options":[{"label":"한 컷만 봐도 감성이 살아나는 장면","scores":{"aesthetic":1}},{"label":"사람들의 순간이 자연스럽게 남은 장면","scores":{"candid":1}}]},
+        {"prompt":"사진을 찍는 이유에 더 가까운 건?","options":[{"label":"예쁜 걸 오래 간직하고 싶어서","scores":{"aesthetic":1}},{"label":"그 순간의 감정을 놓치고 싶지 않아서","scores":{"story":1}}]},
+        {"prompt":"내 사진첩을 한마디로 설명한다면?","options":[{"label":"좋아하는 장면을 모은 취향 보드","scores":{"archive":2}},{"label":"빛과 구도를 담은 작은 화보","scores":{"aesthetic":2}},{"label":"우연히 건진 자연스러운 순간들","scores":{"candid":2}},{"label":"하루의 흐름을 꿰맨 기록","scores":{"story":2}}]}
       ],
       results: {
         archive: { title: "무드 아카이버형", summary: "좋아하는 장면을 취향대로 모아두는 타입", description: "당신은 사진첩을 단순 저장소보다 무드 보드처럼 쓰는 편입니다. 마음에 드는 장면, 색감, 공간의 결을 잘 모아둡니다.", strengths: ["취향 선별 능력", "일관된 무드 감각", "기록 정리 습관"], tip: "이미 좋은 취향 창고를 갖고 있어요. 가끔은 설명 없는 우연한 컷도 남겨보면 더 입체적인 기록이 됩니다.", moodTitle: "기록 키워드", moodItems: ["무드", "취향", "정리"], matchTitle: "찰떡 무드", matchLabel: "이야기 편집형", matchDescription: "상대의 서사 감각이 당신의 무드 컬렉션에 더 풍부한 맥락을 더해줍니다.", heroEmoji: "🗂️" },
@@ -620,15 +570,17 @@
       heroCardSubtitle: "내 공간 취향은?",
       heroArt: { centerEmoji: "🛋️", stickers: ["🪴", "🕯️", "🧸", "📚", "🖼️", "☁️"] },
       loadingMessage: "답변을 조합해서 당신의 공간 취향 무드를 정리하고 있습니다.",
+      scoringVersion: "meaning-20261021",
+      tieBreakQuestions: [7,5,0,6,4,3,2,1],
       questions: [
-        q("방에 들어왔을 때 제일 먼저 보이는 건?", "방 전체의 색 조합과 포인트 컬러", { color: 3, cozy: 1 }, "정리된 구조와 비어 있는 면", { minimal: 2, collector: 1 }),
-        q("침대 주변에 더 잘 어울리는 건?", "포근한 쿠션과 담요", { cozy: 2 }, "딱 필요한 것만 놓인 깔끔함", { minimal: 2 }),
-        q("내 방의 만족도를 올리는 건?", "좋아하는 소품이 조금씩 보이는 것", { collector: 2, color: 1 }, "눈에 거슬리는 것이 없는 정돈감", { minimal: 2 }),
-        q("벽을 꾸민다면?", "사진, 포스터, 메모로 나답게 채우고 싶다.", { collector: 2 }, "한두 포인트만 두고 여백을 살리고 싶다.", { minimal: 2, cozy: 1 }),
-        q("가장 편안한 공간은?", "따뜻한 조명과 폭신한 텍스처가 있는 공간", { cozy: 2 }, "선이 단정하고 시야가 정리된 공간", { minimal: 2 }),
-        q("소품을 고를 때 나는?", "내 취향이 드러나는 디테일을 본다.", { collector: 2, color: 1 }, "전체 공간을 해치지 않는지를 본다.", { minimal: 2, cozy: 1 }),
-        q("방의 기분 전환은 보통 어떻게 하나?", "침구와 소품의 색 조합을 바꾼다.", { color: 3, cozy: 1 }, "정리부터 하며 구조를 다시 맞춘다.", { minimal: 2 }),
-        q("내 공간을 한마디로 하면?", "나를 편하게 감싸는 아지트", { cozy: 2, collector: 1 }, "불필요한 걸 덜어낸 안심 구역", { minimal: 2, color: 1 })
+        {"prompt":"방에 들어왔을 때 가장 반가운 것은?","options":[{"label":"따뜻한 조명과 폭신한 침구","scores":{"cozy":2}},{"label":"정리된 구조와 비어 있는 면","scores":{"minimal":2}},{"label":"좋아하는 물건과 추억의 소품","scores":{"collector":2}},{"label":"방 전체의 색 조합과 포인트 컬러","scores":{"color":2}}]},
+        {"prompt":"침대 주변에 더 잘 어울리는 건?","options":[{"label":"포근한 쿠션과 담요","scores":{"cozy":1}},{"label":"딱 필요한 것만 놓인 깔끔함","scores":{"minimal":1}}]},
+        {"prompt":"내 방의 만족도를 올리는 건?","options":[{"label":"좋아하는 소품이 조금씩 보이는 것","scores":{"collector":1}},{"label":"눈에 거슬리는 것이 없는 정돈감","scores":{"minimal":1}}]},
+        {"prompt":"벽을 꾸민다면?","options":[{"label":"사진, 포스터, 메모로 나답게 채우고 싶다.","scores":{"collector":1}},{"label":"한두 포인트만 두고 여백을 살리고 싶다.","scores":{"minimal":1}}]},
+        {"prompt":"가장 편안한 공간은?","options":[{"label":"따뜻한 조명과 폭신한 텍스처가 있는 공간","scores":{"cozy":1}},{"label":"선이 단정하고 시야가 정리된 공간","scores":{"minimal":1}}]},
+        {"prompt":"소품을 고를 때 가장 끌리는 기준은?","options":[{"label":"손에 닿는 질감과 편안한 온기","scores":{"cozy":2}},{"label":"공간을 차지하지 않는 단정함","scores":{"minimal":2}},{"label":"내가 좋아하는 이야기와 수집 가치","scores":{"collector":2}},{"label":"전체 분위기를 바꿀 색과 모양","scores":{"color":2}}]},
+        {"prompt":"방의 기분 전환은 보통 어떻게 하나?","options":[{"label":"침구와 소품의 색 조합을 바꾼다.","scores":{"color":1}},{"label":"정리부터 하며 구조를 다시 맞춘다.","scores":{"minimal":1}}]},
+        {"prompt":"내가 만들고 싶은 방에 가장 가까운 것은?","options":[{"label":"포근하게 감싸주는 아지트","scores":{"cozy":2}},{"label":"불필요한 것을 덜어낸 안심 구역","scores":{"minimal":2}},{"label":"내 취향과 기억을 모아둔 작은 전시","scores":{"collector":2}},{"label":"작은 색 포인트가 살아 있는 공간","scores":{"color":2}}]}
       ],
       results: {
         cozy: { title: "포근 아지트형", summary: "따뜻하고 감싸는 분위기에서 편안함을 느끼는 타입", description: "당신은 공간에서 기능보다 체감 온도를 더 크게 느낍니다. 폭신함, 따뜻한 빛, 안정적인 촉감 같은 요소가 마음을 풀어줍니다.", strengths: ["편안한 분위기 감각", "휴식에 강한 공간 취향", "자기 돌봄 감도"], tip: "이미 좋은 안식처 감각이 있어요. 여기에 작은 정리 루틴만 더하면 만족도가 더 커집니다.", moodTitle: "공간 키워드", moodItems: ["따뜻한 조명", "폭신함", "안정감"], matchTitle: "찰떡 무드", matchLabel: "여백 미니멀형", matchDescription: "상대의 정돈감이 당신의 포근함을 더 세련되게 살려줍니다.", heroEmoji: "🧸" },
@@ -647,15 +599,17 @@
       heroCardSubtitle: "나는 어떻게 잡을까?",
       heroArt: { centerEmoji: "📅", stickers: ["🗓️", "📍", "⏰", "📞", "🫧", "📝"] },
       loadingMessage: "답변을 조합해서 당신의 일정 성향을 정리하고 있습니다.",
+      scoringVersion: "meaning-20261021",
+      tieBreakQuestions: [7,4,0,6,5,3,2,1],
       questions: [
-        q("약속을 잡을 때 먼저 확인하는 건?", "시간과 장소를 정확히 맞춘다.", { anchor: 2, curator: 1 }, "대략 방향만 잡고 디테일은 나중에 본다.", { flex: 2, pulse: 1 }),
-        q("친구가 '아무 때나 좋아'라고 하면 나는?", "그럴수록 후보 시간을 정확히 제안한다.", { anchor: 2 }, "그날 가까워지면 다시 얘기해도 괜찮다.", { pulse: 2 }),
-        q("약속 장소 선택은?", "이동 동선과 편의성을 먼저 본다.", { anchor: 2, curator: 1 }, "그날 끌리는 분위기가 더 중요하다.", { flex: 2, pulse: 1 }),
-        q("시간이 조금 바뀌면 나는?", "왜 바뀌는지 알아야 마음이 놓인다.", { anchor: 2 }, "괜찮아, 그럴 수 있지 하고 맞춘다.", { flex: 2 }),
-        q("모임 일정 정리에서 더 가까운 건?", "장소와 이동 순서를 묶어 전체 일정을 제안한다.", { curator: 4, anchor: 1 }, "사람들이 되는 흐름을 보며 자연스럽게 정해진다.", { pulse: 2, flex: 1 }),
-        q("당일 약속이 가장 편한 경우는?", "거의 없다. 미리 알아야 좋다.", { anchor: 2, curator: 1 }, "컨디션 좋으면 오히려 더 가볍고 좋다.", { pulse: 2 }),
-        q("나와 약속 잡기 쉬운 사람은?", "동선과 준비할 일을 함께 정리해주는 사람", { curator: 4, anchor: 1 }, "조금 바뀌어도 서로 가볍게 맞출 수 있는 사람", { flex: 2 }),
-        q("내 일정 스타일을 한마디로 하면?", "안정적으로 맞춰야 마음이 편하다.", { anchor: 2, curator: 1 }, "유연하게 흘러가도 충분히 괜찮다.", { flex: 2, pulse: 1 })
+        {"prompt":"약속을 잡을 때 가장 먼저 신경 쓰는 것은?","options":[{"label":"정확한 시간과 이동에 필요한 여유","scores":{"anchor":2}},{"label":"상대와 맞출 수 있는 유연한 범위","scores":{"flex":2}},{"label":"당일 컨디션과 끌리는 기분","scores":{"pulse":2}},{"label":"장소부터 다음 코스까지의 전체 경험","scores":{"curator":2}}]},
+        {"prompt":"친구가 '아무 때나 좋아'라고 하면 나는?","options":[{"label":"그럴수록 후보 시간을 정확히 제안한다.","scores":{"anchor":1}},{"label":"그날 가까워지면 다시 얘기해도 괜찮다.","scores":{"pulse":1}}]},
+        {"prompt":"약속 장소 선택은?","options":[{"label":"이동 동선과 편의성을 먼저 본다.","scores":{"anchor":1}},{"label":"그날 끌리는 분위기가 더 중요하다.","scores":{"pulse":1}}]},
+        {"prompt":"시간이 조금 바뀌면 나는?","options":[{"label":"왜 바뀌는지 알아야 마음이 놓인다.","scores":{"anchor":1}},{"label":"괜찮아, 그럴 수 있지 하고 맞춘다.","scores":{"flex":1}}]},
+        {"prompt":"친구들과 하루를 보내기로 했다면 나는?","options":[{"label":"만날 시간과 이동 시간을 확실히 맞춘다.","scores":{"anchor":2}},{"label":"큰 방향만 두고 바뀌어도 맞춰간다.","scores":{"flex":2}},{"label":"당일 기분이 어떤지 보고 정하고 싶다.","scores":{"pulse":2}},{"label":"식사와 산책 동선을 묶어 코스를 제안한다.","scores":{"curator":2}}]},
+        {"prompt":"당일 약속이 가장 편한 경우는?","options":[{"label":"거의 없다. 미리 알아야 좋다.","scores":{"anchor":1}},{"label":"컨디션 좋으면 오히려 더 가볍고 좋다.","scores":{"pulse":1}}]},
+        {"prompt":"나와 약속 잡기 쉬운 사람은?","options":[{"label":"동선과 준비할 일을 함께 정리해주는 사람","scores":{"curator":1}},{"label":"조금 바뀌어도 서로 가볍게 맞출 수 있는 사람","scores":{"flex":1}}]},
+        {"prompt":"내 약속 스타일에 가장 가까운 것은?","options":[{"label":"정확히 맞춰야 마음이 편하다.","scores":{"anchor":2}},{"label":"상황이 바뀌어도 가볍게 맞춘다.","scores":{"flex":2}},{"label":"그날의 에너지와 기분이 중요하다.","scores":{"pulse":2}},{"label":"전체 경험이 좋게 이어지도록 세팅한다.","scores":{"curator":2}}]}
       ],
       results: {
         anchor: { title: "정시 앵커형", summary: "시간과 동선이 맞아야 마음이 편한 타입", description: "당신은 약속에서 구조와 예측 가능성을 중요하게 생각합니다. 누가 늦고 어디서 헤매는지보다, 깔끔하게 맞춰지는 흐름이 중요합니다.", strengths: ["정확한 일정 감각", "예측 가능한 진행", "동선 안정성"], tip: "당신의 정리 능력은 강점이에요. 다만 모든 약속을 같은 온도로 관리하면 피곤할 수 있으니, 가벼운 약속은 힘을 조금 빼도 괜찮아요.", moodTitle: "일정 키워드", moodItems: ["정확함", "동선", "안정감"], matchTitle: "찰떡 조합", matchLabel: "유연 적응형", matchDescription: "상대의 유연함이 당신의 빡빡함을 부드럽게 풀어줄 수 있어요.", heroEmoji: "⏰" },
@@ -674,15 +628,17 @@
       heroCardSubtitle: "나는 어떻게 받을까?",
       heroArt: { centerEmoji: "🫶", stickers: ["🌷", "😳", "🔥", "🎉", "🫣", "✨"] },
       loadingMessage: "답변을 조합해서 당신의 칭찬 반응 타입을 정리하고 있습니다.",
+      scoringVersion: "meaning-20261021",
+      tieBreakQuestions: [7,4,0,6,5,3,2,1],
       questions: [
-        q("갑자기 칭찬을 들으면 먼저 드는 감정은?", "고맙지만 어쩐지 민망하다.", { shy: 2, cool: 1 }, "오, 힘이 좀 나는데? 싶다.", { fuel: 2, joke: 1 }),
-        q("칭찬에 대한 첫 반응은?", "아니에요 하며 한 번 줄인다.", { shy: 2 }, "고맙다고 받고 더 열심히 하게 된다.", { fuel: 2 }),
-        q("친한 친구가 크게 치켜세우면?", "장난처럼 흘리며 민망함을 덜어낸다.", { joke: 2, shy: 1 }, "겉으론 덤덤해도 속으론 오래 남는다.", { cool: 2, fuel: 1 }),
-        q("칭찬을 들었을 때 더 가까운 쪽은?", "정말 그렇게 보였나 한 번 의심해본다.", { cool: 2 }, "기분 좋고 동기부여가 된다.", { fuel: 2 }),
-        q("온라인에서 칭찬 댓글이 달리면?", "좋지만 답은 짧고 조심스럽게 단다.", { shy: 2, cool: 1 }, "반가워서 하트나 이모지를 아끼지 않는다.", { fuel: 2, joke: 1 }),
-        q("내가 편한 칭찬 방식은?", "조용히 툭 건네는 진심 어린 말", { cool: 2, shy: 1 }, "분위기 좋게 크게 해주는 말", { fuel: 2, joke: 1 }),
-        q("칭찬 후 내 행동은?", "괜히 더 잘해야 할 것 같아진다.", { fuel: 2, cool: 1 }, "민망해서 다른 얘기로 빨리 넘긴다.", { joke: 2, shy: 1 }),
-        q("내 칭찬 리액션을 한마디로 하면?", "쑥스럽지만 오래 남는 편", { shy: 2, cool: 1 }, "좋은 에너지를 받는 편", { fuel: 2, joke: 1 })
+        {"prompt":"갑자기 칭찬을 들었을 때 겉으로 나오는 반응은?","options":[{"label":"아니에요 하며 쑥스러워한다.","scores":{"shy":2}},{"label":"고맙다고 받고 신이 난다.","scores":{"fuel":2}},{"label":"짧게 고맙다고 하고 담담하게 있는다.","scores":{"cool":2}},{"label":"재밌는 말로 받아쳐 민망함을 푼다.","scores":{"joke":2}}]},
+        {"prompt":"칭찬에 대한 첫 반응은?","options":[{"label":"아니에요 하며 한 번 줄인다.","scores":{"shy":1}},{"label":"고맙다고 받고 더 열심히 하게 된다.","scores":{"fuel":1}}]},
+        {"prompt":"친한 친구가 크게 치켜세우면?","options":[{"label":"장난처럼 흘리며 민망함을 덜어낸다.","scores":{"joke":1}},{"label":"겉으론 덤덤해도 속으론 오래 남는다.","scores":{"cool":1}}]},
+        {"prompt":"칭찬을 들었을 때 더 가까운 쪽은?","options":[{"label":"정말 그렇게 보였나 한 번 의심해본다.","scores":{"shy":1}},{"label":"기분 좋고 동기부여가 된다.","scores":{"fuel":1}}]},
+        {"prompt":"칭찬 댓글이 달렸을 때 나는?","options":[{"label":"고맙지만 민망해서 답을 몇 번 고친다.","scores":{"shy":2}},{"label":"반가워서 하트와 답장을 바로 남긴다.","scores":{"fuel":2}},{"label":"짧게 답하지만 나중에 다시 읽어본다.","scores":{"cool":2}},{"label":"농담이나 짤을 섞어 즐겁게 답한다.","scores":{"joke":2}}]},
+        {"prompt":"내가 편한 칭찬 방식은?","options":[{"label":"조용히 툭 건네는 진심 어린 말","scores":{"cool":1}},{"label":"분위기 좋게 크게 해주는 말","scores":{"fuel":1}}]},
+        {"prompt":"칭찬 후 내 행동은?","options":[{"label":"괜히 더 잘해야 할 것 같아진다.","scores":{"fuel":1}},{"label":"민망해서 다른 얘기로 빨리 넘긴다.","scores":{"joke":1}}]},
+        {"prompt":"내 칭찬 리액션을 가장 잘 설명하는 말은?","options":[{"label":"좋지만 티 내기엔 쑥스럽다.","scores":{"shy":2}},{"label":"좋은 에너지를 받아 더 해보고 싶다.","scores":{"fuel":2}},{"label":"겉은 담담해도 속에서는 오래 곱씹는다.","scores":{"cool":2}},{"label":"유머로 넘겨야 민망함이 덜하다.","scores":{"joke":2}}]}
       ],
       results: {
         shy: { title: "수줍 수납형", summary: "좋지만 티 내기엔 조금 쑥스러운 타입", description: "당신은 칭찬이 싫은 건 아니지만, 막상 받으면 민망함이 먼저 오는 편입니다. 겉으론 작게 반응해도 속으로는 오래 품고 있는 경우가 많습니다.", strengths: ["겸손함", "진심을 오래 기억함", "가벼운 과장에 흔들리지 않음"], tip: "좋은 말은 받는 것도 관계의 일부예요. '고마워' 한마디만 더 편하게 꺼내봐도 충분합니다.", moodTitle: "리액션 키워드", moodItems: ["쑥스러움", "조용한 기쁨", "속마음 저장"], matchTitle: "찰떡 포인트", matchLabel: "에너지 충전형", matchDescription: "상대의 밝은 리액션이 당신도 더 편하게 반응하도록 도와줄 수 있어요.", heroEmoji: "🫣" },
@@ -701,15 +657,17 @@
       heroCardSubtitle: "나는 어떤 계절 무드?",
       heroArt: { centerEmoji: "🍃", stickers: ["🌸", "☀️", "🍂", "❄️", "🌙", "☁️"] },
       loadingMessage: "답변을 조합해서 당신의 계절 감성 타입을 정리하고 있습니다.",
+      scoringVersion: "meaning-20261021",
+      tieBreakQuestions: [7,6,5,4,3,2,1,0],
       questions: [
-        q("날씨가 바뀌는 걸 느끼면 먼저 떠오르는 건?", "새로운 시작의 기분", { bloom: 2 }, "옷, 향, 음악 같은 분위기 변화", { hush: 2, frost: 1 }),
-        q("가장 좋아하는 공기는?", "햇살이 선명하고 움직이기 좋은 공기", { blaze: 2, bloom: 1 }, "조용히 생각이 많아지는 서늘한 공기", { hush: 2, frost: 1 }),
-        q("계절이 바뀌면 내 플레이리스트는?", "좀 더 가볍고 밝아진다.", { bloom: 2, blaze: 1 }, "더 차분하고 깊어진다.", { hush: 2, frost: 1 }),
-        q("기분 전환 방식은?", "밖으로 나가 몸을 움직이며 바꾸기", { blaze: 2 }, "혼자 정리하거나 기록하며 바꾸기", { frost: 4 }),
-        q("옷을 고를 때 끌리는 건?", "경쾌한 색과 가벼운 실루엣", { bloom: 2, blaze: 1 }, "톤 다운된 색과 포근한 질감", { hush: 2, frost: 1 }),
-        q("지금의 계절을 느끼는 포인트는?", "거리의 활기와 에너지", { blaze: 2, bloom: 1 }, "빛, 바람, 냄새 같은 미묘한 변화", { hush: 2, frost: 1 }),
-        q("내 감성이 가장 살아나는 시간은?", "새 계획을 세우는 낮", { bloom: 2 }, "하루를 차분히 정리하는 밤", { frost: 4 }),
-        q("계절의 변화가 내게 주는 건?", "다시 움직일 이유", { blaze: 2, bloom: 1 }, "내 마음을 돌아볼 틈", { hush: 2, frost: 1 })
+        {"prompt":"계절이 바뀐 것을 느꼈을 때 가장 먼저 하고 싶은 일은?","options":[{"label":"새 노트를 펴고 시작할 일을 적는다.","scores":{"bloom":2}},{"label":"밖으로 나가 햇빛과 바람 속에서 움직인다.","scores":{"blaze":2}},{"label":"달라진 빛과 냄새를 느끼며 생각에 잠긴다.","scores":{"hush":2}},{"label":"지난 계절 물건과 마음에 남은 일을 정리한다.","scores":{"frost":2}}]},
+        {"prompt":"가장 좋아하는 공기는?","options":[{"label":"햇살이 선명하고 움직이기 좋은 공기","scores":{"blaze":1}},{"label":"조용히 생각이 많아지는 서늘한 공기","scores":{"hush":1}}]},
+        {"prompt":"계절이 바뀌면 내 플레이리스트는?","options":[{"label":"좀 더 가볍고 밝아진다.","scores":{"bloom":1}},{"label":"더 차분하고 깊어진다.","scores":{"hush":1}}]},
+        {"prompt":"기분 전환 방식은?","options":[{"label":"밖으로 나가 몸을 움직이며 바꾸기","scores":{"blaze":1}},{"label":"혼자 정리하거나 기록하며 바꾸기","scores":{"frost":1}}]},
+        {"prompt":"새 계절을 맞아 내 공간에 변화를 준다면?","options":[{"label":"새 식물이나 작은 계획표로 시작의 기분을 낸다.","scores":{"bloom":2}},{"label":"밖에서 할 활동에 쓸 운동화와 도구를 꺼낸다.","scores":{"blaze":2}},{"label":"계절에 맞는 음악을 틀고 창밖을 오래 바라본다.","scores":{"hush":2}},{"label":"필요 없어진 물건을 덜고 조용한 빈자리를 만든다.","scores":{"frost":2}}]},
+        {"prompt":"지금의 계절을 느끼는 포인트는?","options":[{"label":"거리의 활기와 에너지","scores":{"blaze":1}},{"label":"빛, 바람, 냄새 같은 미묘한 변화","scores":{"hush":1}}]},
+        {"prompt":"내 감성이 가장 살아나는 시간은?","options":[{"label":"새 계획을 세우는 낮","scores":{"bloom":1}},{"label":"하루를 차분히 정리하는 밤","scores":{"frost":1}}]},
+        {"prompt":"계절이 바뀌는 순간, 내게 가장 크게 남는 것은?","options":[{"label":"다시 시작하고 싶은 설렘","scores":{"bloom":2}},{"label":"몸을 움직이고 싶은 활력","scores":{"blaze":2}},{"label":"그때의 공기를 곱씹는 사색","scores":{"hush":2}},{"label":"지나온 것을 비우고 마무리하는 편안함","scores":{"frost":2}}]}
       ],
       results: {
         bloom: { title: "봄빛 시작형", summary: "새로운 공기와 시작의 감성에 크게 반응하는 타입", description: "당신은 계절이 바뀔 때 특히 새로움과 설렘을 크게 느낍니다. 무드가 밝아지고, 다시 뭔가를 시작하고 싶어지는 힘이 커집니다.", strengths: ["시작 에너지", "밝은 감도", "새로움에 대한 열린 태도"], tip: "설렘이 큰 만큼 금방 흩어질 수도 있어요. 지금 좋은 무드를 붙잡을 작은 루틴 하나를 정해보세요.", moodTitle: "계절 키워드", moodItems: ["설렘", "새 시작", "밝은 공기"], matchTitle: "찰떡 무드", matchLabel: "가을 사색형", matchDescription: "상대의 깊이가 당신의 밝은 감성을 더 오래 남게 해줄 수 있습니다.", heroEmoji: "🌸" },
@@ -728,15 +686,17 @@
       heroCardSubtitle: "내 버튼은 어디?",
       heroArt: { centerEmoji: "🎮", stickers: ["🏃", "💬", "🛌", "🎨", "☕", "🌙"] },
       loadingMessage: "답변을 조합해서 당신의 스트레스 해소 버튼을 정리하고 있습니다.",
+      scoringVersion: "meaning-20261021",
+      tieBreakQuestions: [7,4,0,6,5,3,2,1],
       questions: [
-        q("답답한 일이 생겼을 때 먼저 하고 싶은 건?", "몸을 움직여서 기분부터 바꾸기", { move: 2 }, "누군가에게 털어놓으며 정리하기", { talk: 2 }),
-        q("혼자 있는 시간이 생기면 나는?", "침대나 소파에서 아무것도 안 하며 쉬고 싶다.", { nest: 2 }, "뭔가 만들거나 정리하며 몰입하고 싶다.", { create: 2 }),
-        q("머리가 복잡할 때 더 가까운 쪽은?", "걷거나 운동해야 생각이 정리된다.", { move: 2 }, "말로 꺼내야 답답함이 줄어든다.", { talk: 2 }),
-        q("내가 가장 빨리 진정되는 순간은?", "몸이 먼저 풀렸을 때", { move: 2 }, "내 이야기를 누가 이해해줬다고 느낄 때", { talk: 2 }),
-        q("집에서 쉬는 방식은?", "아예 누워서 세상과 끊기기", { nest: 2 }, "정리, 취미, 기록으로 집중 돌리기", { create: 2 }),
-        q("스트레스가 오래 갈 때 나는?", "몸이 무겁고 움직여야 할 것 같다.", { move: 2, nest: 1 }, "생각이 많아져 어디든 꺼내야 할 것 같다.", { talk: 2, create: 1 }),
-        q("나를 회복시키는 공간은?", "산책길, 헬스장, 바깥 공기 있는 곳", { move: 2 }, "내 방, 침대, 조용한 구석", { nest: 2, create: 1 }),
-        q("내 회복 버튼을 한 단어로 하면?", "전환", { move: 2, create: 1 }, "정리", { talk: 2, nest: 1 })
+        {"prompt":"답답한 일이 생겼을 때 가장 먼저 하고 싶은 것은?","options":[{"label":"몸을 움직이거나 장소를 바꾸기","scores":{"move":2}},{"label":"누군가에게 털어놓으며 정리하기","scores":{"talk":2}},{"label":"자극을 줄이고 조용히 쉬기","scores":{"nest":2}},{"label":"만들기나 정리 같은 활동에 몰입하기","scores":{"create":2}}]},
+        {"prompt":"혼자 있는 시간이 생기면 나는?","options":[{"label":"침대나 소파에서 아무것도 안 하며 쉬고 싶다.","scores":{"nest":1}},{"label":"뭔가 만들거나 정리하며 몰입하고 싶다.","scores":{"create":1}}]},
+        {"prompt":"머리가 복잡할 때 더 가까운 쪽은?","options":[{"label":"걷거나 운동해야 생각이 정리된다.","scores":{"move":1}},{"label":"말로 꺼내야 답답함이 줄어든다.","scores":{"talk":1}}]},
+        {"prompt":"내가 가장 빨리 진정되는 순간은?","options":[{"label":"몸이 먼저 풀렸을 때","scores":{"move":1}},{"label":"내 이야기를 누가 이해해줬다고 느낄 때","scores":{"talk":1}}]},
+        {"prompt":"집에서 스트레스를 풀 수 있다면?","options":[{"label":"가볍게 스트레칭하며 몸을 움직인다.","scores":{"move":2}},{"label":"편한 사람과 통화하며 이야기를 꺼낸다.","scores":{"talk":2}},{"label":"소리를 줄이고 아무것도 안 하며 쉰다.","scores":{"nest":2}},{"label":"낙서나 취미, 정리로 손을 움직인다.","scores":{"create":2}}]},
+        {"prompt":"스트레스가 오래 갈 때 나는?","options":[{"label":"몸이 무겁고 움직여야 할 것 같다.","scores":{"move":1}},{"label":"생각이 많아져 어디든 꺼내야 할 것 같다.","scores":{"talk":1}}]},
+        {"prompt":"나를 회복시키는 공간은?","options":[{"label":"산책길, 헬스장, 바깥 공기 있는 곳","scores":{"move":1}},{"label":"내 방, 침대, 조용한 구석","scores":{"nest":1}}]},
+        {"prompt":"지금 내 회복 버튼에 가장 가까운 것은?","options":[{"label":"몸과 장소의 전환","scores":{"move":2}},{"label":"말로 꺼내는 정리","scores":{"talk":2}},{"label":"포근한 곳에서의 잠수","scores":{"nest":2}},{"label":"무언가에 빠져드는 몰입","scores":{"create":2}}]}
       ],
       results: {
         move: { title: "몸부터 전환형", summary: "움직여야 머리도 같이 풀리는 타입", description: "당신은 스트레스가 머리에만 남아 있지 않고 몸으로도 크게 느껴지는 편입니다. 그래서 움직임을 통해 상태를 바꾸는 것이 가장 빠른 해소법이 됩니다.", strengths: ["기분 전환 속도", "행동으로 풀어내는 힘", "에너지 회복 전환력"], tip: "움직임이 큰 회복 장치인 만큼, 짧아도 매일 가능한 루틴 하나를 정해두면 훨씬 든든합니다.", moodTitle: "해소 키워드", moodItems: ["산책", "운동", "바깥 공기"], matchTitle: "찰떡 루틴", matchLabel: "포근 잠수형", matchDescription: "상대의 정적 회복이 당신에게도 균형 있는 쉼을 알려줄 수 있습니다.", heroEmoji: "🏃" },
@@ -758,15 +718,17 @@
       heroCardSubtitle: "나는 어디서 충전될까?",
       heroArt: { centerEmoji: "🔋", stickers: ["🎉", "🫂", "👀", "🌙", "💬", "☕"] },
       loadingMessage: "답변을 모아 소셜 배터리 사용법을 정리하고 있어요.",
+      scoringVersion: "meaning-20261021",
+      tieBreakQuestions: [7,4,0,6,5,3,2,1],
       questions: [
-        q("사람 많은 모임에 다녀온 뒤 나는?", "조금 피곤해도 기분은 오르는 편", { crowd: 2, observer: 1 }, "즐겁더라도 결국 혼자 정리 시간이 필요하다", { recharge: 2, deep: 1 }),
-        q("새 사람을 만나는 자리에선?", "어색해도 금방 섞이는 편", { crowd: 2 }, "처음엔 조용히 보다가 한두 사람과 연결된다", { observer: 4, deep: 1 }),
-        q("가장 편한 대화는?", "여러 명이 왔다 갔다 하는 활기", { crowd: 2 }, "깊이 있는 1대1 대화", { deep: 2 }),
-        q("주말 약속이 연달아 잡히면?", "은근히 신나고 살아나는 느낌", { crowd: 2 }, "하루쯤은 꼭 비워둬야 버틸 수 있다", { recharge: 2 }),
-        q("내가 사람 자리에서 자주 하는 건?", "반응하고 섞이며 분위기를 따라간다", { crowd: 2, observer: 1 }, "사람들을 보며 흐름과 거리감을 읽는다", { observer: 4 }),
-        q("관계에서 더 중요한 건?", "다양한 연결과 활기", { crowd: 2 }, "적어도 깊이 있는 몇 사람", { deep: 2, recharge: 1 }),
-        q("대화가 길어지면 나는?", "새 사람, 새 주제가 들어와도 괜찮다", { crowd: 2 }, "깊은 얘기 한 번이 더 기억에 남는다", { deep: 2 }),
-        q("내 소셜 배터리를 한마디로 하면?", "사람 속에서 켜지는 편", { crowd: 2, observer: 1 }, "사람을 고르고 쉬며 쓰는 편", { recharge: 2, deep: 1 })
+        {"prompt":"모임 다음 날에도 떠오를 만큼 편했던 장면은?","options":[{"label":"여러 사람과 새 이야기를 나누는 약속","scores":{"crowd":2}},{"label":"편한 한 사람과 길게 이야기하는 시간","scores":{"deep":2}},{"label":"사람들 이야기를 조용히 들으며 분위기를 읽는 시간","scores":{"observer":2}},{"label":"연락을 잠시 내려놓고 혼자 쉬는 시간","scores":{"recharge":2}}]},
+        {"prompt":"새 사람을 만나는 자리에선?","options":[{"label":"어색해도 금방 섞이는 편","scores":{"crowd":1}},{"label":"처음엔 조용히 보다가 한두 사람과 연결된다","scores":{"observer":1}}]},
+        {"prompt":"가장 편한 대화는?","options":[{"label":"여러 명이 왔다 갔다 하는 활기","scores":{"crowd":1}},{"label":"깊이 있는 1대1 대화","scores":{"deep":1}}]},
+        {"prompt":"주말 약속이 연달아 잡히면?","options":[{"label":"은근히 신나고 살아나는 느낌","scores":{"crowd":1}},{"label":"하루쯤은 꼭 비워둬야 버틸 수 있다","scores":{"recharge":1}}]},
+        {"prompt":"사람이 모인 자리에서 가장 나다운 모습은?","options":[{"label":"여러 대화에 섞여 반응하며 활기를 얻는다.","scores":{"crowd":2}},{"label":"한두 사람과 한 주제를 깊게 나눈다.","scores":{"deep":2}},{"label":"한발 뒤에서 듣다가 흐름을 읽고 참여한다.","scores":{"observer":2}},{"label":"즐거워도 에너지를 남기려고 먼저 쉬러 간다.","scores":{"recharge":2}}]},
+        {"prompt":"관계에서 더 중요한 건?","options":[{"label":"다양한 연결과 활기","scores":{"crowd":1}},{"label":"적어도 깊이 있는 몇 사람","scores":{"deep":1}}]},
+        {"prompt":"대화가 길어지면 나는?","options":[{"label":"새 사람, 새 주제가 들어와도 괜찮다","scores":{"crowd":1}},{"label":"깊은 얘기 한 번이 더 기억에 남는다","scores":{"deep":1}}]},
+        {"prompt":"약속을 고를 때 가장 지키고 싶은 것은?","options":[{"label":"다양한 사람을 만나며 생기는 활기","scores":{"crowd":2}},{"label":"편한 사람과 충분히 연결되는 대화","scores":{"deep":2}},{"label":"서두르지 않고 관찰하며 참여할 내 속도","scores":{"observer":2}},{"label":"만남 뒤 혼자 회복할 빈 시간","scores":{"recharge":2}}]}
       ],
       results: {
         crowd: { title: "활기 충전형", summary: "사람 속에서 오히려 에너지가 살아나는 타입", shareTitle: "내 소셜 배터리 결과는 활기 충전형", shareDescription: "활기 있는 자리와 여러 사람 속에서 오히려 에너지가 올라오는 타입이에요. 사람 많은 곳이 당신에겐 충전소에 가까워요.", description: "다양한 사람, 활기 있는 자리, 빠른 공기 속에서 에너지가 오르는 편이에요. 가벼운 연결 속에서 기분도 금방 환기돼요.", strengths: ["사교 에너지", "새로운 자리 적응력", "활기 속 회복"], tip: "사람 속 에너지가 크고, 빈 일정에서는 다시 천천히 배터리가 차오르는 편이에요.", kukuComment: "사람 속에서 잘 살아나지만, 빈칸 하루도 은근히 좋아하잖아!", moodTitle: "배터리 키워드", moodItems: ["활기", "다양한 연결", "현장감"], matchTitle: "찰떡 케미", matchLabel: "깊은 대화형", matchDescription: "상대의 깊이가 넓은 관계 속에 의미를 더해줄 수 있어요.", heroEmoji: "🎉" },
@@ -786,63 +748,17 @@
       heroArt: { centerEmoji: "📶", stickers: ["🔋", "☀️", "☕", "🛋️", "🎧", "🌙"] },
       questionLayout: "five-choice",
       loadingMessage: "고른 반응을 모아 지금의 에너지 레벨을 맞춰보고 있어요.",
+      scoringVersion: "meaning-20261021",
+      tieBreakQuestions: [7,6,5,4,3,2,1,0],
       questions: [
-        { prompt: "아침 알람이 울렸을 때 가장 가까운 반응은?", options: [
-          { label: "바로 일어나 오늘 할 일을 떠올린다", scores: { full: 2 } },
-          { label: "한 번 미루지만 금방 움직인다", scores: { steady: 2 } },
-          { label: "침대에서 오늘 일정을 계산한다", scores: { saving: 2 } },
-          { label: "일어났지만 정신은 아직 로딩 중", scores: { low: 2 } },
-          { label: "알람과 협상하다 시간이 사라진다", scores: { empty: 2 } }
-        ] },
-        { prompt: "갑자기 저녁 약속이 생기면?", options: [
-          { label: "좋아, 오히려 하루가 재밌어졌다", scores: { full: 2 } },
-          { label: "상대와 장소가 괜찮으면 간다", scores: { steady: 2 } },
-          { label: "내일 일정부터 보고 정한다", scores: { saving: 2 } },
-          { label: "반갑지만 벌써 조금 피곤하다", scores: { low: 2 } },
-          { label: "오늘의 나는 집과 이미 약속했다", scores: { empty: 2 } }
-        ] },
-        { prompt: "해야 할 일이 세 개 겹치면 나는?", options: [
-          { label: "순서를 정하고 바로 하나를 끝낸다", scores: { full: 2 } },
-          { label: "쉬운 것부터 흐름을 만든다", scores: { steady: 2 } },
-          { label: "중요한 것만 남기고 덜어낸다", scores: { saving: 2 } },
-          { label: "목록을 보다가 잠깐 멍해진다", scores: { low: 2 } },
-          { label: "일단 화면을 닫고 현실을 외면한다", scores: { empty: 2 } }
-        ] },
-        { prompt: "친구가 고민을 길게 털어놓으면?", options: [
-          { label: "끝까지 듣고 같이 방법도 찾아본다", scores: { full: 2 } },
-          { label: "공감하며 내가 할 수 있는 만큼 듣는다", scores: { steady: 2 } },
-          { label: "오늘 들을 여유가 있는지 먼저 본다", scores: { saving: 2 } },
-          { label: "마음은 있는데 집중이 자꾸 흐려진다", scores: { low: 2 } },
-          { label: "미안하지만 지금은 내 배터리도 없다", scores: { empty: 2 } }
-        ] },
-        { prompt: "쉬는 시간이 30분 생기면?", options: [
-          { label: "산책이나 작은 볼일을 하나 해낸다", scores: { full: 2 } },
-          { label: "좋아하는 영상이나 음악을 즐긴다", scores: { steady: 2 } },
-          { label: "아무 일정도 넣지 않고 비워둔다", scores: { saving: 2 } },
-          { label: "앉아 있다가 어느새 시간이 끝난다", scores: { low: 2 } },
-          { label: "그대로 누워서 세상과 잠깐 끊긴다", scores: { empty: 2 } }
-        ] },
-        { prompt: "요즘 메시지 답장 속도는?", options: [
-          { label: "읽으면 바로 답하고 대화도 이어간다", scores: { full: 2 } },
-          { label: "조금 늦어도 무난하게 답한다", scores: { steady: 2 } },
-          { label: "중요한 연락부터 골라 답한다", scores: { saving: 2 } },
-          { label: "답장을 생각만 하고 놓칠 때가 있다", scores: { low: 2 } },
-          { label: "알림 숫자가 이제 배경처럼 보인다", scores: { empty: 2 } }
-        ] },
-        { prompt: "이번 주 나를 가장 닮은 문장은?", options: [
-          { label: "할 만하고, 재밌는 일도 더 찾고 싶다", scores: { full: 2 } },
-          { label: "적당히 바쁘지만 내 리듬은 지킨다", scores: { steady: 2 } },
-          { label: "쓸 에너지와 아낄 에너지를 구분한다", scores: { saving: 2 } },
-          { label: "크게 문제는 없지만 계속 졸린 느낌", scores: { low: 2 } },
-          { label: "이번 주는 로딩 화면이 너무 길다", scores: { empty: 2 } }
-        ] },
-        { prompt: "지금 딱 하나를 받을 수 있다면?", options: [
-          { label: "새로운 계획을 시작할 기회", scores: { full: 2 } },
-          { label: "기분 좋은 약속 하나", scores: { steady: 2 } },
-          { label: "아무도 건드리지 않는 자유 시간", scores: { saving: 2 } },
-          { label: "생각 없이 푹 잘 수 있는 밤", scores: { low: 2 } },
-          { label: "이번 주를 건너뛰는 리모컨", scores: { empty: 2 } }
-        ] }
+        {"prompt":"아침 알람이 울렸을 때 가장 가까운 반응은?","options":[{"label":"바로 일어나 오늘 할 일을 떠올린다","scores":{"full":2}},{"label":"한 번 미루지만 금방 움직인다","scores":{"steady":2}},{"label":"침대에서 오늘 일정을 계산한다","scores":{"saving":2}},{"label":"일어났지만 정신은 아직 로딩 중","scores":{"low":2}},{"label":"알람과 협상하다 시간이 사라진다","scores":{"empty":2}}]},
+        {"prompt":"갑자기 저녁 약속이 생기면?","options":[{"label":"좋아, 오히려 하루가 재밌어졌다","scores":{"full":2}},{"label":"상대와 장소가 괜찮으면 간다","scores":{"steady":2}},{"label":"내일 일정부터 보고 정한다","scores":{"saving":2}},{"label":"반갑지만 벌써 조금 피곤하다","scores":{"low":2}},{"label":"오늘의 나는 집과 이미 약속했다","scores":{"empty":2}}]},
+        {"prompt":"해야 할 일이 세 개 겹치면 나는?","options":[{"label":"순서를 정하고 바로 하나를 끝낸다","scores":{"full":2}},{"label":"쉬운 것부터 흐름을 만든다","scores":{"steady":2}},{"label":"중요한 것만 남기고 덜어낸다","scores":{"saving":2}},{"label":"목록을 보다가 잠깐 멍해진다","scores":{"low":2}},{"label":"일단 화면을 닫고 현실을 외면한다","scores":{"empty":2}}]},
+        {"prompt":"친구가 고민을 길게 털어놓으면?","options":[{"label":"끝까지 듣고 같이 방법도 찾아본다","scores":{"full":2}},{"label":"공감하며 내가 할 수 있는 만큼 듣는다","scores":{"steady":2}},{"label":"오늘 들을 여유가 있는지 먼저 본다","scores":{"saving":2}},{"label":"마음은 있는데 집중이 자꾸 흐려진다","scores":{"low":2}},{"label":"미안하지만 지금은 내 배터리도 없다","scores":{"empty":2}}]},
+        {"prompt":"쉬는 시간이 30분 생기면?","options":[{"label":"산책이나 작은 볼일을 하나 해낸다","scores":{"full":2}},{"label":"좋아하는 영상이나 음악을 즐긴다","scores":{"steady":2}},{"label":"아무 일정도 넣지 않고 비워둔다","scores":{"saving":2}},{"label":"앉아 있다가 어느새 시간이 끝난다","scores":{"low":2}},{"label":"그대로 누워서 세상과 잠깐 끊긴다","scores":{"empty":2}}]},
+        {"prompt":"요즘 메시지 답장 속도는?","options":[{"label":"읽으면 바로 답하고 대화도 이어간다","scores":{"full":2}},{"label":"조금 늦어도 무난하게 답한다","scores":{"steady":2}},{"label":"중요한 연락부터 골라 답한다","scores":{"saving":2}},{"label":"답장을 생각만 하고 놓칠 때가 있다","scores":{"low":2}},{"label":"알림 숫자가 이제 배경처럼 보인다","scores":{"empty":2}}]},
+        {"prompt":"이번 주 나를 가장 닮은 문장은?","options":[{"label":"할 만하고, 재밌는 일도 더 찾고 싶다","scores":{"full":2}},{"label":"적당히 바쁘지만 내 리듬은 지킨다","scores":{"steady":2}},{"label":"쓸 에너지와 아낄 에너지를 구분한다","scores":{"saving":2}},{"label":"크게 문제는 없지만 계속 졸린 느낌","scores":{"low":2}},{"label":"이번 주는 로딩 화면이 너무 길다","scores":{"empty":2}}]},
+        {"prompt":"지금 딱 하나를 받을 수 있다면?","options":[{"label":"새로운 계획을 시작할 기회","scores":{"full":2}},{"label":"기분 좋은 약속 하나","scores":{"steady":2}},{"label":"아무도 건드리지 않는 자유 시간","scores":{"saving":2}},{"label":"생각 없이 푹 잘 수 있는 밤","scores":{"low":2}},{"label":"이번 주를 건너뛰는 리모컨","scores":{"empty":2}}]}
       ],
       results: {
         full: { title: "에너지 만땅형", summary: "움직일수록 다음 재미가 더 잘 보이는 상태", description: "요즘의 당신은 새로운 일과 사람을 받아들일 여유가 꽤 있어요. 일정이 조금 늘어도 피로보다 기대가 먼저 오는 날이 많아요.", strengths: ["시작 속도가 빠름", "새로운 자극을 잘 받음", "사람과 일 사이 전환이 가벼움"], tip: "에너지가 넉넉한 날의 속도와 표정이 지금 꽤 선명해요.", kukuComment: "지금 너 옆에 있으면 나까지 괜히 바빠질 것 같은데?", moodTitle: "에너지 키워드", moodItems: ["시작", "활기", "호기심"], matchTitle: "같이 놀기 좋은 타입", matchLabel: "안정 유지형", matchDescription: "당신의 추진력과 상대의 고른 리듬이 잘 섞여요.", heroEmoji: "🔋" },
@@ -863,55 +779,17 @@
       heroArt: { centerEmoji: "🖼️", stickers: ["🌊", "🌃", "🌿", "🎡", "☕", "🌙"] },
       questionLayout: "image-grid",
       loadingMessage: "고른 장면의 색과 공기를 이어 오늘의 무드를 만들고 있어요.",
+      scoringVersion: "meaning-20261021",
+      tieBreakQuestions: [7,6,5,4,3,2,1,0],
       questions: [
-        { prompt: "지금 창문을 열었을 때 보고 싶은 풍경은?", options: [
-          { emoji: "🌊", label: "바람 부는 바다", description: "탁 트인 수평선", scores: { open: 2 } },
-          { emoji: "🌃", label: "불빛 많은 거리", description: "늦은 밤의 활기", scores: { sparkle: 2 } },
-          { emoji: "🌿", label: "조용한 숲길", description: "나뭇잎 사이 그늘", scores: { calm: 2 } },
-          { emoji: "🛋️", label: "정돈된 내 방", description: "익숙한 담요와 음악", scores: { cozy: 2 } }
-        ] },
-        { prompt: "오늘 한 장의 사진을 남긴다면?", options: [
-          { emoji: "☁️", label: "넓은 하늘", description: "아무것도 막지 않는 장면", scores: { open: 2 } },
-          { emoji: "🎡", label: "놀이공원 불빛", description: "색이 가득한 순간", scores: { sparkle: 2 } },
-          { emoji: "🍃", label: "흔들리는 그림자", description: "조용히 움직이는 빛", scores: { calm: 2 } },
-          { emoji: "☕", label: "따뜻한 테이블", description: "컵과 작은 디저트", scores: { cozy: 2 } }
-        ] },
-        { prompt: "마음에 저장하고 싶은 소리는?", options: [
-          { emoji: "🌬️", label: "창문을 지나는 바람", description: "멀리 나가는 느낌", scores: { open: 2 } },
-          { emoji: "🎵", label: "공연 직전의 음악", description: "곧 시작될 것 같은 떨림", scores: { sparkle: 2 } },
-          { emoji: "🌧️", label: "잔잔한 빗소리", description: "생각이 느려지는 리듬", scores: { calm: 2 } },
-          { emoji: "📻", label: "작은 라디오 소리", description: "방 안을 채우는 목소리", scores: { cozy: 2 } }
-        ] },
-        { prompt: "오늘의 색을 하나 고른다면?", options: [
-          { emoji: "🩵", label: "맑은 파랑", description: "공간이 넓어지는 색", scores: { open: 2 } },
-          { emoji: "❤️", label: "선명한 빨강", description: "시선이 먼저 가는 색", scores: { sparkle: 2 } },
-          { emoji: "💚", label: "차분한 초록", description: "숨이 고르게 되는 색", scores: { calm: 2 } },
-          { emoji: "🤎", label: "부드러운 갈색", description: "익숙하고 포근한 색", scores: { cozy: 2 } }
-        ] },
-        { prompt: "잠깐 사라질 수 있다면 어디로?", options: [
-          { emoji: "🚆", label: "처음 가는 도시", description: "목적지는 도착해서 정하기", scores: { open: 2 } },
-          { emoji: "🎪", label: "사람 많은 축제", description: "웃음과 음악 사이", scores: { sparkle: 2 } },
-          { emoji: "🏞️", label: "호수 옆 벤치", description: "말 없이 물결 보기", scores: { calm: 2 } },
-          { emoji: "🏠", label: "불 켜진 작은 집", description: "아무도 재촉하지 않는 곳", scores: { cozy: 2 } }
-        ] },
-        { prompt: "오늘 옆에 두고 싶은 물건은?", options: [
-          { emoji: "🗺️", label: "접힌 지도", description: "아직 안 가본 곳 표시하기", scores: { open: 2 } },
-          { emoji: "📸", label: "작은 카메라", description: "재밌는 순간 바로 남기기", scores: { sparkle: 2 } },
-          { emoji: "📓", label: "빈 노트", description: "떠오르는 생각 천천히 적기", scores: { calm: 2 } },
-          { emoji: "🧸", label: "오래된 인형", description: "익숙한 촉감 곁에 두기", scores: { cozy: 2 } }
-        ] },
-        { prompt: "하루 끝에 걷고 싶은 길은?", options: [
-          { emoji: "🌉", label: "강 위의 긴 다리", description: "밤공기와 넓은 시야", scores: { open: 2 } },
-          { emoji: "🏙️", label: "네온사인 골목", description: "아직 끝나지 않은 하루", scores: { sparkle: 2 } },
-          { emoji: "🌲", label: "가로수 사이 산책로", description: "발소리만 들리는 길", scores: { calm: 2 } },
-          { emoji: "🏡", label: "집 앞 익숙한 골목", description: "곧 도착한다는 안도감", scores: { cozy: 2 } }
-        ] },
-        { prompt: "지금 가장 머물고 싶은 장면은?", options: [
-          { emoji: "🛫", label: "이륙 직전 창가", description: "어디든 갈 수 있는 순간", scores: { open: 2 } },
-          { emoji: "🎆", label: "불꽃이 터지는 밤", description: "짧고 선명한 장면", scores: { sparkle: 2 } },
-          { emoji: "🌙", label: "달빛 든 빈 방", description: "생각이 가라앉는 시간", scores: { calm: 2 } },
-          { emoji: "🕯️", label: "작은 조명 아래", description: "내 것들에 둘러싸인 자리", scores: { cozy: 2 } }
-        ] }
+        {"prompt":"지금 창문을 열었을 때 보고 싶은 풍경은?","options":[{"emoji":"🌊","label":"바람 부는 바다","description":"탁 트인 수평선","scores":{"open":2}},{"emoji":"🌃","label":"불빛 많은 거리","description":"늦은 밤의 활기","scores":{"sparkle":2}},{"emoji":"🌿","label":"조용한 숲길","description":"나뭇잎 사이 그늘","scores":{"calm":2}},{"emoji":"🛋️","label":"정돈된 내 방","description":"익숙한 담요와 음악","scores":{"cozy":2}}]},
+        {"prompt":"오늘 한 장의 사진을 남긴다면?","options":[{"emoji":"☁️","label":"넓은 하늘","description":"아무것도 막지 않는 장면","scores":{"open":2}},{"emoji":"🎡","label":"놀이공원 불빛","description":"색이 가득한 순간","scores":{"sparkle":2}},{"emoji":"🍃","label":"흔들리는 그림자","description":"조용히 움직이는 빛","scores":{"calm":2}},{"emoji":"☕","label":"따뜻한 테이블","description":"컵과 작은 디저트","scores":{"cozy":2}}]},
+        {"prompt":"마음에 저장하고 싶은 소리는?","options":[{"emoji":"🌬️","label":"창문을 지나는 바람","description":"멀리 나가는 느낌","scores":{"open":2}},{"emoji":"🎵","label":"공연 직전의 음악","description":"곧 시작될 것 같은 떨림","scores":{"sparkle":2}},{"emoji":"🌧️","label":"잔잔한 빗소리","description":"생각이 느려지는 리듬","scores":{"calm":2}},{"emoji":"📻","label":"작은 라디오 소리","description":"방 안을 채우는 목소리","scores":{"cozy":2}}]},
+        {"prompt":"오늘의 색을 하나 고른다면?","options":[{"emoji":"🩵","label":"맑은 파랑","description":"공간이 넓어지는 색","scores":{"open":2}},{"emoji":"❤️","label":"선명한 빨강","description":"시선이 먼저 가는 색","scores":{"sparkle":2}},{"emoji":"💚","label":"차분한 초록","description":"숨이 고르게 되는 색","scores":{"calm":2}},{"emoji":"🤎","label":"부드러운 갈색","description":"익숙하고 포근한 색","scores":{"cozy":2}}]},
+        {"prompt":"잠깐 사라질 수 있다면 어디로?","options":[{"emoji":"🚆","label":"처음 가는 도시","description":"목적지는 도착해서 정하기","scores":{"open":2}},{"emoji":"🎪","label":"사람 많은 축제","description":"웃음과 음악 사이","scores":{"sparkle":2}},{"emoji":"🏞️","label":"호수 옆 벤치","description":"말 없이 물결 보기","scores":{"calm":2}},{"emoji":"🏠","label":"불 켜진 작은 집","description":"아무도 재촉하지 않는 곳","scores":{"cozy":2}}]},
+        {"prompt":"오늘 옆에 두고 싶은 물건은?","options":[{"emoji":"🗺️","label":"접힌 지도","description":"아직 안 가본 곳 표시하기","scores":{"open":2}},{"emoji":"📸","label":"작은 카메라","description":"재밌는 순간 바로 남기기","scores":{"sparkle":2}},{"emoji":"📓","label":"빈 노트","description":"떠오르는 생각 천천히 적기","scores":{"calm":2}},{"emoji":"🧸","label":"오래된 인형","description":"익숙한 촉감 곁에 두기","scores":{"cozy":2}}]},
+        {"prompt":"하루 끝에 걷고 싶은 길은?","options":[{"emoji":"🌉","label":"강 위의 긴 다리","description":"밤공기와 넓은 시야","scores":{"open":2}},{"emoji":"🏙️","label":"네온사인 골목","description":"아직 끝나지 않은 하루","scores":{"sparkle":2}},{"emoji":"🌲","label":"가로수 사이 산책로","description":"발소리만 들리는 길","scores":{"calm":2}},{"emoji":"🏡","label":"집 앞 익숙한 골목","description":"곧 도착한다는 안도감","scores":{"cozy":2}}]},
+        {"prompt":"지금 가장 머물고 싶은 장면은?","options":[{"emoji":"🛫","label":"이륙 직전 창가","description":"어디든 갈 수 있는 순간","scores":{"open":2}},{"emoji":"🎆","label":"불꽃이 터지는 밤","description":"짧고 선명한 장면","scores":{"sparkle":2}},{"emoji":"🌙","label":"달빛 든 빈 방","description":"생각이 가라앉는 시간","scores":{"calm":2}},{"emoji":"🕯️","label":"작은 조명 아래","description":"내 것들에 둘러싸인 자리","scores":{"cozy":2}}]}
       ],
       results: {
         open: { title: "바람 환기형", summary: "넓은 장면과 새로운 공기가 필요한 오늘", description: "오늘은 익숙한 화면보다 시야가 트이는 장면에 마음이 먼저 가요. 멀리 가고 싶다기보다, 잠깐이라도 다른 공기로 바뀌는 순간이 끌리는 날이에요.", strengths: ["새로운 풍경에 빠르게 반응함", "공간이 바뀌면 기분도 잘 전환됨", "가능성이 열린 장면을 좋아함"], tip: "오늘의 시선은 닫힌 결론보다 열린 창문 쪽에 더 오래 머물러요.", kukuComment: "지도만 펼쳤는데 벌써 마음은 한 정거장 먼저 갔네.", moodTitle: "장면 키워드", moodItems: ["바람", "수평선", "이동"], matchTitle: "함께 보고 싶은 장면", matchLabel: "포근한 귀가형", matchDescription: "멀리 본 뒤 편하게 돌아올 자리가 있는 조합이에요.", heroEmoji: "🌊" },
@@ -1336,7 +1214,7 @@
   Object.values(pages).forEach((page) => {
     page.resultMethodNote = page.scoringMode === "range-total"
       ? "답변별 0~3점의 합계로 나눠요. 0~6점은 여백 실종형, 7~12점은 빽빽 일정형, 13~18점은 숨통 한 칸형, 19~24점은 여백 넉넉형이에요. 점수는 건강이나 능력의 등급이 아니에요."
-      : `답변별 유형 점수를 더해 가장 높은 타입을 보여줘요. 동점이면 ${Object.values(page.results).map((result) => result.title).join(" → ")} 순서에서 앞선 타입이 표시돼요.`;
+      : page.tieBreakQuestions ? `답변별 유형 점수를 더해 가장 높은 타입을 보여줘요. ${page.questions.some(question => question.options.length === 2) ? "유형별 행동을 직접 고르는 문항은 " + (page.questions.length === 12 ? "3" : "2") + "점, 보조 선택은 1점이에요. " : "문항의 선택지는 같은 점수예요. "}동점이면 ${page.tieBreakQuestions.map(index => index + 1).join(" → ")}번 문항의 답을 차례로 비교해요. 결과 목록 순서나 무작위로 고르지 않아요.` : "답변별 유형 점수를 더해 가장 높은 타입을 보여줘요.";
   });
   pages["test-002"].results.alert.description = "이번에 고른 답에는 쉬는 시간을 확보하기 어렵거나, 쉬어도 아쉬움이 남는 장면이 모였어요. 더 버텨야 한다는 결론보다 요즘 부담이 어떻게 겹쳐 있는지 돌아볼 이야기로 읽어주세요. 이 짧은 테스트는 피로의 원인이나 건강 상태를 판정하지 않아요.";
   pages["test-019"].results.move.description = "답답한 일이 있을 때 자리에 가만히 있기보다 걷거나 장소를 바꾸고 싶다는 선택이 모였어요. 모든 문제를 풀기 전에 지금의 장면부터 바꾸는 방식이 더 익숙한 쪽이에요. 특정 활동의 효과를 보장하는 결과는 아니에요.";

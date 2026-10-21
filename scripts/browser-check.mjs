@@ -207,11 +207,17 @@ try {
       if (id === "test-020") {
         const first = page.locator('[data-action="choose-answer"][data-question-index="0"]').first();
         if (width === 1440) {
+          // The new PC start button can leave the pointer over the first answer.
+          await page.mouse.move(0, 0);
+          await first.evaluate(async button => { await Promise.all(button.getAnimations().map(animation => animation.finished)); });
           const normal = await first.evaluate((button) => getComputedStyle(button).backgroundColor);
           await first.hover();
+          await first.evaluate(async button => { await Promise.all(button.getAnimations().map(animation => animation.finished)); });
           assert.notEqual(await first.evaluate((button) => getComputedStyle(button).backgroundColor), normal, "PC hover has no feedback");
+          const hovered = await first.evaluate(button => getComputedStyle(button).transform);
           await page.mouse.down();
-          assert.notEqual(await first.evaluate((button) => getComputedStyle(button).transform), "none", "PC press has no feedback");
+          await first.evaluate(async button => { await Promise.all(button.getAnimations().map(animation => animation.finished)); });
+          assert.notEqual(await first.evaluate((button) => getComputedStyle(button).transform), hovered, "PC press has no feedback");
           await layout(`test-020-pressed-${width}`, true);
           await page.mouse.up();
         } else await first.click();

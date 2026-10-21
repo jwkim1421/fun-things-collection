@@ -78,15 +78,17 @@ test("all 26 play preview cards are current, complete and use visitor-facing sou
   }
 });
 
-test("all 542,689 answer combinations produce valid results and every advertised type is reachable", () => {
+test("every declared answer combination is valid, deterministic and independent of result insertion order", () => {
   let combinations = 0;
   let resultTypes = 0;
   for (const [id, page] of Object.entries(data.pages)) {
+    const reversed = { ...page, results: Object.fromEntries(Object.entries(page.results).reverse()) };
     const counts = Object.fromEntries(Object.keys(page.results).map((key) => [key, 0]));
     function walk(answers) {
       if (answers.length === page.questions.length) {
         const result = score(page, answers);
         assert.ok(Object.hasOwn(counts, result), `${id}: invalid result ${result}`);
+        assert.equal(score(reversed, answers), result, `${id}: result order must not break ties`);
         counts[result]++;
         combinations++;
         return;
@@ -97,18 +99,18 @@ test("all 542,689 answer combinations produce valid results and every advertised
     assert.deepEqual(Object.keys(counts).filter((key) => counts[key] === 0), [], `${id}: unreachable result`);
     resultTypes += Object.keys(counts).length;
   }
-  assert.equal(combinations, 542689);
+  assert.equal(combinations, Object.values(data.pages).reduce((sum, page) => sum + page.questions.reduce((product, question) => product * question.options.length, 1), 0));
   assert.equal(resultTypes, 101);
 });
 
 test("specific answers about coordination, disconnection, color, planning, reflection and observation return those types", () => {
   const examples = [
-    ["test-009", [0, 0, 1, 1, 0, 1, 0, 0], "harmony"],
-    ["test-012", [0, 0, 0, 0, 0, 0, 0, 0], "vanish"],
-    ["test-015", [0, 1, 0, 0, 0, 0, 0, 0], "color"],
-    ["test-016", [0, 1, 0, 1, 0, 1, 0, 0], "curator"],
-    ["test-018", [1, 1, 1, 1, 1, 1, 1, 1], "frost"],
-    ["test-020", [1, 1, 0, 1, 1, 0, 0, 1], "observer"]
+    ["test-009", [2, 0, 1, 1, 0, 2, 0, 2], "harmony"],
+    ["test-012", [3, 0, 0, 3, 0, 0, 0, 3], "vanish"],
+    ["test-015", [3, 1, 0, 0, 0, 3, 0, 3], "color"],
+    ["test-016", [3, 1, 0, 1, 3, 1, 0, 3], "curator"],
+    ["test-018", [3, 1, 1, 1, 3, 1, 1, 3], "frost"],
+    ["test-020", [2, 1, 0, 1, 2, 0, 0, 2], "observer"]
   ];
   for (const [id, answers, result] of examples) assert.equal(score(data.pages[id], answers), result, id);
 });
@@ -128,8 +130,37 @@ test("new AI and offline quizzes match eight distinct answer meanings and disclo
     assert.equal(score(data.pages[id], answers), expected, id);
     assert.match(data.pages[id].callout, /동점/);
   }
-  assert.equal(score(data.pages["test-024"], [0, 3, 2, 2, 1, 0]), "director");
-  assert.equal(score(data.pages["test-025"], [0, 3, 2, 0, 3, 2]), "maker");
+  // 3–3 mixed responses follow the final self-description, rather than the first result.
+  assert.equal(score(data.pages["test-024"], [0, 3, 2, 2, 1, 0]), "editor");
+  assert.equal(score(data.pages["test-025"], [0, 3, 2, 0, 3, 2]), "connector");
+});
+
+test("blind semantic pilot cases agree with the production scorer", () => {
+  const fixture = JSON.parse(fs.readFileSync(path.join(root, "docs/reviews/20261021/semantic-pilot.json"), "utf8"));
+  assert.equal(fixture.cases.length, 60);
+  for (const item of fixture.cases) {
+    const id = item.id.slice(0, 8);
+    assert.equal(item.answers.length, data.pages[id].questions.length);
+    assert.equal(score(data.pages[id], item.answers), item.expected, `${item.id}: ${item.reason}`);
+  }
+});
+
+test("independent semantic examples cover all 101 types, including the revised seasonal distinction", () => {
+  const remaining = JSON.parse(fs.readFileSync(path.join(root, "docs/reviews/20261021/semantic-remaining.json"), "utf8"));
+  const season = JSON.parse(fs.readFileSync(path.join(root, "docs/reviews/20261021/semantic-season.json"), "utf8"));
+  const pilot = JSON.parse(fs.readFileSync(path.join(root, "docs/reviews/20261021/semantic-pilot.json"), "utf8"));
+  // Old seasonal examples are preserved as review evidence; the revised questions have new blind cases.
+  const cases = [...pilot.cases, ...remaining.cases.filter(item => !item.id.startsWith("test-018")), ...season.cases];
+  assert.equal(cases.length,149);
+  const covered = new Set();
+  for (const item of cases) {
+    const id = item.id.slice(0,8), page = data.pages[id];
+    assert.equal(item.answers.length,page.questions.length);
+    item.answers.forEach((answer,index) => assert.ok(page.questions[index].options[answer],item.id));
+    assert.equal(score(page,item.answers),item.expected,`${item.id}: ${item.reason}`);
+    covered.add(`${id}-${item.expected}`);
+  }
+  assert.deepEqual(covered,new Set(Object.entries(data.pages).flatMap(([id,page])=>Object.keys(page.results).map(key=>`${id}-${key}`))));
 });
 
 test("total-score range boundaries retain the original four intervals", () => {
@@ -176,6 +207,7 @@ function runtime(id, query = "") {
   const events = [];
   const windowListeners = {};
   const timers = new Map();
+  const intervals = new Map();
   let timerId = 0;
   const history = [];
   let starts = 0;
@@ -200,15 +232,33 @@ function runtime(id, query = "") {
     COOCOO_COMMUNITY: { hydrate() {}, recordParticipation() { starts++; return Promise.resolve(); } },
     PartnersCoupang: { G() {} },
     setTimeout: (callback) => { timers.set(++timerId, callback); return timerId; }, clearTimeout: (id) => timers.delete(id),
-    setInterval: () => 1, clearInterval() {}, requestAnimationFrame() {}, addEventListener: (name, callback) => { windowListeners[name] = callback; },
+    setInterval: (callback) => { intervals.set(++timerId, callback); return timerId; }, clearInterval: (id) => intervals.delete(id), requestAnimationFrame() {}, addEventListener: (name, callback) => { windowListeners[name] = callback; },
     matchMedia: () => ({ matches: true }), crypto: { getRandomValues: (array) => array.fill(0) },
     history: Object.fromEntries(["pushState", "replaceState"].map((method) => [method, (state, _, url) => { history.push(state); context.window.location = new URL(url); }]))
   });
   if (isTest) vm.runInContext(source("test-page"), context);
   if (isTest) context.createTestApp({ testId: id, page: pages[id], cards });
   else context.createPlaygroundApp();
-  return { context, app, ads, store, events, history, config, starts: () => starts, restore(state) { windowListeners.popstate({ state }); }, click(action, extras = {}) { app.listeners.click({ target: new ElementStub({ action, ...extras }) }); }, flush() { while (timers.size) { const [id, callback] = timers.entries().next().value; timers.delete(id); callback(); } } };
+  return { context, app, ads, store, events, history, config, intervals, lifecycle(name, event = {}) { windowListeners[name]?.(event); }, starts: () => starts, restore(state) { windowListeners.popstate({ state }); }, click(action, extras = {}) { app.listeners.click({ target: new ElementStub({ action, ...extras }) }); }, flush() { while (timers.size) { const [id, callback] = timers.entries().next().value; timers.delete(id); callback(); } } };
 }
+
+test("battery rounding is identical in displayed result, shared restore and artwork; timers stop on exit", () => {
+  const app = runtime("battery-stop");
+  app.click("start"); assert.equal(app.intervals.size, 1);
+  app.lifecycle("pagehide"); assert.equal(app.intervals.size, 0);
+  app.lifecycle("pageshow", { persisted:true }); assert.equal(app.intervals.size, 1);
+  app.lifecycle("pageshow", { persisted:true }); assert.equal(app.intervals.size, 1);
+  for (const value of [89.49,89.5,97.49,97.5,100.49,102.49,102.5,110.5]) {
+    app.restore({ coocooPlay:true, playId:"battery-stop", screen:"play", snapshot:{ battery:value } });
+    app.click("stop-battery");
+    assert.equal(app.intervals.size,0);
+    const rounded = Math.round(value);
+    const shared = runtime("battery-stop", `?result=battery-${rounded}`);
+    assert.equal(app.context.document.body.dataset.shareResultTitle, shared.context.document.body.dataset.shareResultTitle);
+    assert.equal(app.context.document.body.dataset.shareArtwork, shared.context.document.body.dataset.shareArtwork);
+    assert.match(app.app.innerHTML, new RegExp(`${rounded}%에서 정지`));
+  }
+});
 
 test("25 test flows start, complete, share, restart without ads during questions or duplicate share buttons", async () => {
   for (const card of data.cards) {

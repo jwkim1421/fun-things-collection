@@ -1,0 +1,1293 @@
+{
+  "assumption": "Each question option is equally likely and independent. This is a structural diagnostic, not observed visitor distribution.",
+  "tests": [
+    {
+      "id": "test-001",
+      "title": "내 연애 열차 운행 타입은?",
+      "questions": 12,
+      "optionCounts": [
+        2,
+        4,
+        2,
+        2,
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 32768,
+      "ties": 4425,
+      "tiePercent": 13.5040283203125,
+      "results": [
+        {
+          "key": "engine",
+          "title": "직진 기관사형",
+          "count": 12573,
+          "percent": 38.3697509765625,
+          "tieSplitDiagnosticPercent": 39.43328857421896
+        },
+        {
+          "key": "station",
+          "title": "안정 역장형",
+          "count": 8679,
+          "percent": 26.4862060546875,
+          "tieSplitDiagnosticPercent": 26.36871337890625
+        },
+        {
+          "key": "guide",
+          "title": "다정 안내원형",
+          "count": 4506,
+          "percent": 13.751220703125,
+          "tieSplitDiagnosticPercent": 13.180541992187521
+        },
+        {
+          "key": "signal",
+          "title": "관찰 신호등형",
+          "count": 7010,
+          "percent": 21.392822265625,
+          "tieSplitDiagnosticPercent": 21.017456054687358
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-002",
+      "title": "직장인 회복력 체크",
+      "questions": 10,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        4,
+        2,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 8192,
+      "ties": 1280,
+      "tiePercent": 15.625,
+      "results": [
+        {
+          "key": "sprint",
+          "title": "버티는 스프린터형",
+          "count": 1072,
+          "percent": 13.0859375,
+          "tieSplitDiagnosticPercent": 11.926269531250023
+        },
+        {
+          "key": "buffer",
+          "title": "회복 쿠션형",
+          "count": 757,
+          "percent": 9.24072265625,
+          "tieSplitDiagnosticPercent": 7.971191406250002
+        },
+        {
+          "key": "reset",
+          "title": "리셋 설계형",
+          "count": 4250,
+          "percent": 51.8798828125,
+          "tieSplitDiagnosticPercent": 54.931640624999936
+        },
+        {
+          "key": "alert",
+          "title": "방전 경고형",
+          "count": 2113,
+          "percent": 25.79345703125,
+          "tieSplitDiagnosticPercent": 25.17089843749998
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-003",
+      "title": "나만의 여행 성향 찾기",
+      "questions": 10,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        4,
+        2,
+        2,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 8192,
+      "ties": 1650,
+      "tiePercent": 20.1416015625,
+      "results": [
+        {
+          "key": "planner",
+          "title": "동선 설계자형",
+          "count": 2353,
+          "percent": 28.72314453125,
+          "tieSplitDiagnosticPercent": 29.16259765624999
+        },
+        {
+          "key": "explorer",
+          "title": "즉흥 모험가형",
+          "count": 2353,
+          "percent": 28.72314453125,
+          "tieSplitDiagnosticPercent": 29.16259765625001
+        },
+        {
+          "key": "comfort",
+          "title": "안정 휴양형",
+          "count": 1743,
+          "percent": 21.27685546875,
+          "tieSplitDiagnosticPercent": 20.837402343749957
+        },
+        {
+          "key": "local",
+          "title": "동네 산책가형",
+          "count": 1743,
+          "percent": 21.27685546875,
+          "tieSplitDiagnosticPercent": 20.837402343749982
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-004",
+      "title": "집중력 루틴 진단",
+      "questions": 10,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        4,
+        2,
+        2,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 8192,
+      "ties": 1608,
+      "tiePercent": 19.62890625,
+      "results": [
+        {
+          "key": "timer",
+          "title": "시간 설계형",
+          "count": 1238,
+          "percent": 15.1123046875,
+          "tieSplitDiagnosticPercent": 14.331054687500005
+        },
+        {
+          "key": "diver",
+          "title": "몰입 잠수형",
+          "count": 2314,
+          "percent": 28.2470703125,
+          "tieSplitDiagnosticPercent": 28.47900390625
+        },
+        {
+          "key": "ritual",
+          "title": "루틴 관리자형",
+          "count": 2326,
+          "percent": 28.3935546875,
+          "tieSplitDiagnosticPercent": 28.710937500000032
+        },
+        {
+          "key": "spark",
+          "title": "반짝 아이디어형",
+          "count": 2314,
+          "percent": 28.2470703125,
+          "tieSplitDiagnosticPercent": 28.47900390624999
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-005",
+      "title": "친구 케미 점수 보기",
+      "questions": 10,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        4,
+        2,
+        2,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 8192,
+      "ties": 1482,
+      "tiePercent": 18.0908203125,
+      "results": [
+        {
+          "key": "manager",
+          "title": "든든한 총무형",
+          "count": 2906,
+          "percent": 35.4736328125,
+          "tieSplitDiagnosticPercent": 36.486816406250085
+        },
+        {
+          "key": "listener",
+          "title": "다정한 공감형",
+          "count": 1190,
+          "percent": 14.5263671875,
+          "tieSplitDiagnosticPercent": 13.513183593750014
+        },
+        {
+          "key": "spark",
+          "title": "분위기 메이커형",
+          "count": 2906,
+          "percent": 35.4736328125,
+          "tieSplitDiagnosticPercent": 36.48681640625005
+        },
+        {
+          "key": "free",
+          "title": "자유로운 즉흥형",
+          "count": 1190,
+          "percent": 14.5263671875,
+          "tieSplitDiagnosticPercent": 13.513183593750005
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-006",
+      "title": "주말 충전 방식 찾기",
+      "questions": 10,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        4,
+        2,
+        2,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 8192,
+      "ties": 1650,
+      "tiePercent": 20.1416015625,
+      "results": [
+        {
+          "key": "cocoon",
+          "title": "포근 집콕형",
+          "count": 1747,
+          "percent": 21.32568359375,
+          "tieSplitDiagnosticPercent": 20.94726562499993
+        },
+        {
+          "key": "social",
+          "title": "약속 충전형",
+          "count": 2349,
+          "percent": 28.67431640625,
+          "tieSplitDiagnosticPercent": 29.052734375
+        },
+        {
+          "key": "reset",
+          "title": "리듬 회복형",
+          "count": 2349,
+          "percent": 28.67431640625,
+          "tieSplitDiagnosticPercent": 29.052734375000032
+        },
+        {
+          "key": "roam",
+          "title": "가벼운 산책형",
+          "count": 1747,
+          "percent": 21.32568359375,
+          "tieSplitDiagnosticPercent": 20.947265624999982
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-024",
+      "title": "AI와 일할 때 나는 어떤 파트너?",
+      "questions": 6,
+      "optionCounts": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 4096,
+      "ties": 1560,
+      "tiePercent": 38.0859375,
+      "results": [
+        {
+          "key": "director",
+          "title": "방향 잡는 기획자",
+          "count": 1024,
+          "percent": 25,
+          "tieSplitDiagnosticPercent": 25.000000000000135
+        },
+        {
+          "key": "editor",
+          "title": "내 색 입히는 편집자",
+          "count": 1024,
+          "percent": 25,
+          "tieSplitDiagnosticPercent": 25.00000000000012
+        },
+        {
+          "key": "explorer",
+          "title": "옆길 찾는 탐험가",
+          "count": 1024,
+          "percent": 25,
+          "tieSplitDiagnosticPercent": 25.0000000000001
+        },
+        {
+          "key": "verifier",
+          "title": "근거 챙기는 검증가",
+          "count": 1024,
+          "percent": 25,
+          "tieSplitDiagnosticPercent": 25.000000000000068
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-025",
+      "title": "알림 OFF, 나의 오프라인 모드는?",
+      "questions": 6,
+      "optionCounts": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 4096,
+      "ties": 1560,
+      "tiePercent": 38.0859375,
+      "results": [
+        {
+          "key": "maker",
+          "title": "손끝 몰입 모드",
+          "count": 1024,
+          "percent": 25,
+          "tieSplitDiagnosticPercent": 25.000000000000135
+        },
+        {
+          "key": "wanderer",
+          "title": "골목 탐험 모드",
+          "count": 1024,
+          "percent": 25,
+          "tieSplitDiagnosticPercent": 25.00000000000012
+        },
+        {
+          "key": "keeper",
+          "title": "익숙한 평온 모드",
+          "count": 1024,
+          "percent": 25,
+          "tieSplitDiagnosticPercent": 25.0000000000001
+        },
+        {
+          "key": "connector",
+          "title": "눈앞의 대화 모드",
+          "count": 1024,
+          "percent": 25,
+          "tieSplitDiagnosticPercent": 25.000000000000068
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-007",
+      "title": "썸 대화 온도 체크",
+      "questions": 8,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        2,
+        4,
+        2,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 2048,
+      "ties": 396,
+      "tiePercent": 19.3359375,
+      "results": [
+        {
+          "key": "spark",
+          "title": "직진 온도상승형",
+          "count": 591,
+          "percent": 28.857421875,
+          "tieSplitDiagnosticPercent": 29.248046875000007
+        },
+        {
+          "key": "steady",
+          "title": "편안한 스며듦형",
+          "count": 591,
+          "percent": 28.857421875,
+          "tieSplitDiagnosticPercent": 29.248046875000007
+        },
+        {
+          "key": "tease",
+          "title": "장난 센스형",
+          "count": 433,
+          "percent": 21.142578125,
+          "tieSplitDiagnosticPercent": 20.751953124999975
+        },
+        {
+          "key": "calm",
+          "title": "차분 관찰형",
+          "count": 433,
+          "percent": 21.142578125,
+          "tieSplitDiagnosticPercent": 20.751953124999993
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-008",
+      "title": "첫인상보다 오래가는 내 매력은?",
+      "questions": 8,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        2,
+        4,
+        2,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 2048,
+      "ties": 360,
+      "tiePercent": 17.578125,
+      "results": [
+        {
+          "key": "glow",
+          "title": "은근 발광형",
+          "count": 429,
+          "percent": 20.947265625,
+          "tieSplitDiagnosticPercent": 20.751953124999957
+        },
+        {
+          "key": "comfort",
+          "title": "포근 안정형",
+          "count": 595,
+          "percent": 29.052734375,
+          "tieSplitDiagnosticPercent": 29.248046875000007
+        },
+        {
+          "key": "wit",
+          "title": "위트 레이더형",
+          "count": 595,
+          "percent": 29.052734375,
+          "tieSplitDiagnosticPercent": 29.248046875000018
+        },
+        {
+          "key": "mystery",
+          "title": "미스터리 잔상형",
+          "count": 429,
+          "percent": 20.947265625,
+          "tieSplitDiagnosticPercent": 20.75195312499999
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-009",
+      "title": "결정을 내리는 순간의 나",
+      "questions": 8,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        4,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 2048,
+      "ties": 384,
+      "tiePercent": 18.75,
+      "results": [
+        {
+          "key": "logic",
+          "title": "분석 나침반형",
+          "count": 756,
+          "percent": 36.9140625,
+          "tieSplitDiagnosticPercent": 38.47656250000005
+        },
+        {
+          "key": "gut",
+          "title": "직감 스위치형",
+          "count": 434,
+          "percent": 21.19140625,
+          "tieSplitDiagnosticPercent": 20.605468749999964
+        },
+        {
+          "key": "harmony",
+          "title": "조율 밸런스형",
+          "count": 429,
+          "percent": 20.947265625,
+          "tieSplitDiagnosticPercent": 20.458984374999975
+        },
+        {
+          "key": "quick",
+          "title": "빠른 결정형",
+          "count": 429,
+          "percent": 20.947265625,
+          "tieSplitDiagnosticPercent": 20.458984374999993
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-010",
+      "title": "돈 쓸 때 드러나는 소비 타입",
+      "questions": 8,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        4,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 2048,
+      "ties": 384,
+      "tiePercent": 18.75,
+      "results": [
+        {
+          "key": "planner",
+          "title": "예산 설계형",
+          "count": 434,
+          "percent": 21.19140625,
+          "tieSplitDiagnosticPercent": 20.60546874999996
+        },
+        {
+          "key": "joy",
+          "title": "기분 충전형",
+          "count": 756,
+          "percent": 36.9140625,
+          "tieSplitDiagnosticPercent": 38.476562500000064
+        },
+        {
+          "key": "curator",
+          "title": "취향 수집형",
+          "count": 429,
+          "percent": 20.947265625,
+          "tieSplitDiagnosticPercent": 20.45898437499999
+        },
+        {
+          "key": "saver",
+          "title": "절제 저축형",
+          "count": 429,
+          "percent": 20.947265625,
+          "tieSplitDiagnosticPercent": 20.458984374999993
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-011",
+      "title": "팀플에서 맡게 되는 역할",
+      "questions": 8,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        4,
+        2,
+        2,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 2048,
+      "ties": 360,
+      "tiePercent": 17.578125,
+      "results": [
+        {
+          "key": "captain",
+          "title": "흐름 리더형",
+          "count": 924,
+          "percent": 45.1171875,
+          "tieSplitDiagnosticPercent": 47.8515625000001
+        },
+        {
+          "key": "maker",
+          "title": "실행 메이커형",
+          "count": 290,
+          "percent": 14.16015625,
+          "tieSplitDiagnosticPercent": 12.988281250000014
+        },
+        {
+          "key": "mediator",
+          "title": "조율 브릿지형",
+          "count": 417,
+          "percent": 20.361328125,
+          "tieSplitDiagnosticPercent": 19.580078124999975
+        },
+        {
+          "key": "spark",
+          "title": "분위기 점화형",
+          "count": 417,
+          "percent": 20.361328125,
+          "tieSplitDiagnosticPercent": 19.580078124999993
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-012",
+      "title": "쉬는 날 인간관계 충전법",
+      "questions": 8,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        4,
+        2,
+        2,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 2048,
+      "ties": 420,
+      "tiePercent": 20.5078125,
+      "results": [
+        {
+          "key": "solo",
+          "title": "혼자 숨고르기형",
+          "count": 549,
+          "percent": 26.806640625,
+          "tieSplitDiagnosticPercent": 26.806640624999993
+        },
+        {
+          "key": "duo",
+          "title": "도란도란 1대1형",
+          "count": 549,
+          "percent": 26.806640625,
+          "tieSplitDiagnosticPercent": 26.80664062499999
+        },
+        {
+          "key": "circle",
+          "title": "가벼운 모임형",
+          "count": 720,
+          "percent": 35.15625,
+          "tieSplitDiagnosticPercent": 36.32812500000003
+        },
+        {
+          "key": "vanish",
+          "title": "잠수 회복형",
+          "count": 230,
+          "percent": 11.23046875,
+          "tieSplitDiagnosticPercent": 10.05859375
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-013",
+      "title": "나의 플러팅 방식 찾기",
+      "questions": 8,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        2,
+        4,
+        2,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 2048,
+      "ties": 396,
+      "tiePercent": 19.3359375,
+      "results": [
+        {
+          "key": "direct",
+          "title": "직진 시그널형",
+          "count": 591,
+          "percent": 28.857421875,
+          "tieSplitDiagnosticPercent": 29.248046875
+        },
+        {
+          "key": "play",
+          "title": "장난 유도형",
+          "count": 433,
+          "percent": 21.142578125,
+          "tieSplitDiagnosticPercent": 20.751953124999968
+        },
+        {
+          "key": "care",
+          "title": "다정 배려형",
+          "count": 591,
+          "percent": 28.857421875,
+          "tieSplitDiagnosticPercent": 29.248046875000018
+        },
+        {
+          "key": "subtle",
+          "title": "은근 스며듦형",
+          "count": 433,
+          "percent": 21.142578125,
+          "tieSplitDiagnosticPercent": 20.75195312499999
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-014",
+      "title": "사진첩 무드로 보는 감성 타입",
+      "questions": 8,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        2,
+        4,
+        2,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 2048,
+      "ties": 372,
+      "tiePercent": 18.1640625,
+      "results": [
+        {
+          "key": "archive",
+          "title": "무드 아카이버형",
+          "count": 296,
+          "percent": 14.453125,
+          "tieSplitDiagnosticPercent": 13.574218750000005
+        },
+        {
+          "key": "aesthetic",
+          "title": "빛과 구도형",
+          "count": 749,
+          "percent": 36.572265625,
+          "tieSplitDiagnosticPercent": 38.03710937500006
+        },
+        {
+          "key": "candid",
+          "title": "순간 포착형",
+          "count": 427,
+          "percent": 20.849609375,
+          "tieSplitDiagnosticPercent": 20.166015624999982
+        },
+        {
+          "key": "story",
+          "title": "이야기 편집형",
+          "count": 576,
+          "percent": 28.125,
+          "tieSplitDiagnosticPercent": 28.22265625
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-015",
+      "title": "내 방이 말해주는 취향 무드",
+      "questions": 8,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        4,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 2048,
+      "ties": 360,
+      "tiePercent": 17.578125,
+      "results": [
+        {
+          "key": "cozy",
+          "title": "포근 아지트형",
+          "count": 417,
+          "percent": 20.361328125,
+          "tieSplitDiagnosticPercent": 19.580078124999964
+        },
+        {
+          "key": "minimal",
+          "title": "여백 미니멀형",
+          "count": 924,
+          "percent": 45.1171875,
+          "tieSplitDiagnosticPercent": 47.85156250000008
+        },
+        {
+          "key": "collector",
+          "title": "취향 수집형",
+          "count": 417,
+          "percent": 20.361328125,
+          "tieSplitDiagnosticPercent": 19.58007812499997
+        },
+        {
+          "key": "color",
+          "title": "색감 포인트형",
+          "count": 290,
+          "percent": 14.16015625,
+          "tieSplitDiagnosticPercent": 12.988281250000005
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-016",
+      "title": "약속 잡을 때 드러나는 일정 성향",
+      "questions": 8,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        2,
+        4,
+        2,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 2048,
+      "ties": 408,
+      "tiePercent": 19.921875,
+      "results": [
+        {
+          "key": "anchor",
+          "title": "정시 앵커형",
+          "count": 745,
+          "percent": 36.376953125,
+          "tieSplitDiagnosticPercent": 38.03710937500004
+        },
+        {
+          "key": "flex",
+          "title": "유연 적응형",
+          "count": 414,
+          "percent": 20.21484375,
+          "tieSplitDiagnosticPercent": 19.726562499999968
+        },
+        {
+          "key": "pulse",
+          "title": "당일 펄스형",
+          "count": 589,
+          "percent": 28.759765625,
+          "tieSplitDiagnosticPercent": 28.66210937500001
+        },
+        {
+          "key": "curator",
+          "title": "정리 큐레이터형",
+          "count": 300,
+          "percent": 14.6484375,
+          "tieSplitDiagnosticPercent": 13.574218750000004
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-017",
+      "title": "칭찬 들었을 때 반응 타입",
+      "questions": 8,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        2,
+        4,
+        2,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 2048,
+      "ties": 384,
+      "tiePercent": 18.75,
+      "results": [
+        {
+          "key": "shy",
+          "title": "수줍 수납형",
+          "count": 434,
+          "percent": 21.19140625,
+          "tieSplitDiagnosticPercent": 20.60546874999996
+        },
+        {
+          "key": "fuel",
+          "title": "에너지 충전형",
+          "count": 756,
+          "percent": 36.9140625,
+          "tieSplitDiagnosticPercent": 38.47656250000007
+        },
+        {
+          "key": "cool",
+          "title": "덤덤 흡수형",
+          "count": 429,
+          "percent": 20.947265625,
+          "tieSplitDiagnosticPercent": 20.45898437499998
+        },
+        {
+          "key": "joke",
+          "title": "장난 회피형",
+          "count": 429,
+          "percent": 20.947265625,
+          "tieSplitDiagnosticPercent": 20.45898437499999
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-018",
+      "title": "계절이 바뀌면 깨어나는 감성은?",
+      "questions": 8,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        2,
+        4,
+        2,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 2048,
+      "ties": 396,
+      "tiePercent": 19.3359375,
+      "results": [
+        {
+          "key": "bloom",
+          "title": "봄빛 시작형",
+          "count": 445,
+          "percent": 21.728515625,
+          "tieSplitDiagnosticPercent": 20.75195312499996
+        },
+        {
+          "key": "blaze",
+          "title": "여름 활력형",
+          "count": 579,
+          "percent": 28.271484375,
+          "tieSplitDiagnosticPercent": 29.24804687500001
+        },
+        {
+          "key": "hush",
+          "title": "가을 사색형",
+          "count": 579,
+          "percent": 28.271484375,
+          "tieSplitDiagnosticPercent": 29.248046875000018
+        },
+        {
+          "key": "frost",
+          "title": "겨울 정리형",
+          "count": 445,
+          "percent": 21.728515625,
+          "tieSplitDiagnosticPercent": 20.75195312499999
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-019",
+      "title": "스트레스 해소 버튼 찾기",
+      "questions": 8,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        2,
+        4,
+        2,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 2048,
+      "ties": 408,
+      "tiePercent": 19.921875,
+      "results": [
+        {
+          "key": "move",
+          "title": "몸부터 전환형",
+          "count": 745,
+          "percent": 36.376953125,
+          "tieSplitDiagnosticPercent": 38.037109375000064
+        },
+        {
+          "key": "talk",
+          "title": "말로 정리형",
+          "count": 589,
+          "percent": 28.759765625,
+          "tieSplitDiagnosticPercent": 28.662109375
+        },
+        {
+          "key": "nest",
+          "title": "포근 잠수형",
+          "count": 414,
+          "percent": 20.21484375,
+          "tieSplitDiagnosticPercent": 19.726562499999968
+        },
+        {
+          "key": "create",
+          "title": "몰입 창작형",
+          "count": 300,
+          "percent": 14.6484375,
+          "tieSplitDiagnosticPercent": 13.574218750000004
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-020",
+      "title": "소셜 배터리 사용법",
+      "questions": 8,
+      "optionCounts": [
+        4,
+        2,
+        2,
+        2,
+        4,
+        2,
+        2,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 2048,
+      "ties": 348,
+      "tiePercent": 16.9921875,
+      "results": [
+        {
+          "key": "crowd",
+          "title": "활기 충전형",
+          "count": 916,
+          "percent": 44.7265625,
+          "tieSplitDiagnosticPercent": 47.265625000000085
+        },
+        {
+          "key": "deep",
+          "title": "깊은 대화형",
+          "count": 560,
+          "percent": 27.34375,
+          "tieSplitDiagnosticPercent": 27.34374999999999
+        },
+        {
+          "key": "observer",
+          "title": "조용한 관찰형",
+          "count": 286,
+          "percent": 13.96484375,
+          "tieSplitDiagnosticPercent": 12.69531250000002
+        },
+        {
+          "key": "recharge",
+          "title": "휴식 보존형",
+          "count": 286,
+          "percent": 13.96484375,
+          "tieSplitDiagnosticPercent": 12.695312500000005
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-021",
+      "title": "지금 내 에너지 레벨은?",
+      "questions": 8,
+      "optionCounts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "scoring": "weighted-types",
+      "combinations": 390625,
+      "ties": 114100,
+      "tiePercent": 29.2096,
+      "results": [
+        {
+          "key": "full",
+          "title": "에너지 만땅형",
+          "count": 78125,
+          "percent": 20,
+          "tieSplitDiagnosticPercent": 20.000000000000785
+        },
+        {
+          "key": "steady",
+          "title": "안정 유지형",
+          "count": 78125,
+          "percent": 20,
+          "tieSplitDiagnosticPercent": 20.000000000000338
+        },
+        {
+          "key": "saving",
+          "title": "선택 절전형",
+          "count": 78125,
+          "percent": 20,
+          "tieSplitDiagnosticPercent": 19.999999999997563
+        },
+        {
+          "key": "low",
+          "title": "느린 충전형",
+          "count": 78125,
+          "percent": 20,
+          "tieSplitDiagnosticPercent": 19.999999999996568
+        },
+        {
+          "key": "empty",
+          "title": "완전 방전형",
+          "count": 78125,
+          "percent": 20,
+          "tieSplitDiagnosticPercent": 20.00000000000396
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-022",
+      "title": "오늘 끌리는 장면은?",
+      "questions": 8,
+      "optionCounts": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "scoring": "weighted-types",
+      "combinations": 65536,
+      "ties": 16380,
+      "tiePercent": 24.993896484375,
+      "results": [
+        {
+          "key": "open",
+          "title": "바람 환기형",
+          "count": 16384,
+          "percent": 25,
+          "tieSplitDiagnosticPercent": 25
+        },
+        {
+          "key": "sparkle",
+          "title": "반짝 점화형",
+          "count": 16384,
+          "percent": 25,
+          "tieSplitDiagnosticPercent": 25
+        },
+        {
+          "key": "calm",
+          "title": "고요 관찰형",
+          "count": 16384,
+          "percent": 25,
+          "tieSplitDiagnosticPercent": 25
+        },
+        {
+          "key": "cozy",
+          "title": "포근한 귀가형",
+          "count": 16384,
+          "percent": 25,
+          "tieSplitDiagnosticPercent": 25
+        }
+      ],
+      "ranges": null
+    },
+    {
+      "id": "test-023",
+      "title": "요즘 내 여유 잔량은?",
+      "questions": 8,
+      "optionCounts": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "scoring": "range-total",
+      "combinations": 65536,
+      "ties": 0,
+      "tiePercent": 0,
+      "results": [
+        {
+          "key": "wide",
+          "title": "여백 넉넉형",
+          "count": 1215,
+          "percent": 1.85394287109375,
+          "tieSplitDiagnosticPercent": 0
+        },
+        {
+          "key": "room",
+          "title": "숨통 한 칸형",
+          "count": 27507,
+          "percent": 41.97235107421875,
+          "tieSplitDiagnosticPercent": 0
+        },
+        {
+          "key": "tight",
+          "title": "빽빽 일정형",
+          "count": 34171,
+          "percent": 52.14080810546875,
+          "tieSplitDiagnosticPercent": 0
+        },
+        {
+          "key": "packed",
+          "title": "여백 실종형",
+          "count": 2643,
+          "percent": 4.03289794921875,
+          "tieSplitDiagnosticPercent": 0
+        }
+      ],
+      "ranges": [
+        {
+          "min": 19,
+          "max": 24,
+          "key": "wide"
+        },
+        {
+          "min": 13,
+          "max": 18,
+          "key": "room"
+        },
+        {
+          "min": 7,
+          "max": 12,
+          "key": "tight"
+        },
+        {
+          "min": 0,
+          "max": 6,
+          "key": "packed"
+        }
+      ]
+    }
+  ]
+}

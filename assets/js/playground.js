@@ -61,7 +61,7 @@ const PLAY_CONTENT = {
   "battery-stop": {
     type: "battery",
     title: "쿠쿠 배터리 100%에 멈추기",
-    category: "30초 게임",
+    category: "타이밍 게임 · 약 30초 · 직접 멈추기",
     intro: "버튼을 누르면 배터리가 빠르게 차올라요. 100%에 가장 가깝다고 느낀 순간 다시 눌러 멈춰보세요.",
     icon: "⚡",
     iconAsset: "kuku-battery.svg",
@@ -327,12 +327,13 @@ function resultActions(contentId, shared = false) {
       <button type="button" id="btnKakaoShare">카카오톡</button>
       <button type="button" id="btnInstagramShare">인스타그램</button>
     </div>
-    <button class="play-primary-button result-try-button" type="button" data-action="restart">${shared ? "나도 해보기" : "다시 하기"}</button>
-    <a class="play-home-link" href="./${nextId}.html" data-content-id="${nextId}" data-next-content>다음 놀이: ${escapePlayHtml(PLAY_CONTENT[nextId].title)} →</a>
+    <button class="play-primary-button result-try-button" type="button" data-action="restart">${shared ? "나도 해보기" : contentId === "today-box" ? "오늘 결과 다시 보기" : "다시 하기"}</button>
     <div class="community-reactions" data-reaction-panel data-content-id="${escapePlayHtml(contentId)}" aria-label="콘텐츠 반응">
       <button type="button" data-reaction="fun" aria-pressed="false"><span aria-hidden="true">☺</span><strong>재밌어요</strong><b data-reaction-count="fun">—</b></button>
       <button type="button" data-reaction="relatable" aria-pressed="false"><span aria-hidden="true">♥</span><strong>공감돼요</strong><b data-reaction-count="relatable">—</b></button>
+          <p class="community-status" data-community-status role="status" aria-live="polite"></p>
     </div>
+    <a class="play-home-link" href="./${nextId}.html" data-content-id="${nextId}" data-next-content>다음 놀이: ${escapePlayHtml(PLAY_CONTENT[nextId].title)} →</a>
     <a class="play-home-link" href="../index.html#play">다른 놀이 고르기 →</a>
   `;
 }
@@ -548,12 +549,14 @@ function createPlaygroundApp() {
     }[content.type] || "paper";
     root.innerHTML = `
       <section class="play-intro tone-${introTone}">
-        <span class="play-content-type">${escapePlayHtml(content.category)}</span>
         <img class="play-intro-cover" src="../${contentArtwork(playId)}" alt="" width="720" height="480" fetchpriority="high" />
+        <div class="intro-start">
+        <span class="play-content-type">${escapePlayHtml(content.category)}</span>
         <h1>${escapePlayHtml(content.title)}</h1>
         <p>${escapePlayHtml(content.intro)}</p>
         <button class="play-primary-button" type="button" data-action="start">시작하기</button>
         <span class="intro-participation content-stat" data-participation-count="${escapePlayHtml(playId)}" hidden></span>
+        </div>
       </section>
     `;
     hydratePlayCommunity(root);
@@ -588,26 +591,33 @@ function createPlaygroundApp() {
   }
 
   function renderBingo() {
+    const completed = completedBingoLines();
+    const highlighted = new Set(completed.flat());
     root.innerHTML = `
       <section class="bingo-game">
         <div class="play-progress-label"><span>선택한 칸 ${state.selected.size}</span><span>빙고 ${countBingos()}</span></div>
         <h1>${escapePlayHtml(content.title)}</h1>
         <p>나에게 해당하는 칸을 모두 눌러주세요.</p>
         <div class="bingo-grid">
-          ${content.cells.map((cell, index) => `<button type="button" class="bingo-cell ${state.selected.has(index) ? "is-selected" : ""}" data-action="toggle-bingo" data-index="${index}" aria-pressed="${state.selected.has(index)}">${escapePlayHtml(cell)}</button>`).join("")}
+          ${content.cells.map((cell, index) => `<button type="button" class="bingo-cell ${state.selected.has(index) ? "is-selected" : ""} ${highlighted.has(index) ? "is-complete" : ""}" data-action="toggle-bingo" data-index="${index}" aria-pressed="${state.selected.has(index)}" aria-label="${escapePlayHtml(cell)}${highlighted.has(index) ? " · 빙고 완성" : ""}">${escapePlayHtml(cell)}</button>`).join("")}
         </div>
-        <button class="play-primary-button" type="button" data-action="finish-bingo" ${state.selected.size ? "" : "disabled"}>결과 보기</button>
+        <p class="bingo-hint" id="bingoHint" ${state.selected.size ? "hidden" : ""}>해당하는 칸을 하나 이상 고르면 결과를 볼 수 있어요.</p>
+        <button class="play-primary-button" type="button" data-action="finish-bingo" aria-describedby="bingoHint" ${state.selected.size ? "" : "disabled"}>결과 보기</button>
       </section>
     `;
   }
 
-  function countBingos() {
+  function completedBingoLines() {
     const lines = [
       [0,1,2,3],[4,5,6,7],[8,9,10,11],[12,13,14,15],
       [0,4,8,12],[1,5,9,13],[2,6,10,14],[3,7,11,15],
       [0,5,10,15],[3,6,9,12]
     ];
-    return lines.filter((line) => line.every((index) => state.selected.has(index))).length;
+    return lines.filter((line) => line.every((index) => state.selected.has(index)));
+  }
+
+  function countBingos() {
+    return completedBingoLines().length;
   }
 
   function finishBingo(forcedSelectedCount = null, forcedBingos = null, shouldTrack = true) {
@@ -654,8 +664,8 @@ function createPlaygroundApp() {
   function finishBattery(forcedBattery = null, shouldTrack = true) {
     window.clearInterval(state.timer);
     state.timer = null;
-    const batteryValue = forcedBattery === null ? state.battery : forcedBattery;
-    const score = Math.max(0, 100 - Math.round(Math.abs(100 - batteryValue)));
+    const batteryValue = Math.round(forcedBattery === null ? state.battery : forcedBattery);
+    const score = Math.max(0, 100 - Math.abs(100 - batteryValue));
     const artworkKey = score >= 98 ? "perfect" : score >= 90 ? "close" : "wild";
     const result = { key: artworkKey, ...content.results[artworkKey], line: `${Math.round(batteryValue)}%에서 정지. ${content.results[artworkKey].line}` };
     const resultKey = `battery-${Math.round(batteryValue)}`;
@@ -1137,6 +1147,14 @@ function createPlaygroundApp() {
 
   window.addEventListener("popstate", (event) => {
     if (event.state?.coocooPlay && event.state.playId === playId) renderHistoryScreen(event.state);
+  });
+
+  window.addEventListener("pagehide", () => {
+    window.clearInterval(state.timer);
+    state.timer = null;
+  });
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted && state.screen === "play" && content.type === "battery" && !state.timer) state.timer = window.setInterval(updateBattery, 35);
   });
 
   const sharedResult = new URLSearchParams(window.location.search).get("result") || "";

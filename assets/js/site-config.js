@@ -1,7 +1,7 @@
 window.SITE_CONFIG = {
   siteName: "쿠쿠",
   siteUrl: "https://coocooing.kro.kr/",
-  releaseVersion: "benchmark-20261019",
+  releaseVersion: "review-20261021",
   communityApiUrl: "https://coocoo-api.reviewmoa.workers.dev",
   gaMeasurementId: "G-GE282CZLL6",
   kakaoJavaScriptKey: "f45989bb71514aece0519d2a250e0e7b",

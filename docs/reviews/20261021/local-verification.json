@@ -1,0 +1,47 @@
+{
+  "checkedAt": "2026-10-21T07:53:26.891Z",
+  "stage": "local-passed-deployment-pending",
+  "nodeTests": 27,
+  "semanticCases": 149,
+  "semanticTypes": 101,
+  "answerCombinations": 632289,
+  "resultRegistrationOrderIndependent": true,
+  "browser": {
+    "engine": "Chromium",
+    "version": "155.0.4283.45",
+    "quizFlows": 50,
+    "playFlows": 18,
+    "clipboardChecks": 4,
+    "issues": []
+  },
+  "artworkScreens": 326,
+  "introScreens": 238,
+  "viewports": [
+    "1024x768",
+    "1280x720",
+    "1440x900",
+    "768x1024",
+    "320x812",
+    "375x812",
+    "390x844"
+  ],
+  "bingoPatterns": 21,
+  "async": [
+    "participation: loading → failure without fake zero → online retry → real zero",
+    "reaction: pending/serialized clicks → unchanged failure → retry → success → undo; interpretation before share/reaction/recommendations"
+  ],
+  "images": [
+    "delayed 404 image retains title, link, 3:2 area and neutral fallback"
+  ],
+  "package": {
+    "files": 536,
+    "bytes": 60493064,
+    "privateFiles": 0
+  },
+  "productionWrites": 0,
+  "limits": [
+    "Edge viewport emulation, not physical phones/Safari",
+    "External app handoffs not exercised",
+    "Uniform-option distribution is not observed traffic or psychometric validity"
+  ]
+}

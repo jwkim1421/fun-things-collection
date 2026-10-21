@@ -40,7 +40,8 @@ function getContentAnalyticsParams(page) {
     content_title: page.title || "",
     content_category: page.category || "테스트",
     content_format: page.contentFormat || Array.from(formats).join(",") || "buttons",
-    question_count: questions.length
+    question_count: questions.length,
+    scoring_version: page.scoringVersion || "range-original"
   };
 }
 
@@ -420,8 +421,21 @@ function scoreAnswers(page, answers) {
     });
   });
 
-  const ranking = Object.entries(totals).sort((left, right) => right[1] - left[1]);
+  const ranking = Object.entries(totals).sort((left, right) => {
+    if (left[1] !== right[1]) return right[1] - left[1];
+    for (const index of page.tieBreakQuestions || []) {
+      const scores = page.questions[index]?.options[answers[index]]?.scores || {};
+      const difference = (scores[right[0]] || 0) - (scores[left[0]] || 0);
+      if (difference) return difference;
+    }
+    return 0;
+  });
   return ranking.length ? ranking[0][0] : "";
+}
+
+function progressIcon() {
+  const id = document.body?.dataset?.testId;
+  return window.SITE_CONTENT?.cards?.find((card) => card.id === id)?.icon || "●";
 }
 
 function renderIntroScreen(page) {
@@ -436,17 +450,19 @@ function renderIntroScreen(page) {
           <div class="intro-art">
             <h1 class="sr-only">${escapeHtml(page.title)}</h1>
             <img class="intro-cover" src="../${contentArtwork(testId)}" alt="" width="720" height="480" fetchpriority="high" />
+          </div>
+          <div class="intro-start">
             <div class="intro-copy">
               <strong>${escapeHtml(page.heroCardTitle || page.title)}</strong>
               <span>${escapeHtml(page.heroCardSubtitle || page.summary)}</span>
             </div>
-          </div>
           <p class="intro-facts">${page.questions.length}문항 · 약 ${escapeHtml(card?.duration || "2분")} · 결과 ${Object.keys(page.results).length}종</p>
           ${page.introNotice ? `<p class="content-disclaimer">${escapeHtml(page.introNotice)}</p>` : ""}
           <button class="test-main-button" type="button" data-action="start-test">
             ${escapeHtml(page.startLabel || "테스트 시작하기")}
           </button>
           <span class="intro-participation content-stat" data-participation-count="${escapeHtml(testId)}" hidden></span>
+          </div>
         </article>
       </section>
     </div>
@@ -472,7 +488,7 @@ function renderQuestionScreen(page, questionIndex, answers = []) {
           </div>
           <div class="test-progress-track" role="progressbar" aria-label="답변 진행" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${answeredCount}">
             <div class="test-progress-fill" style="width:${progressPercent}%"></div>
-            <div class="test-progress-train" style="left:clamp(18px, ${progressPercent}%, calc(100% - 18px))">🚂</div>
+            <div class="test-progress-train" aria-hidden="true" style="left:clamp(18px, ${progressPercent}%, calc(100% - 18px))">${escapeHtml(progressIcon())}</div>
           </div>
           <section class="question-panel">
             <h1 tabindex="-1">${escapeHtml(question.prompt)}</h1>
@@ -520,7 +536,7 @@ function renderLoadingScreen(page) {
           </div>
           <div class="test-progress-track loading-progress-track" aria-hidden="true">
             <div class="test-progress-fill" style="width:100%"></div>
-            <div class="test-progress-train" style="left:calc(100% - 18px)">🚂</div>
+            <div class="test-progress-train" style="left:calc(100% - 18px)">${escapeHtml(progressIcon())}</div>
           </div>
           <div class="loading-orb"><img src="../assets/images/kuku-loading.svg" alt="" /></div>
           <p class="loading-copyright">쿠쿠 테스트 로딩 중</p>
@@ -609,6 +625,11 @@ function renderResultScreen(page, resultKey, cards, options = {}) {
           </div>
         </section>
         <button class="test-main-button result-try-button" type="button" data-action="restart-test">${options.shared ? "나도 테스트하기" : "다시 하기"}</button>
+        <div class="community-reactions" data-reaction-panel data-content-id="${escapeHtml(testId)}" aria-label="콘텐츠 반응">
+          <button type="button" data-reaction="fun" aria-pressed="false"><span aria-hidden="true">☺</span><strong>재밌어요</strong><b data-reaction-count="fun">—</b></button>
+          <button type="button" data-reaction="relatable" aria-pressed="false"><span aria-hidden="true">♥</span><strong>공감돼요</strong><b data-reaction-count="relatable">—</b></button>
+          <p class="community-status" data-community-status role="status" aria-live="polite"></p>
+        </div>
         <section class="result-section">
           <div class="result-section-title">${escapeHtml(relatedSectionTitle)}</div>
           <div class="result-section-body result-related-grid">
@@ -622,10 +643,6 @@ function renderResultScreen(page, resultKey, cards, options = {}) {
           </div>
         </section>
 
-        <div class="community-reactions" data-reaction-panel data-content-id="${escapeHtml(testId)}" aria-label="콘텐츠 반응">
-          <button type="button" data-reaction="fun" aria-pressed="false"><span aria-hidden="true">☺</span><strong>재밌어요</strong><b data-reaction-count="fun">—</b></button>
-          <button type="button" data-reaction="relatable" aria-pressed="false"><span aria-hidden="true">♥</span><strong>공감돼요</strong><b data-reaction-count="relatable">—</b></button>
-        </div>
 
         <div class="result-action-row">
           <a class="test-sub-button" href="../index.html">
