@@ -115,8 +115,11 @@
     "privateFilesIncluded": 0
   },
   "deployment": {
-    "status": "pending",
-    "authorizedDate": "2026-11-03"
+    "status": "verified",
+    "revision": "5768aa1e505f35cfa026ceb56039d3bb16da698b",
+    "release": "reading-20261103",
+    "workflow": "https://github.com/jwkim1421/fun-things-collection/actions/runs/41591745377",
+    "verification": "docs/reviews/20261103/deployment-verification.json"
   },
   "limitations": [
     "Not a new real Android/iPhone check",

@@ -1,0 +1,3205 @@
+{
+  "date": "2026-11-03",
+  "revision": "5768aa1e505f35cfa026ceb56039d3bb16da698b",
+  "release": "reading-20261103",
+  "target": "https://coocooing.kro.kr/",
+  "passed": true,
+  "workflow": {
+    "id": 41591745377,
+    "url": "https://github.com/jwkim1421/fun-things-collection/actions/runs/41591745377",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "build",
+        "conclusion": "success"
+      },
+      {
+        "name": "deploy",
+        "conclusion": "success"
+      }
+    ],
+    "nodeTests": 27,
+    "quizCompletions": 50,
+    "playCompletions": 18,
+    "desktopClipboardChecks": 4,
+    "artworkScreens": 326,
+    "reviewViewports": 7
+  },
+  "publicFiles": {
+    "packageCount": 536,
+    "httpCompared": 535,
+    "matching": 535,
+    "buildMarkerExcluded": ".nojekyll",
+    "excluded404": 28
+  },
+  "production": {
+    "widths": [
+      390,
+      1440
+    ],
+    "firstQuestions": 50,
+    "energyQuizCompletions": 2,
+    "representativeQuizCompletions": 6,
+    "representativeDirectResults": 8,
+    "participationWrites": 0,
+    "reactionWrites": 0,
+    "actualMessagesSent": 0
+  },
+  "checks": {
+    "files": [
+      {
+        "file": "assets/images/covers/battery-stop-perfect.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "404.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/apple-touch-icon.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/battery-stop-wild.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/css/style.css",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "ads.txt",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/battery-stop-close.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/coocoo.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/campus-festival-story-together.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/campus-festival-story-observer.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/campus-festival-story.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/chat-temperature-calm.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/chat-temperature-direct.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/campus-festival-story-mischief.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/battery-stop.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/campus-festival-story-spotlight.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/choice-roulette.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/procrastination-bingo-count-high.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/procrastination-bingo-count-low.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/emotion-trash.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/emotion-trash-trash-done.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/choice-roulette-roulette-shared.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/chat-temperature.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/chat-temperature-warm.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/relationship-ranking-fun.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/relationship-ranking-growth.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/relationship-ranking-space.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/relationship-ranking-rhythm.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/procrastination-bingo.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/procrastination-bingo-count-mid.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/relationship-ranking-trust.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/relationship-ranking.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-001.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-001-station.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-002-alert.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-002-buffer.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-001-guide.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-001-engine.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-002-reset.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-001-signal.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-003-comfort.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-002.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-002-sprint.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-003-planner.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-003-local.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-003-explorer.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-003.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-004-diver.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-005-free.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-004-spark.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-004-ritual.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-004-timer.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-005-manager.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-004.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-005-listener.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-005-spark.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-006-social.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-006-cocoon.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-007-spark.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-006-reset.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-007-calm.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-006-roam.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-006.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-005.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-007.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-008-comfort.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-007-tease.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-008-glow.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-008-mystery.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-007-steady.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-008-wit.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-008.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-009.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-009-quick.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-009-harmony.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-009-gut.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-009-logic.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-010-planner.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-010-joy.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-010-curator.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-011-maker.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-011.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-011-captain.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-010.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-010-saver.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-011-spark.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-011-mediator.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-012-circle.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-013-care.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-012.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-012-duo.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-013-play.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-013-direct.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-012-vanish.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-013-subtle.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-012-solo.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-014-candid.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-013.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-015-color.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-014-story.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-014.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-014-archive.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-014-aesthetic.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-015-collector.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-015.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-016-curator.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-015-minimal.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-015-cozy.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-016.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-016-anchor.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-016-pulse.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-016-flex.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-017-shy.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-017.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-017-cool.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-017-joke.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-017-fuel.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-018-blaze.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-018-bloom.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-018-frost.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-019-nest.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-019-create.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-019-move.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-019.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-019-talk.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-020-crowd.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-018-hush.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-018.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-021-full.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-021-low.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-021-saving.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-020-deep.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-020-observer.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-020.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-020-recharge.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-021-empty.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-021.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-021-steady.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-023-packed.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-022-cozy.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-022-sparkle.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-022-calm.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-022-open.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-022.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-023-tight.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-023-room.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-023.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-024-director.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-024-explorer.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-024-editor.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-023-wide.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-024-verifier.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/today-box-mission-shared.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-025-connector.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/today-box.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-024.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-025-wanderer.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-025-keeper.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-025-maker.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/test-025.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/favicon-32x32.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/favicon-16x16.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/weekly-energy-budget-study.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/weekly-energy-budget-people.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/weekly-energy-budget-hobby.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/weekly-energy-budget-love.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/weekly-energy-budget.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/covers/weekly-energy-budget-rest.webp",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/kuku-battery.svg",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/kuku-bingo.svg",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/kuku-chat.svg",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/kuku-loading.svg",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/kuku-mascot-full.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/kuku-face-icon.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/kuku-og-card.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/kuku-hero.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/battery-stop.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/choice-roulette.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/campus-festival-story.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/battery-stop-close.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/battery-stop-perfect.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/battery-stop-wild.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/chat-temperature.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/emotion-trash.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/campus-festival-story-observer.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/campus-festival-story-mischief.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/campus-festival-story-spotlight.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/campus-festival-story-together.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/choice-roulette-roulette-shared.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/chat-temperature-direct.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/chat-temperature-warm.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/chat-temperature-calm.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/emotion-trash-trash-done.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/procrastination-bingo-count-high.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/procrastination-bingo-count-low.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/procrastination-bingo-count-mid.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/relationship-ranking-fun.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/relationship-ranking-growth.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/relationship-ranking-rhythm.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/relationship-ranking-space.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/relationship-ranking-trust.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/today-box-mission-shared.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/weekly-energy-budget-love.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/procrastination-bingo.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/weekly-energy-budget-hobby.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/weekly-energy-budget-rest.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/weekly-energy-budget-study.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/play-results/weekly-energy-budget-people.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/relationship-ranking.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-001-signal.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-002-buffer.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-002-alert.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-001-engine.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-002-reset.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-001-station.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-001-guide.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-002-sprint.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-003-explorer.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-003-local.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-003-planner.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-004-ritual.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-004-diver.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-004-spark.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-003-comfort.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-004-timer.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-005-listener.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-005-manager.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-006-roam.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-006-cocoon.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-005-spark.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-006-reset.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-005-free.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-007-calm.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-007-spark.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-006-social.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-007-steady.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-008-comfort.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-008-mystery.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-007-tease.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-008-glow.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-008-wit.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-009-gut.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-009-quick.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-009-logic.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-009-harmony.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-010-joy.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-010-planner.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-010-curator.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-011-captain.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-010-saver.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-011-maker.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-012-circle.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-012-solo.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-011-mediator.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-012-duo.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-011-spark.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-012-vanish.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-013-care.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-013-direct.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-013-play.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-014-aesthetic.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-014-candid.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-014-archive.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-013-subtle.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-015-collector.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-015-color.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-014-story.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-015-minimal.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-015-cozy.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-016-anchor.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-016-flex.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-016-curator.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-016-pulse.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-017-cool.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-017-fuel.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-017-joke.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-017-shy.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-018-blaze.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-018-bloom.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-018-frost.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-018-hush.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-019-create.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-019-move.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-019-talk.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-019-nest.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-020-deep.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-020-crowd.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-020-observer.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-021-empty.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-020-recharge.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-021-full.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-021-saving.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-021-low.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-022-calm.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-021-steady.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-022-cozy.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-022-open.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-023-packed.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-022-sparkle.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-023-room.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-023-wide.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-024-director.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-023-tight.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-024-editor.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-024-explorer.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-024-verifier.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-025-connector.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-002.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-025-keeper.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-025-wanderer.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/results/test-025-maker.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-001.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-003.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-007.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-005.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-008.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-010.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-009.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-004.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-006.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-011.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-012.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-015.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-014.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-013.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-017.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-016.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-018.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-019.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-020.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-021.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-023.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-022.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-024.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/today-box.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/test-025.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/images/og/weekly-energy-budget.png",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/js/ads.js",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/js/artwork.js",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/js/catalog.js",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/js/community.js",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/js/main.js",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/js/content-data.js",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/js/extra-content-data.js",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/js/search.js",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/js/site-config.js",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/js/share.js",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/js/test-page.js",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "assets/js/playground.js",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "contact.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "CNAME",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/404.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-002.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/privacy.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/index.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-004.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-001.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-003.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-005.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/contact.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-006.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-007.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-008.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-009.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-010.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-011.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-013.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-012.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "index.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-014.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-015.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-016.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-018.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-019.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-017.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "github-pages-starter/tests/test-020.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "play/battery-stop.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "play/campus-festival-story.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "play/choice-roulette.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "play/chat-temperature.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "play/emotion-trash.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "play/procrastination-bingo.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "play/relationship-ranking.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "play/today-box.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "play/weekly-energy-budget.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "privacy.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-001-engine.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-001-guide.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-001-station.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-001-signal.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-002-alert.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-002-buffer.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-002-reset.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-003-comfort.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-002-sprint.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-003-explorer.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-003-local.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-003-planner.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-004-diver.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-004-ritual.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-004-spark.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-004-timer.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-005-free.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-005-listener.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-005-manager.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-005-spark.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-006-reset.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-006-cocoon.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-006-roam.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-006-social.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-007-calm.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-007-spark.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-007-steady.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-007-tease.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-008-comfort.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-008-glow.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-008-mystery.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-008-wit.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-009-gut.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-009-harmony.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-009-logic.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-009-quick.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-010-curator.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-010-joy.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-010-planner.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-010-saver.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-011-captain.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-011-maker.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-011-mediator.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-012-circle.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-011-spark.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-012-duo.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-012-solo.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-012-vanish.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-013-care.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-013-direct.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-013-play.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-014-aesthetic.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-013-subtle.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-014-archive.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-014-candid.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-015-collector.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-015-color.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-014-story.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-015-cozy.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-015-minimal.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-016-anchor.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-016-curator.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-016-flex.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-016-pulse.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-017-cool.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-017-fuel.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-017-joke.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-017-shy.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-018-blaze.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-018-bloom.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-018-hush.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-018-frost.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-019-create.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-019-move.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-019-nest.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-019-talk.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-020-crowd.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-020-deep.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-020-observer.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-020-recharge.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-021-empty.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-021-low.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-021-full.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-021-saving.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-021-steady.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-022-calm.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-022-cozy.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-022-sparkle.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-022-open.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-023-packed.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-023-room.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-023-tight.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-023-wide.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-024-director.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-024-editor.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-024-explorer.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-024-verifier.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-025-connector.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-025-keeper.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-025-maker.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "results/test-025-wanderer.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "robots.txt",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-001.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-002.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-003.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-004.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-005.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "search.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-006.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "sitemap.xml",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-007.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-008.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-009.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-010.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-011.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-012.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-013.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-014.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-015.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-016.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-017.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-018.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-019.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-020.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-021.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-022.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-025.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-024.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-004.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/test-023.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-003.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-001.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-002.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-005.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-006.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-007.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-009.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-008.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-012.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-010.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-011.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-013.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-014.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-015.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-016.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-018.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-017.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-019.html",
+        "status": 200,
+        "same": true
+      },
+      {
+        "file": "tests/tests/test-020.html",
+        "status": 200,
+        "same": true
+      }
+    ],
+    "excluded": [
+      {
+        "file": "COOCOO_REVIEW_UPDATE_20261021.md",
+        "status": 404
+      },
+      {
+        "file": "COOCOO_CLAUDE_REVIEW_PLAN_20261021.md",
+        "status": 404
+      },
+      {
+        "file": "docs/reviews/20261021/scoring-spec.json",
+        "status": 404
+      },
+      {
+        "file": "docs/reviews/20261021/semantic-pilot.json",
+        "status": 404
+      },
+      {
+        "file": "scripts/review-check.mjs",
+        "status": 404
+      },
+      {
+        "file": "COOCOO_GROWTH_PLAN.md",
+        "status": 404
+      },
+      {
+        "file": "COOCOO_SITE_UPDATE_PLAN.md",
+        "status": 404
+      },
+      {
+        "file": "COOCOO_SIMSIMTEST_BENCHMARK_20261019.md",
+        "status": 404
+      },
+      {
+        "file": "package.json",
+        "status": 404
+      },
+      {
+        "file": "scripts/build-site.mjs",
+        "status": 404
+      },
+      {
+        "file": "cloudflare/coocoo-api/wrangler.jsonc",
+        "status": 404
+      },
+      {
+        "file": "docs/images/benchmark-home-pc-20261019.png",
+        "status": 404
+      },
+      {
+        "file": ".github/workflows/pages.yml",
+        "status": 404
+      },
+      {
+        "file": "assets/images/og/manifest.json",
+        "status": 404
+      },
+      {
+        "file": "assets/images/og/results/manifest.json",
+        "status": 404
+      },
+      {
+        "file": "COOCOO_ILLUSTRATION_ROLLOUT_20261020.md",
+        "status": 404
+      },
+      {
+        "file": "docs/art-production/20261020/production.json",
+        "status": 404
+      },
+      {
+        "file": "docs/illustration-style/kuku-ink-comic-v1/reference.png",
+        "status": 404
+      },
+      {
+        "file": "docs/mascots/human-companion-v1/reference.png",
+        "status": 404
+      },
+      {
+        "file": "scripts/artwork-check.mjs",
+        "status": 404
+      },
+      {
+        "file": "assets/images/og/play-results/manifest.json",
+        "status": 404
+      },
+      {
+        "file": "assets/images/covers/test-020.svg",
+        "status": 404
+      },
+      {
+        "file": "COOCOO_QUESTION_RESULT_UPDATE_20261103.md",
+        "status": 404
+      },
+      {
+        "file": "COOCOO_MOBILE_QA_20261026.md",
+        "status": 404
+      },
+      {
+        "file": "docs/reviews/20261103/question-verification.json",
+        "status": 404
+      },
+      {
+        "file": "docs/images/questions-20261103-selected-pc.png",
+        "status": 404
+      },
+      {
+        "file": "scripts/question-check.mjs",
+        "status": 404
+      },
+      {
+        "file": ".artifacts/browserstack.local.json",
+        "status": 404
+      }
+    ],
+    "questionLayouts": [
+      {
+        "id": "test-001",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-002",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-003",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-004",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-005",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-006",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-024",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-025",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-007",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-008",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-009",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-010",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-011",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-012",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-013",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-014",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-015",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-016",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-017",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-018",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-019",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-020",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-021",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-022",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-023",
+        "width": 390,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-001",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-002",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-003",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-004",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-005",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-006",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-024",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-025",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-007",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-008",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-009",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-010",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-011",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-012",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-013",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-014",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-015",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-016",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-017",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-018",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-019",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-020",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-021",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-022",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      },
+      {
+        "id": "test-023",
+        "width": 1440,
+        "gap": 16,
+        "paw": true,
+        "overflow": false
+      }
+    ]
+  },
+  "rawReports": {
+    ".artifacts/deploy-run.json": "441e96ce17c3ea6e75bc43247b186a4859424146d47288aa61ef0194fefcc2a5",
+    ".artifacts/review-deploy-verification.json": "1e64c7316f460e5197df04500bf13be7f9c233dcd639c058e70f2aa2b241bc97",
+    ".artifacts/question-excluded-verification.json": "b7bfea8d212b1e20d78735761efbd8b0b5be337707029c649d726644c4eeb4fc",
+    ".artifacts/qa-question-live-20261103/report.json": "606fa5dd278386d34bb6de2ab5d9c25751ce062c1a29cb8b270df4450f2e37fb",
+    ".artifacts/qa-live/report.json": "8f26fad951489ba15f2f3d504c092a6244ce606990d08ce87cad4614e031fa7b"
+  },
+  "limitations": [
+    "Desktop browser mobile viewport checks; no new physical-phone test",
+    "Kakao actual send/receive and native mobile paste remain unverified"
+  ],
+  "documentationCommit": "Follow-up documentation only; public deployed files unchanged"
+}
