@@ -1,0 +1,220 @@
+{
+  "verifiedAt": "2026-10-26T02:03:36.193Z",
+  "target": "https://coocooing.kro.kr/",
+  "kind": "BrowserStack real Android/iPhone browser sessions",
+  "release": "review-20261021",
+  "reports": [
+    {
+      "id": "android-pixel7",
+      "source": ".artifacts/qa-browserstack-android-pixel7/report.json",
+      "sourceSha256": "5595164125709f3bf738da25ee99a2d6aebb661cf3e1425a41e96c43b9d8faca",
+      "startedAt": "2026-10-26T01:25:09.885Z",
+      "finishedAt": "2026-10-26T01:39:55.829Z",
+      "observed": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Mobile Safari/537.36",
+        "width": 411,
+        "height": 789,
+        "screenWidth": 412,
+        "screenHeight": 915,
+        "dpr": 2.625,
+        "release": "review-20261021"
+      },
+      "session": {
+        "id": "7a6673e79d87f98167f998d0e2d4c95ac22b606b",
+        "name": "android-pixel7 whole catalog",
+        "status": "passed",
+        "device": "Google Pixel 7",
+        "os": "android",
+        "osVersion": "13.0",
+        "browser": "chrome_android",
+        "browserVersion": null,
+        "dashboard": "https://automate.browserstack.com/builds/d44d8d42783dd27a1150aa7d137df41020b27342/sessions/7a6673e79d87f98167f998d0e2d4c95ac22b606b"
+      },
+      "initialRunPassed": true,
+      "initialFlows": 34,
+      "coveredContent": 34,
+      "resultViews": 101,
+      "imageCopyAccepted": 34,
+      "imageCopyDenied": 0,
+      "trustedImageGestures": 34,
+      "untrustedImageGestures": 0
+    },
+    {
+      "id": "android-galaxy",
+      "source": ".artifacts/qa-browserstack-android-galaxy/report.json",
+      "sourceSha256": "83175d08f1c47b4b73ff40ccb69348956956002f9f3ecf53ce8e50ee3353f7a6",
+      "startedAt": "2026-10-26T01:29:18.526Z",
+      "finishedAt": "2026-10-26T01:43:28.622Z",
+      "observed": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Mobile Safari/537.36",
+        "width": 384,
+        "height": 700,
+        "screenWidth": 384,
+        "screenHeight": 832,
+        "dpr": 2.8125,
+        "release": "review-20261021"
+      },
+      "session": {
+        "id": "5283569ae2041b49fd362d7d6cb0950ee8ec7a5e",
+        "name": "android-galaxy whole catalog",
+        "status": "failed",
+        "device": "Samsung Galaxy S24 Ultra",
+        "os": "android",
+        "osVersion": "14.0",
+        "browser": "chrome_android",
+        "browserVersion": null,
+        "dashboard": "https://automate.browserstack.com/builds/d44d8d42783dd27a1150aa7d137df41020b27342/sessions/5283569ae2041b49fd362d7d6cb0950ee8ec7a5e"
+      },
+      "initialRunPassed": false,
+      "initialFlows": 33,
+      "coveredContent": 34,
+      "resultViews": 101,
+      "imageCopyAccepted": 33,
+      "imageCopyDenied": 0,
+      "trustedImageGestures": 33,
+      "untrustedImageGestures": 0,
+      "retest": {
+        "source": ".artifacts/qa-browserstack-android-galaxy-emotion-trash/report.json",
+        "sha256": "11d4715c3bd875d7f49c743c30edca30774d132de41df89173c2523655c1eb7b",
+        "passed": true,
+        "case": "emotion-trash",
+        "sessionId": "5f58e99eb79edca02813e3e51e4d10b0e47d66ec",
+        "keyboardDiagnostic": {
+          "innerHeight": 700,
+          "viewportHeight": 390.3999938964844,
+          "offsetTop": 300.79998779296875,
+          "scrollY": 80,
+          "focused": "TEXTAREA",
+          "button": {
+            "x": 31.77777862548828,
+            "y": 639.0889282226562,
+            "width": 320.4444580078125,
+            "height": 52
+          },
+          "hit": "<button class=\"play-primary-button\" type=\"button\" data-action=\"trash-submit\">구겨서 보내기</button>",
+          "initialTapPassed": true
+        },
+        "intermittentIssueStillTracked": true
+      }
+    },
+    {
+      "id": "ios-iphone13",
+      "source": ".artifacts/qa-browserstack-ios-iphone13/report.json",
+      "sourceSha256": "a84095cc96445cbd2c7ef2bdb4c214e7ea5248b63f5dd767a9f9ca91569df1cc",
+      "startedAt": "2026-10-26T01:34:08.103Z",
+      "finishedAt": "2026-10-26T01:51:19.399Z",
+      "observed": {
+        "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.4 Mobile/15E148 Safari/604.1",
+        "width": 390,
+        "height": 663,
+        "screenWidth": 390,
+        "screenHeight": 844,
+        "dpr": 3,
+        "release": "review-20261021"
+      },
+      "session": {
+        "id": "9d57a3e637a90fa548b4c182abcf1646d652c786",
+        "name": "ios-iphone13 whole catalog",
+        "status": "passed",
+        "device": "iPhone 13",
+        "os": "ios",
+        "osVersion": "18.4",
+        "browser": "iphone",
+        "browserVersion": null,
+        "dashboard": "https://automate.browserstack.com/builds/d44d8d42783dd27a1150aa7d137df41020b27342/sessions/9d57a3e637a90fa548b4c182abcf1646d652c786"
+      },
+      "initialRunPassed": true,
+      "initialFlows": 34,
+      "coveredContent": 34,
+      "resultViews": 101,
+      "imageCopyAccepted": 0,
+      "imageCopyDenied": 34,
+      "trustedImageGestures": 0,
+      "untrustedImageGestures": 34
+    },
+    {
+      "id": "ios-se2022",
+      "source": ".artifacts/qa-browserstack-ios-se2022/report.json",
+      "sourceSha256": "da2c3659024de1c37b8928a66e5522fe59040f84a128d035df53fe28565670bd",
+      "startedAt": "2026-10-26T01:34:08.917Z",
+      "finishedAt": "2026-10-26T01:56:29.154Z",
+      "observed": {
+        "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 15_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Mobile/15E148 Safari/604.1",
+        "width": 375,
+        "height": 548,
+        "screenWidth": 375,
+        "screenHeight": 667,
+        "dpr": 2,
+        "release": "review-20261021"
+      },
+      "session": {
+        "id": "2d855eebcbf6306beb73f04a41fb42961a0d4d53",
+        "name": "ios-se2022 whole catalog",
+        "status": "passed",
+        "device": "iPhone SE 2022",
+        "os": "ios",
+        "osVersion": "15.4",
+        "browser": "iphone",
+        "browserVersion": null,
+        "dashboard": "https://automate.browserstack.com/builds/d44d8d42783dd27a1150aa7d137df41020b27342/sessions/2d855eebcbf6306beb73f04a41fb42961a0d4d53"
+      },
+      "initialRunPassed": true,
+      "initialFlows": 34,
+      "coveredContent": 34,
+      "resultViews": 101,
+      "imageCopyAccepted": 0,
+      "imageCopyDenied": 34,
+      "trustedImageGestures": 0,
+      "untrustedImageGestures": 34
+    },
+    {
+      "id": "ios-pro-max",
+      "source": ".artifacts/qa-browserstack-ios-pro-max/report.json",
+      "sourceSha256": "af0775fca8ce6021233c2bbcb8749eb801eecf35a79e59ede21c76f7b5839dee",
+      "startedAt": "2026-10-26T01:34:09.114Z",
+      "finishedAt": "2026-10-26T01:50:26.979Z",
+      "observed": {
+        "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1.1 Mobile/15E148 Safari/604.1",
+        "width": 430,
+        "height": 739,
+        "screenWidth": 430,
+        "screenHeight": 932,
+        "dpr": 3,
+        "release": "review-20261021"
+      },
+      "session": {
+        "id": "5da9efb86082be784954a387565cbe696f772730",
+        "name": "ios-pro-max whole catalog",
+        "status": "passed",
+        "device": "iPhone 15 Pro Max",
+        "os": "ios",
+        "osVersion": "17.1",
+        "browser": "iphone",
+        "browserVersion": null,
+        "dashboard": "https://automate.browserstack.com/builds/d44d8d42783dd27a1150aa7d137df41020b27342/sessions/5da9efb86082be784954a387565cbe696f772730"
+      },
+      "initialRunPassed": true,
+      "initialFlows": 34,
+      "coveredContent": 34,
+      "resultViews": 101,
+      "imageCopyAccepted": 0,
+      "imageCopyDenied": 34,
+      "trustedImageGestures": 0,
+      "untrustedImageGestures": 34
+    }
+  ],
+  "totals": {
+    "devices": 5,
+    "contentCoverage": 170,
+    "directQuizResultViews": 505
+  },
+  "catalogCoverageComplete": true,
+  "allInitialRunsPassed": false,
+  "remaining": [
+    "Galaxy emotion-trash first-run touch timeout; separate retest passed, intermittent keyboard-coordinate issue remains tracked",
+    "iOS synthetic tap isTrusted=false and activation=false; image/link clipboard denial does not certify manual Safari clipboard behavior",
+    "Native mobile paste, Instagram upload and real Kakao delivery remain separate"
+  ],
+  "appCodeChanged": false,
+  "deployedByThisTask": false
+}

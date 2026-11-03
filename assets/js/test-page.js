@@ -433,9 +433,8 @@ function scoreAnswers(page, answers) {
   return ranking.length ? ranking[0][0] : "";
 }
 
-function progressIcon() {
-  const id = document.body?.dataset?.testId;
-  return window.SITE_CONTENT?.cards?.find((card) => card.id === id)?.icon || "●";
+function progressMarker(percent) {
+  return `<span class="test-progress-paw" aria-hidden="true" style="left:clamp(16px, ${percent}%, calc(100% - 16px))"><svg viewBox="0 0 32 32" fill="#edc577" stroke="#72552a" stroke-width="1.4"><ellipse cx="7" cy="11" rx="3.2" ry="4.3" transform="rotate(-25 7 11)"/><ellipse cx="14" cy="6.5" rx="3" ry="4" transform="rotate(-8 14 6.5)"/><ellipse cx="22" cy="8" rx="3" ry="4" transform="rotate(18 22 8)"/><ellipse cx="27" cy="14" rx="3" ry="4" transform="rotate(35 27 14)"/><path d="M7 24c-1-4 3-6 5-9 2-3 6-3 8 0 2 3 6 5 5 9-1 4-6 2-9 2s-8 2-9-2Z"/></svg></span>`;
 }
 
 function renderIntroScreen(page) {
@@ -488,7 +487,7 @@ function renderQuestionScreen(page, questionIndex, answers = []) {
           </div>
           <div class="test-progress-track" role="progressbar" aria-label="답변 진행" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${answeredCount}">
             <div class="test-progress-fill" style="width:${progressPercent}%"></div>
-            <div class="test-progress-train" aria-hidden="true" style="left:clamp(18px, ${progressPercent}%, calc(100% - 18px))">${escapeHtml(progressIcon())}</div>
+            ${progressMarker(progressPercent)}
           </div>
           <section class="question-panel">
             <h1 tabindex="-1">${escapeHtml(question.prompt)}</h1>
@@ -536,7 +535,7 @@ function renderLoadingScreen(page) {
           </div>
           <div class="test-progress-track loading-progress-track" aria-hidden="true">
             <div class="test-progress-fill" style="width:100%"></div>
-            <div class="test-progress-train" style="left:calc(100% - 18px)">${escapeHtml(progressIcon())}</div>
+            ${progressMarker(100)}
           </div>
           <div class="loading-orb"><img src="../assets/images/kuku-loading.svg" alt="" /></div>
           <p class="loading-copyright">쿠쿠 테스트 로딩 중</p>
@@ -575,11 +574,14 @@ function renderResultScreen(page, resultKey, cards, options = {}) {
           <h2 class="result-section-title">${escapeHtml(resultTraitTitle)}</h2>
           <div class="result-section-body result-traits">
             ${renderReadableParagraphs(result.description)}
+            ${renderReadableParagraphs(result.detail)}
             <h3>이런 순간, 나답죠</h3>
             ${renderReadableParagraphs(result.scene)}
             <ul class="result-strengths">${result.strengths.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
             <h3>놓치기 쉬운 부분</h3>
             ${renderReadableParagraphs(result.watchOut)}
+            <h3>함께 있을 때는</h3>
+            ${renderReadableParagraphs(result.communication)}
           </div>
         </section>
         <section class="result-section result-action-tip">

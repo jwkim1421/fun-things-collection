@@ -376,21 +376,29 @@ test("all 101 result HTML variants have balanced elements, unique IDs and one pr
 test("all result stories are specific, visible, and linked to two real distinct types", () => {
   const scenes = new Set();
   const cautions = new Set();
+  const details = new Set();
+  const conversations = new Set();
   for (const [id, page] of Object.entries(data.pages)) {
     assert.ok(page.resultMethodNote.includes(page.scoringMode === "range-total" ? "0~6점" : "동점이면"), id);
     for (const [key, result] of Object.entries(page.results)) {
-      for (const field of ["description", "scene", "watchOut", "action", "matchReason", "contrastReason"]) {
+      for (const field of ["description", "detail", "communication", "scene", "watchOut", "action", "matchReason", "contrastReason"]) {
         assert.ok(result[field]?.length > 15, `${id}/${key}: ${field}`);
         assert.doesNotMatch(result[field], /undefined|\[object Object\]/);
       }
       assert.ok(!scenes.has(result.scene), `${id}/${key}: repeated scene`); scenes.add(result.scene);
       assert.ok(!cautions.has(result.watchOut), `${id}/${key}: repeated caution`); cautions.add(result.watchOut);
+      assert.ok(result.detail.length >= 100, `${id}/${key}: missing extended interpretation`);
+      assert.ok(result.communication.length >= 65, `${id}/${key}: missing conversation example`);
+      assert.ok(!details.has(result.detail), `${id}/${key}: repeated interpretation`); details.add(result.detail);
+      assert.ok(!conversations.has(result.communication), `${id}/${key}: repeated conversation`); conversations.add(result.communication);
       assert.ok(page.results[result.matchKey], `${id}/${key}: nonexistent match`);
       assert.ok(page.results[result.contrastKey], `${id}/${key}: nonexistent comparison`);
       assert.equal(new Set([key, result.matchKey, result.contrastKey]).size, 3, `${id}/${key}`);
     }
   }
   assert.equal(scenes.size, 101);
+  assert.equal(details.size, 101);
+  assert.equal(conversations.size, 101);
 });
 
 test("share clicks, completed copies and failed handoffs are different events", async () => {
@@ -464,6 +472,9 @@ test("all 101 static result URLs expose the same text and type-specific crawler 
     assert.ok(html.includes(`<title>${meta.title}</title>`));
     assert.ok(html.includes(`data-initial-result="${meta.key}"`));
     assert.ok(html.replace(/<[^>]+>/g, "").replace(/\s/g, "").includes(data.pages[meta.id].results[meta.key].scene.replace(/\s/g, "")), meta.file);
+    for (const field of ["detail", "communication"]) {
+      assert.ok(html.replace(/<[^>]+>/g, "").replace(/\s/g, "").includes(data.pages[meta.id].results[meta.key][field].replace(/\s/g, "")), `${meta.file}: missing ${field}`);
+    }
     assert.ok(html.includes(`property="og:image" content="https://coocooing.kro.kr/${meta.image}"`));
     assert.ok(html.includes(`rel="canonical" href="https://coocooing.kro.kr/${meta.file}"`));
     assert.equal((html.match(/rel="canonical"/g) || []).length, 1, meta.file);

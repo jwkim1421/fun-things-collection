@@ -1,0 +1,113 @@
+{
+  "verifiedAt": "2026-10-26T01:32:59.890Z",
+  "target": "https://coocooing.kro.kr/",
+  "kind": "Windows engine mobile emulation; NOT physical devices",
+  "releaseObservedOnAndroid": "review-20261021",
+  "reports": [
+    {
+      "engine": "chromium",
+      "version": "156.0.4314.42",
+      "source": ".artifacts/qa-mobile-chromium-live/report.json",
+      "sourceSha256": "d5dc29b2a40d4f354235b909f8ec8de09d66ab2d509916023b9096c5d8378192",
+      "startedAt": "2026-10-25T23:52:56.693Z",
+      "finishedAt": "2026-10-26T00:20:51.648Z",
+      "sizes": [
+        [
+          360,
+          740
+        ],
+        [
+          393,
+          873
+        ],
+        [
+          412,
+          915
+        ],
+        [
+          873,
+          393
+        ],
+        [
+          800,
+          1280
+        ]
+      ],
+      "completedFlows": 170,
+      "resultViews": 635,
+      "sharingChecks": 170,
+      "imageCopiedAndPasted": 170,
+      "imageCopyDeniedWithDownload": 0,
+      "linkReadBack": 170,
+      "instagramPng": 170
+    },
+    {
+      "engine": "webkit",
+      "version": "27.2",
+      "source": ".artifacts/qa-mobile-webkit-live/report.json",
+      "sourceSha256": "dca38c69a041f32ad2142166502b30e86e9b753495fd849f209f2f0131addab0",
+      "startedAt": "2026-10-25T23:53:07.638Z",
+      "finishedAt": "2026-10-26T01:21:58.935Z",
+      "sizes": [
+        [
+          320,
+          568
+        ],
+        [
+          375,
+          667
+        ],
+        [
+          390,
+          844
+        ],
+        [
+          430,
+          932
+        ],
+        [
+          844,
+          390
+        ],
+        [
+          768,
+          1024
+        ]
+      ],
+      "completedFlows": 204,
+      "resultViews": 762,
+      "sharingChecks": 204,
+      "imageCopiedAndPasted": 0,
+      "imageCopyDeniedWithDownload": 204,
+      "linkReadBack": 0,
+      "instagramPng": 204
+    }
+  ],
+  "totals": {
+    "sizes": 11,
+    "flows": 374,
+    "resultViews": 1397,
+    "sharingChecks": 374
+  },
+  "automatedPassed": true,
+  "manualFindings": [
+    {
+      "id": "landscape-result-heading",
+      "content": "test-020",
+      "size": [
+        873,
+        393
+      ],
+      "problem": "Result illustration pushes the result name below the first viewport.",
+      "fixed": false
+    }
+  ],
+  "limitations": [
+    "Kakao SDK payload substituted; no real message sent",
+    "Instagram app upload and physical mobile paste unverified",
+    "External ads and production writes blocked",
+    "One representative answer path per content per size"
+  ],
+  "applicationCodeChanged": false,
+  "deployedByThisTask": false
+}

@@ -1,0 +1,127 @@
+{
+  "date": "2026-11-03",
+  "target": "local packaged site",
+  "scope": "Windows desktop Chromium and WebKit at four viewport sizes; not physical phones; all external requests blocked",
+  "passed": true,
+  "sourceFiles": {
+    "assets/css/style.css": "15a2e8267e24b29c97d96e61b389970916cfd654bc595b116e3514b0b59f3734",
+    "assets/js/extra-content-data.js": "4e6bd75bf6d0bb21f25274a5becb3473f6398d068fea70aa9b172d3533182069",
+    "assets/js/test-page.js": "4efe039fa2ec6ca5c16f2c8e04b8b788a8abc8c6f84109579cded5f716a047f8",
+    "scripts/question-check.mjs": "bc257a1dd47f6a0927efff6e9c0f3049d55e0f21df43b86a53343ea2b0905750",
+    "scripts/site.test.mjs": "1f10169b7005d214c2b1f39006539535093db39c56f48984ad924f9d0b0cc7e8",
+    "assets/js/site-config.js": "396ee2195eda18e7fe74c6f891cb234250724352f86c2b9881a68506f9c78faa"
+  },
+  "sourceHashNormalization": "CRLF converted to LF",
+  "quizCount": 25,
+  "questionCount": 210,
+  "resultCount": 101,
+  "addedReadingCharacters": {
+    "minimum": 250,
+    "maximum": 283,
+    "mean": 268
+  },
+  "nodeTests": {
+    "passed": 27
+  },
+  "runs": [
+    {
+      "engine": "chromium",
+      "version": "156.0.4314.42",
+      "viewports": [
+        [
+          320,
+          740
+        ],
+        [
+          390,
+          844
+        ],
+        [
+          768,
+          1024
+        ],
+        [
+          1440,
+          900
+        ]
+      ],
+      "passed": true,
+      "completions": 100,
+      "questionViews": 840,
+      "dynamicResultViews": 202,
+      "javascriptDisabledResults": 101,
+      "titleToProgressGap": {
+        "min": 16,
+        "max": 16
+      },
+      "rawReport": ".artifacts/qa-questions-chromium/report.json",
+      "rawReportSha256": "f28a98c13e09736fc41b63f4ed8e61ece9c4594b709e7e20b8e2854fef779a0a"
+    },
+    {
+      "engine": "webkit",
+      "version": "27.2",
+      "viewports": [
+        [
+          320,
+          740
+        ],
+        [
+          390,
+          844
+        ],
+        [
+          768,
+          1024
+        ],
+        [
+          1440,
+          900
+        ]
+      ],
+      "passed": true,
+      "completions": 100,
+      "questionViews": 840,
+      "dynamicResultViews": 202,
+      "javascriptDisabledResults": 101,
+      "titleToProgressGap": {
+        "min": 16,
+        "max": 16
+      },
+      "rawReport": ".artifacts/qa-questions-webkit/report.json",
+      "rawReportSha256": "760825b6777a2e2dd577d94f17014558ac63e18e262bd8e704c4c0727096e5db"
+    }
+  ],
+  "totals": {
+    "completions": 200,
+    "questionViews": 1680,
+    "dynamicResultViews": 404,
+    "javascriptDisabledResults": 202
+  },
+  "firstFailure": {
+    "description": "Hover translateY(-2px) made the first answer oscillate at the mouse boundary in quiz test-002, question 6, width 390px; reproduced separately before removing hover movement.",
+    "resolvedBy": "Removed hover movement; complete suite rerun passed on both engines. Selected-card press remains."
+  },
+  "beforeLayout": {
+    "quiz": "test-021",
+    "question": 7,
+    "width": 1440,
+    "titleBottom": 124,
+    "progressHeadTop": 116,
+    "overlap": 8
+  },
+  "publicPackage": {
+    "files": 536,
+    "untrackedPublicFiles": 0,
+    "privateFilesIncluded": 0
+  },
+  "deployment": {
+    "status": "pending",
+    "authorizedDate": "2026-11-03"
+  },
+  "limitations": [
+    "Not a new real Android/iPhone check",
+    "No KakaoTalk delivery or native mobile paste verification",
+    "Content length/uniqueness checks do not establish reader satisfaction"
+  ],
+  "release": "reading-20261103"
+}
