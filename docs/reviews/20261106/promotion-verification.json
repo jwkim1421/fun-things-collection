@@ -550,9 +550,31 @@
     "path": "Windsor.ai",
     "installationVerified": true,
     "ownerReportsGA4Connected": true,
-    "status": "installed; query tools not exposed in current conversation",
-    "verified": false,
-    "nextAction": "Select Windsor.ai with @ in the next request and inspect the linked GA4 property/events"
+    "status": "existing page_view/content_start/content_complete records verified through connected GA4 reporting; specific new QA requests and campaign remain unverified",
+    "verified": true,
+    "verificationScope": "existing property event records; not specific QA delivery or user-level funnel",
+    "checkedAt": "2026-11-06T03:08:27.479Z",
+    "propertyId": "537602017",
+    "measurementId": "G-GE282CZLL6",
+    "hostname": "coocooing.kro.kr",
+    "streamId": "14870113477",
+    "timezone": "Asia/Seoul",
+    "period": {
+      "from": "2026-11-01",
+      "to": "2026-11-05"
+    },
+    "events": {
+      "page_view": 168,
+      "content_start": 6,
+      "content_complete": 4
+    },
+    "contentIdBreakdownVerified": true,
+    "specificQaRequestsVerified": false,
+    "campaignReceiptVerified": false,
+    "accountFiltersVerified": false,
+    "resultKeyAndReleaseValuesVerified": false,
+    "operatorAndQaTrafficSeparated": false,
+    "nextAction": "Apply prepared small image and UTM URLs in public blog; then inspect real campaign records after processing"
   },
   "live": {
     "passed": true,
@@ -1089,7 +1111,7 @@
     "issues": []
   },
   "blog": {
-    "checkedAt": "2026-11-06T02:49:51.817Z",
+    "checkedAt": "2026-11-06T03:08:27.144Z",
     "url": "https://hvyair.tistory.com/391",
     "status": 200,
     "images": [
@@ -1108,6 +1130,7 @@
     ".artifacts/blog-thumbs-20261106/live/report.json": "7955fa885b964b915e3adc484e385700eb462a7db81919a8b002fd26d5aec418",
     ".artifacts/review-deploy-verification.json": "bf3ff3776e6002544dbd3cfc282e7ea98ca5598ed011c717097fb7076e0d61a5",
     ".artifacts/blog-thumbs-20261106/private-paths.json": "0062370941363a0aab989008f539529d9e45ad2aa96e756023c895b465155a29",
-    ".artifacts/blog-thumbs-20261106/blog-public-state.json": "bed0ee6785c3c301e188838fc63edae0054fc111bdcaa6f65241e29f7f376695"
+    ".artifacts/blog-thumbs-20261106/blog-public-state.json": "7a5509f832a54bf7115983c8ecdd7730ba7910dc617595543f3b5e00bddaa5c0",
+    ".artifacts/blog-thumbs-20261106/windsor-ga4-report.json": "de01d869c43a66d445ef07ca9c506d7fc66fb51ed922a6ba5609a5535708abff"
   }
 }
