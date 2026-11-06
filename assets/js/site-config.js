@@ -1,7 +1,7 @@
 window.SITE_CONFIG = {
   siteName: "쿠쿠",
   siteUrl: "https://coocooing.kro.kr/",
-  releaseVersion: "reading-20261103",
+  releaseVersion: "blog-cards-20261106",
   communityApiUrl: "https://coocoo-api.reviewmoa.workers.dev",
   gaMeasurementId: "G-GE282CZLL6",
   kakaoJavaScriptKey: "f45989bb71514aece0519d2a250e0e7b",
@@ -13,6 +13,9 @@ window.SITE_CONFIG = {
 (function initializeAnalytics() {
   const config = window.SITE_CONFIG || {};
   const measurementId = config.gaMeasurementId;
+  const isQa = new URLSearchParams(window.location.search).get("qa") === "1";
+  const measurementOptions = { traffic_type: isQa ? "internal" : "external" };
+  if (isQa) measurementOptions.debug_mode = true;
 
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function gtag() {
@@ -23,9 +26,7 @@ window.SITE_CONFIG = {
     track(eventName, parameters = {}) {
       window.gtag("event", eventName, Object.assign({
         release_version: config.releaseVersion || "unknown"
-      }, parameters, {
-        traffic_type: new URLSearchParams(window.location.search).get("qa") === "1" ? "internal" : "external"
-      }));
+      }, parameters, measurementOptions));
     }
   };
 
@@ -42,9 +43,7 @@ window.SITE_CONFIG = {
 
   if (!window.__COOCOO_GA_INITIALIZED__) {
     window.gtag("js", new Date());
-    window.gtag("config", measurementId, {
-      traffic_type: new URLSearchParams(window.location.search).get("qa") === "1" ? "internal" : "external"
-    });
+    window.gtag("config", measurementId, measurementOptions);
     window.__COOCOO_GA_INITIALIZED__ = true;
   }
 })();

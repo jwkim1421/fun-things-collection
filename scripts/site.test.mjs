@@ -14,6 +14,44 @@ const data = loadContent();
 vm.runInContext(source("test-page"), data.context);
 const score = data.context.scoreAnswers;
 
+test("small blog covers match the current originals and every advertised content", () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, "docs/promotion/card-thumbnails.json"), "utf8"));
+  assert.deepEqual(new Set(manifest.assets.map(item => item.id)), new Set(data.catalog.items.map(item => item.id)));
+  assert.equal(manifest.assets.length, data.catalog.items.length);
+  for (const item of manifest.assets) {
+    assert.equal(item.source, data.context.contentArtwork(item.id));
+    assert.equal(item.file, `assets/images/card-thumbs/${item.id}.webp`);
+    for (const [file, expected] of [[item.source, item.sourceSha256], [item.file, item.sha256]]) {
+      assert.equal(createHash("sha256").update(fs.readFileSync(path.join(root, file))).digest("hex"), expected, file);
+    }
+    const bytes = fs.readFileSync(path.join(root, item.file));
+    assert.equal(bytes.toString("ascii", 0, 4), "RIFF");
+    assert.equal(bytes.toString("ascii", 8, 12), "WEBP");
+    assert.equal(bytes.length, item.bytes);
+    assert.ok(bytes.length < item.sourceBytes && bytes.length <= 80 * 1024, item.id);
+    assert.equal(item.width, 600); assert.equal(item.height, 400);
+  }
+});
+
+test("GA4 debug flags apply only to QA visits while ordinary visits keep normal attribution", () => {
+  for (const search of ["", "?utm_source=tistory&utm_medium=referral&utm_campaign=blog_cards_202611&utm_content=hvyair_391_test010", "?qa=1&utm_source=tistory"]) {
+    const context = vm.createContext({ window: { location: { search } }, document: { querySelector: () => ({}), addEventListener() {} }, URLSearchParams });
+    vm.runInContext(source("site-config"), context);
+    const calls = context.window.dataLayer;
+    const config = Array.from(calls).find(call => call[0] === "config");
+    const qa = new URLSearchParams(search).get("qa") === "1";
+    assert.equal(config[2].traffic_type, qa ? "internal" : "external");
+    assert.equal(config[2].debug_mode, qa ? true : undefined);
+    context.window.COOCOO_ANALYTICS.track("content_start", { content_id: "test-010", traffic_type: "spoofed" });
+    const event = calls[calls.length - 1];
+    assert.equal(event[0], "event"); assert.equal(event[1], "content_start");
+    assert.equal(event[2].content_id, "test-010");
+    assert.equal(event[2].traffic_type, qa ? "internal" : "external");
+    assert.equal(event[2].debug_mode, qa ? true : undefined);
+    assert.equal(context.window.location.search, search);
+  }
+});
+
 test("every quiz result and meaningful play outcome has a distinct, verified illustration", () => {
   const manifest = JSON.parse(fs.readFileSync(path.join(root, "docs/art-production/20261020/production.json"), "utf8"));
   const expected = data.catalog.items.flatMap(item => [data.context.contentArtwork(item.id), ...(data.pages[item.id] ? Object.keys(data.pages[item.id].results) : playResultArtworkKeys(data.play[item.id])).map(key => data.context.contentArtwork(item.id, key))]);
