@@ -537,8 +537,577 @@
   "rawReportSha256": "806812290abe6480c2cb40d276db5320a5e745096123f632a2906e4edd2a5de8",
   "nodeTests": 29,
   "deployment": {
-    "status": "pending"
+    "status": "verified",
+    "revision": "e89839cd8e93753ae2e9ce2e159e4c7d5725f7c8",
+    "workflow": "https://github.com/jwkim1421/fun-things-collection/actions/runs/42152012972",
+    "release": "blog-cards-20261106",
+    "httpCompared": 569,
+    "httpMatching": 569,
+    "excluded404": 36
   },
   "blogSmallImageAndUtmUpdate": "pending external blog administrator",
-  "ga4AccountReceipt": "pending account access"
+  "ga4AccountReceipt": {
+    "path": "Windsor.ai",
+    "installationVerified": true,
+    "ownerReportsGA4Connected": true,
+    "status": "installed; query tools not exposed in current conversation",
+    "verified": false,
+    "nextAction": "Select Windsor.ai with @ in the next request and inspect the linked GA4 property/events"
+  },
+  "live": {
+    "passed": true,
+    "target": "deployed site",
+    "googleDelivery": "real QA debug requests",
+    "ga4UiVerified": false,
+    "assets": [
+      {
+        "id": "test-001",
+        "bytes": 50376
+      },
+      {
+        "id": "test-002",
+        "bytes": 35728
+      },
+      {
+        "id": "test-003",
+        "bytes": 69276
+      },
+      {
+        "id": "test-004",
+        "bytes": 62378
+      },
+      {
+        "id": "test-005",
+        "bytes": 63248
+      },
+      {
+        "id": "test-006",
+        "bytes": 48706
+      },
+      {
+        "id": "test-007",
+        "bytes": 42004
+      },
+      {
+        "id": "test-008",
+        "bytes": 48096
+      },
+      {
+        "id": "test-009",
+        "bytes": 27906
+      },
+      {
+        "id": "test-010",
+        "bytes": 48238
+      },
+      {
+        "id": "test-011",
+        "bytes": 42608
+      },
+      {
+        "id": "test-012",
+        "bytes": 35092
+      },
+      {
+        "id": "test-013",
+        "bytes": 40682
+      },
+      {
+        "id": "test-014",
+        "bytes": 61872
+      },
+      {
+        "id": "test-015",
+        "bytes": 23952
+      },
+      {
+        "id": "test-016",
+        "bytes": 42774
+      },
+      {
+        "id": "test-017",
+        "bytes": 39672
+      },
+      {
+        "id": "test-018",
+        "bytes": 60030
+      },
+      {
+        "id": "test-019",
+        "bytes": 39432
+      },
+      {
+        "id": "test-020",
+        "bytes": 46898
+      },
+      {
+        "id": "test-021",
+        "bytes": 25524
+      },
+      {
+        "id": "test-022",
+        "bytes": 54738
+      },
+      {
+        "id": "test-023",
+        "bytes": 28268
+      },
+      {
+        "id": "test-024",
+        "bytes": 42576
+      },
+      {
+        "id": "test-025",
+        "bytes": 47488
+      },
+      {
+        "id": "chat-temperature",
+        "bytes": 37680
+      },
+      {
+        "id": "procrastination-bingo",
+        "bytes": 34610
+      },
+      {
+        "id": "battery-stop",
+        "bytes": 16854
+      },
+      {
+        "id": "today-box",
+        "bytes": 17318
+      },
+      {
+        "id": "relationship-ranking",
+        "bytes": 31454
+      },
+      {
+        "id": "weekly-energy-budget",
+        "bytes": 35778
+      },
+      {
+        "id": "campus-festival-story",
+        "bytes": 35446
+      },
+      {
+        "id": "emotion-trash",
+        "bytes": 18538
+      },
+      {
+        "id": "choice-roulette",
+        "bytes": 22120
+      }
+    ],
+    "cases": [
+      {
+        "id": "test-010",
+        "width": 390,
+        "images": [
+          {
+            "src": "https://coocooing.kro.kr/assets/images/card-thumbs/test-010.webp",
+            "width": 600,
+            "height": 400,
+            "loading": null
+          },
+          {
+            "src": "https://coocooing.kro.kr/assets/images/card-thumbs/test-015.webp",
+            "width": 600,
+            "height": 400,
+            "loading": null
+          }
+        ],
+        "originalHref": "https://coocooing.kro.kr/tests/test-010.html?utm_source=tistory&utm_medium=referral&utm_campaign=blog_cards_202611&utm_content=hvyair_391_test010",
+        "completed": true
+      },
+      {
+        "id": "test-015",
+        "width": 390,
+        "images": [
+          {
+            "src": "https://coocooing.kro.kr/assets/images/card-thumbs/test-010.webp",
+            "width": 600,
+            "height": 400,
+            "loading": null
+          },
+          {
+            "src": "https://coocooing.kro.kr/assets/images/card-thumbs/test-015.webp",
+            "width": 600,
+            "height": 400,
+            "loading": null
+          }
+        ],
+        "originalHref": "https://coocooing.kro.kr/tests/test-015.html?utm_source=tistory&utm_medium=referral&utm_campaign=blog_cards_202611&utm_content=hvyair_391_test015",
+        "completed": true
+      },
+      {
+        "id": "test-010",
+        "width": 1440,
+        "images": [
+          {
+            "src": "https://coocooing.kro.kr/assets/images/card-thumbs/test-010.webp",
+            "width": 600,
+            "height": 400,
+            "loading": null
+          },
+          {
+            "src": "https://coocooing.kro.kr/assets/images/card-thumbs/test-015.webp",
+            "width": 600,
+            "height": 400,
+            "loading": null
+          }
+        ],
+        "originalHref": "https://coocooing.kro.kr/tests/test-010.html?utm_source=tistory&utm_medium=referral&utm_campaign=blog_cards_202611&utm_content=hvyair_391_test010",
+        "completed": true
+      },
+      {
+        "id": "test-015",
+        "width": 1440,
+        "images": [
+          {
+            "src": "https://coocooing.kro.kr/assets/images/card-thumbs/test-010.webp",
+            "width": 600,
+            "height": 400,
+            "loading": null
+          },
+          {
+            "src": "https://coocooing.kro.kr/assets/images/card-thumbs/test-015.webp",
+            "width": 600,
+            "height": 400,
+            "loading": null
+          }
+        ],
+        "originalHref": "https://coocooing.kro.kr/tests/test-015.html?utm_source=tistory&utm_medium=referral&utm_campaign=blog_cards_202611&utm_content=hvyair_391_test015",
+        "completed": true
+      }
+    ],
+    "events": [
+      {
+        "case": "test-010@390",
+        "event": "page_view",
+        "measurementId": "G-GE282CZLL6",
+        "debug": "true",
+        "traffic": "internal",
+        "contentId": null,
+        "resultKey": null,
+        "release": null,
+        "page": "/tests/test-010.html",
+        "campaign": {
+          "utm_source": "tistory",
+          "utm_medium": "referral",
+          "utm_campaign": "blog_cards_202611",
+          "utm_content": "hvyair_391_test010",
+          "qa": "1"
+        },
+        "status": 204
+      },
+      {
+        "case": "test-010@390",
+        "event": "content_start",
+        "measurementId": "G-GE282CZLL6",
+        "debug": "true",
+        "traffic": "internal",
+        "contentId": "test-010",
+        "resultKey": null,
+        "release": "blog-cards-20261106",
+        "page": "/tests/test-010.html",
+        "campaign": {
+          "utm_source": "tistory",
+          "utm_medium": "referral",
+          "utm_campaign": "blog_cards_202611",
+          "utm_content": "hvyair_391_test010",
+          "qa": "1"
+        },
+        "status": 204
+      },
+      {
+        "case": "test-010@390",
+        "event": "scroll",
+        "measurementId": "G-GE282CZLL6",
+        "debug": "true",
+        "traffic": "internal",
+        "contentId": null,
+        "resultKey": null,
+        "release": null,
+        "page": "/tests/test-010.html",
+        "campaign": {
+          "utm_source": "tistory",
+          "utm_medium": "referral",
+          "utm_campaign": "blog_cards_202611",
+          "utm_content": "hvyair_391_test010",
+          "qa": "1"
+        },
+        "status": 204
+      },
+      {
+        "case": "test-010@390",
+        "event": "content_complete",
+        "measurementId": "G-GE282CZLL6",
+        "debug": "true",
+        "traffic": "internal",
+        "contentId": "test-010",
+        "resultKey": "planner",
+        "release": "blog-cards-20261106",
+        "page": "/tests/test-010.html",
+        "campaign": {
+          "utm_source": "tistory",
+          "utm_medium": "referral",
+          "utm_campaign": "blog_cards_202611",
+          "utm_content": "hvyair_391_test010",
+          "qa": "1"
+        },
+        "status": 204
+      },
+      {
+        "case": "test-015@390",
+        "event": "page_view",
+        "measurementId": "G-GE282CZLL6",
+        "debug": "true",
+        "traffic": "internal",
+        "contentId": null,
+        "resultKey": null,
+        "release": null,
+        "page": "/tests/test-015.html",
+        "campaign": {
+          "utm_source": "tistory",
+          "utm_medium": "referral",
+          "utm_campaign": "blog_cards_202611",
+          "utm_content": "hvyair_391_test015",
+          "qa": "1"
+        },
+        "status": 204
+      },
+      {
+        "case": "test-015@390",
+        "event": "content_start",
+        "measurementId": "G-GE282CZLL6",
+        "debug": "true",
+        "traffic": "internal",
+        "contentId": "test-015",
+        "resultKey": null,
+        "release": "blog-cards-20261106",
+        "page": "/tests/test-015.html",
+        "campaign": {
+          "utm_source": "tistory",
+          "utm_medium": "referral",
+          "utm_campaign": "blog_cards_202611",
+          "utm_content": "hvyair_391_test015",
+          "qa": "1"
+        },
+        "status": 204
+      },
+      {
+        "case": "test-015@390",
+        "event": "scroll",
+        "measurementId": "G-GE282CZLL6",
+        "debug": "true",
+        "traffic": "internal",
+        "contentId": null,
+        "resultKey": null,
+        "release": null,
+        "page": "/tests/test-015.html",
+        "campaign": {
+          "utm_source": "tistory",
+          "utm_medium": "referral",
+          "utm_campaign": "blog_cards_202611",
+          "utm_content": "hvyair_391_test015",
+          "qa": "1"
+        },
+        "status": 204
+      },
+      {
+        "case": "test-015@390",
+        "event": "content_complete",
+        "measurementId": "G-GE282CZLL6",
+        "debug": "true",
+        "traffic": "internal",
+        "contentId": "test-015",
+        "resultKey": "cozy",
+        "release": "blog-cards-20261106",
+        "page": "/tests/test-015.html",
+        "campaign": {
+          "utm_source": "tistory",
+          "utm_medium": "referral",
+          "utm_campaign": "blog_cards_202611",
+          "utm_content": "hvyair_391_test015",
+          "qa": "1"
+        },
+        "status": 204
+      },
+      {
+        "case": "test-010@1440",
+        "event": "page_view",
+        "measurementId": "G-GE282CZLL6",
+        "debug": "true",
+        "traffic": "internal",
+        "contentId": null,
+        "resultKey": null,
+        "release": null,
+        "page": "/tests/test-010.html",
+        "campaign": {
+          "utm_source": "tistory",
+          "utm_medium": "referral",
+          "utm_campaign": "blog_cards_202611",
+          "utm_content": "hvyair_391_test010",
+          "qa": "1"
+        },
+        "status": 204
+      },
+      {
+        "case": "test-010@1440",
+        "event": "content_start",
+        "measurementId": "G-GE282CZLL6",
+        "debug": "true",
+        "traffic": "internal",
+        "contentId": "test-010",
+        "resultKey": null,
+        "release": "blog-cards-20261106",
+        "page": "/tests/test-010.html",
+        "campaign": {
+          "utm_source": "tistory",
+          "utm_medium": "referral",
+          "utm_campaign": "blog_cards_202611",
+          "utm_content": "hvyair_391_test010",
+          "qa": "1"
+        },
+        "status": 204
+      },
+      {
+        "case": "test-010@1440",
+        "event": "scroll",
+        "measurementId": "G-GE282CZLL6",
+        "debug": "true",
+        "traffic": "internal",
+        "contentId": null,
+        "resultKey": null,
+        "release": null,
+        "page": "/tests/test-010.html",
+        "campaign": {
+          "utm_source": "tistory",
+          "utm_medium": "referral",
+          "utm_campaign": "blog_cards_202611",
+          "utm_content": "hvyair_391_test010",
+          "qa": "1"
+        },
+        "status": 204
+      },
+      {
+        "case": "test-010@1440",
+        "event": "content_complete",
+        "measurementId": "G-GE282CZLL6",
+        "debug": "true",
+        "traffic": "internal",
+        "contentId": "test-010",
+        "resultKey": "planner",
+        "release": "blog-cards-20261106",
+        "page": "/tests/test-010.html",
+        "campaign": {
+          "utm_source": "tistory",
+          "utm_medium": "referral",
+          "utm_campaign": "blog_cards_202611",
+          "utm_content": "hvyair_391_test010",
+          "qa": "1"
+        },
+        "status": 204
+      },
+      {
+        "case": "test-015@1440",
+        "event": "page_view",
+        "measurementId": "G-GE282CZLL6",
+        "debug": "true",
+        "traffic": "internal",
+        "contentId": null,
+        "resultKey": null,
+        "release": null,
+        "page": "/tests/test-015.html",
+        "campaign": {
+          "utm_source": "tistory",
+          "utm_medium": "referral",
+          "utm_campaign": "blog_cards_202611",
+          "utm_content": "hvyair_391_test015",
+          "qa": "1"
+        },
+        "status": 204
+      },
+      {
+        "case": "test-015@1440",
+        "event": "content_start",
+        "measurementId": "G-GE282CZLL6",
+        "debug": "true",
+        "traffic": "internal",
+        "contentId": "test-015",
+        "resultKey": null,
+        "release": "blog-cards-20261106",
+        "page": "/tests/test-015.html",
+        "campaign": {
+          "utm_source": "tistory",
+          "utm_medium": "referral",
+          "utm_campaign": "blog_cards_202611",
+          "utm_content": "hvyair_391_test015",
+          "qa": "1"
+        },
+        "status": 204
+      },
+      {
+        "case": "test-015@1440",
+        "event": "scroll",
+        "measurementId": "G-GE282CZLL6",
+        "debug": "true",
+        "traffic": "internal",
+        "contentId": null,
+        "resultKey": null,
+        "release": null,
+        "page": "/tests/test-015.html",
+        "campaign": {
+          "utm_source": "tistory",
+          "utm_medium": "referral",
+          "utm_campaign": "blog_cards_202611",
+          "utm_content": "hvyair_391_test015",
+          "qa": "1"
+        },
+        "status": 204
+      },
+      {
+        "case": "test-015@1440",
+        "event": "content_complete",
+        "measurementId": "G-GE282CZLL6",
+        "debug": "true",
+        "traffic": "internal",
+        "contentId": "test-015",
+        "resultKey": "cozy",
+        "release": "blog-cards-20261106",
+        "page": "/tests/test-015.html",
+        "campaign": {
+          "utm_source": "tistory",
+          "utm_medium": "referral",
+          "utm_campaign": "blog_cards_202611",
+          "utm_content": "hvyair_391_test015",
+          "qa": "1"
+        },
+        "status": 204
+      }
+    ],
+    "blockedWrites": [],
+    "issues": []
+  },
+  "blog": {
+    "checkedAt": "2026-11-06T02:49:51.817Z",
+    "url": "https://hvyair.tistory.com/391",
+    "status": 200,
+    "images": [
+      "https://coocooing.kro.kr/assets/images/covers/test-010.webp",
+      "https://coocooing.kro.kr/assets/images/covers/test-015.webp"
+    ],
+    "links": [
+      "https://coocooing.kro.kr/tests/test-010.html",
+      "https://coocooing.kro.kr/tests/test-015.html"
+    ],
+    "lazyAttribute": false,
+    "smallImagesApplied": false,
+    "campaignLinksApplied": false
+  },
+  "rawReports": {
+    ".artifacts/blog-thumbs-20261106/live/report.json": "7955fa885b964b915e3adc484e385700eb462a7db81919a8b002fd26d5aec418",
+    ".artifacts/review-deploy-verification.json": "bf3ff3776e6002544dbd3cfc282e7ea98ca5598ed011c717097fb7076e0d61a5",
+    ".artifacts/blog-thumbs-20261106/private-paths.json": "0062370941363a0aab989008f539529d9e45ad2aa96e756023c895b465155a29",
+    ".artifacts/blog-thumbs-20261106/blog-public-state.json": "bed0ee6785c3c301e188838fc63edae0054fc111bdcaa6f65241e29f7f376695"
+  }
 }
